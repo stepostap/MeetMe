@@ -9,23 +9,37 @@
 /* Begin PBXBuildFile section */
 		E8C09B2D27C7BBB800597ED7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B2C27C7BBB800597ED7 /* AppDelegate.swift */; };
 		E8C09B2F27C7BBB800597ED7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B2E27C7BBB800597ED7 /* SceneDelegate.swift */; };
-		E8C09B3127C7BBB800597ED7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B3027C7BBB800597ED7 /* ViewController.swift */; };
 		E8C09B3427C7BBB800597ED7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8C09B3227C7BBB800597ED7 /* Main.storyboard */; };
 		E8C09B3727C7BBB800597ED7 /* MeetMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B3527C7BBB800597ED7 /* MeetMe.xcdatamodeld */; };
 		E8C09B3927C7BBBA00597ED7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8C09B3827C7BBBA00597ED7 /* Assets.xcassets */; };
 		E8C09B3C27C7BBBA00597ED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8C09B3A27C7BBBA00597ED7 /* LaunchScreen.storyboard */; };
+		E8C09B4427C7BE0E00597ED7 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B4327C7BE0E00597ED7 /* AccountVC.swift */; };
+		E8C09B4627C7BE3000597ED7 /* MeetingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B4527C7BE3000597ED7 /* MeetingsVC.swift */; };
+		E8C09B4827C7BE3D00597ED7 /* GroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B4727C7BE3D00597ED7 /* GroupsVC.swift */; };
+		E8C09B4E27C811E900597ED7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B4D27C811E900597ED7 /* UIView+.swift */; };
+		E8C09B5127C97B1400597ED7 /* NavigationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5027C97B1400597ED7 /* NavigationHandler.swift */; };
+		E8C09B5327C97C6600597ED7 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5227C97C6600597ED7 /* LoginVC.swift */; };
+		E8C09B5727C97CAA00597ED7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5627C97CAA00597ED7 /* SignUpVC.swift */; };
+		E8C09B5A27C97CF500597ED7 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5927C97CF500597ED7 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E8C09B2927C7BBB800597ED7 /* MeetMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8C09B2C27C7BBB800597ED7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8C09B2E27C7BBB800597ED7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E8C09B3027C7BBB800597ED7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E8C09B3327C7BBB800597ED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E8C09B3627C7BBB800597ED7 /* MeetMe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MeetMe.xcdatamodel; sourceTree = "<group>"; };
 		E8C09B3827C7BBBA00597ED7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8C09B3B27C7BBBA00597ED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8C09B3D27C7BBBA00597ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8C09B4327C7BE0E00597ED7 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		E8C09B4527C7BE3000597ED7 /* MeetingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsVC.swift; sourceTree = "<group>"; };
+		E8C09B4727C7BE3D00597ED7 /* GroupsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsVC.swift; sourceTree = "<group>"; };
+		E8C09B4D27C811E900597ED7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		E8C09B5027C97B1400597ED7 /* NavigationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHandler.swift; sourceTree = "<group>"; };
+		E8C09B5227C97C6600597ED7 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		E8C09B5627C97CAA00597ED7 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		E8C09B5927C97CF500597ED7 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +72,63 @@
 		E8C09B2B27C7BBB800597ED7 /* MeetMe */ = {
 			isa = PBXGroup;
 			children = (
+				E8C09B5827C97CCA00597ED7 /* Helpers */,
+				E8C09B4F27C8120800597ED7 /* Extensions */,
 				E8C09B2C27C7BBB800597ED7 /* AppDelegate.swift */,
 				E8C09B2E27C7BBB800597ED7 /* SceneDelegate.swift */,
-				E8C09B3027C7BBB800597ED7 /* ViewController.swift */,
 				E8C09B3227C7BBB800597ED7 /* Main.storyboard */,
 				E8C09B3827C7BBBA00597ED7 /* Assets.xcassets */,
 				E8C09B3A27C7BBBA00597ED7 /* LaunchScreen.storyboard */,
 				E8C09B3D27C7BBBA00597ED7 /* Info.plist */,
 				E8C09B3527C7BBB800597ED7 /* MeetMe.xcdatamodeld */,
+				E8C09B4927C7D25E00597ED7 /* Views */,
 			);
 			path = MeetMe;
+			sourceTree = "<group>";
+		};
+		E8C09B4927C7D25E00597ED7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E8C09B5427C97C6B00597ED7 /* Authentification */,
+				E8C09B4A27C7D26C00597ED7 /* MainViews */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E8C09B4A27C7D26C00597ED7 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				E8C09B4727C7BE3D00597ED7 /* GroupsVC.swift */,
+				E8C09B4527C7BE3000597ED7 /* MeetingsVC.swift */,
+				E8C09B4327C7BE0E00597ED7 /* AccountVC.swift */,
+			);
+			path = MainViews;
+			sourceTree = "<group>";
+		};
+		E8C09B4F27C8120800597ED7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E8C09B4D27C811E900597ED7 /* UIView+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E8C09B5427C97C6B00597ED7 /* Authentification */ = {
+			isa = PBXGroup;
+			children = (
+				E8C09B5227C97C6600597ED7 /* LoginVC.swift */,
+				E8C09B5627C97CAA00597ED7 /* SignUpVC.swift */,
+			);
+			path = Authentification;
+			sourceTree = "<group>";
+		};
+		E8C09B5827C97CCA00597ED7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E8C09B5027C97B1400597ED7 /* NavigationHandler.swift */,
+				E8C09B5927C97CF500597ED7 /* Utilities.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,7 +203,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8C09B3727C7BBB800597ED7 /* MeetMe.xcdatamodeld in Sources */,
-				E8C09B3127C7BBB800597ED7 /* ViewController.swift in Sources */,
+				E8C09B4427C7BE0E00597ED7 /* AccountVC.swift in Sources */,
+				E8C09B4627C7BE3000597ED7 /* MeetingsVC.swift in Sources */,
+				E8C09B5727C97CAA00597ED7 /* SignUpVC.swift in Sources */,
+				E8C09B4E27C811E900597ED7 /* UIView+.swift in Sources */,
+				E8C09B5327C97C6600597ED7 /* LoginVC.swift in Sources */,
+				E8C09B5A27C97CF500597ED7 /* Utilities.swift in Sources */,
+				E8C09B4827C7BE3D00597ED7 /* GroupsVC.swift in Sources */,
+				E8C09B5127C97B1400597ED7 /* NavigationHandler.swift in Sources */,
 				E8C09B2D27C7BBB800597ED7 /* AppDelegate.swift in Sources */,
 				E8C09B2F27C7BBB800597ED7 /* SceneDelegate.swift in Sources */,
 			);
