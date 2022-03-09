@@ -32,7 +32,15 @@ class LoginVC: UIViewController {
     }
 
     @objc func login() {
+        
+        User.currentUser.account = getAccount()
+        
         view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
+        
+    }
+    
+    private func getAccount() -> Account {
+        return Account(id: "", name: "Stepan Ostapenko", info: "I am a student from Moscow", imageData: nil)
         
     }
     
