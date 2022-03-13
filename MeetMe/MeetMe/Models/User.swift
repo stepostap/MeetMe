@@ -7,12 +7,23 @@
 
 import Foundation
 
+struct loginInfo: Codable, Hashable {
+    internal init(email: String, password: String) {
+        self.email = email
+        self.password = password
+    }
+    
+    var email: String
+    var password: String
+}
+
 class User {
     
-    static let currentUser = User()
+    static var currentUser = User()
     
     var account: Account?
     
+    var friends = [Account]()
     var meetingHistory = [Meeting]()
     var plannedMeetings = [Meeting]()
     var meetingInvitations = [Meeting]()

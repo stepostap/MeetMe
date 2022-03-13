@@ -10,18 +10,20 @@ import Foundation
 
 class Meeting: Codable {
     
-    internal init(id: Int64, name: String, types: [Interests], info: String, online: Bool, participants: [String], participantsMax: Int, Location: String? = nil, startingDate: Date, endingDate: Date? = nil, currentParticipantNumber: Int) {
+    internal init(id: Int64, name: String, types: [Interests], info: String, online: Bool, isPrivate: Bool, participants: [Int64], groups: [Int64], participantsMax: Int, Location: String? = nil, startingDate: Date, endingDate: Date? = nil, currentParticipantNumber: Int) {
         self.id = id
         self.currentParticipantNumber = currentParticipantNumber
         self.name = name
         self.types = types
         self.info = info
-        self.online = online
+        self.isOnline = online
         self.participantsID = participants
         self.participantsMax = participantsMax
         self.Location = Location
         self.startingDate = startingDate
         self.endingDate = endingDate
+        self.participantsGroupsID = groups
+        self.isPrivate = isPrivate
     }
     
     var id: Int64
@@ -29,14 +31,15 @@ class Meeting: Codable {
     var name: String
     var types: [Interests]
     var info:  String
-    var online: Bool
-    var participantsID: [String]
+    var isOnline: Bool
+    var participantsID: [Int64]
+    var participantsGroupsID: [Int64]
     var currentParticipantNumber: Int
     var participantsMax: Int
     var Location: String?
     var startingDate: Date
     var endingDate: Date?
-    
+    var isPrivate: Bool
     
     func loadParticipants(id: String) {
         

@@ -11,7 +11,7 @@ import UIKit
 
 class Account: Codable {
     
-    internal init(id: Int64, name: String, info: String, imageDataURL: String, interests: [Interests] = [Interests](), socialMediaLinks: [String] = [String]()) {
+    internal init(id: Int64, name: String, info: String, imageDataURL: String, interests: [Interests] = [Interests](), socialMediaLinks: [String:String] = [String:String]()) {
         self.id = id
         self.name = name
         self.info = info
@@ -20,11 +20,27 @@ class Account: Codable {
         self.socialMediaLinks = socialMediaLinks
     }
     
+    internal init(account: Account) {
+        self.id = account.id
+        self.name = account.name
+        self.info = account.info
+        self.imageDataURL = account.imageDataURL
+        self.interests = account.interests
+        self.socialMediaLinks = account.socialMediaLinks
+    }
+    
     var id: Int64
     var name: String
     var info: String
     var imageDataURL: String
     var interests = [Interests]()
-    var socialMediaLinks = [String]()
+    var socialMediaLinks:[String:String] = [:]
     
+    func getInterests() -> String {
+        var interests = ""
+        for interest in self.interests {
+            interests += interest.rawValue + ", "
+        }
+        return interests
+    }
 }

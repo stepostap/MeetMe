@@ -129,6 +129,7 @@ extension UIView {
     
     func setConstraints(to superView: UIView, left: Int = 0, top: Int = 0,
                         right: Int = 0, bottom: Int = 0) {
+        translatesAutoresizingMaskIntoConstraints = false
         self.pinTop(to: superView.safeAreaLayoutGuide.topAnchor, const: top)
         self.pinLeft(to: superView.safeAreaLayoutGuide.leadingAnchor, const: left)
         self.pinRight(to: superView.safeAreaLayoutGuide.trailingAnchor, const: right)
@@ -138,6 +139,7 @@ extension UIView {
     
     func setConstraints(to superView: UIView, left: Int = 0, top: Int = 0,
                         right: Int = 0, height: Int = 0) {
+        translatesAutoresizingMaskIntoConstraints = false
         self.pinTop(to: superView.safeAreaLayoutGuide.topAnchor, const: top)
         self.pinLeft(to: superView.safeAreaLayoutGuide.leadingAnchor, const: left)
         self.pinRight(to: superView.safeAreaLayoutGuide.trailingAnchor, const: right)
@@ -147,6 +149,7 @@ extension UIView {
     
     func setConstraints(to superView: UIView, left: Int = 0, top: Int = 0,
                         width: Int = 0, height: Int = 0) {
+        translatesAutoresizingMaskIntoConstraints = false
         self.pinTop(to: superView.safeAreaLayoutGuide.topAnchor, const: top)
         self.pinLeft(to: superView.safeAreaLayoutGuide.leadingAnchor, const: left)
         self.setHeight(to: height)
