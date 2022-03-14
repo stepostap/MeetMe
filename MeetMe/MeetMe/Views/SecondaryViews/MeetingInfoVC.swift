@@ -222,6 +222,7 @@ class MeetingInfoVC: UIViewController {
         view.addSubview(onlineSwitch)
         onlineSwitch.pinCenter(to: onlineLabel.centerYAnchor, const: 0)
         onlineSwitch.pinRight(to: view.trailingAnchor, const: 30)
+        onlineSwitch.isUserInteractionEnabled = false
         
         let privateLabel = UILabel()
         privateLabel.text = "Приватное"
@@ -234,6 +235,7 @@ class MeetingInfoVC: UIViewController {
         view.addSubview(privateSwitch)
         privateSwitch.pinCenter(to: privateLabel.centerYAnchor, const: 0)
         privateSwitch.pinRight(to: view.trailingAnchor, const: 30)
+        privateSwitch.isUserInteractionEnabled = false
         
         return view
     }

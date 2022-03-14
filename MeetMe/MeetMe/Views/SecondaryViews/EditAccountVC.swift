@@ -25,6 +25,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         textField.textAlignment = .left
+        textField.textColor = UIColor.systemBlue
         textField.placeholder = "Аккаунт ВК"
         return textField
     }()
@@ -125,9 +126,11 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         accountImage.pinHeight(to: editView.safeAreaLayoutGuide.widthAnchor, mult: 0.5)
         accountImage.image = UIImage(named: "placeholder")
         
+        Utilities.styleTextField(nameTextField)
         editView.addSubview(nameTextField)
         nameTextField.pinCenter(to: editView.safeAreaLayoutGuide.centerXAnchor, const: 0)
         nameTextField.pinTop(to: accountImage.bottomAnchor, const: 10)
+        nameTextField.setWidth(to: 200)
         nameTextField.text = account.name
         nameTextField.delegate = self
         
@@ -239,7 +242,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         vc.completion = {(interests) in
             print(interests)
             self.account.interests = interests
-            self.interestsTextView.text = User.currentUser.account?.getInterests()
+            self.interestsTextView.text = Utilities.getInterests(interestArray: self.account.interests)
         }
         
         if let sheet = vc.sheetPresentationController {
@@ -293,6 +296,9 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         }
         
         account.info = infoTextView.text
+        if !nameTextField.text!.isEmpty {
+            account.name = nameTextField.text!
+        }
         
         Networker.shared.updateUserInfo(account: account, completion: {(error) in
             if let error = error {

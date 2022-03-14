@@ -68,6 +68,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         textField.textAlignment = .left
         textField.placeholder = "Аккаунт ВК"
         textField.isUserInteractionEnabled = false
+        textField.textColor = .systemBlue
         return textField
     }()
     
@@ -78,7 +79,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         textField.textAlignment = .left
-        //textField.textColor = UIColor.systemBlue
+        textField.textColor = UIColor.systemBlue
         textField.placeholder = "Аккаунт в Телеграмме"
         textField.isEnabled = false
         textField.isUserInteractionEnabled = false
