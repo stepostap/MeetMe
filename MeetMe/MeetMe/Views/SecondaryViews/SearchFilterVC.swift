@@ -44,21 +44,26 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
         
     }
     
+    let interestsVC = InterestsVC()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        createCheckboxArray()
-        for checkbox in meetingTypeCheckboxes {
-            checkbox.isChecked = searchOptions?.types.contains(Interests.allCases[checkbox.index]) ?? false
+        interestsVC.interests = searchOptions?.types ?? []
+        interestsVC.completion = {(interest) in
+            self.searchOptions?.types = interest
         }
+        
+        self.addChild(interestsVC)
+        interestsVC.didMove(toParent: self)
+        
         maxParticipants.text = searchOptions?.participantsMax.description
         isOnline.isChecked = searchOptions?.online ?? true
         formatter.dateFormat = "dd.MM HH:mm"
         if let date = searchOptions?.startingDate {
             startingDateTextField.text = formatter.string(from: date)
         }
-        
-        
+    
         configureView()
     }
     
@@ -87,64 +92,7 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return maxParticipants.resignFirstResponder()
     }
-    
-    func createCheckboxStackview() -> UIStackView {
-        let checkboxStack = UIStackView()
-        checkboxStack.axis = NSLayoutConstraint.Axis.vertical
-        checkboxStack.alignment = UIStackView.Alignment.leading
-        checkboxStack.spacing = 10
-        
-        for checkbox in meetingTypeCheckboxes {
-            checkboxStack.addArrangedSubview(createCheckboxWithLabel(checkbox: checkbox,
-                                                                     text: Interests.allCases[checkbox.index].rawValue))
-        }
-        
-        return checkboxStack
-    }
-    
-    func createCheckboxArray(){
-        var i = 0
-        for _ in Interests.allCases {
-            let checkbox = CheckBox.init()
-            checkbox.style = .tick
-            checkbox.borderStyle = .roundedSquare(radius: 5)
-            checkbox.index = i
-            checkbox.addTarget(self, action: #selector(syncCheckbox(_:)), for: .valueChanged)
-            i += 1
-            meetingTypeCheckboxes.append(checkbox)
-        }
-    }
-    
-    @objc func syncCheckbox(_ sender: CheckBox)  {
-        let type = Interests.allCases[sender.index]
-        if sender.isChecked {
-            searchOptions?.types.append(type)
-        } else {
-            if let index = searchOptions?.types.firstIndex(of: type){
-                searchOptions?.types.remove(at: index)
-            }
-        }
-    }
-    
-    
-    func createCheckboxWithLabel(checkbox: CheckBox, text: String) -> UIView {
-        let container = UIView()
-        container.setHeight(to: 30)
-        container.setWidth(to: 200)
-        
-        let label = UILabel()
-        label.text = text
-        label.font = .systemFont(ofSize: 15)
-        
-        container.addSubview(checkbox)
-        container.addSubview(label)
-        
-        checkbox.setConstraints(to: container, left: 5, top: 5, width: 30, height: 30)
-        label.pinLeft(to: checkbox.trailingAnchor, const: 10)
-        label.pinTop(to: container.topAnchor, const: 10)
-        
-        return container
-    }
+   
     
     @objc func updateDateTextview() {
         formatter.dateFormat = "dd.MM HH:mm"
@@ -154,7 +102,7 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
     }
     
     @objc func clearOptions() {
-        for checkbox in meetingTypeCheckboxes {
+        for checkbox in interestsVC.meetingTypeCheckboxes {
             checkbox.isChecked = false
         }
         searchOptions?.types = []
@@ -225,12 +173,10 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
         startingDateTextField.setWidth(to: 150)
         startingDateTextField.setHeight(to: 30)
         
-        let stack = createCheckboxStackview()
-        view.addSubview(stack)
-        stack.pinTop(to: startingDateTextField.bottomAnchor, const: 10)
-        stack.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 10)
-        stack.setWidth(to: 200)
-        //stack.setHeight(to: 300)
-        
+        view.addSubview(interestsVC.view)
+        interestsVC.view.pinTop(to: startingDateTextField.bottomAnchor, const: 10)
+        interestsVC.view.pinBottom(to: view.bottomAnchor, const: 10)
+        interestsVC.view.pinRight(to: view.trailingAnchor, const: 10)
+        interestsVC.view.pinLeft(to: view.leadingAnchor, const: 10)
     }
 }

@@ -38,10 +38,14 @@ class Utilities {
         button.tintColor = UIColor.black
     }
     
-    static func isPasswordValid(_ password : String) -> Bool {
+    static func getInterests(interestArray: [Interests]) -> String {
+        var interests = ""
+        for interest in interestArray {
+            interests += interest.rawValue + ", "
+        }
+        interests.popLast()
         
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
-        return passwordTest.evaluate(with: password)
+        return interests
     }
     
 }

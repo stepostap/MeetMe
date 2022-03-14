@@ -12,22 +12,18 @@ class MeetingCell: UITableViewCell {
     var meeting: Meeting? {
         didSet {
             meetingName.text = meeting?.name
-            if let imageData = meeting?.image {
-                meetingImage.image = UIImage(data: imageData)
-            } else {
+            dateLabel.text = meeting?.getDate()
+            interestsTextView.text = Utilities.getInterests(interestArray: meeting?.types ?? [])
+            if meeting!.imageURL.isEmpty {
                 meetingImage.image = UIImage(named: "placeholder")
             }
-            dateLabel.text = meeting?.getDate()
-            interestsLabel.text = meeting?.getInterests()
         }
     }
-    
-    let labelStack = UIStackView()
-    
+        
     var meetingName : UILabel = {
         let label = UILabel()
         //label.setHeight(to: 20)
-        label.font = .systemFont(ofSize: 15)
+        label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
     
@@ -45,11 +41,12 @@ class MeetingCell: UITableViewCell {
         return label
     }()
     
-    var interestsLabel : UILabel = {
-        let label = UILabel()
+    var interestsTextView : UITextView = {
+        let textView = UITextView()
         //label.setHeight(to: 20)
-        label.font = .systemFont(ofSize: 15)
-        return label
+        textView.font = .systemFont(ofSize: 15)
+        textView.isUserInteractionEnabled = false
+        return textView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -63,22 +60,27 @@ class MeetingCell: UITableViewCell {
     }
     
     private func setCostraints() {
-        contentView.setHeight(to: 200)
+        contentView.setHeight(to: 170)
         contentView.addSubview(meetingImage)
         meetingImage.setConstraints(to: contentView, left: 10, top: 10, width: 150, height: 150)
         
-        labelStack.addArrangedSubview(meetingName)
-        labelStack.addArrangedSubview(dateLabel)
-        labelStack.addArrangedSubview(interestsLabel)
-        labelStack.axis = NSLayoutConstraint.Axis.vertical
-        labelStack.alignment = UIStackView.Alignment.leading
-        labelStack.spacing = 10
+        contentView.addSubview(meetingName)
+        meetingName.pinTop(to: contentView.topAnchor, const: 10)
+        meetingName.pinLeft(to: meetingImage.trailingAnchor, const: 10)
+        meetingName.pinRight(to: contentView.trailingAnchor, const: 10)
+        meetingName.setHeight(to: 20)
         
-        contentView.addSubview(labelStack)
-        labelStack.pinLeft(to: meetingImage.trailingAnchor, const: 10)
-        labelStack.pinTop(to: contentView.topAnchor, const: 10)
-        labelStack.pinBottom(to: contentView.bottomAnchor, const: 10)
-        labelStack.pinRight(to: contentView.trailingAnchor, const: 10)
+        contentView.addSubview(dateLabel)
+        dateLabel.pinTop(to: meetingName.bottomAnchor, const: 10)
+        dateLabel.pinLeft(to: meetingImage.trailingAnchor, const: 10)
+        dateLabel.pinRight(to: contentView.trailingAnchor, const: 10)
+        dateLabel.setHeight(to: 20)
+        
+        contentView.addSubview(interestsTextView)
+        interestsTextView.pinTop(to: dateLabel.bottomAnchor, const: 10)
+        interestsTextView.pinLeft(to: meetingImage.trailingAnchor, const: 10)
+        interestsTextView.pinRight(to: contentView.trailingAnchor, const: 10)
+        interestsTextView.setHeight(to: 80)
         
     }
 

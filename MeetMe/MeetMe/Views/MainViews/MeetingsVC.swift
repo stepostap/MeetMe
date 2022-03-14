@@ -16,37 +16,55 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
     let segmentController = UISegmentedControl(items: ["История", "Предстоящие", "Приглашения"])
     let searchController = UISearchController(searchResultsController: nil)
     let meetingTableView = UITableView()
-    var meetingHistory = [Meeting]()
-    var plannedMeetings = [Meeting]()
-    var meetingInvitations = [Meeting]()
+    
     var currentMeetings = [Meeting]()
     
-    let meeting1 = Meeting(id: "", name: "1", types: [.bar], info: "Тусовка в баре", online: false, participants: [], participantsMax: 10, Location: "", image: nil, startingDate: Date.now, endingDate: Date.distantFuture, currentParticipantNumber: 1)
-    let meeting2 = Meeting(id: "", name: "2", types: [.club, .dancing], info: "Бухаем и танцуем в клубе", online: false, participants: [], participantsMax: 10, Location: "", image: nil, startingDate: Date.distantPast, endingDate: Date.distantPast, currentParticipantNumber: 1)
-    let meeting3 = Meeting(id: "", name: "3", types: [.tabletopGames], info: "Играем в настолки", online: false, participants: [], participantsMax: 10, Location: "", image: nil, startingDate: Date.now, endingDate: Date.distantFuture, currentParticipantNumber: 1)
-    let meeting4 = Meeting(id: "", name: "4", types: [.tabletopGames], info: "Играем в настолки", online: false, participants: [], participantsMax: 10, Location: "", image: nil, startingDate: Date.now, endingDate: Date.distantFuture, currentParticipantNumber: 1)
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        meetingHistory.append(meeting2)
-        plannedMeetings.append(meeting3)
-        plannedMeetings.append(meeting4)
-        meetingInvitations.append(meeting1)
-        currentMeetings = plannedMeetings
-        
         meetingTableView.delegate = self
         meetingTableView.dataSource = self
         
-        
         view.backgroundColor = .systemBackground
-    }
-    
-    override func viewWillLayoutSubviews() {
+        
         configNavigationBar()
         configSegmentController()
         configMeetingTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        Networker.shared.getUserMeetings(completion: {(meetings, error) in
+            if let error = error {
+                let alert = ErrorChecker.handler.getAlertController(error: error)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            if let meetings = meetings {
+                User.currentUser.meetingInvitations.removeAll()
+                User.currentUser.meetingHistory.removeAll()
+                User.currentUser.plannedMeetings.removeAll()
+                for meeting in meetings {
+                    if meeting.startingDate < Date.now {
+                        User.currentUser.meetingHistory.append(meeting)
+                    }
+                    else if meeting.participantsID.contains(User.currentUser.account!.id) {
+                        User.currentUser.plannedMeetings.append(meeting)
+                    }
+                    else {
+                        User.currentUser.meetingInvitations.append(meeting)
+                    }
+                }
+                self.currentMeetings = User.currentUser.plannedMeetings
+                self.meetingTableView.reloadData()
+            }
+            self.segmentController.selectedSegmentIndex = 1
+        })
+        
+        currentMeetings = User.currentUser.plannedMeetings
+        meetingTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,6 +78,12 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = MeetingInfoVC()
+        vc.meeting = currentMeetings[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -79,15 +103,15 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
     }
     
     @objc func createMeeting() {
-        
+        navigationController?.pushViewController(CreateMeetingVC(), animated: true)
     }
     
     @objc func segmentChanged() {
         
         switch segmentController.selectedSegmentIndex {
-        case 0: currentMeetings = meetingHistory
-        case 1: currentMeetings = plannedMeetings
-        case 2: currentMeetings = meetingInvitations
+        case 0: currentMeetings = User.currentUser.meetingHistory
+        case 1: currentMeetings = User.currentUser.plannedMeetings
+        case 2: currentMeetings = User.currentUser.meetingInvitations
         default:
             break;
         }
@@ -125,7 +149,6 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
         meetingTableView.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 10)
         meetingTableView.pinRight(to: view.safeAreaLayoutGuide.trailingAnchor, const: 10)
         meetingTableView.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor, const: 10)
-        
     }
 
 }

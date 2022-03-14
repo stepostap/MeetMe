@@ -27,7 +27,7 @@ class Meeting: Codable {
     }
     
     var id: Int64
-    var imageURL: String?
+    var imageURL = ""
     var name: String
     var types: [Interests]
     var info:  String

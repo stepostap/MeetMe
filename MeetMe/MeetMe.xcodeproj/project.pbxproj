@@ -30,6 +30,17 @@
 		E8C09B7127D155D600597ED7 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7027D155D600597ED7 /* Checkbox.swift */; };
 		E8C09B7327D7F45000597ED7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7227D7F45000597ED7 /* User.swift */; };
 		E8C09B7527D7F62900597ED7 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7427D7F62900597ED7 /* Group.swift */; };
+		E8C09B7A27DA24B000597ED7 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7927DA24B000597ED7 /* Server.swift */; };
+		E8C09B7E27DA2E2E00597ED7 /* NetWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7D27DA2E2E00597ED7 /* NetWorker.swift */; };
+		E8C09B8027DA2E9B00597ED7 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7F27DA2E9B00597ED7 /* NetworkMonitor.swift */; };
+		E8C09B8227DA354400597ED7 /* ErrorChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8127DA354400597ED7 /* ErrorChecker.swift */; };
+		E8C09B8427DA383400597ED7 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8327DA383400597ED7 /* Errors.swift */; };
+		E8C09B8627DB96E000597ED7 /* InterestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8527DB96DF00597ED7 /* InterestsVC.swift */; };
+		E8C09B8827DC0B1500597ED7 /* EditAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8727DC0B1500597ED7 /* EditAccountVC.swift */; };
+		E8C09B8A27DCE4EE00597ED7 /* CreateMeetingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8927DCE4ED00597ED7 /* CreateMeetingVC.swift */; };
+		E8C09B8C27DE44C700597ED7 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8B27DE44C600597ED7 /* UIStackView+.swift */; };
+		E8C09B8E27DEC43000597ED7 /* MeetingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8D27DEC42F00597ED7 /* MeetingInfoVC.swift */; };
+		E8C09B9027DF3A5300597ED7 /* FriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8F27DF3A5300597ED7 /* FriendsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +69,17 @@
 		E8C09B7027D155D600597ED7 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		E8C09B7227D7F45000597ED7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E8C09B7427D7F62900597ED7 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		E8C09B7927DA24B000597ED7 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		E8C09B7D27DA2E2E00597ED7 /* NetWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorker.swift; sourceTree = "<group>"; };
+		E8C09B7F27DA2E9B00597ED7 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		E8C09B8127DA354400597ED7 /* ErrorChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorChecker.swift; sourceTree = "<group>"; };
+		E8C09B8327DA383400597ED7 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		E8C09B8527DB96DF00597ED7 /* InterestsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsVC.swift; sourceTree = "<group>"; };
+		E8C09B8727DC0B1500597ED7 /* EditAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountVC.swift; sourceTree = "<group>"; };
+		E8C09B8927DCE4ED00597ED7 /* CreateMeetingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeetingVC.swift; sourceTree = "<group>"; };
+		E8C09B8B27DE44C600597ED7 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		E8C09B8D27DEC42F00597ED7 /* MeetingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingInfoVC.swift; sourceTree = "<group>"; };
+		E8C09B8F27DF3A5300597ED7 /* FriendsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +112,7 @@
 		E8C09B2B27C7BBB800597ED7 /* MeetMe */ = {
 			isa = PBXGroup;
 			children = (
+				E8C09B7827DA249C00597ED7 /* Networking */,
 				E8C09B5B27CFFC9800597ED7 /* Models */,
 				E8C09B5827C97CCA00597ED7 /* Helpers */,
 				E8C09B4F27C8120800597ED7 /* Extensions */,
@@ -130,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				E8C09B4D27C811E900597ED7 /* UIView+.swift */,
+				E8C09B8B27DE44C600597ED7 /* UIStackView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -149,6 +173,7 @@
 				E8C09B5027C97B1400597ED7 /* NavigationHandler.swift */,
 				E8C09B5927C97CF500597ED7 /* Utilities.swift */,
 				E8C09B7027D155D600597ED7 /* Checkbox.swift */,
+				E8C09B8127DA354400597ED7 /* ErrorChecker.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -162,6 +187,7 @@
 				E8C09B6827D129E600597ED7 /* MeetingSearchFilter.swift */,
 				E8C09B7227D7F45000597ED7 /* User.swift */,
 				E8C09B7427D7F62900597ED7 /* Group.swift */,
+				E8C09B8327DA383400597ED7 /* Errors.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,8 +204,23 @@
 			isa = PBXGroup;
 			children = (
 				E8C09B6527D1296500597ED7 /* SearchFilterVC.swift */,
+				E8C09B8527DB96DF00597ED7 /* InterestsVC.swift */,
+				E8C09B8727DC0B1500597ED7 /* EditAccountVC.swift */,
+				E8C09B8927DCE4ED00597ED7 /* CreateMeetingVC.swift */,
+				E8C09B8D27DEC42F00597ED7 /* MeetingInfoVC.swift */,
+				E8C09B8F27DF3A5300597ED7 /* FriendsVC.swift */,
 			);
 			path = SecondaryViews;
+			sourceTree = "<group>";
+		};
+		E8C09B7827DA249C00597ED7 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				E8C09B7927DA24B000597ED7 /* Server.swift */,
+				E8C09B7D27DA2E2E00597ED7 /* NetWorker.swift */,
+				E8C09B7F27DA2E9B00597ED7 /* NetworkMonitor.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,20 +295,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8C09B3727C7BBB800597ED7 /* MeetMe.xcdatamodeld in Sources */,
+				E8C09B8027DA2E9B00597ED7 /* NetworkMonitor.swift in Sources */,
+				E8C09B8C27DE44C700597ED7 /* UIStackView+.swift in Sources */,
 				E8C09B5F27CFFF4000597ED7 /* Account.swift in Sources */,
 				E8C09B7127D155D600597ED7 /* Checkbox.swift in Sources */,
+				E8C09B8627DB96E000597ED7 /* InterestsVC.swift in Sources */,
 				E8C09B7527D7F62900597ED7 /* Group.swift in Sources */,
 				E8C09B5D27CFFD8000597ED7 /* Meeting.swift in Sources */,
 				E8C09B4427C7BE0E00597ED7 /* AccountVC.swift in Sources */,
 				E8C09B6627D1296500597ED7 /* SearchFilterVC.swift in Sources */,
+				E8C09B7A27DA24B000597ED7 /* Server.swift in Sources */,
+				E8C09B9027DF3A5300597ED7 /* FriendsVC.swift in Sources */,
+				E8C09B8A27DCE4EE00597ED7 /* CreateMeetingVC.swift in Sources */,
+				E8C09B8227DA354400597ED7 /* ErrorChecker.swift in Sources */,
 				E8C09B6427D0FBA700597ED7 /* MeetingCell.swift in Sources */,
 				E8C09B4627C7BE3000597ED7 /* MeetingsVC.swift in Sources */,
 				E8C09B6127D000DA00597ED7 /* Interests.swift in Sources */,
 				E8C09B6927D129E600597ED7 /* MeetingSearchFilter.swift in Sources */,
 				E8C09B5727C97CAA00597ED7 /* SignUpVC.swift in Sources */,
+				E8C09B7E27DA2E2E00597ED7 /* NetWorker.swift in Sources */,
 				E8C09B4E27C811E900597ED7 /* UIView+.swift in Sources */,
 				E8C09B5327C97C6600597ED7 /* LoginVC.swift in Sources */,
+				E8C09B8827DC0B1500597ED7 /* EditAccountVC.swift in Sources */,
 				E8C09B5A27C97CF500597ED7 /* Utilities.swift in Sources */,
+				E8C09B8427DA383400597ED7 /* Errors.swift in Sources */,
+				E8C09B8E27DEC43000597ED7 /* MeetingInfoVC.swift in Sources */,
 				E8C09B4827C7BE3D00597ED7 /* GroupsVC.swift in Sources */,
 				E8C09B5127C97B1400597ED7 /* NavigationHandler.swift in Sources */,
 				E8C09B2D27C7BBB800597ED7 /* AppDelegate.swift in Sources */,

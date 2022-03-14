@@ -18,7 +18,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: scene.coordinateSpace.bounds)
         window?.windowScene = scene
-        window?.rootViewController = NavigationHandler.createAuthNC()
+        
+        if let email = UserDefaults.standard.string(forKey: "userEmail") {
+            if let password = UserDefaults.standard.string(forKey: "userPassword") {
+                Networker.shared.loginUser(email: email, password: password, completion: { (user, error) in
+                    if error != nil {
+                        self.window?.rootViewController = NavigationHandler.createAuthNC()
+                    }
+                    
+                    if let user = user {
+                        User.currentUser = user
+                        self.window?.rootViewController = NavigationHandler.createTabBar()
+                    }
+                })
+            } else {
+                window?.rootViewController = NavigationHandler.createAuthNC()
+            }
+        } else {
+            window?.rootViewController = NavigationHandler.createAuthNC()
+        }
+        
+        
         window?.makeKeyAndVisible()
         
     }

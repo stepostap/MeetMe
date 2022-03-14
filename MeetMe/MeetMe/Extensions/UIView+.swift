@@ -60,6 +60,7 @@ extension UIView {
         ])
     }
     
+    
     func pinTop(to anchor: NSLayoutYAxisAnchor, const: Int? = nil) {
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -94,6 +95,12 @@ extension UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         heightAnchor.constraint(equalToConstant: CGFloat(width)).isActive = true
+    }
+    
+    func disableHeight(to width: Int) {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        heightAnchor.constraint(equalToConstant: CGFloat(width)).isActive = false
     }
     
     func pinWidth(to width: NSLayoutDimension, mult: Double? = nil) {
