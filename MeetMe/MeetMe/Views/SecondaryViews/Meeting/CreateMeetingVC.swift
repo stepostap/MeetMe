@@ -9,6 +9,7 @@ import UIKit
 
 class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITextViewDelegate {
     
+    var meeting: Meeting?
     var createButton: UIBarButtonItem?
     
     var interests = [Interests]()
@@ -110,6 +111,29 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        showMeetingInfo()
+    }
+    
+    private func showMeetingInfo() {
+        formatter.dateFormat = "dd.MM HH:mm"
+        if let meeting = meeting {
+            nameTextField.text = meeting.name
+            onlineSwitch.isOn = meeting.isOnline
+            privateSwitch.isOn = meeting.isPrivate
+            infoTextView.text = meeting.info
+            interestsTextView.text = Utilities.getInterests(interestArray: meeting.types)
+            print(formatter.string(from: meeting.startingDate))
+            startingDateTextField.text = formatter.string(from: meeting.startingDate)
+            if let endingDate = meeting.endingDate {
+                endingDateTextField.text = formatter.string(from: endingDate)
+            }
+            interests = meeting.types
+            maxParticipantsTextField.text = meeting.participantsMax.description
+        }
+    }
+    
+    
     private func createMeetingCheck() throws {
         
         if nameTextField.text!.isEmpty {
@@ -129,8 +153,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         }
     }
     
+    
     @objc func createMeeting()  {
-        
         do {
             try createMeetingCheck()
         } catch let error {
@@ -139,39 +163,50 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
             return
         }
         
-        
         var friendIds = [User.currentUser.account!.id]
-        
         for friend in friends {
             friendIds.append(friend.id)
         }
-        
         var groupIds = [Int64]()
         for group in groups {
             groupIds.append(group.id)
         }
-        
         var endingDate: Date?
         if let text = endingDateTextField.text, !text.isEmpty {
             endingDate = datePicker2.date
         }
         
-        let meeting = Meeting(id: 0, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, participants: friendIds, groups: groupIds, participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: 1)
-        
-        Networker.shared.addMeeting(meeting: meeting, completion: {(meeting, error) in
-            if let error = error {
-                let alert = ErrorChecker.handler.getAlertController(error: error)
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
+        if let _ = meeting {
+            self.meeting = Meeting(id: self.meeting!.id, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, participants: friendIds, groups: groupIds, participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: self.meeting!.currentParticipantNumber)
             
-            if let meeting = meeting {
-                User.currentUser.plannedMeetings.append(meeting)
+            MeetingRequests.shared.editMeeting(meeting: meeting!, completion: {(error) in
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                let index = User.currentUser.plannedMeetings.firstIndex(of: self.meeting!)
+                User.currentUser.plannedMeetings[index!] = self.meeting!
                 self.navigationController?.popViewController(animated: true)
-            }
+            })
+        } else {
+            self.meeting = Meeting(id: 0, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, participants: friendIds, groups: groupIds, participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: 1)
             
-        })
+            MeetingRequests.shared.createMeeting(meeting: meeting!, completion: {(meeting, error) in
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                if let meeting = meeting {
+                    User.currentUser.plannedMeetings.append(meeting)
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
+        }
     }
+    
     
     @objc func chooseImage() {
         let picker = UIImagePickerController()
@@ -214,12 +249,11 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
     }
     
     @objc func addFriends() {
-        
+        let vc = ChooseParticipantsVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func addGroups() {
-        
-    }
+   
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == maxParticipantsTextField {
@@ -253,7 +287,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         mainView.pin(to: scrollView)
         mainView.pinWidth(to: view.widthAnchor, mult: 1)
         //mainView.pinHeight(to: view.heightAnchor, mult: 1)
-        mainView.setHeight(to: 1200)
+        mainView.setHeight(to: 1050)
         
         configNameAndImageView()
         configOnlinePrivateView()
@@ -465,40 +499,40 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         maxParticipantsTextField.delegate = self
         
         Utilities.styleFilledButton(addFriendsButton)
-        addFriendsButton.setTitle("Добавить друзей", for: .normal)
+        addFriendsButton.setTitle("Добавить участников", for: .normal)
         mainView.addSubview(addFriendsButton)
         addFriendsButton.pinTop(to: maxPartaicipantsLabel.bottomAnchor, const: 20)
         addFriendsButton.pinLeft(to: mainView.leadingAnchor, const: 20)
-        addFriendsButton.setHeight(to: 30)
-        addFriendsButton.setWidth(to: 180)
+        addFriendsButton.setHeight(to: 40)
+        addFriendsButton.pinRight(to: mainView.trailingAnchor, const: 20)
         addFriendsButton.addTarget(self, action: #selector(addFriends), for: .touchUpInside)
         
-        mainView.addSubview(invitedFriendsLabel)
-        invitedFriendsLabel.layer.borderWidth = 1
-        invitedFriendsLabel.layer.cornerRadius = 10
-        invitedFriendsLabel.backgroundColor = .systemGray4
-        invitedFriendsLabel.pinLeft(to: addFriendsButton.trailingAnchor, const: 10)
-        invitedFriendsLabel.pinCenter(to: addFriendsButton.centerYAnchor, const: 0)
-        invitedFriendsLabel.setWidth(to: 20)
-        invitedFriendsLabel.setHeight(to: 20)
-        
-        Utilities.styleFilledButton(addGroupsButton)
-        addGroupsButton.setTitle("Добавить группы", for: .normal)
-        mainView.addSubview(addGroupsButton)
-        addGroupsButton.pinTop(to: addFriendsButton.bottomAnchor, const: 20)
-        addGroupsButton.pinLeft(to: mainView.leadingAnchor, const: 20)
-        addGroupsButton.setHeight(to: 30)
-        addGroupsButton.setWidth(to: 180)
-        addGroupsButton.addTarget(self, action: #selector(addGroups), for: .touchUpInside)
-        
-        mainView.addSubview(invitedGroupsLabel)
-        invitedGroupsLabel.layer.borderWidth = 1
-        invitedGroupsLabel.layer.cornerRadius = 10
-        invitedGroupsLabel.backgroundColor = .systemGray4
-        invitedGroupsLabel.pinLeft(to: addGroupsButton.trailingAnchor, const: 10)
-        invitedGroupsLabel.pinCenter(to: addGroupsButton.centerYAnchor, const: 0)
-        invitedGroupsLabel.setWidth(to: 20)
-        invitedGroupsLabel.setHeight(to: 20)
+//        mainView.addSubview(invitedFriendsLabel)
+//        invitedFriendsLabel.layer.borderWidth = 1
+//        invitedFriendsLabel.layer.cornerRadius = 10
+//        invitedFriendsLabel.backgroundColor = .systemGray4
+//        invitedFriendsLabel.pinLeft(to: addFriendsButton.trailingAnchor, const: 10)
+//        invitedFriendsLabel.pinCenter(to: addFriendsButton.centerYAnchor, const: 0)
+//        invitedFriendsLabel.setWidth(to: 20)
+//        invitedFriendsLabel.setHeight(to: 20)
+//
+//        Utilities.styleFilledButton(addGroupsButton)
+//        addGroupsButton.setTitle("Добавить группы", for: .normal)
+//        mainView.addSubview(addGroupsButton)
+//        addGroupsButton.pinTop(to: addFriendsButton.bottomAnchor, const: 20)
+//        addGroupsButton.pinLeft(to: mainView.leadingAnchor, const: 20)
+//        addGroupsButton.setHeight(to: 30)
+//        addGroupsButton.setWidth(to: 180)
+//        addGroupsButton.addTarget(self, action: #selector(addGroups), for: .touchUpInside)
+//
+//        mainView.addSubview(invitedGroupsLabel)
+//        invitedGroupsLabel.layer.borderWidth = 1
+//        invitedGroupsLabel.layer.cornerRadius = 10
+//        invitedGroupsLabel.backgroundColor = .systemGray4
+//        invitedGroupsLabel.pinLeft(to: addGroupsButton.trailingAnchor, const: 10)
+//        invitedGroupsLabel.pinCenter(to: addGroupsButton.centerYAnchor, const: 0)
+//        invitedGroupsLabel.setWidth(to: 20)
+//        invitedGroupsLabel.setHeight(to: 20)
     }
     
 }

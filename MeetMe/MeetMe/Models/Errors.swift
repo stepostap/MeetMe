@@ -41,3 +41,10 @@ enum CreateMeetingError : Error {
     case noMaxUser
     case noParticipants
 }
+
+enum createGroupError: Error {
+    case noName
+    case noInfo
+    case noInterests
+    case noParticipants
+}

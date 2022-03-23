@@ -8,10 +8,15 @@
 
 import Foundation
 
-class Meeting: Codable {
+class Meeting: Codable, Equatable {
+    static func == (lhs: Meeting, rhs: Meeting) -> Bool {
+        return lhs.id == rhs.id
+    }
     
-    internal init(id: Int64, name: String, types: [Interests], info: String, online: Bool, isPrivate: Bool, participants: [Int64], groups: [Int64], participantsMax: Int, Location: String? = nil, startingDate: Date, endingDate: Date? = nil, currentParticipantNumber: Int) {
+    
+    internal init(id: Int64, creatorID: Int64, name: String, types: [Interests], info: String, online: Bool, isPrivate: Bool, participants: [Int64], groups: [Int64], participantsMax: Int, Location: String? = nil, startingDate: Date, endingDate: Date? = nil, currentParticipantNumber: Int) {
         self.id = id
+        self.creatorID = creatorID
         self.currentParticipantNumber = currentParticipantNumber
         self.name = name
         self.types = types
@@ -27,6 +32,7 @@ class Meeting: Codable {
     }
     
     var id: Int64
+    var creatorID: Int64
     var imageURL = ""
     var name: String
     var types: [Interests]

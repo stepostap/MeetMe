@@ -9,8 +9,6 @@ import UIKit
 
 class MeetingInfoVC: UIViewController {
 
-   
-    
     var meeting: Meeting?
     
     let formatter = DateFormatter()

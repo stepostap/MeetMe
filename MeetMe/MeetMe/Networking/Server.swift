@@ -17,22 +17,35 @@ enum ServerResponce: Int {
 class Server {
     static var shared = Server()
     
-    var users = [loginInfo: User]()
+    public var users = [loginInfo: User]()
     
     init() {
         let me = loginInfo(email: "Stepostap@gmail.com", password: "12345")
-       
+        let notMe = loginInfo(email: "stepan@ostapenko.net", password: "1")
+        let roma = loginInfo(email: "roma@gmail.com", password: "1")
+        
         let user = User()
         user.account = Account(id: 1, name: "Степан Остапенко", info: "Студент из Москвы, 20 лет.", imageDataURL: "", interests: [.photography, .tabletopGames, .cinema, .bar], socialMediaLinks: [:])
+
+        let secondUser = User()
+        secondUser.account = Account(id: 2, name: "Степа розовая попа", info: "ихааааааааааа", imageDataURL: "", interests: [.club, .gaming], socialMediaLinks: [:])
+        
+        let romaUser =  User()
+        romaUser.account = Account(id: 3, name: "Роман Ренатович", info: "Насзмуъдтиновъ", imageDataURL: "", interests: [.club, .gaming], socialMediaLinks: [:])
+
+        user.friends.append(secondUser.account!)
+        user.friends.append(romaUser.account!)
+        secondUser.friends.append(user.account!)
         
         users[me] = user
+        users[notMe] = user
         
-        let meeting1 = Meeting(id: 1, name: "Настолки", types: [.tabletopGames], info: "Собираемся играть в настолки, в первую очередь в ДНД", online: false, isPrivate: false, participants: [1], groups: [], participantsMax: 10, Location: "ETO кофейня", startingDate: Date.distantFuture, endingDate: Date.distantFuture, currentParticipantNumber: 1)
+        let meeting1 = Meeting(id: 1, creatorID: user.account!.id, name: "Настолки", types: [.tabletopGames], info: "Собираемся играть в настолки, в первую очередь в ДНД", online: false, isPrivate: false, participants: [1], groups: [], participantsMax: 10, Location: "ETO кофейня", startingDate: Date.distantFuture, endingDate: Date.distantFuture, currentParticipantNumber: 1)
         
-        let meeting2 = Meeting(id: 2, name: "ДР Коли", types: [.tabletopGames], info: "Отмечать будем у меня на даче, всех жду!", online: false, isPrivate: true, participants: [], groups: [], participantsMax: 20, Location: "Улица Пушкина, дом Калатушкина", startingDate: Date.distantFuture, endingDate: Date.distantFuture, currentParticipantNumber: 5)
+        let meeting2 = Meeting(id: 2, creatorID: secondUser.account!.id, name: "ДР Коли", types: [.tabletopGames], info: "Отмечать будем у меня на даче, всех жду!", online: false, isPrivate: true, participants: [1, 2], groups: [], participantsMax: 20, Location: "Улица Пушкина, дом Калатушкина", startingDate: Date.distantFuture, endingDate: Date.distantFuture, currentParticipantNumber: 5)
         
         user.plannedMeetings.append(meeting1)
-        user.meetingInvitations.append(meeting2)
+        user.plannedMeetings.append(meeting2)
     
     }
     
@@ -46,6 +59,16 @@ class Server {
         }
         
         return nil
+    }
+    
+    public func getUserFromId(id: Int64) -> Account? {
+        var selectedUser: Account?
+        for user in users {
+            if user.value.account?.id == id {
+                selectedUser = user.value.account
+            }
+        }
+        return selectedUser
     }
     
     public func registerUser(data: Data) -> Data? {

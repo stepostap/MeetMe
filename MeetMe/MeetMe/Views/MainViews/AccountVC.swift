@@ -45,6 +45,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         textView.layer.cornerRadius = 5
         textView.autocorrectionType = UITextAutocorrectionType.no
         textView.isUserInteractionEnabled = false
+        textView.isScrollEnabled = false
         return textView
     }()
     
@@ -86,10 +87,11 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         return textField
     }()
     
-    let imageAndNameHeight = 320
-    let infoHeight = 120
+    let imageAndNameHeight = 280
+    let infoHeight = 40
     let interestsHeight = 120
     let linksHeight = 200
+    let friendsButtonHeight = 40
     
     var accountViewHeight = 0
     var accountViewHeightConstraint: NSLayoutConstraint?
@@ -100,14 +102,13 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.backgroundColor = .systemGray4
-        tabBarController?.tabBar.backgroundColor = .systemGray4
-        
         logoutButton = UIBarButtonItem(title: "Sign out", style: .done, target: self, action: #selector(signOut))
         editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editProfile))
         
-        self.navigationItem.rightBarButtonItem = logoutButton
-        self.navigationItem.leftBarButtonItem = editButton
+        if isUserAccount {
+            self.navigationItem.rightBarButtonItem = logoutButton
+            self.navigationItem.leftBarButtonItem = editButton
+        }
         
         configView()
     }
@@ -133,17 +134,19 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
             account = User.currentUser.account
         }
         
-        print(self.account!.info)
-        print(self.account!.interests)
-        print(self.account!.socialMediaLinks)
-        
         accountView.removeFullyAllArrangedSubviews()
         accountView.addArrangedSubview(configImageAndNameView())
         nameTextField.text = account?.name
         
+        if isUserAccount {
+            accountView.addArrangedSubview(configFriendsButton())
+            accountViewHeight += friendsButtonHeight
+        }
+        
         if User.currentUser.account?.info != "" {
             infoTextView.text = account?.info
-            accountViewHeight += infoHeight
+            let height = infoTextView.sizeThatFits(infoTextView.bounds.size).height
+            accountViewHeight += infoHeight + Int(height)
             accountView.addArrangedSubview(configInfoTextView())
         }
 
@@ -218,12 +221,15 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         nameTextField.setWidth(to: 200)
         nameTextField.delegate = self
         nameTextField.isUserInteractionEnabled = false
-        
+    
+        return view
+    }
+    
+    private func configFriendsButton() -> UIView {
+        let view = UIView()
+        view.setHeight(to: friendsButtonHeight)
         view.addSubview(friendsButton)
-        friendsButton.pinLeft(to: view.leadingAnchor, const: 0)
-        friendsButton.pinRight(to: view.trailingAnchor, const: 0)
-        friendsButton.setHeight(to: 40)
-        friendsButton.pinTop(to: nameTextField.bottomAnchor, const: 5)
+        friendsButton.pin(to: view)
         friendsButton.layer.borderWidth = 1
         friendsButton.layer.borderColor = UIColor.systemGray.cgColor
         friendsButton.setTitle("Друзья", for: .normal)
@@ -235,8 +241,8 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     
     private func configInfoTextView() -> UIView{
         let view = UIView()
-        view.setHeight(to: infoHeight)
-        view.pinWidth(to: view.widthAnchor, mult: 1)
+        //view.setHeight(to: infoHeight)
+        //view.pinWidth(to: view.widthAnchor, mult: 1)
         
         let infoLabel = UILabel()
         infoLabel.font = UIFont.boldSystemFont(ofSize: 15)
@@ -252,7 +258,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         infoTextView.pinTop(to: infoLabel.bottomAnchor, const: 0)
         infoTextView.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 20)
         infoTextView.pinRight(to: view.safeAreaLayoutGuide.trailingAnchor, const: 20)
-        infoTextView.setHeight(to: 80)
+        //infoTextView.setHeight(to: 80)
         infoTextView.delegate = self
         
         return view
@@ -282,6 +288,26 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         return view
     }
     
+    @objc func viewVkLink(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == UITapGestureRecognizer.State.began {
+            
+            if let vkLink = account?.socialMediaLinks["vk"] {
+                print(1)
+                let url = URL(string: "https://vk.com/\(vkLink)")
+                do {
+                    var isReachable = true
+                    isReachable = try url?.checkResourceIsReachable() ?? false
+                    if isReachable {
+                        
+                        UIApplication.shared.open(url!)
+                    }
+                } catch {
+                    
+                }
+            }
+        }
+    }
+    
     private func configLinksView() -> UIView {
         let view = UIView()
         view.setHeight(to: linksHeight)
@@ -299,6 +325,10 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         linksLabel.pinLeft(to: view.leadingAnchor, const: 25)
         linksLabel.setHeight(to: 30)
         linksLabel.setWidth(to: 200)
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewVkLink))
+        view.addGestureRecognizer(gestureRecognizer)
+//        vkLinkTextField.addGestureRecognizer(gestureRecognizer)
        
         let vkImage = UIImageView(image: UIImage(named: "vkLogo"))
         view.addSubview(vkImage)
@@ -307,6 +337,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         vkImage.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 20)
         vkImage.setWidth(to: 50)
         vkImage.setHeight(to: 50)
+//        vkImage.addGestureRecognizer(gestureRecognizer)
         
         view.addSubview(vkLinkTextField)
         vkLinkTextField.pinLeft(to: vkImage.trailingAnchor, const: 5)
@@ -314,6 +345,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         vkLinkTextField.setWidth(to: 200)
         vkLinkTextField.setHeight(to: 30)
         vkLinkTextField.delegate = self
+        
         
         let tgImage = UIImageView(image: UIImage(named: "tgLogo"))
         view.addSubview(tgImage)

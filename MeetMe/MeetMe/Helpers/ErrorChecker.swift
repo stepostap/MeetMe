@@ -56,7 +56,7 @@ class ErrorChecker {
             case CreateMeetingError.startEndDateError:
                 message = "Дата окончания мероприятия идет до даты наступления мероприятия."
             case CreateMeetingError.noName:
-                message = "Не введено название мероприятия"
+                message = "Не введено название мероприятия."
             case CreateMeetingError.noParticipants:
                 message = "У приватного мероприятия должны быть указаны участники."
             case CreateMeetingError.noMaxUser:
@@ -67,6 +67,22 @@ class ErrorChecker {
                 break
             }
             
+            return message
+        }
+        
+        if error is createGroupError {
+            switch error {
+            case createGroupError.noName:
+                message = "Укажите название группы"
+            case createGroupError.noInfo:
+                message = "Добавьте описание группы"
+            case createGroupError.noInterests:
+                message = "Укажите интересы группы"
+            case createGroupError.noParticipants:
+                message = "При создании приватной группы добавьте в нее участников"
+            default:
+                break
+            }
             return message
         }
         

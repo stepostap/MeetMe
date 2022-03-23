@@ -86,6 +86,71 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
         navigationController?.pushViewController(vc, animated: true)
     }
     
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//
+//        return true
+//    }
+        
+//    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//
+//    }
+    
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var actions = [UIContextualAction]()
+        let leaveAction = UIContextualAction(style: .destructive, title: "Покинуть мероприятие") { _, _, complete in
+            let alert = UIAlertController(title: "Покинуть мероприятие?", message: "Вы уверены, что хотите покинуть мероприятие? Это действие нельзя отменить.", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+            let removeAction = UIAlertAction(title: "Покинуть", style: .default, handler: {_ in
+                MeetingRequests.shared.removeMeeting(meetingID: self.currentMeetings[indexPath.row].id)
+                self.currentMeetings.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.reloadData()
+            })
+            alert.addAction(cancelAction)
+            alert.addAction(removeAction)
+            self.present(alert, animated: true)
+        }
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Отменить мероприятие") { _, _, complete in
+            let alert = UIAlertController(title: "Удалить мероприятие?", message: "Вы уверены, что хотите удалить мероприятие? Это действие нельзя отменить. Мероприятие будет удалено для всех его участников.", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+            let removeAction = UIAlertAction(title: "Удалить", style: .default, handler: {_ in
+                MeetingRequests.shared.deleteMeeting(meetingID: self.currentMeetings[indexPath.row].id)
+                self.currentMeetings.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.reloadData()
+            })
+            alert.addAction(cancelAction)
+            alert.addAction(removeAction)
+            self.present(alert, animated: true)
+        }
+        
+        let editAction = UIContextualAction(style: .normal, title: "Редактировать") { _, _, complete in
+            let vc = CreateMeetingVC()
+            vc.meeting = self.currentMeetings[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        let participateAction = UIContextualAction(style: .normal, title: "Участвовать") { _, _, complete in
+            MeetingRequests.shared.participateInMeeting(meetingID: self.currentMeetings[indexPath.row].id)
+        }
+       
+        if currentMeetings[indexPath.row].creatorID == User.currentUser.account!.id {
+            actions.append(editAction)
+            actions.append(deleteAction)
+        } else {
+            actions.append(leaveAction)
+        }
+    
+        if segmentController.selectedSegmentIndex == 2 {
+            actions.append(participateAction)
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: actions)
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
     
     func updateSearchResults(for searchController: UISearchController) {
         
