@@ -19,6 +19,7 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
     
     var currentMeetings = [Meeting]()
     
+    let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,11 +73,8 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingCell", for: indexPath) as! MeetingCell
         cell.meeting = currentMeetings[indexPath.row]
-        
-        
         return cell
     }
     
@@ -184,6 +182,15 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
         meetingTableView.reloadData()
     }
     
+    @objc func reloadUserMeetings() {
+        
+        DispatchQueue.main.async {
+            sleep(2)
+            self.refreshControl.endRefreshing()
+        }
+        
+    }
+    
     func configSegmentController() {
         view.addSubview(segmentController)
         segmentController.setConstraints(to: view, left: 30, top: 0, right: 30, height: 30)
@@ -207,6 +214,9 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
     }
     
     func configMeetingTableView() {
+        
+        refreshControl.addTarget(self, action: #selector(reloadUserMeetings), for: .valueChanged)
+        meetingTableView.refreshControl = refreshControl
         
         meetingTableView.register(MeetingCell.self, forCellReuseIdentifier: "MeetingCell")
         view.addSubview(meetingTableView)

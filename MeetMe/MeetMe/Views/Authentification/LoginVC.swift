@@ -22,7 +22,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         textField.textAlignment = .left
         textField.placeholder = "email"
-        textField.text = "Stepostap@gmail.com"
+        //textField.text = "Stepostap@gmail.com"
         return textField
     }()
     
@@ -35,7 +35,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         textField.textAlignment = .left
         textField.placeholder = "password"
         textField.isSecureTextEntry = true
-        textField.text = "12345"
+        //textField.text = "12345"
         return textField
     }()
 
@@ -148,28 +148,30 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
         loader.startAnimating()
+       
+//        User.currentUser = Server.shared.users[LoginInfo(email: "Stepostap@gmail.com", password: "12345")]!
+//        self.loader.stopAnimating()
+//        self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
         
-        Networker.shared.loginUser(email: email, password: password, completion: { (user, error) in
+        AuthRequests.shared.login(info: LoginInfo(email: email, password: password), completion: { (account, error) in
             if let error = error {
                 let alert = ErrorChecker.handler.getAlertController(error: error)
                 self.present(alert, animated: true, completion: nil)
                 self.loader.stopAnimating()
                 return
             }
-            
-            if let user = user {
-                
+
+            if let account = account {
+
                 if self.shouldSaveLoginAndPassword!.isChecked {
                     UserDefaults.standard.set(email, forKey: "userName")
                     UserDefaults.standard.set(password, forKey: "userPassword")
-                    
                 }
-                
-                User.currentUser = user
+
+                User.currentUser.account = account
                 self.loader.stopAnimating()
                 self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
             }
-            
         })
     }
     

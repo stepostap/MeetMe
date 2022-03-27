@@ -13,8 +13,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
     var createButton: UIBarButtonItem?
     
     var interests = [Interests]()
-    var friends = [Account]()
-    var groups = [Group]()
+    var invitedFriendsIDs = [Int64]()
+    var invitedGroupsIDs = [Int64]()
     
     let formatter = DateFormatter()
     let scrollView = UIScrollView()
@@ -142,7 +142,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         if maxParticipantsTextField.text!.isEmpty {
             throw CreateMeetingError.noMaxUser
         }
-        if privateSwitch.isOn && groups.isEmpty && friends.isEmpty {
+        if privateSwitch.isOn && invitedGroupsIDs.isEmpty && invitedFriendsIDs.isEmpty {
             throw CreateMeetingError.noParticipants
         }
         if startingDateTextField.text!.isEmpty {
@@ -163,21 +163,13 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
             return
         }
         
-        var friendIds = [User.currentUser.account!.id]
-        for friend in friends {
-            friendIds.append(friend.id)
-        }
-        var groupIds = [Int64]()
-        for group in groups {
-            groupIds.append(group.id)
-        }
         var endingDate: Date?
         if let text = endingDateTextField.text, !text.isEmpty {
             endingDate = datePicker2.date
         }
         
         if let _ = meeting {
-            self.meeting = Meeting(id: self.meeting!.id, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, participants: friendIds, groups: groupIds, participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: self.meeting!.currentParticipantNumber)
+            self.meeting = Meeting(id: self.meeting!.id, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, participants: meeting!.participantsID, groups: meeting!.participantsGroupsID, participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: self.meeting!.currentParticipantNumber)
             
             MeetingRequests.shared.editMeeting(meeting: meeting!, completion: {(error) in
                 if let error = error {
@@ -190,8 +182,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
                 self.navigationController?.popViewController(animated: true)
             })
         } else {
-            self.meeting = Meeting(id: 0, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, participants: friendIds, groups: groupIds, participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: 1)
-            
+            self.meeting = Meeting(id: 0, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, participants: [User.currentUser.account!.id], groups: [], participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: 1)
+            print("create meeting")
             MeetingRequests.shared.createMeeting(meeting: meeting!, completion: {(meeting, error) in
                 if let error = error {
                     let alert = ErrorChecker.handler.getAlertController(error: error)
@@ -250,10 +242,15 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
     
     @objc func addFriends() {
         let vc = ChooseParticipantsVC()
+        vc.includeGroups = true
+        vc.passData = {(friends, groups) in
+            self.invitedFriendsIDs = friends
+            self.invitedGroupsIDs = groups
+        }
+        vc.chosenFriendIDs = invitedFriendsIDs
+        vc.chosenGroupIDs = invitedGroupsIDs
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-   
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == maxParticipantsTextField {

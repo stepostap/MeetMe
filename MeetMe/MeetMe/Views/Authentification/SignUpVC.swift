@@ -158,7 +158,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        Networker.shared.registerUser(name: name, email: email, password: password, completion: { (user, error) in
+        AuthRequests.shared.register(info: RegisterInfo(email: email, password: password, fullName: name), completion: { (account, error) in
             if let error = error {
                 let alert = ErrorChecker.handler.getAlertController(error: error)
                 self.present(alert, animated: true, completion: nil)
@@ -166,12 +166,12 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                 return
             }
             
-            if let user = user {
-                User.currentUser = user
+            if let account = account {
+                User.currentUser = User()
+                User.currentUser.account = account
                 self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
             }
         })
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

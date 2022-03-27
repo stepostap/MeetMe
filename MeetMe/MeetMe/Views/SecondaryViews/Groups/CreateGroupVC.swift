@@ -9,11 +9,11 @@ import UIKit
 
 class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITextViewDelegate {
     
-    var group: Meeting?
+    var group: Group?
     var createButton: UIBarButtonItem?
     
     var interests = [Interests]()
-    var friends = [Account]()
+    var invitedFriendsIDs = [Int64]()
     
     let formatter = DateFormatter()
     let scrollView = UIScrollView()
@@ -22,8 +22,6 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
     let chooseImageButton = UIButton(type: .system)
     let editInterestsButton = UIButton(type: .system)
     let addFriendsButton = UIButton()
-    
-    let invitedFriendsLabel = UILabel()
     
     let privateSwitch = UISwitch()
     
@@ -80,14 +78,13 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
     
     private func showMeetingInfo() {
         formatter.dateFormat = "dd.MM HH:mm"
-        if let meeting = group {
-            nameTextField.text = meeting.name
+        if let group = group {
+            nameTextField.text = group.groupName
         
-            privateSwitch.isOn = meeting.isPrivate
-            infoTextView.text = meeting.info
-            interestsTextView.text = Utilities.getInterests(interestArray: meeting.types)
-            print(formatter.string(from: meeting.startingDate))
-            interests = meeting.types
+            privateSwitch.isOn = group.isPrivate
+            infoTextView.text = group.groupInfo
+            interestsTextView.text = Utilities.getInterests(interestArray: group.interests)
+            interests = group.interests
         }
     }
     
@@ -100,7 +97,6 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         
     }
     
-    
     @objc func createGroup()  {
         do {
             try createGroupCheck()
@@ -110,12 +106,13 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
             return
         }
         
-        var friendIds = [User.currentUser.account!.id]
-        for friend in friends {
-            friendIds.append(friend.id)
+        if let group = group {
+            group.groupInfo = infoTextView.text
+            group.interests = interests
+            let index = User.currentUser.groups.firstIndex(of: group)!
+            User.currentUser.groups[index] = group
+            navigationController?.popViewController(animated: true)
         }
-        var groupIds = [Int64]()
-        
     }
     
     @objc func chooseImage() {
@@ -150,12 +147,18 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
     
     
     @objc func addFriends() {
+        let vc = ChooseParticipantsVC()
+        vc.passData = {(friends, groups) in
+            self.invitedFriendsIDs = friends
+        }
+        vc.chosenFriendIDs = invitedFriendsIDs
+        if let group = group, group.participants != nil {
+            vc.alreadyAddedFriends = group.participants!
+        }
         
+        navigationController?.pushViewController(vc, animated: true)
     }
-    
-    @objc func addGroups() {
-        
-    }
+
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()

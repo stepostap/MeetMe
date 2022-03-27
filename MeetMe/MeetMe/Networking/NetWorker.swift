@@ -18,7 +18,7 @@ class Networker {
             }
         }
         
-        let userInfo = loginInfo(email: email, password: password)
+        let userInfo = LoginInfo(email: email, password: password)
         let loginData = try! JSONEncoder().encode(userInfo)
         
         if let userData = Server.shared.getUser(data: loginData){
@@ -40,49 +40,49 @@ class Networker {
         }
     }
     
-    func registerUser (name: String, email: String, password: String, completion: @escaping (User?, Error?) -> (Void)) {
-        if !NetworkMonitor.shared.isConnected {
-            DispatchQueue.main.async {
-                completion(nil, NetworkerError.noConnection)
-            }
-        }
-        
-        let userLoginData = [email, password, name]
-        let userLoginDataJSON = try! JSONEncoder().encode(userLoginData)
-        
-        if let newAccount = Server.shared.registerUser(data: userLoginDataJSON) {
-            do {
-                let errorNumber = try JSONDecoder().decode(Int.self, from: newAccount)
-                switch errorNumber {
-                case 1:
-                    DispatchQueue.main.async {
-                        completion(nil, RegisterErrors.emailRegistered)
-                    }
-                default:
-                    break
-                }
-                
-            } catch {
-                
-            }
-            
-            let user = User()
-            do {
-                user.account = try JSONDecoder().decode(Account.self, from: newAccount)
-                DispatchQueue.main.async {
-                    completion(user, nil)
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    completion(nil, JSONError.decodingError)
-                }
-            }
-        } else {
-            DispatchQueue.main.async {
-                completion(nil, LoginErrors.noSuchUser)
-            }
-        }
-    }
+//    func registerUser (name: String, email: String, password: String, completion: @escaping (User?, Error?) -> (Void)) {
+//        if !NetworkMonitor.shared.isConnected {
+//            DispatchQueue.main.async {
+//                completion(nil, NetworkerError.noConnection)
+//            }
+//        }
+//
+//        let userLoginData = [email, password, name]
+//        let userLoginDataJSON = try! JSONEncoder().encode(userLoginData)
+//
+//        if let newAccount = Server.shared.registerUser(data: userLoginDataJSON) {
+//            do {
+//                let errorNumber = try JSONDecoder().decode(Int.self, from: newAccount)
+//                switch errorNumber {
+//                case 1:
+//                    DispatchQueue.main.async {
+//                        completion(nil, RegisterErrors.emailRegistered)
+//                    }
+//                default:
+//                    break
+//                }
+//
+//            } catch {
+//
+//            }
+//
+//            let user = User()
+//            do {
+//                user.account = try JSONDecoder().decode(Account.self, from: newAccount)
+//                DispatchQueue.main.async {
+//                    completion(user, nil)
+//                }
+//            } catch {
+//                DispatchQueue.main.async {
+//                    completion(nil, JSONError.decodingError)
+//                }
+//            }
+//        } else {
+//            DispatchQueue.main.async {
+//                completion(nil, LoginErrors.noSuchUser)
+//            }
+//        }
+//    }
     
     func updateUserInfo(account: Account, completion:  @escaping (Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {

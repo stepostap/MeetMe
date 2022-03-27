@@ -48,3 +48,11 @@ enum createGroupError: Error {
     case noInterests
     case noParticipants
 }
+
+class ServerError: Error {
+    internal init(message: String) {
+        self.message = message
+    }
+    
+    let message: String
+}

@@ -312,8 +312,6 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
             User.currentUser.account = Account(account: self.account)
             self.navigationController?.popViewController(animated: true)
         })
-        
-       
     }
 }
 

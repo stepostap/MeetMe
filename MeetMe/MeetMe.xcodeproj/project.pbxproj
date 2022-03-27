@@ -10,9 +10,20 @@
 		E84B770027E1FD5900D985A8 /* toDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E84B76FF27E1FD5900D985A8 /* toDo.rtf */; };
 		E853FBBA27E912B8001313E0 /* AddParticipantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBB927E912B8001313E0 /* AddParticipantCell.swift */; };
 		E853FBBF27E9174D001313E0 /* ChooseParticipantsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBBE27E9174D001313E0 /* ChooseParticipantsVC.swift */; };
-		E853FBC127E91A23001313E0 /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBC027E91A23001313E0 /* Participant.swift */; };
 		E853FBC327EA12C2001313E0 /* CreateGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBC227EA12C2001313E0 /* CreateGroupVC.swift */; };
-		E8A10ABB27E5F895008A43CA /* ViewFriendCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A10ABA27E5F895008A43CA /* ViewFriendCellTableViewCell.swift */; };
+		E853FBC727EBAD28001313E0 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBC627EBAD28001313E0 /* GroupCell.swift */; };
+		E853FBCA27EBB3F6001313E0 /* GroupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBC927EBB3F6001313E0 /* GroupScreen.swift */; };
+		E853FBCC27EBBBBB001313E0 /* ExtendedMeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBCB27EBBBBB001313E0 /* ExtendedMeetingCell.swift */; };
+		E853FBD027ECA42D001313E0 /* ViewParticipantsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBCF27ECA42D001313E0 /* ViewParticipantsVC.swift */; };
+		E853FBD227ECE58C001313E0 /* AuthRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBD127ECE58C001313E0 /* AuthRequests.swift */; };
+		E853FBD427ECE5E3001313E0 /* MeetMeRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBD327ECE5E3001313E0 /* MeetMeRequests.swift */; };
+		E853FBD627ECE7EE001313E0 /* RegisterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBD527ECE7EE001313E0 /* RegisterInfo.swift */; };
+		E853FBD827ED0A1E001313E0 /* Responce.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBD727ED0A1E001313E0 /* Responce.swift */; };
+		E853FBDB27F0BE34001313E0 /* IDDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBDA27F0BE34001313E0 /* IDDTO.swift */; };
+		E853FBDE27F0C121001313E0 /* MeetingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBDD27F0C121001313E0 /* MeetingDTO.swift */; };
+		E853FBE027F0CA55001313E0 /* AccountDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBDF27F0CA55001313E0 /* AccountDTO.swift */; };
+		E853FBE227F0D915001313E0 /* InterestsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBE127F0D915001313E0 /* InterestsParser.swift */; };
+		E8A10ABB27E5F895008A43CA /* ViewFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A10ABA27E5F895008A43CA /* ViewFriendCell.swift */; };
 		E8A10ABD27E78645008A43CA /* FriendsRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A10ABC27E78645008A43CA /* FriendsRequests.swift */; };
 		E8A10ABF27E78660008A43CA /* MeetingRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A10ABE27E78660008A43CA /* MeetingRequests.swift */; };
 		E8A10AC127E78A07008A43CA /* AccountRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A10AC027E78A07008A43CA /* AccountRequests.swift */; };
@@ -56,9 +67,20 @@
 		E84B76FF27E1FD5900D985A8 /* toDo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = toDo.rtf; sourceTree = "<group>"; };
 		E853FBB927E912B8001313E0 /* AddParticipantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParticipantCell.swift; sourceTree = "<group>"; };
 		E853FBBE27E9174D001313E0 /* ChooseParticipantsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseParticipantsVC.swift; sourceTree = "<group>"; };
-		E853FBC027E91A23001313E0 /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
 		E853FBC227EA12C2001313E0 /* CreateGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupVC.swift; sourceTree = "<group>"; };
-		E8A10ABA27E5F895008A43CA /* ViewFriendCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFriendCellTableViewCell.swift; sourceTree = "<group>"; };
+		E853FBC627EBAD28001313E0 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
+		E853FBC927EBB3F6001313E0 /* GroupScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupScreen.swift; sourceTree = "<group>"; };
+		E853FBCB27EBBBBB001313E0 /* ExtendedMeetingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedMeetingCell.swift; sourceTree = "<group>"; };
+		E853FBCF27ECA42D001313E0 /* ViewParticipantsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewParticipantsVC.swift; sourceTree = "<group>"; };
+		E853FBD127ECE58C001313E0 /* AuthRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequests.swift; sourceTree = "<group>"; };
+		E853FBD327ECE5E3001313E0 /* MeetMeRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetMeRequests.swift; sourceTree = "<group>"; };
+		E853FBD527ECE7EE001313E0 /* RegisterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInfo.swift; sourceTree = "<group>"; };
+		E853FBD727ED0A1E001313E0 /* Responce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responce.swift; sourceTree = "<group>"; };
+		E853FBDA27F0BE34001313E0 /* IDDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDDTO.swift; sourceTree = "<group>"; };
+		E853FBDD27F0C121001313E0 /* MeetingDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDTO.swift; sourceTree = "<group>"; };
+		E853FBDF27F0CA55001313E0 /* AccountDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDTO.swift; sourceTree = "<group>"; };
+		E853FBE127F0D915001313E0 /* InterestsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsParser.swift; sourceTree = "<group>"; };
+		E8A10ABA27E5F895008A43CA /* ViewFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFriendCell.swift; sourceTree = "<group>"; };
 		E8A10ABC27E78645008A43CA /* FriendsRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsRequests.swift; sourceTree = "<group>"; };
 		E8A10ABE27E78660008A43CA /* MeetingRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRequests.swift; sourceTree = "<group>"; };
 		E8A10AC027E78A07008A43CA /* AccountRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRequests.swift; sourceTree = "<group>"; };
@@ -124,9 +146,42 @@
 		E853FBBB27E91315001313E0 /* NetworkingModels */ = {
 			isa = PBXGroup;
 			children = (
-				E853FBC027E91A23001313E0 /* Participant.swift */,
+				E853FBDC27F0BE51001313E0 /* DTO */,
+				E853FBD527ECE7EE001313E0 /* RegisterInfo.swift */,
+				E853FBD727ED0A1E001313E0 /* Responce.swift */,
+				E853FBE127F0D915001313E0 /* InterestsParser.swift */,
 			);
 			path = NetworkingModels;
+			sourceTree = "<group>";
+		};
+		E853FBC827EBB3BB001313E0 /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				E853FBC227EA12C2001313E0 /* CreateGroupVC.swift */,
+				E853FBC927EBB3F6001313E0 /* GroupScreen.swift */,
+			);
+			path = Groups;
+			sourceTree = "<group>";
+		};
+		E853FBD927EE1FD1001313E0 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				E853FBCF27ECA42D001313E0 /* ViewParticipantsVC.swift */,
+				E853FBBE27E9174D001313E0 /* ChooseParticipantsVC.swift */,
+				E8C09B8F27DF3A5300597ED7 /* FriendsVC.swift */,
+				E8C09B8727DC0B1500597ED7 /* EditAccountVC.swift */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		E853FBDC27F0BE51001313E0 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				E853FBDA27F0BE34001313E0 /* IDDTO.swift */,
+				E853FBDD27F0C121001313E0 /* MeetingDTO.swift */,
+				E853FBDF27F0CA55001313E0 /* AccountDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		E8C09B2027C7BBB800597ED7 = {
@@ -234,8 +289,10 @@
 			isa = PBXGroup;
 			children = (
 				E8C09B6327D0FBA700597ED7 /* MeetingCell.swift */,
-				E8A10ABA27E5F895008A43CA /* ViewFriendCellTableViewCell.swift */,
+				E8A10ABA27E5F895008A43CA /* ViewFriendCell.swift */,
 				E853FBB927E912B8001313E0 /* AddParticipantCell.swift */,
+				E853FBC627EBAD28001313E0 /* GroupCell.swift */,
+				E853FBCB27EBBBBB001313E0 /* ExtendedMeetingCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -243,12 +300,10 @@
 		E8C09B6727D1297900597ED7 /* SecondaryViews */ = {
 			isa = PBXGroup;
 			children = (
+				E853FBD927EE1FD1001313E0 /* Accounts */,
+				E853FBC827EBB3BB001313E0 /* Groups */,
 				E84B770127E2006D00D985A8 /* Meeting */,
 				E8C09B8527DB96DF00597ED7 /* InterestsVC.swift */,
-				E8C09B8727DC0B1500597ED7 /* EditAccountVC.swift */,
-				E8C09B8F27DF3A5300597ED7 /* FriendsVC.swift */,
-				E853FBBE27E9174D001313E0 /* ChooseParticipantsVC.swift */,
-				E853FBC227EA12C2001313E0 /* CreateGroupVC.swift */,
 			);
 			path = SecondaryViews;
 			sourceTree = "<group>";
@@ -259,9 +314,11 @@
 				E8C09B7927DA24B000597ED7 /* Server.swift */,
 				E8C09B7D27DA2E2E00597ED7 /* NetWorker.swift */,
 				E8C09B7F27DA2E9B00597ED7 /* NetworkMonitor.swift */,
+				E8A10AC027E78A07008A43CA /* AccountRequests.swift */,
 				E8A10ABC27E78645008A43CA /* FriendsRequests.swift */,
 				E8A10ABE27E78660008A43CA /* MeetingRequests.swift */,
-				E8A10AC027E78A07008A43CA /* AccountRequests.swift */,
+				E853FBD127ECE58C001313E0 /* AuthRequests.swift */,
+				E853FBD327ECE5E3001313E0 /* MeetMeRequests.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -343,40 +400,51 @@
 				E8C09B8C27DE44C700597ED7 /* UIStackView+.swift in Sources */,
 				E8C09B5F27CFFF4000597ED7 /* Account.swift in Sources */,
 				E8C09B7127D155D600597ED7 /* Checkbox.swift in Sources */,
-				E853FBC127E91A23001313E0 /* Participant.swift in Sources */,
 				E8C09B8627DB96E000597ED7 /* InterestsVC.swift in Sources */,
+				E853FBDB27F0BE34001313E0 /* IDDTO.swift in Sources */,
 				E8C09B7527D7F62900597ED7 /* Group.swift in Sources */,
+				E853FBE027F0CA55001313E0 /* AccountDTO.swift in Sources */,
 				E8C09B5D27CFFD8000597ED7 /* Meeting.swift in Sources */,
 				E8C09B4427C7BE0E00597ED7 /* AccountVC.swift in Sources */,
+				E853FBD627ECE7EE001313E0 /* RegisterInfo.swift in Sources */,
 				E8A10ABF27E78660008A43CA /* MeetingRequests.swift in Sources */,
 				E8C09B6627D1296500597ED7 /* SearchFilterVC.swift in Sources */,
 				E8C09B7A27DA24B000597ED7 /* Server.swift in Sources */,
 				E8C09B9027DF3A5300597ED7 /* FriendsVC.swift in Sources */,
+				E853FBD027ECA42D001313E0 /* ViewParticipantsVC.swift in Sources */,
 				E8C09B8A27DCE4EE00597ED7 /* CreateMeetingVC.swift in Sources */,
+				E853FBC727EBAD28001313E0 /* GroupCell.swift in Sources */,
 				E8A10ABD27E78645008A43CA /* FriendsRequests.swift in Sources */,
 				E8C09B8227DA354400597ED7 /* ErrorChecker.swift in Sources */,
 				E8C09B6427D0FBA700597ED7 /* MeetingCell.swift in Sources */,
 				E8C09B4627C7BE3000597ED7 /* MeetingsVC.swift in Sources */,
 				E853FBBF27E9174D001313E0 /* ChooseParticipantsVC.swift in Sources */,
+				E853FBCA27EBB3F6001313E0 /* GroupScreen.swift in Sources */,
 				E8C09B6127D000DA00597ED7 /* Interests.swift in Sources */,
 				E8C09B6927D129E600597ED7 /* MeetingSearchFilter.swift in Sources */,
+				E853FBCC27EBBBBB001313E0 /* ExtendedMeetingCell.swift in Sources */,
+				E853FBDE27F0C121001313E0 /* MeetingDTO.swift in Sources */,
 				E8C09B5727C97CAA00597ED7 /* SignUpVC.swift in Sources */,
 				E8C09B7E27DA2E2E00597ED7 /* NetWorker.swift in Sources */,
 				E8C09B4E27C811E900597ED7 /* UIView+.swift in Sources */,
 				E8C09B5327C97C6600597ED7 /* LoginVC.swift in Sources */,
-				E8A10ABB27E5F895008A43CA /* ViewFriendCellTableViewCell.swift in Sources */,
+				E8A10ABB27E5F895008A43CA /* ViewFriendCell.swift in Sources */,
 				E8C09B8827DC0B1500597ED7 /* EditAccountVC.swift in Sources */,
 				E8C09B5A27C97CF500597ED7 /* Utilities.swift in Sources */,
 				E853FBC327EA12C2001313E0 /* CreateGroupVC.swift in Sources */,
 				E853FBBA27E912B8001313E0 /* AddParticipantCell.swift in Sources */,
+				E853FBD427ECE5E3001313E0 /* MeetMeRequests.swift in Sources */,
+				E853FBD827ED0A1E001313E0 /* Responce.swift in Sources */,
 				E8C09B8427DA383400597ED7 /* Errors.swift in Sources */,
 				E8A10AC127E78A07008A43CA /* AccountRequests.swift in Sources */,
 				E8C09B8E27DEC43000597ED7 /* MeetingInfoVC.swift in Sources */,
 				E8C09B4827C7BE3D00597ED7 /* GroupsVC.swift in Sources */,
+				E853FBE227F0D915001313E0 /* InterestsParser.swift in Sources */,
 				E8C09B5127C97B1400597ED7 /* NavigationHandler.swift in Sources */,
 				E8C09B2D27C7BBB800597ED7 /* AppDelegate.swift in Sources */,
 				E8C09B2F27C7BBB800597ED7 /* SceneDelegate.swift in Sources */,
 				E8C09B7327D7F45000597ED7 /* User.swift in Sources */,
+				E853FBD227ECE58C001313E0 /* AuthRequests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

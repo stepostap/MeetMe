@@ -7,9 +7,13 @@
 
 import Foundation
 
-class Group: Codable {
+class Group: Codable, Equatable {
+    static func == (lhs: Group, rhs: Group) -> Bool {
+        return lhs.id == rhs.id
+    }
     
-    internal init(id: Int64, groupImage: String, groupName: String, groupInfo: String, interests: [Interests], meetings: [String]? = nil, participants: [Int64]? = nil, admins: [Int64]) {
+    
+    internal init(id: Int64, groupImage: String, groupName: String, groupInfo: String, interests: [Interests], meetings: [Int64]? = nil, participants: [Int64]? = nil, admins: [Int64]) {
         self.id = id
         self.groupImageURL = groupImage
         self.groupName = groupName
@@ -25,7 +29,8 @@ class Group: Codable {
     var groupName: String
     var groupInfo: String
     var interests: [Interests]
-    var meetingsID: [String]?
+    var isPrivate = false
+    var meetingsID: [Int64]?
     var admins: [Int64]
     var participants: [Int64]?
     

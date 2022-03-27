@@ -34,8 +34,6 @@ class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate,
         FriendsReequests.shared.getFriends(userID: User.currentUser.account!.id)
         FriendsReequests.shared.getFriendRequests()
         
-        User.currentUser = Server.shared.users[loginInfo(email: "Stepostap@gmail.com", password: "12345")]!
-        
         segmentController.selectedSegmentIndex = 0
         currentFriends = User.currentUser.friends
     }
@@ -46,7 +44,7 @@ class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingCell", for: indexPath) as! ViewFriendCellTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingCell", for: indexPath) as! ViewFriendCell
         cell.account = currentFriends[indexPath.row]
        
         return cell
@@ -97,7 +95,7 @@ class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate,
     
     func configMeetingTableView() {
         
-        friendsTableView.register(ViewFriendCellTableViewCell.self, forCellReuseIdentifier: "MeetingCell")
+        friendsTableView.register(ViewFriendCell.self, forCellReuseIdentifier: "MeetingCell")
         view.addSubview(friendsTableView)
         friendsTableView.pinTop(to: segmentController.bottomAnchor, const: 10)
         friendsTableView.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 10)

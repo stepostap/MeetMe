@@ -86,6 +86,36 @@ class ErrorChecker {
             return message
         }
         
+        if error is JSONError {
+            switch error {
+            case JSONError.decodingError:
+                message = "Ошибка в декодировании данных, полученных с сервера"
+            case JSONError.encodingError:
+                message = "Ошибка в кодировании введенных данных"
+            default: break
+            }
+            return message
+        }
+        
+        if error is ServerError {
+            let serverError = error as! ServerError
+            return serverError.message
+        }
+        
+        if error is NetworkerError {
+            switch error {
+            case NetworkerError.badData:
+                message = "Данные с сервера не были получены."
+            case NetworkerError.badResponse:
+                message = "Неправильный ответ сервераю"
+            case NetworkerError.badStatusCode(let code):
+                message = "Ошибка сервера \(code)."
+            case NetworkerError.noConnection:
+                message = "Отсутствует соединение с сетью."
+            default: break
+            }
+        }
+        
         print(error)
         return "Unknown error"
     }

@@ -120,7 +120,9 @@ class MeetingInfoVC: UIViewController {
     }
     
     @objc func viewParticipants() {
-        
+        let vc = ViewParticipantsVC()
+        vc.meeting = meeting
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func setViewInfo() {

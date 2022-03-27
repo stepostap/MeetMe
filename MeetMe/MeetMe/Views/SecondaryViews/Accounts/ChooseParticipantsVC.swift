@@ -15,6 +15,10 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
     let participantTableView = UITableView()
     var chosenFriendIDs = [Int64]()
     var chosenGroupIDs = [Int64]()
+    var includeGroups = false
+    var alreadyAddedFriends = [Int64]()
+    
+    var passData: ((_ friendIDs: [Int64], _ groupIDs: [Int64]) -> (Void))?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,9 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
         navigationController?.navigationBar.backgroundColor = .systemBackground
         
         configNavigationBar()
-        configSegmentController()
+        if includeGroups {
+            configSegmentController()
+        }
         configMeetingTableView()
     }
     
@@ -35,17 +41,18 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
         FriendsReequests.shared.getFriends(userID: User.currentUser.account!.id)
         FriendsReequests.shared.getFriendRequests()
         
-        User.currentUser = Server.shared.users[loginInfo(email: "Stepostap@gmail.com", password: "12345")]!
-        
-        segmentController.selectedSegmentIndex = 0
+        User.currentUser = Server.shared.users[LoginInfo(email: "Stepostap@gmail.com", password: "12345")]!
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        passData?(chosenFriendIDs, chosenGroupIDs)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if segmentController.selectedSegmentIndex == 0 {
-            return User.currentUser.friends.count
-        } else {
+        if segmentController.selectedSegmentIndex == 1 {
             return User.currentUser.groups.count
+        } else {
+            return User.currentUser.friends.count
         }
     }
     
@@ -67,11 +74,22 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
         if segmentController.selectedSegmentIndex == 1 {
             cell.nameLabel.text = User.currentUser.groups[indexPath.row].groupName
             cell.participantID = User.currentUser.groups[indexPath.row].id
+            if chosenGroupIDs.contains(cell.participantID!) {
+                cell.checkbox.isChecked = true
+            }
             
         } else {
             cell.nameLabel.text = User.currentUser.friends[indexPath.row].name
             cell.participantID = User.currentUser.friends[indexPath.row].id
             cell.checkboxChanged = friendIDChanged
+            if chosenFriendIDs.contains(cell.participantID!) {
+                cell.checkbox.isChecked = true
+            }
+            if alreadyAddedFriends.contains(cell.participantID!) {
+                cell.canBeSelected = false
+                cell.checkbox.isChecked = true
+                cell.backgroundColor = .systemGray4
+            }
         }
         
         return cell
@@ -80,16 +98,15 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
     func updateSearchResults(for searchController: UISearchController) {
         
     }
-    
-    
+
     @objc func segmentChanged() {
         participantTableView.reloadData()
     }
     
     func configSegmentController() {
         view.addSubview(segmentController)
+        segmentController.selectedSegmentIndex = 0
         segmentController.setConstraints(to: view, left: 30, top: 0, right: 30, height: 30)
-        segmentController.selectedSegmentIndex = 1
         segmentController.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
     }
     
@@ -103,14 +120,16 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
         navigationItem.title = "Друзья"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.searchController = searchController
-       
     }
     
     func configMeetingTableView() {
-        //participantTableView.allowsSelection = false
         participantTableView.register(AddParticipantCell.self, forCellReuseIdentifier: "cell")
         view.addSubview(participantTableView)
-        participantTableView.pinTop(to: segmentController.bottomAnchor, const: 10)
+        if includeGroups {
+            participantTableView.pinTop(to: segmentController.bottomAnchor, const: 10)
+        } else {
+            participantTableView.pinTop(to: view.safeAreaLayoutGuide.topAnchor, const: 10)
+        }
         participantTableView.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 10)
         participantTableView.pinRight(to: view.safeAreaLayoutGuide.trailingAnchor, const: 10)
         participantTableView.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor, const: 10)

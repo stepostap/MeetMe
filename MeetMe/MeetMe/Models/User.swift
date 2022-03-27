@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct loginInfo: Codable, Hashable {
+struct LoginInfo: Codable, Hashable {
     internal init(email: String, password: String) {
         self.email = email
         self.password = password

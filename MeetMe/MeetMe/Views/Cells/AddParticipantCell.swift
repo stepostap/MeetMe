@@ -12,6 +12,7 @@ class AddParticipantCell: UITableViewCell {
     var participantID: Int64?
     let nameLabel = UILabel()
     var checkboxChanged: ((_ checked: Bool, _ id: Int64) -> (Void))?
+    var canBeSelected = true
     
     let participantImage: UIImageView = {
         let image = UIImageView(frame: .zero)
@@ -24,7 +25,7 @@ class AddParticipantCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(false, animated: false)
-        if selected {
+        if selected, canBeSelected {
             if checkbox.isChecked {
                 checkbox.isChecked = false
             } else {
@@ -34,7 +35,6 @@ class AddParticipantCell: UITableViewCell {
                 checkboxChanged(checkbox.isChecked, participantID!)
             }
         }
-        
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -61,7 +61,7 @@ class AddParticipantCell: UITableViewCell {
         contentView.addSubview(checkbox)
         checkbox.style = .tick
         checkbox.borderStyle = .roundedSquare(radius: 5)
-        checkbox.isChecked = false
+        //checkbox.isChecked = false
         checkbox.isUserInteractionEnabled = false
         checkbox.pinLeft(to: nameLabel.trailingAnchor, const: 10)
         checkbox.pinCenter(to: contentView.centerYAnchor, const: 0)
