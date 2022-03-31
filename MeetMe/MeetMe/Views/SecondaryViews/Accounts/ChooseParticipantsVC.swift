@@ -17,6 +17,8 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
     var chosenGroupIDs = [Int64]()
     var includeGroups = false
     var alreadyAddedFriends = [Int64]()
+    let loader = UIActivityIndicatorView()
+    let refresher = UIRefreshControl()
     
     var passData: ((_ friendIDs: [Int64], _ groupIDs: [Int64]) -> (Void))?
     
@@ -30,18 +32,56 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
         navigationController?.navigationBar.backgroundColor = .systemBackground
         
         configNavigationBar()
-        if includeGroups {
-            configSegmentController()
-        }
+        configSegmentController()
+        uploadInfo()
+        
         configMeetingTableView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    @objc func refreshInfo() {
+        if segmentController.selectedSegmentIndex == 1 {
+            GroupRequests.shared.getUserGroups(completion: {(groups, error) in
+                self.loader.stopAnimating()
+                self.refresher.endRefreshing()
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                if let groups = groups {
+                    User.currentUser.groups = groups
+                    self.participantTableView.reloadData()
+                }
+                self.participantTableView.reloadData()
+            })
+        } else {
+            FriendsReequests.shared.getFriends(completion: {(friends, error) in
+                self.loader.stopAnimating()
+                self.refresher.endRefreshing()
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                if let friends = friends {
+                    User.currentUser.friends = friends
+                }
+                self.participantTableView.reloadData()
+            })
+        }
+    }
+    
+    func uploadInfo() {
         
-        FriendsReequests.shared.getFriends(userID: User.currentUser.account!.id)
-        FriendsReequests.shared.getFriendRequests()
+        if User.currentUser.groups == nil {
+            loader.startAnimating()
+            refreshInfo()
+        }
         
-        User.currentUser = Server.shared.users[LoginInfo(email: "Stepostap@gmail.com", password: "12345")]!
+        if User.currentUser.friends == nil {
+            loader.startAnimating()
+            refreshInfo()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,9 +90,9 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentController.selectedSegmentIndex == 1 {
-            return User.currentUser.groups.count
+            return User.currentUser.groups?.count ?? 0
         } else {
-            return User.currentUser.friends.count
+            return User.currentUser.friends?.count ?? 0
         }
     }
     
@@ -67,20 +107,34 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    
+    func groupIDChanged(checked: Bool, ID: Int64) {
+        if checked {
+            chosenGroupIDs.append(ID)
+        } else {
+            let index = chosenGroupIDs.firstIndex(of: ID)
+            if let index = index {
+                chosenGroupIDs.remove(at: index)
+            }
+        }
+    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AddParticipantCell
         
         if segmentController.selectedSegmentIndex == 1 {
-            cell.nameLabel.text = User.currentUser.groups[indexPath.row].groupName
-            cell.participantID = User.currentUser.groups[indexPath.row].id
+            cell.nameLabel.text = User.currentUser.groups![indexPath.row].groupName
+            cell.participantID = User.currentUser.groups![indexPath.row].id
+            cell.checkboxChanged = groupIDChanged
             if chosenGroupIDs.contains(cell.participantID!) {
                 cell.checkbox.isChecked = true
             }
             
         } else {
-            cell.nameLabel.text = User.currentUser.friends[indexPath.row].name
-            cell.participantID = User.currentUser.friends[indexPath.row].id
+            cell.nameLabel.text = User.currentUser.friends![indexPath.row].name
+            cell.participantID = User.currentUser.friends![indexPath.row].id
             cell.checkboxChanged = friendIDChanged
             if chosenFriendIDs.contains(cell.participantID!) {
                 cell.checkbox.isChecked = true
@@ -100,14 +154,17 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     @objc func segmentChanged() {
-        participantTableView.reloadData()
+        uploadInfo()
+        participantTableView.reloadSections(IndexSet(integer: 0), with: .none)
     }
     
     func configSegmentController() {
-        view.addSubview(segmentController)
-        segmentController.selectedSegmentIndex = 0
-        segmentController.setConstraints(to: view, left: 30, top: 0, right: 30, height: 30)
-        segmentController.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
+        if includeGroups {
+            view.addSubview(segmentController)
+            segmentController.selectedSegmentIndex = 0
+            segmentController.setConstraints(to: view, left: 30, top: 0, right: 30, height: 30)
+            segmentController.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
+        }
     }
     
     func configNavigationBar()  {
@@ -130,6 +187,9 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             participantTableView.pinTop(to: view.safeAreaLayoutGuide.topAnchor, const: 10)
         }
+        refresher.addTarget(self, action: #selector(refreshInfo), for: .valueChanged)
+        participantTableView.refreshControl = refresher
+        participantTableView.backgroundView = loader
         participantTableView.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 10)
         participantTableView.pinRight(to: view.safeAreaLayoutGuide.trailingAnchor, const: 10)
         participantTableView.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor, const: 10)

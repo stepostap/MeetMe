@@ -397,6 +397,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     @objc func signOut() {
         UserDefaults.standard.removeObject(forKey: "userName")
         UserDefaults.standard.removeObject(forKey: "userPassword")
+        User.currentUser = User()
         view.setRootViewController(NavigationHandler.createAuthNC(), animated: true)
     }
 

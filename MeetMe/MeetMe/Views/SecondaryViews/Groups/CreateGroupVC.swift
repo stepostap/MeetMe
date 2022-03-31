@@ -109,9 +109,32 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         if let group = group {
             group.groupInfo = infoTextView.text
             group.interests = interests
-            let index = User.currentUser.groups.firstIndex(of: group)!
-            User.currentUser.groups[index] = group
+            let index = User.currentUser.groups?.firstIndex(of: group)!
+            User.currentUser.groups?[index!] = group
             navigationController?.popViewController(animated: true)
+        } else {
+            let createdGroup = Group(id: 0, groupImage: "", groupName: nameTextField.text!, groupInfo: infoTextView.text, interests: interests, meetings: [], participants: [], admins: [User.currentUser.account!.id])
+            GroupRequests.shared.createGroup(group: createdGroup, completion: {(group, error) in
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                if let group = group {
+                    User.currentUser.groups!.append(group)
+                    
+                    GroupRequests.shared.addNewGroupParticipants(participants: self.invitedFriendsIDs, groupID: group.id, completion: {(error) in
+                        if let error = error {
+                            let alert = ErrorChecker.handler.getAlertController(error: error)
+                            self.present(alert, animated: true, completion: nil)
+                            return
+                        }
+                    })
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
+            
         }
     }
     

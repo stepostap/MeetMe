@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import CloudKit
+import Network
 
 class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource {
     
     let segmentController = UISegmentedControl(items: ["Друзья", "Запросы"])
     let searchController = UISearchController(searchResultsController: nil)
     let friendsTableView = UITableView()
+    let loader = UIActivityIndicatorView()
+    let refresher = UIRefreshControl()
+    
     
     var currentFriends = [Account]()
     
@@ -24,19 +29,140 @@ class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate,
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.backgroundColor = .systemBackground
         
+        segmentController.selectedSegmentIndex = 0
+        
         configNavigationBar()
         configSegmentController()
         configMeetingTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        FriendsReequests.shared.getFriends(userID: User.currentUser.account!.id)
-        FriendsReequests.shared.getFriendRequests()
-        
-        segmentController.selectedSegmentIndex = 0
-        currentFriends = User.currentUser.friends
+        reloadData()
     }
+    
+    
+    @objc func reloadData() {
+        if segmentController.selectedSegmentIndex == 0 {
+            if let _  = User.currentUser.friends {
+                currentFriends = User.currentUser.friends!
+            } else  {
+                currentFriends = []
+                uploadFriends()
+            }
+        } else  {
+            if let _  = User.currentUser.friendsRequests {
+                currentFriends = User.currentUser.friendsRequests!
+            } else  {
+                currentFriends = []
+                uploadFriends()
+            }
+        }
+        friendsTableView.reloadData()
+    }
+    
+    
+    @objc func uploadFriends() {
+        loader.startAnimating()
+        if segmentController.selectedSegmentIndex == 0 {
+            FriendsReequests.shared.getFriends(completion: {(accounts, error) in
+                self.loader.stopAnimating()
+                self.friendsTableView.refreshControl?.endRefreshing()
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    self.friendsTableView.refreshControl?.endRefreshing()
+                    return
+                }
+                
+                if let accounts = accounts {
+                    User.currentUser.friends = accounts
+                    self.currentFriends = accounts
+                    self.friendsTableView.reloadData()
+                }
+            })
+        } else {
+            FriendsReequests.shared.getFriendRequests(completion: {(accounts, error) in
+                self.loader.stopAnimating()
+                self.friendsTableView.refreshControl?.endRefreshing()
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    self.loader.stopAnimating()
+                    self.friendsTableView.refreshControl?.endRefreshing()
+                    return
+                }
+                
+                if let accounts = accounts {
+                    User.currentUser.friendsRequests = accounts
+                    self.currentFriends = accounts
+                    self.friendsTableView.reloadData()
+                }
+            })
+        }
+        
+    }
+    
+    
+    func addFriendAction(indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "Добавить в друзья") {[weak self] (_,_,_) in
+            FriendsReequests.shared.makeFriendRequest(recieverId: self!.currentFriends[indexPath.row].id, completion: {(error) in
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self?.present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                let index = User.currentUser.friendsRequests?.firstIndex(of: self!.currentFriends[indexPath.row])
+                User.currentUser.friends?.append(User.currentUser.friendsRequests![index!])
+                User.currentUser.friendsRequests?.remove(at: index!)
+                self?.friendsTableView.reloadData()
+            })
+        }
+        action.backgroundColor = .systemGreen
+        return action
+    }
+    
+    
+    func removeFriendAction(indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .destructive, title: "Удалить") {[weak self] (_,_,_) in
+            FriendsReequests.shared.deleteFriend(recieverId: self!.currentFriends[indexPath.row].id, completion: {(error) in
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self?.present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                if User.currentUser.friends!.contains(self!.currentFriends[indexPath.row]) {
+                    let index = User.currentUser.friends?.firstIndex(of: self!.currentFriends[indexPath.row])
+                    User.currentUser.friends?.remove(at: index!)
+                } else {
+                    let index = User.currentUser.friendsRequests?.firstIndex(of: self!.currentFriends[indexPath.row])
+                    User.currentUser.friendsRequests?.remove(at: index!)
+                }
+                
+                self?.friendsTableView.reloadData()
+            })
+        }
+        
+        return action
+    }
+    
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var actions = [UIContextualAction]()
+        
+        if segmentController.selectedSegmentIndex == 1 {
+            actions.append(removeFriendAction(indexPath: indexPath))
+            actions.append(addFriendAction(indexPath: indexPath))
+        } else {
+            actions.append(removeFriendAction(indexPath: indexPath))
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: actions)
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentFriends.count
@@ -65,9 +191,9 @@ class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate,
     
     @objc func segmentChanged() {
         if segmentController.selectedSegmentIndex == 0 {
-            currentFriends = User.currentUser.friends
+            currentFriends = User.currentUser.friends!
         } else {
-            currentFriends = User.currentUser.friendsRequests
+            currentFriends = User.currentUser.friendsRequests!
         }
        
         friendsTableView.reloadData()
@@ -77,7 +203,7 @@ class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate,
         view.addSubview(segmentController)
         segmentController.setConstraints(to: view, left: 30, top: 0, right: 30, height: 30)
         segmentController.selectedSegmentIndex = 1
-        segmentController.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
+        segmentController.addTarget(self, action: #selector(reloadData), for: .valueChanged)
     }
     
     func configNavigationBar()  {
@@ -97,6 +223,9 @@ class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate,
         
         friendsTableView.register(ViewFriendCell.self, forCellReuseIdentifier: "MeetingCell")
         view.addSubview(friendsTableView)
+        friendsTableView.backgroundView = loader
+        refresher.addTarget(self, action: #selector(uploadFriends), for: .valueChanged)
+        friendsTableView.refreshControl = refresher
         friendsTableView.pinTop(to: segmentController.bottomAnchor, const: 10)
         friendsTableView.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 10)
         friendsTableView.pinRight(to: view.safeAreaLayoutGuide.trailingAnchor, const: 10)

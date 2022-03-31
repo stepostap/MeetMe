@@ -7,6 +7,21 @@
 
 import Foundation
 
+
+struct InvitationShortInfo: Hashable, Comparable {
+    static func < (lhs: InvitationShortInfo, rhs: InvitationShortInfo) -> Bool {
+        if lhs.id == User.currentUser.account?.id {
+            return false
+        } else {
+            return lhs.name < rhs.name
+        }
+    }
+    
+    var name: String
+    var id: Int64
+}
+
+
 class Group: Codable, Equatable {
     static func == (lhs: Group, rhs: Group) -> Bool {
         return lhs.id == rhs.id

@@ -14,7 +14,7 @@ class Meeting: Codable, Equatable {
     }
     
     
-    internal init(id: Int64, creatorID: Int64, name: String, types: [Interests], info: String, online: Bool, isPrivate: Bool, participants: [Int64], groups: [Int64], participantsMax: Int, Location: String? = nil, startingDate: Date, endingDate: Date? = nil, currentParticipantNumber: Int) {
+    internal init(id: Int64, creatorID: Int64, name: String, types: [Interests], info: String, online: Bool, isPrivate: Bool, participants: [Int64], groups: [Int64], participantsMax: Int, Location: String, startingDate: Date, endingDate: Date? = nil, currentParticipantNumber: Int) {
         self.id = id
         self.creatorID = creatorID
         self.currentParticipantNumber = currentParticipantNumber
@@ -42,7 +42,7 @@ class Meeting: Codable, Equatable {
     var participantsGroupsID: [Int64]
     var currentParticipantNumber: Int
     var participantsMax: Int
-    var Location: String?
+    var Location: String
     var startingDate: Date
     var endingDate: Date?
     var isPrivate: Bool

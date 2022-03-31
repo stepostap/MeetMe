@@ -10,6 +10,6 @@ import Foundation
 struct Responce<T: Codable>: Codable {
     var message: String
     var appCode: Int
-    var data: T
+    var data: T?
 }
 

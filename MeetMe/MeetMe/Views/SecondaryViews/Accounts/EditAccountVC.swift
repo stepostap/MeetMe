@@ -300,17 +300,19 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
             account.name = nameTextField.text!
         }
         
-        Networker.shared.updateUserInfo(account: account, completion: {(error) in
+        
+        AuthRequests.shared.editAccount(account: EditAccountDTO(fullName: account.name, description: account.info, links: account.socialMediaLinks, interests: InterestsParser.getInterestsString(interests: account.interests)), completion: {(account, error) in
+            
             if let error = error {
                 let alert = ErrorChecker.handler.getAlertController(error: error)
                 self.present(alert, animated: true, completion: nil)
                 return
             }
-            print(self.account.info)
-            print(self.account.interests)
-            print(self.account.socialMediaLinks)
-            User.currentUser.account = Account(account: self.account)
-            self.navigationController?.popViewController(animated: true)
+            
+            if let account = account {
+                User.currentUser.account = Account(account: self.account)
+                self.navigationController?.popViewController(animated: true)
+            }
         })
     }
 }

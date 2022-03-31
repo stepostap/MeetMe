@@ -8,7 +8,7 @@
 import Foundation
 
 struct AccountDTO: Codable {
-    internal init(id: Int64, fullName: String, description: String?, links: [String : String]? = nil, interests: [Interests]? = nil, photoUrl: String? = nil, email: String? = nil, telephone: String? = nil) {
+    internal init(id: Int64, fullName: String, description: String?, links: [String : String]? = nil, interests: [String]? = nil, photoUrl: String? = nil, email: String? = nil, telephone: String? = nil) {
         self.id = id
         self.fullName = fullName
         self.description = description
@@ -23,7 +23,7 @@ struct AccountDTO: Codable {
     var fullName: String
     var description: String?
     var links: [String:String]?
-    var interests: [Interests]?
+    var interests: [String]?
     var photoUrl: String?
     var email: String?
     var telephone: String?

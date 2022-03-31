@@ -130,6 +130,10 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
             }
             interests = meeting.types
             maxParticipantsTextField.text = meeting.participantsMax.description
+            datePicker1.date = meeting.startingDate
+            if let endDate = meeting.endingDate {
+                datePicker2.date = endDate
+            }
         }
     }
     
@@ -177,13 +181,12 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
                     self.present(alert, animated: true, completion: nil)
                     return
                 }
-                let index = User.currentUser.plannedMeetings.firstIndex(of: self.meeting!)
-                User.currentUser.plannedMeetings[index!] = self.meeting!
+                let index = User.currentUser.plannedMeetings!.firstIndex(of: self.meeting!)
+                User.currentUser.plannedMeetings![index!] = self.meeting!
                 self.navigationController?.popViewController(animated: true)
             })
         } else {
             self.meeting = Meeting(id: 0, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, participants: [User.currentUser.account!.id], groups: [], participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: 1)
-            print("create meeting")
             MeetingRequests.shared.createMeeting(meeting: meeting!, completion: {(meeting, error) in
                 if let error = error {
                     let alert = ErrorChecker.handler.getAlertController(error: error)
@@ -192,10 +195,35 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
                 }
                 
                 if let meeting = meeting {
-                    User.currentUser.plannedMeetings.append(meeting)
+                    if let _ = User.currentUser.plannedMeetings {
+                        User.currentUser.plannedMeetings!.append(meeting)
+                    } else {
+                        User.currentUser.plannedMeetings = [meeting]
+                    }
+                    
+                    print("Invited groups: \(self.invitedGroupsIDs)")
+                    GroupRequests.shared.inviteGroupsToMeeting(groups: self.invitedGroupsIDs, meetingID: meeting.id,
+                                                               completion: {(error) in
+                        if let error = error {
+                            let alert = ErrorChecker.handler.getAlertController(error: error)
+                            self.present(alert, animated: true, completion: nil)
+                            return
+                        }
+                        
+                    })
+                    
+                    MeetingRequests.shared.inviteAccountsToMeeting(accountsID: self.invitedFriendsIDs, meetingID: meeting.id, completion: {(error) in
+                        if let error = error {
+                            let alert = ErrorChecker.handler.getAlertController(error: error)
+                            self.present(alert, animated: true, completion: nil)
+                            return
+                        }
+                    })
+                    
                     self.navigationController?.popViewController(animated: true)
                 }
             })
+           
         }
     }
     

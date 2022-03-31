@@ -152,7 +152,7 @@ class MeetingInfoVC: UIViewController {
             mainStackView.addArrangedSubview(configDateView())
             height += dateViewHeight
             
-            if let location = meeting.Location, !location.isEmpty {
+            if !meeting.Location.isEmpty {
                 mainStackView.addArrangedSubview(configLocationView())
                 locationTextView.text = meeting.Location
                 height += locationViewHeight
@@ -160,7 +160,8 @@ class MeetingInfoVC: UIViewController {
             
             mainStackView.addArrangedSubview(configParticipantsView())
             height += participantViewHeight
-            
+            maxParticipantsTextField.text = meeting.participantsMax.description
+            currentParticipantsTextField.text = meeting.currentParticipantNumber.description
             mainStackView.setHeight(to: height)
         }
     }
@@ -433,11 +434,21 @@ class MeetingInfoVC: UIViewController {
 
     @objc func participate() {
         
-        Networker.shared.participateInMeeting(meetingId: meeting!.id, completion: {(error) in
+        MeetingRequests.shared.participateInMeeting(accept: true, meetingID: meeting!.id, completion: {(error) in
+            if let error = error {
+                let alert = ErrorChecker.handler.getAlertController(error: error)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            self.meeting?.participantsID.append(User.currentUser.account!.id)
+            if User.currentUser.meetingInvitations!.personalInvitations.contains(self.meeting!) {
+                let index = User.currentUser.meetingInvitations!.personalInvitations.firstIndex(of: self.meeting!)
+                User.currentUser.meetingInvitations!.personalInvitations.remove(at: index!)
+                User.currentUser.plannedMeetings?.append(self.meeting!)
+            }
             self.navigationController?.popViewController(animated: true)
         })
-        
-        
     }
     
 }

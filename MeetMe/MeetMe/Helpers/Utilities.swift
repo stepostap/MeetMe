@@ -43,7 +43,6 @@ class Utilities {
         for interest in interestArray {
             interests += interest.rawValue + ", "
         }
-        interests.popLast()
         
         return interests
     }

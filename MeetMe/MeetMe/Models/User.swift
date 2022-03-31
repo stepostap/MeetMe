@@ -17,17 +17,18 @@ struct LoginInfo: Codable, Hashable {
     var password: String
 }
 
+
 class User {
     
     static var currentUser = User()
     
     var account: Account?
     
-    var friends = [Account]()
-    var friendsRequests = [Account]()
-    var meetingHistory = [Meeting]()
-    var plannedMeetings = [Meeting]()
-    var meetingInvitations = [Meeting]()
-    var groups = [Group]()
+    var friends: [Account]?
+    var friendsRequests: [Account]?
+    var meetingHistory: [Meeting]?
+    var plannedMeetings: [Meeting]?
+    var meetingInvitations: UserInvitations?
+    var groups: [Group]?
     
 }

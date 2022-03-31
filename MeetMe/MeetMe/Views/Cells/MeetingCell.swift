@@ -60,7 +60,7 @@ class MeetingCell: UITableViewCell {
     }
     
     private func setCostraints() {
-        contentView.setHeight(to: 170)
+        
         contentView.addSubview(meetingImage)
         meetingImage.setConstraints(to: contentView, left: 10, top: 10, width: 150, height: 150)
         

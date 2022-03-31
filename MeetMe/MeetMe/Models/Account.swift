@@ -9,7 +9,12 @@ import Foundation
 import UIKit
 
 
-class Account: Codable {
+class Account: Codable, Equatable {
+    
+    static func == (lhs: Account, rhs: Account) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     
     internal init(id: Int64, name: String, info: String, imageDataURL: String, interests: [Interests] = [Interests](), socialMediaLinks: [String:String] = [String:String]()) {
         self.id = id

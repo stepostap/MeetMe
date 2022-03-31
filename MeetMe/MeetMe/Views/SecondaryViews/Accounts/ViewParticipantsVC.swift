@@ -18,18 +18,48 @@ class ViewParticipantsVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let group = group {
+            GroupRequests.shared.getGroupParticipants(groupID: group.id, completion: {(accounts, error) in
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                if let accounts = accounts {
+                    self.participants = accounts
+                    for participant in accounts {
+                        if group.admins.contains(participant.id) {
+                            self.admins.append(participant)
+                        }
+                    }
+                    self.tableView.reloadData()
+                }
+                
+            })
             
         }
         if let meeting = meeting {
-            MeetingRequests.shared.getParticipants(meetingID: meeting.id)
+            MeetingRequests.shared.getParticipants(meetingID: meeting.id, completion: {(accounts, error) in
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                if let accounts = accounts {
+                    self.participants = accounts
+                    for participant in accounts {
+                        if meeting.creatorID == participant.id {
+                            self.admins.append(participant)
+                        }
+                    }
+                    self.tableView.reloadData()
+                }
+            })
         }
         
-        admins.append(User.currentUser.account!)
         
-        participants.append(Server.shared.romaUser.account!)
-        participants.append(Server.shared.secondUser.account!)
         
         setConstraint()
+        
     }
     
     func setConstraint() {

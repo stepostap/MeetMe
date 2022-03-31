@@ -33,7 +33,7 @@ class AuthRequests: MeetMeRequests {
                 if let data = data {
                     do {
                         let dataAccount : AccountDTO = try self.getData(data: data)
-                        let account = Account(id: dataAccount.id, name: dataAccount.fullName, info: dataAccount.description ?? "", imageDataURL: dataAccount.photoUrl ?? "", interests: dataAccount.interests ?? [], socialMediaLinks: dataAccount.links ?? [:])
+                        let account = self.createAccountFromDTO(dataAccount: dataAccount)
                         DispatchQueue.main.async { completion(account, nil) }
                     } catch let error {
                         DispatchQueue.main.async { completion(nil, error) }
@@ -83,5 +83,36 @@ class AuthRequests: MeetMeRequests {
         
     }
     
+    
+    func editAccount(account: EditAccountDTO, completion: @escaping (Account?, Error?) -> (Void)) {
+        if !NetworkMonitor.shared.isConnected {
+            DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
+        }
+        
+        let editedData = try! encoder.encode(account)
+        var request = URLRequest(url: URL(string: userURL + User.currentUser.account!.id.description + "/edit")!)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.httpBody = editedData
+        
+        let task = session.dataTask(with: request, completionHandler: ({ data, responce, error in
+            do {
+                try self.errorCheck(data: data, response: responce, error: error)
+            } catch let error {
+                DispatchQueue.main.async { completion(nil, error) }
+            }
+            
+            if let data = data {
+                do {
+                    let dataAccount : AccountDTO = try self.getData(data: data)
+                    let account = self.createAccountFromDTO(dataAccount: dataAccount)
+                    DispatchQueue.main.async { completion(account, nil) }
+                } catch let error {
+                    DispatchQueue.main.async { completion(nil, error) }
+                }
+            }
+        }))
+        task.resume()
+    }
     
 }

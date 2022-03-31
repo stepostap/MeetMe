@@ -33,14 +33,35 @@ class GroupScreen: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.tableHeaderView = configHeaderView()
+        
+        GroupRequests.shared.getGroupMeetings(groupID: group!.id, completion: {(meetings, error) in
+            if let error = error {
+                let alert = ErrorChecker.handler.getAlertController(error: error)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            if let meetings = meetings {
+                self.groupMeetings = meetings
+                self.tableView.reloadData()
+            }
+        })
     }
     
     func leaveGroup(action: UIAlertAction) {
-        let index = User.currentUser.groups.firstIndex(of: group!)
-        if let index = index {
-            User.currentUser.groups.remove(at: index)
-        }
-        navigationController?.popViewController(animated: true)
+        GroupRequests.shared.leaveGroup(groupID: group!.id, completion: {(error) in
+            if let error = error {
+                let alert = ErrorChecker.handler.getAlertController(error: error)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            let index = User.currentUser.groups!.firstIndex(of: self.group!)
+            if let index = index {
+                User.currentUser.groups!.remove(at: index)
+            }
+            self.navigationController?.popViewController(animated: true)
+        })
     }
     
     func editGroup(action: UIAlertAction) {
@@ -50,11 +71,19 @@ class GroupScreen: UITableViewController {
     }
     
     func deleteGoup(action: UIAlertAction) {
-        let index = User.currentUser.groups.firstIndex(of: group!)
-        if let index = index {
-            User.currentUser.groups.remove(at: index)
-        }
-        navigationController?.popViewController(animated: true)
+        GroupRequests.shared.deleteGroup(groupID: group!.id, completion: {(error) in
+            if let error = error {
+                let alert = ErrorChecker.handler.getAlertController(error: error)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            let index = User.currentUser.groups!.firstIndex(of: self.group!)
+            if let index = index {
+                User.currentUser.groups!.remove(at: index)
+            }
+            self.navigationController?.popViewController(animated: true)
+        })
     }
     
     @objc func showGroupActions() {
@@ -226,10 +255,10 @@ class GroupScreen: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let width = UIScreen.main.bounds.width - 20
-        let locationHeight = groupMeetings[indexPath.row].Location?
-            .heightWithConstrainedWidth(width: width, font: .systemFont(ofSize: 15)) ?? 0
+        let locationHeight = groupMeetings[indexPath.row].Location
+            .heightWithConstrainedWidth(width: width, font: .systemFont(ofSize: 15))
         let interestsText = Utilities.getInterests(interestArray: groupMeetings[indexPath.row].types)
-        let interestsHeight = interestsText.heightWithConstrainedWidth(width: width, font: .systemFont(ofSize: 15)) ?? 0
+        let interestsHeight = interestsText.heightWithConstrainedWidth(width: width, font: .systemFont(ofSize: 15))
         return 150 + locationHeight + interestsHeight
     }
 }
