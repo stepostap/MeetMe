@@ -12,10 +12,11 @@ class MeetMeRequests {
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
     let formatter = DateFormatter()
+    static var JWTToken = ""
     
     func createMeetingFromDTO(dataMeeting: MeetingDTO) -> Meeting {
         formatter.dateFormat = "MM-dd-yyyy HH:mm"
-        let recievedMeeting = Meeting(id: dataMeeting.id, creatorID: dataMeeting.adminId, name: dataMeeting.name, types: InterestsParser.getInterests(interestsString: dataMeeting.interests ?? []), info: dataMeeting.description ?? "", online: dataMeeting.isOnline, isPrivate: dataMeeting.isPrivate, participants: [], groups: [], participantsMax: dataMeeting.maxNumberOfParticipants, Location: dataMeeting.location ?? "", startingDate: self.formatter.date(from: dataMeeting.startDate)!, endingDate: nil, currentParticipantNumber: dataMeeting.numberOfParticipants)
+        let recievedMeeting = Meeting(id: dataMeeting.id, creatorID: dataMeeting.adminId, name: dataMeeting.name, types: InterestsParser.getInterests(interestsString: dataMeeting.interests ?? []), info: dataMeeting.description ?? "", online: dataMeeting.isOnline, isPrivate: dataMeeting.isPrivate, isParticipant: dataMeeting.isParticipant ?? false, groups: [], participantsMax: dataMeeting.maxNumberOfParticipants, Location: dataMeeting.location ?? "", startingDate: self.formatter.date(from: dataMeeting.startDate)!, endingDate: nil, currentParticipantNumber: dataMeeting.numberOfParticipants, imageURL: dataMeeting.imageUrl ?? "")
         return recievedMeeting
     }
     
@@ -27,7 +28,7 @@ class MeetMeRequests {
     
     
     func createGroupFromDTO(dataGroup: GroupDTO) -> Group {
-        let group = Group(id: dataGroup.id, groupImage: dataGroup.photoURL ?? "", groupName: dataGroup.name, groupInfo: dataGroup.description ?? "", interests: InterestsParser.getInterests(interestsString: dataGroup.interests ?? []), meetings: [], participants: [], admins: [dataGroup.adminId])
+        let group = Group(id: dataGroup.id, groupImage: dataGroup.photoUrl ?? "", groupName: dataGroup.name, groupInfo: dataGroup.description ?? "", interests: InterestsParser.getInterests(interestsString: dataGroup.interests ?? []), meetings: [], participants: [], admins: [dataGroup.adminId])
         return group
     }
     
@@ -142,4 +143,26 @@ class MeetMeRequests {
         }
     }
     
+    func createBody(boundary: String, data: Data, mimeType: String, fileName: String) -> Data? {
+        let body = NSMutableData()
+        
+        let boundaryPrefix = "--\(boundary)\r\n"
+        
+        body.appendString(boundaryPrefix)
+        body.appendString("Content-Disposition: form-data; name=\"image\"; filename=\"\(fileName)\"\r\n")
+        body.appendString("Content-Type: \(mimeType)\r\n\r\n")
+        body.append(data)
+        body.appendString("\r\n")
+        body.appendString("--".appending(boundary.appending("--")))
+        
+        return body as Data
+    }
+}
+
+// MARK: - Helper
+extension NSMutableData {
+    func appendString(_ string: String) {
+        let data = string.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        append(data!)
+    }
 }

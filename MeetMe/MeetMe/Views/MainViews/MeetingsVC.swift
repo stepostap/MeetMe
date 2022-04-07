@@ -15,7 +15,8 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
                                             startingDate: Date.now, endingDate: Date.distantFuture)
     
     let segmentController = UISegmentedControl(items: ["История", "Предстоящие", "Приглашения"])
-    let searchController = UISearchController(searchResultsController: nil)
+    var searchController: UISearchController?
+    let searchResultsVC = MeetingSearchResultsVC()
     let meetingTableView = UITableView()
     let activityIndicator = UIActivityIndicatorView(style: .large)
     
@@ -31,6 +32,11 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
         
         segmentController.selectedSegmentIndex = 1
         getMeetings(showLoader: true)
+        
+        searchController = UISearchController(searchResultsController: searchResultsVC)
+        self.addChild(searchResultsVC)
+        searchResultsVC.didMove(toParent: self)
+
         //currentMeetings = User.currentUser.plannedMeetings
         //meetingTableView.reloadData()
         
@@ -207,11 +213,18 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let currentMeetings = currentMeetings {
-            let vc = MeetingInfoVC()
-            vc.meeting = currentMeetings[indexPath.row]
+        switch segmentController.selectedSegmentIndex {
+        case 0:
+            let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+            layout.scrollDirection = UICollectionView.ScrollDirection.vertical
+            let vc = PhotoGalleryVC(collectionViewLayout: layout)
+            vc.meeting = currentMeetings![indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
-        } else {
+        case 1:
+            let vc = MeetingInfoVC()
+            vc.meeting = currentMeetings![indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        case 2:
             if indexPath.section == 0 {
                 let vc = MeetingInfoVC()
                 vc.meeting = User.currentUser.meetingInvitations!.personalInvitations[indexPath.row]
@@ -221,6 +234,7 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
                 vc.meeting = User.currentUser.meetingInvitations!.groupInvitations[indexPath.section - 1].meetings[indexPath.row]
                 navigationController?.pushViewController(vc, animated: true)
             }
+        default: break
         }
     }
     
@@ -280,14 +294,14 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
         let participateAction = UIContextualAction(style: (participate ? .normal : .destructive), title: (participate ? "Участвовать" : "Отказаться")) { [weak self] (_, _, _) in
             if indexPath.section == 0 {
                 let meeting = User.currentUser.meetingInvitations!.personalInvitations[indexPath.row]
-                MeetingRequests.shared.participateInMeeting(accept: participate ,meetingID: meeting.id, completion: {(error) in
+                MeetingRequests.shared.answerToInvitation(accept: participate, meetingID: meeting.id, completion: {(error) in
                     if let error = error {
                         let alert = ErrorChecker.handler.getAlertController(error: error)
                         self!.present(alert, animated: true, completion: nil)
                         return
                     }
                     
-                    meeting.participantsID.append(User.currentUser.account!.id)
+                    meeting.isUserParticipant = true
                     
                     let index = User.currentUser.meetingInvitations!.personalInvitations.firstIndex(of: meeting)
                     User.currentUser.meetingInvitations!.personalInvitations.remove(at: index!)
@@ -385,10 +399,10 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
     func configNavigationBar()  {
         let filterButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(filterMeetingsSearch))
         let createMeetingButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createMeeting))
-        searchController.searchBar.sizeToFit()
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search meetings"
+        searchController?.searchBar.sizeToFit()
+        searchController?.searchResultsUpdater = self
+        searchController?.obscuresBackgroundDuringPresentation = false
+        searchController?.searchBar.placeholder = "Search meetings"
         
         navigationItem.title = "Meetings"
         navigationController?.navigationBar.prefersLargeTitles = false
@@ -402,6 +416,9 @@ class MeetingsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate
         
         refreshControl.addTarget(self, action: #selector(reloadUserMeetings), for: .valueChanged)
         meetingTableView.refreshControl = refreshControl
+        
+        //self.searchController.searchResultsController = searchResultsVC
+        self.searchController?.searchResultsUpdater = searchResultsVC
        
         meetingTableView.backgroundView = activityIndicator
         meetingTableView.register(MeetingCell.self, forCellReuseIdentifier: "MeetingCell")

@@ -22,12 +22,9 @@ class GroupScreen: UITableViewController {
         let optionsButton = UIBarButtonItem(title: ". . .", style: .plain, target: self, action: #selector(showGroupActions))
         navigationItem.rightBarButtonItem = optionsButton
         
-        let meeting1 = Meeting(id: 1, creatorID: 1, name: "Настолки", types: [.tabletopGames], info: "Собираемся играть в настолки, в первую очередь в ДНД", online: false, isPrivate: false, participants: [1], groups: [], participantsMax: 10, Location: "ETO кофейня", startingDate: Date.distantFuture, endingDate: Date.distantFuture, currentParticipantNumber: 1)
         
-        let meeting2 = Meeting(id: 2, creatorID: 1, name: "ДР Коли", types: [.tabletopGames, .bar, .cinema, .photography], info: "Отмечать будем у меня на даче, всех жду!", online: false, isPrivate: true, participants: [1, 2], groups: [], participantsMax: 20, Location: "Улица Пушкина, дом Калатушкина dks jhdfbv sjdhb vskjdbv sjdkfh bvjskdfhb vsdjfhb vsjkdf bvsjkd fhbv sdj kfhbvjsdhf bvsjdhfbvjs kdfhbvsjd khfbvj sdhfbvjsdhfb vsjdhf bvsjdfhbvjsk dhfbvsj kdhfbvsjdhfbv", startingDate: Date.distantFuture, endingDate: Date.distantFuture, currentParticipantNumber: 5)
         self.tableView.register(ExtendedMeetingCell.self, forCellReuseIdentifier: "meetingCell")
-        groupMeetings.append(meeting1)
-        groupMeetings.append(meeting2)
+        
        
     }
     

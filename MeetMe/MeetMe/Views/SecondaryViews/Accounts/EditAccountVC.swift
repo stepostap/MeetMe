@@ -17,6 +17,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
     
     let scrollView = UIScrollView()
     let editView = UIView()
+    var chosenImage: UIImage?
     
     let vkLinkTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
@@ -254,7 +255,6 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
     
     
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        
         return textView.resignFirstResponder()
     }
    
@@ -266,8 +266,8 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         return updatedText.count <= 175
     }
     
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         return textField.resignFirstResponder()
     }
     
@@ -282,6 +282,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let userPickedImage = info[.editedImage] as? UIImage else { return }
         accountImage.image = userPickedImage
+        chosenImage = userPickedImage
         picker.dismiss(animated: true)
     }
     
@@ -301,7 +302,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         }
         
         
-        AuthRequests.shared.editAccount(account: EditAccountDTO(fullName: account.name, description: account.info, links: account.socialMediaLinks, interests: InterestsParser.getInterestsString(interests: account.interests)), completion: {(account, error) in
+        AuthRequests.shared.editAccount(image: chosenImage, account: EditAccountDTO(fullName: account.name, description: account.info, links: account.socialMediaLinks, interests: InterestsParser.getInterestsString(interests: account.interests)), completion: {(account, error) in
             
             if let error = error {
                 let alert = ErrorChecker.handler.getAlertController(error: error)
@@ -310,7 +311,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
             }
             
             if let account = account {
-                User.currentUser.account = Account(account: self.account)
+                User.currentUser.account = Account(account: account)
                 self.navigationController?.popViewController(animated: true)
             }
         })

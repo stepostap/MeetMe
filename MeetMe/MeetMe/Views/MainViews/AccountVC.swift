@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITextViewDelegate {
     
@@ -17,6 +18,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     let scrollView = UIScrollView()
     let accountView = UIStackView()
     let friendsButton = UIButton()
+    let addAsFriendButton = UIButton()
     
     let accountImage : UIImageView = {
         let image = UIImageView(frame: .zero)
@@ -141,22 +143,31 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         if isUserAccount {
             accountView.addArrangedSubview(configFriendsButton())
             accountViewHeight += friendsButtonHeight
+        } else if !User.currentUser.friends!.contains(account!) {
+            accountView.addArrangedSubview(configAddAsFriendButton())
+            accountViewHeight += friendsButtonHeight
         }
         
-        if User.currentUser.account?.info != "" {
+        if account!.info != "" {
             infoTextView.text = account?.info
             let height = infoTextView.sizeThatFits(infoTextView.bounds.size).height
             accountViewHeight += infoHeight + Int(height)
             accountView.addArrangedSubview(configInfoTextView())
         }
+        
+        if !account!.imageDataURL.isEmpty {
+            let url = URL(string: account!.imageDataURL)
+            accountImage.kf.setImage(with: url, options: [ .forceRefresh])
+            
+        }
 
-        if User.currentUser.account?.interests != [] {
+        if account!.interests != [] {
             interestsTextView.text = Utilities.getInterests(interestArray: account?.interests ?? [])
             accountViewHeight += interestsHeight
             accountView.addArrangedSubview(configIterestsTextView())
         }
 
-        if !(User.currentUser.account?.socialMediaLinks.isEmpty ?? true) {
+        if !(account!.socialMediaLinks.isEmpty) {
             var vkLink = ""
             var tgLink = ""
             if let accountVkLink = account?.socialMediaLinks["vk"] {
@@ -225,6 +236,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         return view
     }
     
+    
     private func configFriendsButton() -> UIView {
         let view = UIView()
         view.setHeight(to: friendsButtonHeight)
@@ -238,6 +250,22 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         
         return view
     }
+    
+    
+    private func configAddAsFriendButton() -> UIView {
+        let view = UIView()
+        view.setHeight(to: friendsButtonHeight)
+        view.addSubview(addAsFriendButton)
+        addAsFriendButton.pin(to: view)
+        addAsFriendButton.layer.borderWidth = 1
+        addAsFriendButton.layer.borderColor = UIColor.systemGray.cgColor
+        addAsFriendButton.setTitle("Добавить в друзья", for: .normal)
+        addAsFriendButton.setTitleColor(.darkGray, for: .normal)
+        addAsFriendButton.addTarget(self, action: #selector(addAsFriend), for: .touchUpInside)
+        
+        return view
+    }
+    
     
     private func configInfoTextView() -> UIView{
         let view = UIView()
@@ -388,6 +416,17 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         present(picker, animated: true)
     }
     
+    @objc func addAsFriend() {
+        FriendsReequests.shared.makeFriendRequest(recieverId: account!.id, completion: {(error) in
+            if let error = error {
+                let alert = ErrorChecker.handler.getAlertController(error: error)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            self.addAsFriendButton.isEnabled = false
+        })
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let userPickedImage = info[.editedImage] as? UIImage else { return }
         accountImage.image = userPickedImage
@@ -397,6 +436,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     @objc func signOut() {
         UserDefaults.standard.removeObject(forKey: "userName")
         UserDefaults.standard.removeObject(forKey: "userPassword")
+        MeetMeRequests.JWTToken = ""
         User.currentUser = User()
         view.setRootViewController(NavigationHandler.createAuthNC(), animated: true)
     }

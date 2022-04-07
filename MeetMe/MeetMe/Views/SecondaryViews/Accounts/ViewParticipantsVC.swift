@@ -56,8 +56,6 @@ class ViewParticipantsVC: UITableViewController {
             })
         }
         
-        
-        
         setConstraint()
         
     }

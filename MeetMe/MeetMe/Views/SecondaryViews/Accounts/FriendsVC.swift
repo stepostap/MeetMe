@@ -9,14 +9,14 @@ import UIKit
 import CloudKit
 import Network
 
-class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource {
+class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let segmentController = UISegmentedControl(items: ["Друзья", "Запросы"])
-    let searchController = UISearchController(searchResultsController: nil)
+    var searchController: UISearchController?
     let friendsTableView = UITableView()
     let loader = UIActivityIndicatorView()
     let refresher = UIRefreshControl()
-    
+    let searchAccountsVC = AccountSearchResultsVC()
     
     var currentFriends = [Account]()
     
@@ -28,7 +28,7 @@ class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate,
         
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.backgroundColor = .systemBackground
-        
+        searchController = UISearchController(searchResultsController: searchAccountsVC)
         segmentController.selectedSegmentIndex = 0
         
         configNavigationBar()
@@ -183,12 +183,7 @@ class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate,
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
-    
-    
+   
     @objc func segmentChanged() {
         if segmentController.selectedSegmentIndex == 0 {
             currentFriends = User.currentUser.friends!
@@ -202,16 +197,16 @@ class FriendsVC: UIViewController, UISearchResultsUpdating, UITableViewDelegate,
     func configSegmentController() {
         view.addSubview(segmentController)
         segmentController.setConstraints(to: view, left: 30, top: 0, right: 30, height: 30)
-        segmentController.selectedSegmentIndex = 1
+        segmentController.selectedSegmentIndex = 0
         segmentController.addTarget(self, action: #selector(reloadData), for: .valueChanged)
     }
     
     func configNavigationBar()  {
        
-        searchController.searchBar.sizeToFit()
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search meetings"
+        searchController?.searchBar.sizeToFit()
+        searchController?.obscuresBackgroundDuringPresentation = false
+        searchController?.searchBar.placeholder = "Search meetings"
+        searchController?.searchResultsUpdater = searchAccountsVC
         
         navigationItem.title = "Друзья"
         navigationController?.navigationBar.prefersLargeTitles = false

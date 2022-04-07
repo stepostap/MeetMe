@@ -39,9 +39,9 @@ class Server {
 //        secondUser.friends.append(user.account!)
         
 
-        let meeting1 = Meeting(id: 1, creatorID: user.account!.id, name: "Настолки", types: [.tabletopGames], info: "Собираемся играть в настолки, в первую очередь в ДНД", online: false, isPrivate: false, participants: [1], groups: [], participantsMax: 10, Location: "ETO кофейня", startingDate: Date.distantFuture, endingDate: Date.distantFuture, currentParticipantNumber: 1)
-        
-        let meeting2 = Meeting(id: 2, creatorID: secondUser.account!.id, name: "ДР Коли", types: [.tabletopGames], info: "Отмечать будем у меня на даче, всех жду!", online: false, isPrivate: true, participants: [1, 2], groups: [], participantsMax: 20, Location: "Улица Пушкина, дом Калатушкина", startingDate: Date.distantFuture, endingDate: Date.distantFuture, currentParticipantNumber: 5)
+//        let meeting1 = Meeting(id: 1, creatorID: user.account!.id, name: "Настолки", types: [.tabletopGames], info: "Собираемся играть в настолки, в первую очередь в ДНД", online: false, isPrivate: false, participants: [1], groups: [], participantsMax: 10, Location: "ETO кофейня", startingDate: Date.distantFuture, endingDate: Date.distantFuture, currentParticipantNumber: 1)
+//
+//        let meeting2 = Meeting(id: 2, creatorID: secondUser.account!.id, name: "ДР Коли", types: [.tabletopGames], info: "Отмечать будем у меня на даче, всех жду!", online: false, isPrivate: true, participants: [1, 2], groups: [], participantsMax: 20, Location: "Улица Пушкина, дом Калатушкина", startingDate: Date.distantFuture, endingDate: Date.distantFuture, currentParticipantNumber: 5)
         
         let firstGroup = Group(id: 1, groupImage: "", groupName: "Group1", groupInfo: "", interests: [.cinema, .bar, .photography, .club, .dancing, .gaming], meetings: [], participants: [user.account!.id, secondUser.account!.id, romaUser.account!.id], admins: [user.account!.id])
         let secondGroup = Group(id: 2, groupImage: "", groupName: "Group2", groupInfo: "Группа группа группочка 2", interests: [.cinema, .bar], meetings: [], participants: [user.account!.id, secondUser.account!.id, romaUser.account!.id], admins: [user.account!.id])
@@ -116,7 +116,7 @@ class Server {
         meeting.id = Int64.random(in: 0..<Int64.max)
         
         for user in users {
-            if user.value.account?.id == meeting.participantsID[0] {
+            if meeting.isUserParticipant {
                 //user.value.plannedMeetings.append(meeting)
             }
         }

@@ -16,6 +16,10 @@ class MeetingCell: UITableViewCell {
             interestsTextView.text = Utilities.getInterests(interestArray: meeting?.types ?? [])
             if meeting!.imageURL.isEmpty {
                 meetingImage.image = UIImage(named: "placeholder")
+            } else {
+                let url = URL(string: meeting!.imageURL)
+                meetingImage.kf.indicatorType = .activity
+                meetingImage.kf.setImage(with: url, options: [ .cacheOriginalImage ])
             }
         }
     }

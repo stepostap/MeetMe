@@ -162,14 +162,24 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
             if let error = error {
                 let alert = ErrorChecker.handler.getAlertController(error: error)
                 self.present(alert, animated: true, completion: nil)
-                
                 return
             }
             
             if let account = account {
                 User.currentUser = User()
                 User.currentUser.account = account
-                self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
+                
+                AuthRequests.shared.getJWTToken(info: JWTBullshit(email: email, password: password), completion: {(token, error) in
+                    if let error = error {
+                        let alert = ErrorChecker.handler.getAlertController(error: error)
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    }
+                    if let token = token {
+                        MeetingRequests.JWTToken = token
+                        self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
+                    }
+                })
             }
         })
     }

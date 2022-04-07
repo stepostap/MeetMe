@@ -15,6 +15,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
     var interests = [Interests]()
     var invitedFriendsIDs = [Int64]()
     var invitedGroupsIDs = [Int64]()
+    var chosenImage: UIImage?
     
     let formatter = DateFormatter()
     let scrollView = UIScrollView()
@@ -173,7 +174,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         }
         
         if let _ = meeting {
-            self.meeting = Meeting(id: self.meeting!.id, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, participants: meeting!.participantsID, groups: meeting!.participantsGroupsID, participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: self.meeting!.currentParticipantNumber)
+            self.meeting = Meeting(id: self.meeting!.id, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, isParticipant: true, groups: meeting!.participantsGroupsID, participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: self.meeting!.currentParticipantNumber)
             
             MeetingRequests.shared.editMeeting(meeting: meeting!, completion: {(error) in
                 if let error = error {
@@ -186,8 +187,9 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
                 self.navigationController?.popViewController(animated: true)
             })
         } else {
-            self.meeting = Meeting(id: 0, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, participants: [User.currentUser.account!.id], groups: [], participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: 1)
-            MeetingRequests.shared.createMeeting(meeting: meeting!, completion: {(meeting, error) in
+            self.meeting = Meeting(id: 0, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, isParticipant: true,  groups: [], participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: 1)
+            
+            MeetingRequests.shared.createMeeting(image: chosenImage, meeting: meeting!, completion: {(meeting, error) in
                 if let error = error {
                     let alert = ErrorChecker.handler.getAlertController(error: error)
                     self.present(alert, animated: true, completion: nil)
@@ -196,29 +198,34 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
                 
                 if let meeting = meeting {
                     if let _ = User.currentUser.plannedMeetings {
+                        meeting.isUserParticipant = true
                         User.currentUser.plannedMeetings!.append(meeting)
                     } else {
                         User.currentUser.plannedMeetings = [meeting]
                     }
                     
-                    print("Invited groups: \(self.invitedGroupsIDs)")
-                    GroupRequests.shared.inviteGroupsToMeeting(groups: self.invitedGroupsIDs, meetingID: meeting.id,
-                                                               completion: {(error) in
-                        if let error = error {
-                            let alert = ErrorChecker.handler.getAlertController(error: error)
-                            self.present(alert, animated: true, completion: nil)
-                            return
-                        }
-                        
-                    })
                     
-                    MeetingRequests.shared.inviteAccountsToMeeting(accountsID: self.invitedFriendsIDs, meetingID: meeting.id, completion: {(error) in
-                        if let error = error {
-                            let alert = ErrorChecker.handler.getAlertController(error: error)
-                            self.present(alert, animated: true, completion: nil)
-                            return
-                        }
-                    })
+//                    if !self.invitedGroupsIDs.isEmpty {
+//                        GroupRequests.shared.inviteGroupsToMeeting(groups: self.invitedGroupsIDs, meetingID: meeting.id,
+//                                                                   completion: {(error) in
+//                            if let error = error {
+//                                let alert = ErrorChecker.handler.getAlertController(error: error)
+//                                self.present(alert, animated: true, completion: nil)
+//                                return
+//                            }
+//
+//                        })
+//                    }
+
+                    if !self.invitedFriendsIDs.isEmpty {
+                        MeetingRequests.shared.inviteAccountsToMeeting(invites: MeetingInvitationsDTO(users: self.invitedFriendsIDs, groups: self.invitedGroupsIDs), meetingID: meeting.id, completion: {(error) in
+                            if let error = error {
+                                let alert = ErrorChecker.handler.getAlertController(error: error)
+                                self.present(alert, animated: true, completion: nil)
+                                return
+                            }
+                        })
+                    }
                     
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -239,6 +246,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let userPickedImage = info[.editedImage] as? UIImage else { return }
         meetingImage.image = userPickedImage
+        chosenImage = userPickedImage
         picker.dismiss(animated: true)
     }
     

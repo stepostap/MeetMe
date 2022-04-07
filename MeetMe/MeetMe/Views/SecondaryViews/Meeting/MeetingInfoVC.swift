@@ -117,7 +117,9 @@ class MeetingInfoVC: UIViewController {
         configView()
         setViewInfo()
         // Do any additional setup after loading the view.
+        
     }
+    
     
     @objc func viewParticipants() {
         let vc = ViewParticipantsVC()
@@ -141,6 +143,12 @@ class MeetingInfoVC: UIViewController {
                 mainStackView.addArrangedSubview(configInfoView())
                 height += infoViewHeight
                 infoTextView.text = meeting.info
+            }
+            
+            if !meeting.imageURL.isEmpty {
+                let url = URL(string: meeting.imageURL)
+                meetingImage.kf.indicatorType = .activity
+                meetingImage.kf.setImage(with: url, options: [ .cacheOriginalImage ])
             }
             
             if !meeting.types.isEmpty {
@@ -415,7 +423,7 @@ class MeetingInfoVC: UIViewController {
         currentParticipantsTextField.setHeight(to: 30)
         currentParticipantsTextField.text = meeting?.currentParticipantNumber.description
         
-        if !meeting!.participantsID.contains(User.currentUser.account!.id) {
+        if !meeting!.isUserParticipant {
             view.addSubview(participateButton)
             Utilities.styleFilledButton(participateButton)
             participateButton.pinTop(to: currentParticipantsTextField.bottomAnchor, const: 20)
@@ -432,23 +440,24 @@ class MeetingInfoVC: UIViewController {
         return view
     }
 
+    
     @objc func participate() {
-        
-        MeetingRequests.shared.participateInMeeting(accept: true, meetingID: meeting!.id, completion: {(error) in
+        MeetingRequests.shared.participateInMeeting(meetingID: meeting!.id, completion: {(error) in
             if let error = error {
                 let alert = ErrorChecker.handler.getAlertController(error: error)
                 self.present(alert, animated: true, completion: nil)
                 return
             }
             
-            self.meeting?.participantsID.append(User.currentUser.account!.id)
-            if User.currentUser.meetingInvitations!.personalInvitations.contains(self.meeting!) {
+            self.meeting!.isUserParticipant = true
+            if User.currentUser.meetingInvitations?.personalInvitations.contains(self.meeting!) ??  false {
                 let index = User.currentUser.meetingInvitations!.personalInvitations.firstIndex(of: self.meeting!)
                 User.currentUser.meetingInvitations!.personalInvitations.remove(at: index!)
+                User.currentUser.plannedMeetings?.append(self.meeting!)
+            } else {
                 User.currentUser.plannedMeetings?.append(self.meeting!)
             }
             self.navigationController?.popViewController(animated: true)
         })
     }
-    
 }

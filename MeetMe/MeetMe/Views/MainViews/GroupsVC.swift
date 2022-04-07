@@ -7,19 +7,17 @@
 
 import UIKit
 
-class GroupsVC: UITableViewController, UISearchResultsUpdating {
+class GroupsVC: UITableViewController {
     
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
-    
-    let searchController = UISearchController()
+    let searchResultVC = GroupSearchResultVC()
+    var searchController:  UISearchController?
     let loader = UIActivityIndicatorView()
     let refresher = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        searchController = UISearchController(searchResultsController: searchResultVC)
         configView()
         
     }
@@ -59,10 +57,11 @@ class GroupsVC: UITableViewController, UISearchResultsUpdating {
     func configView() {
         let filterButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(filterGroupSearch))
         let createMeetingButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createGroup))
-        searchController.searchBar.sizeToFit()
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Groups"
+        searchController?.searchBar.sizeToFit()
+        
+        searchController?.searchResultsUpdater = searchResultVC
+        searchController?.obscuresBackgroundDuringPresentation = false
+        searchController?.searchBar.placeholder = "Search Groups"
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.searchController = searchController
@@ -78,7 +77,14 @@ class GroupsVC: UITableViewController, UISearchResultsUpdating {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupCell
-        cell.nameLabel.text = User.currentUser.groups?[indexPath.row].groupName
+        let group = User.currentUser.groups![indexPath.row]
+        cell.nameLabel.text = group.groupName
+        if !group.groupImageURL.isEmpty {
+            let url = URL(string: group.groupImageURL)
+            cell.groupImage.kf.indicatorType = .activity
+            cell.groupImage.kf.setImage(with: url, options: [ .cacheOriginalImage ])
+        }
+        
         return cell
     }
     

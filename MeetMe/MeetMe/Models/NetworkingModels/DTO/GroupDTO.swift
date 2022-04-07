@@ -13,14 +13,14 @@ struct GroupDTO: Codable {
         self.adminId = adminID
         self.name = name
         self.description = description
-        self.photoURL = photoURL
+        self.photoUrl = photoURL
         self.isPrivate = isPrivate
         self.interests = interests
     }
     
     let id, adminId: Int64
     let name: String, description: String?
-    let photoURL: String?
+    let photoUrl: String?
     let isPrivate: Bool
     let interests: [String]?
 }

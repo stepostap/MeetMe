@@ -153,24 +153,36 @@ class LoginVC: UIViewController, UITextFieldDelegate {
 //        self.loader.stopAnimating()
 //        self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
         
-        AuthRequests.shared.login(info: LoginInfo(email: email, password: password), completion: { (account, error) in
+        AuthRequests.shared.getJWTToken(info: JWTBullshit(email: email, password: password), completion: {(token, error) in
             if let error = error {
                 let alert = ErrorChecker.handler.getAlertController(error: error)
                 self.present(alert, animated: true, completion: nil)
                 self.loader.stopAnimating()
                 return
             }
+            
+            if let token = token {
+                MeetingRequests.JWTToken = token
+                AuthRequests.shared.login(info: LoginInfo(email: email, password: password), completion: { (account, error) in
+                    if let error = error {
+                        let alert = ErrorChecker.handler.getAlertController(error: error)
+                        self.present(alert, animated: true, completion: nil)
+                        self.loader.stopAnimating()
+                        return
+                    }
 
-            if let account = account {
+                    if let account = account {
 
-                if self.shouldSaveLoginAndPassword!.isChecked {
-                    UserDefaults.standard.set(email, forKey: "userName")
-                    UserDefaults.standard.set(password, forKey: "userPassword")
-                }
+                        if self.shouldSaveLoginAndPassword!.isChecked {
+                            UserDefaults.standard.set(email, forKey: "userName")
+                            UserDefaults.standard.set(password, forKey: "userPassword")
+                        }
 
-                User.currentUser.account = account
-                self.loader.stopAnimating()
-                self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
+                        User.currentUser.account = account
+                        self.loader.stopAnimating()
+                        self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
+                    }
+                })
             }
         })
     }

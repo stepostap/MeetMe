@@ -125,20 +125,33 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AddParticipantCell
         
         if segmentController.selectedSegmentIndex == 1 {
-            cell.nameLabel.text = User.currentUser.groups![indexPath.row].groupName
-            cell.participantID = User.currentUser.groups![indexPath.row].id
+            let group = User.currentUser.groups![indexPath.row]
+            cell.nameLabel.text = group.groupName
+            cell.participantID = group.id
             cell.checkboxChanged = groupIDChanged
             if chosenGroupIDs.contains(cell.participantID!) {
                 cell.checkbox.isChecked = true
             }
+            if !group.groupImageURL.isEmpty {
+                let url = URL(string: group.groupImageURL)
+                cell.participantImage.kf.indicatorType = .activity
+                cell.participantImage.kf.setImage(with: url, options: [ .cacheOriginalImage ])
+            }
             
         } else {
-            cell.nameLabel.text = User.currentUser.friends![indexPath.row].name
-            cell.participantID = User.currentUser.friends![indexPath.row].id
+            let meeting = User.currentUser.friends![indexPath.row]
+            cell.nameLabel.text = meeting.name
+            cell.participantID = meeting.id
             cell.checkboxChanged = friendIDChanged
             if chosenFriendIDs.contains(cell.participantID!) {
                 cell.checkbox.isChecked = true
             }
+            if !meeting.imageDataURL.isEmpty {
+                let url = URL(string: meeting.imageDataURL)
+                cell.participantImage.kf.indicatorType = .activity
+                cell.participantImage.kf.setImage(with: url, options: [ .cacheOriginalImage ])
+            }
+            
             if alreadyAddedFriends.contains(cell.participantID!) {
                 cell.canBeSelected = false
                 cell.checkbox.isChecked = true

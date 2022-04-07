@@ -14,6 +14,7 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
     
     var interests = [Interests]()
     var invitedFriendsIDs = [Int64]()
+    var chosenImage: UIImage?
     
     let formatter = DateFormatter()
     let scrollView = UIScrollView()
@@ -114,7 +115,7 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
             navigationController?.popViewController(animated: true)
         } else {
             let createdGroup = Group(id: 0, groupImage: "", groupName: nameTextField.text!, groupInfo: infoTextView.text, interests: interests, meetings: [], participants: [], admins: [User.currentUser.account!.id])
-            GroupRequests.shared.createGroup(group: createdGroup, completion: {(group, error) in
+            GroupRequests.shared.createGroup(image: chosenImage, group: createdGroup, completion: {(group, error) in
                 if let error = error {
                     let alert = ErrorChecker.handler.getAlertController(error: error)
                     self.present(alert, animated: true, completion: nil)
@@ -149,6 +150,7 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let userPickedImage = info[.editedImage] as? UIImage else { return }
         groupImage.image = userPickedImage
+        chosenImage = userPickedImage
         picker.dismiss(animated: true)
     }
     

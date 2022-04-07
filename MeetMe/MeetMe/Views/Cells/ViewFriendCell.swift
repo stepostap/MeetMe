@@ -12,6 +12,11 @@ class ViewFriendCell: UITableViewCell {
     var account: Account? {
         didSet {
             nameLabel.text = account?.name
+            if !account!.imageDataURL.isEmpty {
+                let url = URL(string: account!.imageDataURL)
+                accountImage.kf.indicatorType = .activity
+                accountImage.kf.setImage(with: url, options: [ .cacheOriginalImage ])
+            }
         }
     }
     

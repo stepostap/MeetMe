@@ -5,8 +5,13 @@
 //  Created by Stepan Ostapenko on 02.03.2022.
 //
 
-
 import Foundation
+
+enum MeetingType: String {
+    case visited = "visited"
+    case planned = "planned"
+    case invitations = "invites"
+}
 
 class Meeting: Codable, Equatable {
     static func == (lhs: Meeting, rhs: Meeting) -> Bool {
@@ -14,7 +19,7 @@ class Meeting: Codable, Equatable {
     }
     
     
-    internal init(id: Int64, creatorID: Int64, name: String, types: [Interests], info: String, online: Bool, isPrivate: Bool, participants: [Int64], groups: [Int64], participantsMax: Int, Location: String, startingDate: Date, endingDate: Date? = nil, currentParticipantNumber: Int) {
+    internal init(id: Int64, creatorID: Int64, name: String, types: [Interests], info: String, online: Bool, isPrivate: Bool, isParticipant: Bool, groups: [Int64], participantsMax: Int, Location: String, startingDate: Date, endingDate: Date? = nil, currentParticipantNumber: Int, imageURL: String = "") {
         self.id = id
         self.creatorID = creatorID
         self.currentParticipantNumber = currentParticipantNumber
@@ -22,23 +27,25 @@ class Meeting: Codable, Equatable {
         self.types = types
         self.info = info
         self.isOnline = online
-        self.participantsID = participants
+        self.isUserParticipant = isParticipant
         self.participantsMax = participantsMax
         self.Location = Location
         self.startingDate = startingDate
         self.endingDate = endingDate
         self.participantsGroupsID = groups
         self.isPrivate = isPrivate
+        self.imageURL = imageURL
     }
     
     var id: Int64
     var creatorID: Int64
-    var imageURL = ""
+    var imageURL:  String
     var name: String
     var types: [Interests]
     var info:  String
     var isOnline: Bool
-    var participantsID: [Int64]
+    var isUserParticipant: Bool
+    //var participantsID: [Int64]
     var participantsGroupsID: [Int64]
     var currentParticipantNumber: Int
     var participantsMax: Int
