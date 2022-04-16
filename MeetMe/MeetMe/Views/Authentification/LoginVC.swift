@@ -7,35 +7,37 @@
 
 import UIKit
 
+/// Контроллер для входа пользователя в приложение
 class LoginVC: UIViewController, UITextFieldDelegate {
-    
-    let loginButton = UIButton()
-    let signUpButton = UIButton()
-    let loader = UIActivityIndicatorView()
-    var shouldSaveLoginAndPassword: CheckBox?
-    
-    let emailTextField : UITextField = {
+    ///  Кнопка для входа
+    private let loginButton = UIButton()
+    /// Кнопка для регистрации
+    private let signUpButton = UIButton()
+    /// Идентификатор загрузки
+    private let loader = UIActivityIndicatorView()
+    /// Требуется ли сохранять на устройстве логин и пароль для повторного входа
+    private var shouldSaveLoginAndPassword: CheckBox?
+    /// Текстовое поле для ввода электронной почты пользователя
+    private let emailTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         textField.textAlignment = .left
-        textField.placeholder = "email"
-        //textField.text = "Stepostap@gmail.com"
+        textField.placeholder = "Почта"
         return textField
     }()
-    
-    let passwordTextField : UITextField = {
+    /// Текстовое поле для ввода пароля пользователя
+    private let passwordTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         textField.textAlignment = .left
-        textField.placeholder = "password"
+        textField.placeholder = "Пароль"
         textField.isSecureTextEntry = true
-        //textField.text = "12345"
         return textField
     }()
 
@@ -46,11 +48,12 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         configView()
     }
     
+    /// Формирование экрана логина
     private func configView() {
-        Utilities.styleTextField(emailTextField)
-        Utilities.styleTextField(passwordTextField)
-        Utilities.styleFilledButton(loginButton)
-        Utilities.styleHollowButton(signUpButton)
+        Styling.styleTextField(emailTextField)
+        Styling.styleTextField(passwordTextField)
+        Styling.styleFilledButton(loginButton)
+        Styling.styleHollowButton(signUpButton)
         
         view.addSubview(emailTextField)
         emailTextField.pinCenter(to: view.safeAreaLayoutGuide.centerXAnchor, const: 0)
@@ -65,7 +68,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         passwordTextField.delegate = self
         
         shouldSaveLoginAndPassword = CheckBox.init()
-        shouldSaveLoginAndPassword?.style = .tick
+        //shouldSaveLoginAndPassword?.style = .tick
         shouldSaveLoginAndPassword?.borderStyle = .roundedSquare(radius: 5)
         view.addSubview(shouldSaveLoginAndPassword!)
         shouldSaveLoginAndPassword?.setWidth(to: 20)
@@ -88,7 +91,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         loader.setWidth(to: 30)
         loader.setHeight(to: 30)
         
-        loginButton.setTitle("Login", for: .normal)
+        loginButton.setTitle("Войти", for: .normal)
         view.addSubview(loginButton)
         loginButton.pinTop(to: loader.bottomAnchor, const: 30)
         loginButton.pinCenter(to: view.safeAreaLayoutGuide.centerXAnchor, const: 0)
@@ -101,7 +104,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         signUpButton.pinCenter(to: view.safeAreaLayoutGuide.centerXAnchor, const: 0)
         signUpButton.setWidth(to: 200)
         signUpButton.setHeight(to: 30)
-        signUpButton.setTitle("Sign Up", for: .normal)
+        signUpButton.setTitle("Зарегистрироваться", for: .normal)
         signUpButton.setTitleColor(.black, for: .normal)
         signUpButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
     }
@@ -111,6 +114,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         return textField.resignFirstResponder()
     }
     
+    /// Проверка введенных почты и пароля на корректность
     private func loginAndPasswordCheck() throws {
         if let email = emailTextField.text {
             if email.isEmpty {
@@ -132,12 +136,11 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         }
         
     }
-
-    @objc func login() {
-        
+    
+    /// Вход пользователя в приложение
+    @objc private func login() {
         do {
             try loginAndPasswordCheck()
-                
         } catch let error {
             let alert = ErrorChecker.handler.getAlertController(error: error)
             present(alert, animated: true, completion: nil)
@@ -149,10 +152,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         
         loader.startAnimating()
        
-//        User.currentUser = Server.shared.users[LoginInfo(email: "Stepostap@gmail.com", password: "12345")]!
-//        self.loader.stopAnimating()
-//        self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
-        
         AuthRequests.shared.getJWTToken(info: JWTBullshit(email: email, password: password), completion: {(token, error) in
             if let error = error {
                 let alert = ErrorChecker.handler.getAlertController(error: error)
@@ -162,7 +161,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             }
             
             if let token = token {
-                MeetingRequests.JWTToken = token
+                MeetMeRequests.JWTToken = token
                 AuthRequests.shared.login(info: LoginInfo(email: email, password: password), completion: { (account, error) in
                     if let error = error {
                         let alert = ErrorChecker.handler.getAlertController(error: error)
@@ -174,8 +173,9 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     if let account = account {
 
                         if self.shouldSaveLoginAndPassword!.isChecked {
-                            UserDefaults.standard.set(email, forKey: "userName")
+                            UserDefaults.standard.set(email, forKey: "userEmail")
                             UserDefaults.standard.set(password, forKey: "userPassword")
+                            print("saved \(email) and \(password) to user defaults")
                         }
 
                         User.currentUser.account = account
@@ -187,9 +187,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         })
     }
     
-    
-    @objc func signUp() {
-        
+    /// Кнопка для перехода на контроллер регистрации 
+    @objc private func signUp() {
         self.navigationController?.pushViewController(SignUpVC(), animated: true)
     }
 }

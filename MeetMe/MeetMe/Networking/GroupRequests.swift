@@ -8,11 +8,14 @@
 import Foundation
 import UIKit
 
+/// Создание, отправка и обработка запросов, связанных с группами
 class GroupRequests: MeetMeRequests {
+    /// Статический экзмепляр класса
     static let shared = GroupRequests()
+    /// Базовая часть URL дла запросов
     let groupURL = "http://localhost:8080/api/v1/groups/"
     
-    
+    /// Создание и отправка запроса на получение списка групп пользователя и обработка полученного ответа
     func getUserGroups(completion: @escaping ([Group]?, Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
@@ -45,7 +48,7 @@ class GroupRequests: MeetMeRequests {
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса на создание новой группы и обработка полученного ответа
     func createGroup(image: UIImage? = nil, group: Group, completion: @escaping (Group?, Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
@@ -86,7 +89,47 @@ class GroupRequests: MeetMeRequests {
         }
     }
     
+    /// Создание и отправка запроса на редактирование информации существующей группы и обработка полученного ответа
+    func editGroup(groupID: Int64, image: UIImage?, newInfo: GroupEditDTO, completion: @escaping (Group?, Error?)->() ) {
+        if !NetworkMonitor.shared.isConnected {
+            DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
+        }
+        
+        do {
+            let groupInfo = try encoder.encode(newInfo)
+            var request = URLRequest(url: URL(string: groupURL + groupID.description + "/edit")!)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = groupInfo
+            request.setValue("Bearer \(MeetMeRequests.JWTToken)", forHTTPHeaderField: "Authorization")
     
+            let task = session.dataTask(with: request, completionHandler: ({ data, responce, error in
+                do {
+                    try self.errorCheck(data: data, response: responce, error: error)
+                } catch let error {
+                    DispatchQueue.main.async { completion(nil, error) }
+                }
+                if let data = data {
+                    do {
+                        let dataGroup : GroupDTO = try self.getData(data: data)
+                        if let image = image {
+                            self.uploadImage(groupID: dataGroup.id, image: image, completion: completion)
+                        } else {
+                            let recievedGroup = self.createGroupFromDTO(dataGroup: dataGroup)
+                            DispatchQueue.main.async { completion(recievedGroup, nil) }
+                        }
+                    } catch let error {
+                        DispatchQueue.main.async { completion(nil, error) }
+                    }
+                }
+            }))
+            task.resume()
+        } catch {
+            DispatchQueue.main.async { completion(nil, JSONError.encodingError) }
+        }
+    }
+    
+    /// Создание и отправка запроса на получение списка мероприятий группы с groupID и обработка полученного ответа
     func getGroupMeetings(groupID: Int64, completion: @escaping ([Meeting]?, Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
@@ -120,7 +163,7 @@ class GroupRequests: MeetMeRequests {
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса на получение списка участников группы и обработка полученного ответа
     func getGroupParticipants(groupID: Int64, completion: @escaping ([Account]?, Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
@@ -135,7 +178,7 @@ class GroupRequests: MeetMeRequests {
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса на добавление новых участников в группу
     func addNewGroupParticipants(participants: [Int64], groupID: Int64, completion: @escaping (Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(NetworkerError.noConnection)}
@@ -152,7 +195,7 @@ class GroupRequests: MeetMeRequests {
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса на приглащение одной или нескольких групп на мероприятие с meetingID и обработка полученного ответа
     func inviteGroupsToMeeting(groups: [Int64], meetingID: Int64, completion: @escaping (Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(NetworkerError.noConnection)}
@@ -169,7 +212,7 @@ class GroupRequests: MeetMeRequests {
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса на отписку пользователя от группы и обработка полученного ответа
     func leaveGroup(groupID: Int64, completion: @escaping (Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(NetworkerError.noConnection)}
@@ -200,7 +243,7 @@ class GroupRequests: MeetMeRequests {
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса на удаление группы и обработка полученного ответа
     func deleteGroup(groupID: Int64, completion: @escaping (Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(NetworkerError.noConnection)}
@@ -215,7 +258,7 @@ class GroupRequests: MeetMeRequests {
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса, содержащего информацию об ответе админа группы на приглашение его группы на мероприятие и обработка полученного ответа
     func respondMeetingForGroupInvitation(accept: Bool, groupID: Int64, meetingID: Int64, completion: @escaping (Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(NetworkerError.noConnection)}
@@ -230,7 +273,7 @@ class GroupRequests: MeetMeRequests {
         task.resume()
     }
     
-    
+    /// Создание и отправка  запроса на загрузку изображения группы на сервер  и обработка полученного ответа
     func uploadImage(groupID: Int64, image: UIImage, completion: @escaping (Group?, Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
@@ -267,11 +310,12 @@ class GroupRequests: MeetMeRequests {
         task.resume()
     }
     
+    /// Создание и отправка запроса на получение списка отфильтрованных групп (используется при поиске групп) и обработка полученного ответа
     func getFilteredGroups(query: String, filter: [Interests], completion: @escaping ([[Group]]?, Error?) ->  (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
         }
-        let searchInfo = MeetingSearchDTO(searchQuery: query, interests: InterestsParser.getInterestsString(interests: filter))
+        let searchInfo = GroupSearchDTO(searchQuery: query, interests: InterestsParser.getInterestsString(interests: filter))
         let searchData = try! encoder.encode(searchInfo)
         var request = URLRequest(url: URL(string: groupURL + User.currentUser.account!.id.description + "/search")!)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

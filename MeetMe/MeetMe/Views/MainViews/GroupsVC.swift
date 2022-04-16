@@ -7,27 +7,32 @@
 
 import UIKit
 
+/// Контроллер, отвечающий за отображение списка групп пользователя
 class GroupsVC: UITableViewController {
-    
-    let searchResultVC = GroupSearchResultVC()
-    var searchController:  UISearchController?
-    let loader = UIActivityIndicatorView()
-    let refresher = UIRefreshControl()
+    /// Контроллер, отвечающий за отображение разультата поиска групп
+    private let searchResultVC = GroupSearchResultVC()
+    /// Контроллер поиска
+    private var searchController:  UISearchController?
+    /// Идентификатор загрузки
+    private let loader = UIActivityIndicatorView()
+    /// Идентификатор обновления данных
+    private let refresher = UIRefreshControl()
+    /// Список-фильтр интересов для поиска групп
+    var searchFilterInterests = [Interests]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         searchController = UISearchController(searchResultsController: searchResultVC)
         configView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         updateGroups()
     }
     
-    
-    func updateGroups() {
+    /// Обновление информации о группах пользователя
+    private func updateGroups() {
         if let _  = User.currentUser.groups {
             self.loader.stopAnimating()
             self.tableView.reloadData()
@@ -36,8 +41,8 @@ class GroupsVC: UITableViewController {
         }
     }
     
-
-    @objc func getGroups() {
+    /// Загрузка информации о группах пользователя
+    @objc private func getGroups() {
         GroupRequests.shared.getUserGroups(completion: {(groups, error) in
             self.loader.stopAnimating()
             self.refreshControl?.endRefreshing()
@@ -53,8 +58,29 @@ class GroupsVC: UITableViewController {
         })
     }
     
+    /// Переход на экран создания новой группы
+    @objc private func createGroup() {
+        let vc = CreateGroupVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
-    func configView() {
+    /// Отображение контроллера для создания фильтра поиска групп
+    @objc private func filterGroupSearch() {
+        let searchFilterVC = InterestsVC()
+        searchFilterVC.interests = searchFilterInterests
+        searchFilterVC.completion = {(interests) in
+            self.searchFilterInterests = interests
+        }
+        if let sheet = searchFilterVC.sheetPresentationController {
+            sheet.detents = [ .medium(), .large() ]
+        }
+        
+        present(searchFilterVC, animated: true)
+    }
+    
+    // MARK: Configs
+    /// Формирование экрана групп
+    private func configView() {
         let filterButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(filterGroupSearch))
         let createMeetingButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createGroup))
         searchController?.searchBar.sizeToFit()
@@ -75,6 +101,7 @@ class GroupsVC: UITableViewController {
         self.tableView.refreshControl = refresher
     }
     
+    // MARK: TableView Datasource
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupCell
         let group = User.currentUser.groups![indexPath.row]
@@ -82,7 +109,7 @@ class GroupsVC: UITableViewController {
         if !group.groupImageURL.isEmpty {
             let url = URL(string: group.groupImageURL)
             cell.groupImage.kf.indicatorType = .activity
-            cell.groupImage.kf.setImage(with: url, options: [ .cacheOriginalImage ])
+            cell.groupImage.kf.setImage(with: url, options: [.forceRefresh ])
         }
         
         return cell
@@ -97,25 +124,4 @@ class GroupsVC: UITableViewController {
         vc.group = User.currentUser.groups?[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
-    
-//    override func tableView(_ tableView: UITableView,
-//                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        var actions = [UIContextualAction]()
-//        
-//        let configuration = UISwipeActionsConfiguration(actions: actions)
-//        configuration.performsFirstActionWithFullSwipe = false
-//        return configuration
-//    }
-    
-    @objc func createGroup() {
-        let vc = CreateGroupVC()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc func filterGroupSearch() {
-        
-    }
-    
 }

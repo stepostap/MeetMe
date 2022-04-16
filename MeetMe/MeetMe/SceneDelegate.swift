@@ -21,20 +21,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let email = UserDefaults.standard.string(forKey: "userEmail") {
             if let password = UserDefaults.standard.string(forKey: "userPassword") {
-                Networker.shared.loginUser(email: email, password: password, completion: { (user, error) in
+                AuthRequests.shared.getJWTToken(info: JWTBullshit(email: email, password: password), completion: {(token, error) in
                     if error != nil {
                         self.window?.rootViewController = NavigationHandler.createAuthNC()
                     }
-                    
-                    if let user = user {
-                        User.currentUser = user
-                        self.window?.rootViewController = NavigationHandler.createTabBar()
+                    if let token = token {
+                        MeetingRequests.JWTToken = token
+                        AuthRequests.shared.login(info: LoginInfo(email: email, password: password), completion: { (account, error) in
+                            if error != nil {
+                                print(3)
+                                self.window?.rootViewController = NavigationHandler.createAuthNC()
+                            }
+
+                            if let account = account {
+                                User.currentUser.account = account
+                                self.window?.rootViewController = NavigationHandler.createTabBar()
+                            }
+                        })
                     }
                 })
             } else {
+                print("no password")
                 window?.rootViewController = NavigationHandler.createAuthNC()
             }
         } else {
+            print("no email")
             window?.rootViewController = NavigationHandler.createAuthNC()
         }
         
@@ -42,7 +53,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
     }
-    
     
 
     func sceneDidDisconnect(_ scene: UIScene) {

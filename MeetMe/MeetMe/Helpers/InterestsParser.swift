@@ -7,8 +7,9 @@
 
 import Foundation
 
+/// Класс для парсинга интересов
 class InterestsParser {
-    
+    /// Получение стрового представления интересов
     static func getInterestsString(interests: [Interests]) -> [String] {
         var stringInterests = [String]()
         for interest in interests {
@@ -16,7 +17,7 @@ class InterestsParser {
         }
         return stringInterests
     }
-    
+    /// Получение списка интересов в виде экземпляров перечисления из строки
     static func getInterests(interestsString: [String]) -> [Interests] {
         var interests = [Interests]()
         for interestStr in interestsString {

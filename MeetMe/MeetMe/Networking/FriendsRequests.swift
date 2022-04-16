@@ -7,11 +7,14 @@
 
 import Foundation
 
+/// Создание, отправка и обработка запросов для взаимодействия с друзьями пользователя
 class FriendsReequests: MeetMeRequests{
+    /// Базовая часть URL дла запросов
     let userURL = "http://localhost:8080/api/v1/user/"
+    /// Статический экзмепляр класса
     static let shared = FriendsReequests()
     
-    
+    /// Создание и отправка аккаунту с recieverId запроса на добавление в друзья и обработка полученного ответа
     func makeFriendRequest(recieverId: Int64, completion: @escaping (Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(NetworkerError.noConnection)}
@@ -25,7 +28,7 @@ class FriendsReequests: MeetMeRequests{
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса на удаление аккаунта с reciverId из списка друзей пользователя и обработка полученного ответа
     func deleteFriend(recieverId: Int64, completion: @escaping (Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(NetworkerError.noConnection)}
@@ -39,7 +42,7 @@ class FriendsReequests: MeetMeRequests{
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса на получение списка друзей пользователя и обработка полученного ответа
     func getFriends(completion: @escaping ([Account]?, Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
@@ -53,7 +56,7 @@ class FriendsReequests: MeetMeRequests{
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса на получение списка заявок в друзья пользователя и обработка полученного ответа
     func getFriendRequests(completion: @escaping ([Account]?, Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
@@ -67,7 +70,7 @@ class FriendsReequests: MeetMeRequests{
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса на поиск аккаунтов приложения по имени и обработка полученного ответа 
     func searchFriends(query:  String, completion: @escaping ([[Account]]?, Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}

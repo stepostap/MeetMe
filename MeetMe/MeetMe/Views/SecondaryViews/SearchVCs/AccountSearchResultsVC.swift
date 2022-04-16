@@ -7,23 +7,24 @@
 
 import UIKit
 
+/// Организация отображения результатов поиска аккаунтов
 class AccountSearchResultsVC: UITableViewController, UISearchResultsUpdating {
-    
-    var parentVC: FriendsVC {
+    /// ViewController, содержащий данный ViewController
+    private var parentVC: FriendsVC {
         return self.presentingViewController as! FriendsVC
     }
-    
-    var accounts = [[Account]]()
-    let loader = UIActivityIndicatorView()
+    /// Список отображаемых аккаунтов
+    private var accounts = [[Account]]()
+    /// Индикатор загрузки
+    private let loader = UIActivityIndicatorView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
         confinTableView()
     }
     
-    func confinTableView() {
+    /// Формирование таблицы найденных аккаунтов
+    private func confinTableView() {
         self.tableView.backgroundView = loader
         self.tableView.backgroundColor = .systemBackground
         self.tableView.register(ViewFriendCell.self, forCellReuseIdentifier: "accountCell")
@@ -38,7 +39,8 @@ class AccountSearchResultsVC: UITableViewController, UISearchResultsUpdating {
         }
     }
     
-    func updateTable(accounts: [[Account]]?, error: Error?) {
+    /// Обновление таблицы с найденными аккаунтами
+    private func updateTable(accounts: [[Account]]?, error: Error?) {
         self.loader.stopAnimating()
         if let error = error {
             let alert = ErrorChecker.handler.getAlertController(error: error)

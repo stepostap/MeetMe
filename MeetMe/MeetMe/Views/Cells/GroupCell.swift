@@ -7,14 +7,15 @@
 
 import UIKit
 
+/// Ячейка группы
 class GroupCell: UITableViewCell {
-
+    /// Текстовое поле с названием группы
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 17)
         return label
     }()
-    
+    /// UI элемент, отображающий картинку группы
     let groupImage: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
@@ -32,6 +33,7 @@ class GroupCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Метод, формирующий внешний вид ячейки
     private func setCostraints() {
         contentView.setHeight(to: 50)
         contentView.addSubview(groupImage)
@@ -42,6 +44,10 @@ class GroupCell: UITableViewCell {
         nameLabel.pinLeft(to: groupImage.trailingAnchor, const: 10)
         nameLabel.pinCenter(to: contentView.centerYAnchor, const: 0)
         nameLabel.pinRight(to: contentView.trailingAnchor, const: 10)
+    }
+    
+    override func prepareForReuse() {
+        groupImage.image = UIImage(named: "placeholder")
     }
 
 }

@@ -7,13 +7,14 @@
 
 import UIKit
 
+/// Контроллер, отвечающий за создание фильтра для поиска мероприятий
 class SearchFilterVC: UIViewController, UITextFieldDelegate {
-    
-    let formatter = DateFormatter()
-    
+    /// Форматер даты
+    private let formatter = DateFormatter()
+    /// Фильтр для поиска мероприятий
     var searchOptions: MeetingSearchFilter?
-    
-    var maxParticipants : UITextField = {
+    /// Поле для ввода максимального числа участников
+    private var maxParticipants : UITextField = {
         let textField = UITextField()
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -22,29 +23,29 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         return textField
     }()
-    
-    var meetingTypeCheckboxes = [CheckBox]()
-    
-    let isOnline = CheckBox.init()
-    
-    let datePicker = UIDatePicker()
-    let startingDateTextField : UITextField = {
+    /// Чекбоксы для выбора интересов, которые должны быть у найденных мероприятий
+    private var meetingTypeCheckboxes = [CheckBox]()
+    /// Интересы, которые должны быть у найденных мероприятий
+    private let interestsVC = InterestsVC()
+    /// Проводится ли мероприятие онлайн
+    private let isOnline = CheckBox.init()
+    /// Выбор даты
+    private let datePicker = UIDatePicker()
+    /// Поле для отображения даты начала мероприятия
+    private let startingDateTextField : UITextField = {
+        let textField = UITextField()
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing;
+        return textField
+    }()
+    /// Поле для отображения даты конца мероприятия
+    private let endingDateTextField : UITextField = {
         let textField = UITextField()
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         return textField
     }()
     
-    @objc func isOnlineCheckboxSync() {
-        if isOnline.isChecked {
-            searchOptions?.online = true
-        } else {
-            searchOptions?.online = false
-        }
-        
-    }
-    
-    let interestsVC = InterestsVC()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,15 +64,53 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
         if let date = searchOptions?.startingDate {
             startingDateTextField.text = formatter.string(from: date)
         }
+        if let date = searchOptions?.endingDate {
+            endingDateTextField.text = formatter.string(from: date)
+        }
     
         configureView()
     }
     
+    
     override func viewWillLayoutSubviews() {
         view.backgroundColor = .systemBackground
+    }
+    
+    /// Метод для синхронизации значения чекбокса и поля isOnline
+    @objc private func isOnlineCheckboxSync() {
+        if isOnline.isChecked {
+            searchOptions?.online = true
+        } else {
+            searchOptions?.online = false
+        }
         
     }
-        
+    
+    /// Очистка введенных настроек
+    @objc private func clearOptions() {
+        searchOptions?.types = []
+        maxParticipants.text = "100"
+        searchOptions?.participantsMax = 100
+        isOnline.isChecked = false
+        startingDateTextField.text = ""
+        searchOptions?.startingDate = nil
+    }
+    
+    /// Отображение в текстовых полях выбранной даты
+    @objc private func updateDateTextview() {
+        if startingDateTextField.isEditing {
+            //formatter.dateFormat = "dd.MM HH:mm"
+            startingDateTextField.text = formatter.string(from: datePicker.date)
+            searchOptions?.startingDate = datePicker.date
+        }
+        if endingDateTextField.isEditing {
+            //formatter.dateFormat = "dd.MM HH:mm"
+            endingDateTextField.text = formatter.string(from: datePicker.date)
+            searchOptions?.endingDate = datePicker.date
+        }
+    }
+    
+    // MARK: Text Delegates
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let number = Int(maxParticipants.text ?? "100"), number > 1 {
             searchOptions?.participantsMax = number
@@ -93,27 +132,9 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
         return maxParticipants.resignFirstResponder()
     }
    
-    
-    @objc func updateDateTextview() {
-        formatter.dateFormat = "dd.MM HH:mm"
-        startingDateTextField.text = formatter.string(from: datePicker.date)
-        searchOptions?.startingDate = datePicker.date
-        
-    }
-    
-    @objc func clearOptions() {
-        for checkbox in interestsVC.meetingTypeCheckboxes {
-            checkbox.isChecked = false
-        }
-        searchOptions?.types = []
-        maxParticipants.text = "100"
-        searchOptions?.participantsMax = 100
-        isOnline.isChecked = false
-        startingDateTextField.text = ""
-        searchOptions?.startingDate = nil
-    }
-    
-    func configureView() {
+    // MARK: Configs
+    /// Формирование экрана фильтра поиска
+    private func configureView() {
         
         let clearButton = UIButton(type: .system)
         clearButton.setTitle("Очистить", for: .normal)
@@ -125,7 +146,7 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
         clearButton.setWidth(to: 100)
         clearButton.setHeight(to: 30)
         
-        isOnline.style = .tick
+        //isOnline.style = .tick
         isOnline.borderStyle = .rounded
         isOnline.addTarget(self, action: #selector(isOnlineCheckboxSync), for: .valueChanged)
         view.addSubview(isOnline)
@@ -173,8 +194,24 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
         startingDateTextField.setWidth(to: 150)
         startingDateTextField.setHeight(to: 30)
         
+        let endinfDatePickerLabel = UILabel()
+        endinfDatePickerLabel.text = "Дата конца мероприятия:"
+        view.addSubview(endinfDatePickerLabel)
+        endinfDatePickerLabel.font = .systemFont(ofSize: 13)
+        endinfDatePickerLabel.pinTop(to: datePickerLabel.bottomAnchor, const: 10)
+        endinfDatePickerLabel.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 10)
+        endinfDatePickerLabel.setWidth(to: 180)
+        endinfDatePickerLabel.setHeight(to: 30)
+        
+        endingDateTextField.inputView = datePicker
+        view.addSubview(endingDateTextField)
+        endingDateTextField.pinTop(to: startingDateTextField.bottomAnchor, const: 10)
+        endingDateTextField.pinLeft(to: endinfDatePickerLabel.safeAreaLayoutGuide.trailingAnchor, const: 10)
+        endingDateTextField.setWidth(to: 150)
+        endingDateTextField.setHeight(to: 30)
+        
         view.addSubview(interestsVC.view)
-        interestsVC.view.pinTop(to: startingDateTextField.bottomAnchor, const: 10)
+        interestsVC.view.pinTop(to: endingDateTextField.bottomAnchor, const: 10)
         interestsVC.view.pinBottom(to: view.bottomAnchor, const: 10)
         interestsVC.view.pinRight(to: view.trailingAnchor, const: 10)
         interestsVC.view.pinLeft(to: view.leadingAnchor, const: 10)

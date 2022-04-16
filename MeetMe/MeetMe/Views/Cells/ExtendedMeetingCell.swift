@@ -7,13 +7,14 @@
 
 import UIKit
 
+/// Ячейка с подробной информацией о мероприятии
 class ExtendedMeetingCell: UITableViewCell {
-
+    /// Мероприятие, информацию о котором отображает ячейка
     var meeting: Meeting? {
         didSet {
             meetingName.text = meeting?.name
             dateLabel.text = meeting?.getDate()
-            interestsTextView.text = Utilities.getInterests(interestArray: meeting?.types ?? [])
+            interestsTextView.text = Styling.getInterests(interestArray: meeting?.types ?? [])
             if meeting!.imageURL.isEmpty {
                 meetingImage.image = UIImage(named: "placeholder")
             } else {
@@ -26,28 +27,27 @@ class ExtendedMeetingCell: UITableViewCell {
             setCostraints()
         }
     }
-    
+    /// Текстовое поле с названием мероприятия
     let meetingName : UILabel = {
         let label = UILabel()
-        //label.setHeight(to: 20)
         label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
-    
+    /// UI элемент,  отображающий картинку мероприятия
     let meetingImage: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
         return image
     }()
-    
+    /// Текстовое поле с датой проведения мероприятия
     let dateLabel : UILabel = {
         let label = UILabel()
         //label.setHeight(to: 20)
         label.font = .systemFont(ofSize: 15)
         return label
     }()
-    
+    /// Текстовое поле с местом проведения мероприятия
     let locationTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
@@ -56,16 +56,15 @@ class ExtendedMeetingCell: UITableViewCell {
         textView.isScrollEnabled = false
         return textView
     }()
-    
+    /// Текстовое поле с интересами мероприятия
     let interestsTextView : UITextView = {
         let textView = UITextView()
-        //label.setHeight(to: 20)
         textView.font = .boldSystemFont(ofSize: 15)
         textView.isUserInteractionEnabled = false
         textView.isScrollEnabled = false
         return textView
     }()
-
+    /// Текстовое поле с число участников
     let participantsLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -79,7 +78,7 @@ class ExtendedMeetingCell: UITableViewCell {
     }
     
     
-    
+    /// Метод, формирующий внешний вид ячейки
     private func setCostraints() {
         
         contentView.addSubview(meetingImage)
@@ -113,10 +112,5 @@ class ExtendedMeetingCell: UITableViewCell {
         locationTextView.pinTop(to: interestsTextView.bottomAnchor, const: 5)
         locationTextView.pinLeft(to: contentView.leadingAnchor, const: 10)
         locationTextView.pinRight(to: contentView.trailingAnchor, const: 10)
-        
-        
-        //contentView.setHeight(to: 170 + interestsHeight + locationHeight)
-        //locationTextView.setHeight(to: 60)
-        
     }
 }

@@ -8,10 +8,14 @@
 import Foundation
 import UIKit
 
+/// Создание, отправка и обработка запросов,  связанных с хранилищем фотографий для истории мероприятий 
 class ImageStoreRequests: MeetMeRequests {
+    /// Статический экзмепляр класса
     static let shared = ImageStoreRequests()
-    let storeURL = "http://localhost:8080/api/v1/image_store/"
+    /// Базовая часть URL дла запросов
+    let storeURL = "http://localhost:8080/api/v1/imageStore/"
     
+    /// Создание и отправка запроса на загрузку нового изображения в хранилище + обработка ответа
     func uploadImage(meetingID: Int64, image: UIImage, completion: @escaping ([String]?, Error?) -> (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
@@ -37,7 +41,6 @@ class ImageStoreRequests: MeetMeRequests {
             
             if let data = data {
                 do {
-                    print(data.prettyJson)
                     let dataMeeting : [String] = try self.getData(data: data)
                     
                     DispatchQueue.main.async { completion(dataMeeting, nil) }
@@ -49,7 +52,7 @@ class ImageStoreRequests: MeetMeRequests {
         task.resume()
     }
     
-    
+    /// Создание и отправка запроса на получение списка ссылок на изображения хранилища + обработка ответа 
     func getImageLinks(meetingID: Int64, completion: @escaping ([String]?, Error?) ->  (Void)) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}

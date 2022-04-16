@@ -7,13 +7,16 @@
 
 import UIKit
 
+/// Организация отображения участников мероприятий и групп
 class ViewParticipantsVC: UITableViewController {
-
+    /// Группа,  участников которой требуется отобразить
     var group: Group?
+    /// Мероприятие, участников которого требуется отобразить
     var meeting: Meeting?
-    var participants = [Account]()
-    var admins = [Account]()
-   
+    /// Участники мероприятия или группы
+    private var participants = [Account]()
+    ///  Администраторы мероприятия или группы
+    private var admins = [Account]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,12 +59,11 @@ class ViewParticipantsVC: UITableViewController {
             })
         }
         
-        setConstraint()
-        
+        configureTable()
     }
     
-    func setConstraint() {
-        
+    /// Формирование списка участников
+    private func configureTable() {
         self.tableView.register(ViewFriendCell.self, forCellReuseIdentifier: "accountCell")
         navigationItem.title = "Участники"
     }

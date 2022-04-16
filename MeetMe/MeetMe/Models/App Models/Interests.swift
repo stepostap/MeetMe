@@ -16,5 +16,8 @@ enum Interests: String, CaseIterable, Codable {
     case dancing = "Танцы"
     case cinema = "Кино"
     case gaming = "Компьютерные игры"
-    
+    case sport = "Спорт"
+    case walking = "Прогулка"
+    case picknick = "Пикник"
+    case natureGames = "Игры на природе"
 }

@@ -7,27 +7,29 @@
 
 import UIKit
 
+/// Организация отображения результатов поиска мероприятий
 class MeetingSearchResultsVC: UITableViewController, UISearchResultsUpdating {
-    
-    var parentVC: MeetingsVC {
+    /// ViewController, содержащий данный ViewController
+    private var parentVC: MeetingsVC {
         return self.presentingViewController as! MeetingsVC
     }
-    
-    var meetings = [(sectionHeader: String, meetings: [Meeting])]()
-    let loader = UIActivityIndicatorView()
+    /// Список найденых мероприятий
+    private var meetings = [(sectionHeader: String, meetings: [Meeting])]()
+    /// Индикатор загрузки
+    private let loader = UIActivityIndicatorView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-        confinTableView()
+        configTableView()
     }
     
-    func confinTableView() {
+    /// Формирование таблицы с результатом поиска мероприятий
+    private func configTableView() {
         self.tableView.backgroundView = loader
         self.tableView.backgroundColor = .systemBackground
         self.tableView.register(MeetingCell.self, forCellReuseIdentifier: "meetingCell")
     }
+    
 
     func updateSearchResults(for searchController: UISearchController) {
         loader.startAnimating()
@@ -44,7 +46,8 @@ class MeetingSearchResultsVC: UITableViewController, UISearchResultsUpdating {
         }
     }
     
-    func updateTable(meetings: [(sectionHeader: String, meetings: [Meeting])]?, error: Error?) {
+    /// Обновление таблицы с результатом поиска мероприятий 
+    private func updateTable(meetings: [(sectionHeader: String, meetings: [Meeting])]?, error: Error?) {
         self.loader.stopAnimating()
         if let error = error {
             let alert = ErrorChecker.handler.getAlertController(error: error)

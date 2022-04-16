@@ -7,51 +7,55 @@
 
 import UIKit
 
+/// Класс, отвечающий за отображение информации о мероприятии
 class MeetingInfoVC: UIViewController {
-
+    /// Мероприятие
     var meeting: Meeting?
-    
-    let formatter = DateFormatter()
-    let scrollView = UIScrollView()
-    let mainStackView = UIStackView()
-    
-    let onlineSwitch = UISwitch()
-    let privateSwitch = UISwitch()
-    
-    let participateButton = UIButton()
-    
-    let startingDateTextField : UITextField = {
+    /// Форматтер даты
+    private let formatter = DateFormatter()
+    /// Прокручиваемая область,  содежащая UI элементы
+    private let scrollView = UIScrollView()
+    /// Стэк с UI элементами
+    private let mainStackView = UIStackView()
+    /// Индикатор, показывающий проходит ли мероприятие онлайн
+    private let onlineSwitch = UISwitch()
+    /// Индикатор, показывающий приватное ли это мероприятие
+    private let privateSwitch = UISwitch()
+    /// Кнопка для участия в мероприятии
+    private let participateButton = UIButton()
+    /// Текстовое поле для отображения даты начала мероприятия
+    private let startingDateTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 150, height: 30))
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         textField.isUserInteractionEnabled = false
         return textField
     }()
-    
-    let endingDateTextField : UITextField = {
+    /// Текстовое поле для отображения даты конца мероприятия
+    private let endingDateTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 150, height: 30))
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         textField.isUserInteractionEnabled = false
         return textField
     }()
-    
-    let maxParticipantsTextField : UITextField = {
+    /// Текстовое поле для отображения максимального числа участников мероприятия
+    private let maxParticipantsTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
         textField.textAlignment = .left
         textField.keyboardType = UIKeyboardType.numberPad
         textField.isUserInteractionEnabled = false
         return textField
     }()
-    
-    let currentParticipantsTextField : UITextField = {
+    /// Текекстовое поле для отображения текущего числа участников мероприяия
+    private let currentParticipantsTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
         textField.textAlignment = .left
         textField.isUserInteractionEnabled = false
         return textField
     }()
-    
-    let nameTextField : UITextField = {
+    /// Текстовое поле для отображения названия мероприяия
+    private let nameTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -62,8 +66,8 @@ class MeetingInfoVC: UIViewController {
         textField.isUserInteractionEnabled = false
         return textField
     }()
-    
-    let infoTextView: UITextView = {
+    /// Текстовое поле для отображения информации о мероприятии
+    private let infoTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.borderWidth = 1
@@ -72,8 +76,8 @@ class MeetingInfoVC: UIViewController {
         textView.isUserInteractionEnabled = false
         return textView
     }()
-    
-    let interestsTextView : UITextView = {
+    /// Текстовое поле для отображения интересов мероприятия
+    private let interestsTextView : UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.borderWidth = 1
@@ -82,15 +86,15 @@ class MeetingInfoVC: UIViewController {
         textView.isUserInteractionEnabled = false
         return textView
     }()
-    
-    let meetingImage : UIImageView = {
+    /// UI элемент, демонстрирующий картинку мероприятия
+    private let meetingImage : UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
         return image
     }()
-    
-    let locationTextView: UITextView = {
+    ///  Текстовое поле для отображения информации о месте проведения мероприятия
+    private let locationTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.borderWidth = 1
@@ -99,14 +103,20 @@ class MeetingInfoVC: UIViewController {
         textView.autocorrectionType = UITextAutocorrectionType.no
         return textView
     }()
-    
-    let nameAndImageHeight = 280
-    let onlinePrivateHeight = 100
-    let infoViewHeight = 120
-    let interestsViewHeight = 120
-    var dateViewHeight = 100
-    let locationViewHeight = 140
-    var participantViewHeight = 120
+    /// Константа высоты области с названием и картинкой мероприятия
+    private let nameAndImageHeight = 280
+    /// Константа высоты области с индикаторами мероприятия
+    private let onlinePrivateHeight = 100
+    /// Константа высоты области с информацией о меропритии
+    private let infoViewHeight = 120
+    /// Константа высоты области с интересами мероприятия
+    private let interestsViewHeight = 120
+    /// Константа высоты области с датами проведения мероприятия
+    private var dateViewHeight = 100
+    /// Константа высоты области с информацией о месте проведения мероприятия
+    private let locationViewHeight = 140
+    /// Константа высоты области с информацией о числе участников мероприятия
+    private var participantViewHeight = 120
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,18 +126,17 @@ class MeetingInfoVC: UIViewController {
         navigationItem.rightBarButtonItem = viewParticipantsButton
         configView()
         setViewInfo()
-        // Do any additional setup after loading the view.
-        
     }
     
-    
-    @objc func viewParticipants() {
+    /// Переход на контроллер, отображающий участников мероприятия
+    @objc private func viewParticipants() {
         let vc = ViewParticipantsVC()
         vc.meeting = meeting
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func setViewInfo() {
+    /// Установка информации о мероприятии на UI элементы
+    private func setViewInfo() {
         if let meeting = meeting {
             var height = 0
             mainStackView.addArrangedSubview(configNameAndImageView())
@@ -154,7 +163,7 @@ class MeetingInfoVC: UIViewController {
             if !meeting.types.isEmpty {
                 mainStackView.addArrangedSubview(configInterestsView())
                 height += interestsViewHeight
-                interestsTextView.text = Utilities.getInterests(interestArray: meeting.types)
+                interestsTextView.text = Styling.getInterests(interestArray: meeting.types)
             }
             
             mainStackView.addArrangedSubview(configDateView())
@@ -174,7 +183,30 @@ class MeetingInfoVC: UIViewController {
         }
     }
     
-    func configView() {
+    /// Участие пользователя в мероприятии
+    @objc private func participate() {
+        MeetingRequests.shared.participateInMeeting(meetingID: meeting!.id, completion: {(error) in
+            if let error = error {
+                let alert = ErrorChecker.handler.getAlertController(error: error)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            self.meeting!.isUserParticipant = true
+            if User.currentUser.meetingInvitations?.personalInvitations.contains(self.meeting!) ??  false {
+                let index = User.currentUser.meetingInvitations!.personalInvitations.firstIndex(of: self.meeting!)
+                User.currentUser.meetingInvitations!.personalInvitations.remove(at: index!)
+                User.currentUser.plannedMeetings?.append(self.meeting!)
+            } else {
+                User.currentUser.plannedMeetings?.append(self.meeting!)
+            }
+            self.navigationController?.popViewController(animated: true)
+        })
+    }
+    
+    // MARK: Configs
+    /// Формирование экрана
+    private func configView() {
         view.addSubview(scrollView)
         scrollView.addSubview(mainStackView)
         
@@ -193,9 +225,8 @@ class MeetingInfoVC: UIViewController {
         mainStackView.axis  = NSLayoutConstraint.Axis.vertical
     }
     
-    
-    func configNameAndImageView() -> UIView {
-        
+    /// Формирование раздела экрана с названием и изображением мероприятия
+    private func configNameAndImageView() -> UIView {
         let view = UIView()
         view.setHeight(to: nameAndImageHeight)
         view.addSubview(meetingImage)
@@ -205,7 +236,7 @@ class MeetingInfoVC: UIViewController {
         meetingImage.setWidth(to: 220)
         meetingImage.image = UIImage(named: "placeholder")
         
-        Utilities.styleTextField(nameTextField)
+        Styling.styleTextField(nameTextField)
         view.addSubview(nameTextField)
         nameTextField.pinCenter(to: view.safeAreaLayoutGuide.centerXAnchor, const: 0)
         nameTextField.pinTop(to: meetingImage.bottomAnchor, const: 10)
@@ -215,8 +246,8 @@ class MeetingInfoVC: UIViewController {
         return view
     }
     
-    
-    func configOnlinePrivateView() -> UIView {
+    /// Формирование раздела экрана с информацией о приватности мероприятия
+    private func configOnlinePrivateView() -> UIView {
         let view = UIView()
         view.setHeight(to: onlinePrivateHeight)
         
@@ -249,9 +280,8 @@ class MeetingInfoVC: UIViewController {
         return view
     }
     
-    
-    func configInfoView() -> UIView {
-        
+    /// Формирование раздела экрана с информацией о мероприятии
+    private func configInfoView() -> UIView {
         let view = UIView()
         view.setHeight(to: infoViewHeight)
         let infoLabel = UILabel()
@@ -273,8 +303,8 @@ class MeetingInfoVC: UIViewController {
        return view
     }
     
-    func configInterestsView() -> UIView {
-        
+    /// Формирование раздела экрана со спиской интересов
+    private func configInterestsView() -> UIView {
         let view = UIView()
         view.setHeight(to: interestsViewHeight)
         
@@ -298,7 +328,8 @@ class MeetingInfoVC: UIViewController {
         return view
     }
 
-    func configDateView() -> UIView {
+    /// Формирование раздела экрана с информацией о времени проведения мероприятия
+    private func configDateView() -> UIView {
         let view = UIView()
         formatter.dateFormat = "dd.MM HH:mm"
         
@@ -320,7 +351,7 @@ class MeetingInfoVC: UIViewController {
         startingDateLabel.setHeight(to: 30)
         startingDateLabel.setWidth(to: 80)
         
-        Utilities.styleTextField(startingDateTextField)
+        Styling.styleTextField(startingDateTextField)
 
         view.addSubview(startingDateTextField)
         startingDateTextField.pinLeft(to: startingDateLabel.trailingAnchor, const: 10)
@@ -338,7 +369,7 @@ class MeetingInfoVC: UIViewController {
             endingDateLabel.setHeight(to: 30)
             endingDateLabel.setWidth(to: 80)
             
-            Utilities.styleTextField(endingDateTextField)
+            Styling.styleTextField(endingDateTextField)
             
             view.addSubview(endingDateTextField)
             endingDateTextField.pinLeft(to: endingDateLabel.trailingAnchor, const: 10)
@@ -354,7 +385,8 @@ class MeetingInfoVC: UIViewController {
         return view
     }
     
-    func configLocationView() -> UIView {
+    /// Формирование раздела экрана с информацией о месте проведения мероприятия
+    private func configLocationView() -> UIView {
         let view = UIView()
         
         let locationLabel = UILabel()
@@ -376,10 +408,9 @@ class MeetingInfoVC: UIViewController {
         return view
     }
     
-    func configParticipantsView() -> UIView {
-        
+    /// Формирование раздела экрана с информацией о количестве участников мероприятия
+    private func configParticipantsView() -> UIView {
         let view = UIView()
-        
         
         let participantsLabel = UILabel()
         participantsLabel.font = UIFont.boldSystemFont(ofSize: 15)
@@ -399,7 +430,7 @@ class MeetingInfoVC: UIViewController {
         maxPartaicipantsLabel.setHeight(to: 30)
         maxPartaicipantsLabel.setWidth(to: 180)
         
-        Utilities.styleTextField(maxParticipantsTextField)
+        Styling.styleTextField(maxParticipantsTextField)
         view.addSubview(maxParticipantsTextField)
         maxParticipantsTextField.pinCenter(to: maxPartaicipantsLabel.centerYAnchor, const: 0)
         maxParticipantsTextField.pinLeft(to: maxPartaicipantsLabel.trailingAnchor, const: 0)
@@ -415,7 +446,7 @@ class MeetingInfoVC: UIViewController {
         currentPartaicipantsLabel.setHeight(to: 30)
         currentPartaicipantsLabel.setWidth(to: 180)
         
-        Utilities.styleTextField(currentParticipantsTextField)
+        Styling.styleTextField(currentParticipantsTextField)
         view.addSubview(currentParticipantsTextField)
         currentParticipantsTextField.pinCenter(to: currentPartaicipantsLabel.centerYAnchor, const: 0)
         currentParticipantsTextField.pinLeft(to: currentPartaicipantsLabel.trailingAnchor, const: 0)
@@ -425,7 +456,7 @@ class MeetingInfoVC: UIViewController {
         
         if !meeting!.isUserParticipant {
             view.addSubview(participateButton)
-            Utilities.styleFilledButton(participateButton)
+            Styling.styleFilledButton(participateButton)
             participateButton.pinTop(to: currentParticipantsTextField.bottomAnchor, const: 20)
             participateButton.addTarget(self, action: #selector(participate), for: .touchUpInside)
             participateButton.pinLeft(to: view.leadingAnchor, const: 20)
@@ -438,26 +469,5 @@ class MeetingInfoVC: UIViewController {
         view.setHeight(to: participantViewHeight)
         
         return view
-    }
-
-    
-    @objc func participate() {
-        MeetingRequests.shared.participateInMeeting(meetingID: meeting!.id, completion: {(error) in
-            if let error = error {
-                let alert = ErrorChecker.handler.getAlertController(error: error)
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
-            
-            self.meeting!.isUserParticipant = true
-            if User.currentUser.meetingInvitations?.personalInvitations.contains(self.meeting!) ??  false {
-                let index = User.currentUser.meetingInvitations!.personalInvitations.firstIndex(of: self.meeting!)
-                User.currentUser.meetingInvitations!.personalInvitations.remove(at: index!)
-                User.currentUser.plannedMeetings?.append(self.meeting!)
-            } else {
-                User.currentUser.plannedMeetings?.append(self.meeting!)
-            }
-            self.navigationController?.popViewController(animated: true)
-        })
     }
 }

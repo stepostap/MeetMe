@@ -7,21 +7,25 @@
 
 import UIKit
 import PhotosUI
+import SwiftPhotoGallery
+import Kingfisher
 
-private let reuseIdentifier = "Cell"
-
-class PhotoGalleryVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, PHPickerViewControllerDelegate {
-    
-    var photoURLs = [String]()
+/// Контроллер, отвечающий за загрузку и отображение фотографий для посещенного пользователем мероприятия
+class PhotoGalleryVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, PHPickerViewControllerDelegate, SwiftPhotoGalleryDataSource, SwiftPhotoGalleryDelegate {
+    /// URL  фотографий
+    private var loadedPhotoURLs = [String]()
+    /// Мероприятия, фотографии которого отображаются
     var meeting: Meeting!
-
+    /// Ширина одного изображения на экране
+    private let imageWidth = (UIScreen.main.bounds.width - 20) / 2
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView!.register(PhotoCell.self, forCellWithReuseIdentifier: "photoCell")
         self.collectionView.register(PhotoCollectionFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
-        //photoURLs.append(contentsOf: ["","","","","","",""])
-        
+
         self.title = meeting.name
         
         let viewMeetingInfoButton = UIBarButtonItem(title: "О событии", style: .plain, target: self, action: #selector(showMeetingInfo))
@@ -34,19 +38,38 @@ class PhotoGalleryVC: UICollectionViewController, UICollectionViewDelegateFlowLa
         downloadPhotos()
     }
     
-    
+    /// Переход на MeetingInfoVC, отобрающий информацию о текущем мероприятии
     @objc func showMeetingInfo() {
         let vc = MeetingInfoVC()
         vc.meeting = meeting
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    /// Получение изображения из кэша
+    private func getSingleImage(with urlString : String) -> UIImage? {
+        guard let url = URL.init(string: urlString) else {
+            return  nil
+        }
+        let resource = ImageResource(downloadURL: url)
+        var image:  UIImage?
+        KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: nil) { result in
+            switch result {
+            case .success(let value):
+                image = value.image
+            case .failure:
+                image = nil
+            }
+        }
+        return image
+    }
     
-    func downloadPhotos() {
+    /// Отправка запроса на получение ссылок на изображения
+    private func downloadPhotos() {
         ImageStoreRequests.shared.getImageLinks(meetingID: meeting.id, completion: getLinks(links:error:))
     }
     
-    func getLinks(links: [String]?, error: Error?) {
+    /// Обработка данных с массивом ссылок или кодом ошибки, полученных от сервера
+    private func getLinks(links: [String]?, error: Error?) {
         if let error = error {
             let alert = ErrorChecker.handler.getAlertController(error: error)
             self.present(alert, animated: true, completion: nil)
@@ -54,14 +77,13 @@ class PhotoGalleryVC: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
         
         if let links = links {
-            self.photoURLs = links
+            self.loadedPhotoURLs = links
             self.collectionView.reloadData()
-            self.collectionView.scrollToItem(at: IndexPath(item: links.count - 1, section: 0), at: .bottom, animated: false)
         }
     }
     
-    
-    @objc func uploadPhotos() {
+    /// Загрузка новых фотографий 
+    @objc private func uploadPhotos() {
         var configuration = PHPickerConfiguration()
         configuration.filter = PHPickerFilter.images
         configuration.selectionLimit = 10
@@ -83,26 +105,45 @@ class PhotoGalleryVC: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
     }
     
+    // MARK: Image Gallery
+    func numberOfImagesInGallery(gallery: SwiftPhotoGallery) -> Int {
+        return loadedPhotoURLs.count
+    }
+    
+    func imageInGallery(gallery: SwiftPhotoGallery, forIndex: Int) -> UIImage? {
+        if let image = getSingleImage(with: loadedPhotoURLs[forIndex]) {
+            return image
+        } else {
+            return UIImage(named: "placeholder")
+        }
+    }
+    
+    func galleryDidTapToClose(gallery: SwiftPhotoGallery) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: UICollectionViewDataSource
-
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoURLs.count
+        return loadedPhotoURLs.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCell
-        cell.imageURL = URL(string: photoURLs[indexPath.row])
+        cell.configure()
+        cell.image.kf.indicatorType = .activity
+        
+        cell.image.kf.setImage(with: URL(string: self.loadedPhotoURLs[indexPath.row]), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: imageWidth, height: imageWidth))), .scaleFactor(UIScreen.main.scale), .cacheOriginalImage])
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (UIScreen.main.bounds.width - 30) / 3 // In this example the width is the same as the whole view.
-        return CGSize(width: width, height: width)
+        return CGSize(width: imageWidth, height: imageWidth)
     }
     
     
@@ -120,5 +161,18 @@ class PhotoGalleryVC: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width - 20, height: 40)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let gallery = SwiftPhotoGallery(delegate: self, dataSource: self)
+        
+        gallery.backgroundColor = UIColor.black
+        
+        gallery.pageIndicatorTintColor = UIColor.gray.withAlphaComponent(0.5)
+        gallery.currentPageIndicatorTintColor = UIColor.white
+        gallery.hidePageControl = false
+        present(gallery, animated: true, completion: { () -> Void in
+            gallery.currentPage = indexPath.row
+        })
     }
 }

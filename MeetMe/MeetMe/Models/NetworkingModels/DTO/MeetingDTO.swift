@@ -8,7 +8,8 @@
 import Foundation
 
 struct MeetingDTO: Codable {
-    internal init(id: Int64, adminID: Int64, name: String, startDate: String, endDate: String? = nil, description: String? = nil, location: String? = nil, imageURL: String? = nil, isPrivate: Bool, isOnline: Bool, maxNumberOfParticipants: Int, numberOfParticipants: Int, interests: [String]?, isParticipant: Bool?) {
+    internal init(id: Int64, adminID: Int64, chatId: Int64, name: String, startDate: String, endDate: String? = nil, description: String? = nil, location: String? = nil, imageURL: String? = nil, isPrivate: Bool, isOnline: Bool, maxNumberOfParticipants: Int, numberOfParticipants: Int, interests: [String]?, isParticipant: Bool?) {
+        self.chatId = chatId
         self.id = id
         self.adminId = adminID
         self.name = name
@@ -25,7 +26,7 @@ struct MeetingDTO: Codable {
         self.isParticipant = isParticipant
     }
     
-    let id, adminId: Int64
+    let id, adminId, chatId: Int64
     let name: String
     let startDate: String
     var endDate: String?

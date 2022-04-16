@@ -6,9 +6,12 @@
 //
 
 import Foundation
-
+/// Информация для регистрации пользователя
 struct RegisterInfo: Codable {
+    /// Почта
     var email: String
+    /// Пароль
     var password: String
+    /// Полное имя
     var fullName: String
 }

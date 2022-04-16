@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		87D4BE7715D404C72E0B8317 /* Pods_MeetMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20EE7A69A0F7488743F0EF7D /* Pods_MeetMe.framework */; };
 		E84B770027E1FD5900D985A8 /* toDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E84B76FF27E1FD5900D985A8 /* toDo.rtf */; };
+		E84D11542801A1F8008D36D0 /* EmailCodeCheckVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84D11532801A1F8008D36D0 /* EmailCodeCheckVC.swift */; };
+		E84D11582803935A008D36D0 /* GroupEditDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84D115728039359008D36D0 /* GroupEditDTO.swift */; };
 		E853FBBA27E912B8001313E0 /* AddParticipantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBB927E912B8001313E0 /* AddParticipantCell.swift */; };
 		E853FBBF27E9174D001313E0 /* ChooseParticipantsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBBE27E9174D001313E0 /* ChooseParticipantsVC.swift */; };
 		E853FBC327EA12C2001313E0 /* CreateGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBC227EA12C2001313E0 /* CreateGroupVC.swift */; };
@@ -50,7 +53,7 @@
 		E8C09B5127C97B1400597ED7 /* NavigationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5027C97B1400597ED7 /* NavigationHandler.swift */; };
 		E8C09B5327C97C6600597ED7 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5227C97C6600597ED7 /* LoginVC.swift */; };
 		E8C09B5727C97CAA00597ED7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5627C97CAA00597ED7 /* SignUpVC.swift */; };
-		E8C09B5A27C97CF500597ED7 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5927C97CF500597ED7 /* Utilities.swift */; };
+		E8C09B5A27C97CF500597ED7 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5927C97CF500597ED7 /* Styling.swift */; };
 		E8C09B5D27CFFD8000597ED7 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5C27CFFD8000597ED7 /* Meeting.swift */; };
 		E8C09B5F27CFFF4000597ED7 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5E27CFFF4000597ED7 /* Account.swift */; };
 		E8C09B6127D000DA00597ED7 /* Interests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B6027D000DA00597ED7 /* Interests.swift */; };
@@ -60,8 +63,6 @@
 		E8C09B7127D155D600597ED7 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7027D155D600597ED7 /* Checkbox.swift */; };
 		E8C09B7327D7F45000597ED7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7227D7F45000597ED7 /* User.swift */; };
 		E8C09B7527D7F62900597ED7 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7427D7F62900597ED7 /* Group.swift */; };
-		E8C09B7A27DA24B000597ED7 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7927DA24B000597ED7 /* Server.swift */; };
-		E8C09B7E27DA2E2E00597ED7 /* NetWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7D27DA2E2E00597ED7 /* NetWorker.swift */; };
 		E8C09B8027DA2E9B00597ED7 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B7F27DA2E9B00597ED7 /* NetworkMonitor.swift */; };
 		E8C09B8227DA354400597ED7 /* ErrorChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8127DA354400597ED7 /* ErrorChecker.swift */; };
 		E8C09B8427DA383400597ED7 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8327DA383400597ED7 /* Errors.swift */; };
@@ -82,10 +83,20 @@
 		E8EC4FF127FF2DF300DDE392 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EC4FF027FF2DF300DDE392 /* PhotoCell.swift */; };
 		E8EC4FF427FF43B500DDE392 /* PhotoCollectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EC4FF327FF43B500DDE392 /* PhotoCollectionFooter.swift */; };
 		E8EC4FF627FF789300DDE392 /* ImageStoreRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EC4FF527FF789300DDE392 /* ImageStoreRequest.swift */; };
+		E8F374AF28048BD500F52E1D /* ChatMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F374AE28048BD500F52E1D /* ChatMessageDTO.swift */; };
+		E8F374B128048C8D00F52E1D /* ChatRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F374B028048C8D00F52E1D /* ChatRequests.swift */; };
+		E8F374B328048FEC00F52E1D /* GetChatDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F374B228048FEC00F52E1D /* GetChatDTO.swift */; };
+		E8F374B52804910200F52E1D /* ChatSendMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F374B42804910200F52E1D /* ChatSendMessageDTO.swift */; };
+		E8F374B72804BA2500F52E1D /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F374B62804BA2500F52E1D /* ChatMessage.swift */; };
+		E8F374BA280A0D4B00F52E1D /* InterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F374B9280A0D4A00F52E1D /* InterestCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		20EE7A69A0F7488743F0EF7D /* Pods_MeetMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeetMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F6D59591A6C60573D733A29 /* Pods-MeetMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetMe.release.xcconfig"; path = "Target Support Files/Pods-MeetMe/Pods-MeetMe.release.xcconfig"; sourceTree = "<group>"; };
 		E84B76FF27E1FD5900D985A8 /* toDo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = toDo.rtf; sourceTree = "<group>"; };
+		E84D11532801A1F8008D36D0 /* EmailCodeCheckVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeCheckVC.swift; sourceTree = "<group>"; };
+		E84D115728039359008D36D0 /* GroupEditDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupEditDTO.swift; sourceTree = "<group>"; };
 		E853FBB927E912B8001313E0 /* AddParticipantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParticipantCell.swift; sourceTree = "<group>"; };
 		E853FBBE27E9174D001313E0 /* ChooseParticipantsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseParticipantsVC.swift; sourceTree = "<group>"; };
 		E853FBC227EA12C2001313E0 /* CreateGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupVC.swift; sourceTree = "<group>"; };
@@ -129,7 +140,7 @@
 		E8C09B5027C97B1400597ED7 /* NavigationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHandler.swift; sourceTree = "<group>"; };
 		E8C09B5227C97C6600597ED7 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		E8C09B5627C97CAA00597ED7 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
-		E8C09B5927C97CF500597ED7 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		E8C09B5927C97CF500597ED7 /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		E8C09B5C27CFFD8000597ED7 /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		E8C09B5E27CFFF4000597ED7 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		E8C09B6027D000DA00597ED7 /* Interests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interests.swift; sourceTree = "<group>"; };
@@ -139,8 +150,6 @@
 		E8C09B7027D155D600597ED7 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		E8C09B7227D7F45000597ED7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E8C09B7427D7F62900597ED7 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
-		E8C09B7927DA24B000597ED7 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
-		E8C09B7D27DA2E2E00597ED7 /* NetWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorker.swift; sourceTree = "<group>"; };
 		E8C09B7F27DA2E9B00597ED7 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		E8C09B8127DA354400597ED7 /* ErrorChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorChecker.swift; sourceTree = "<group>"; };
 		E8C09B8327DA383400597ED7 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -159,6 +168,13 @@
 		E8EC4FF027FF2DF300DDE392 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		E8EC4FF327FF43B500DDE392 /* PhotoCollectionFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionFooter.swift; sourceTree = "<group>"; };
 		E8EC4FF527FF789300DDE392 /* ImageStoreRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStoreRequest.swift; sourceTree = "<group>"; };
+		E8F374AE28048BD500F52E1D /* ChatMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageDTO.swift; sourceTree = "<group>"; };
+		E8F374B028048C8D00F52E1D /* ChatRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequests.swift; sourceTree = "<group>"; };
+		E8F374B228048FEC00F52E1D /* GetChatDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatDTO.swift; sourceTree = "<group>"; };
+		E8F374B42804910200F52E1D /* ChatSendMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSendMessageDTO.swift; sourceTree = "<group>"; };
+		E8F374B62804BA2500F52E1D /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		E8F374B9280A0D4A00F52E1D /* InterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCell.swift; sourceTree = "<group>"; };
+		F5E79A61C15E656EAB76AFF2 /* Pods-MeetMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetMe.debug.xcconfig"; path = "Target Support Files/Pods-MeetMe/Pods-MeetMe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,12 +185,30 @@
 				E853FBF127F610A8001313E0 /* Kingfisher in Frameworks */,
 				E8EC4FE527FDF87D00DDE392 /* MessageKit in Frameworks */,
 				E8EC4FEC27FE435900DDE392 /* InputBarAccessoryView in Frameworks */,
+				87D4BE7715D404C72E0B8317 /* Pods_MeetMe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		106BBD11CE395342B39F0863 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F5E79A61C15E656EAB76AFF2 /* Pods-MeetMe.debug.xcconfig */,
+				3F6D59591A6C60573D733A29 /* Pods-MeetMe.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C8B0926D0D5EE05AEF8AF47A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20EE7A69A0F7488743F0EF7D /* Pods_MeetMe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E84B770127E2006D00D985A8 /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,7 +225,6 @@
 				E853FBDC27F0BE51001313E0 /* DTO */,
 				E853FBD527ECE7EE001313E0 /* RegisterInfo.swift */,
 				E853FBD727ED0A1E001313E0 /* Responce.swift */,
-				E853FBE127F0D915001313E0 /* InterestsParser.swift */,
 			);
 			path = NetworkingModels;
 			sourceTree = "<group>";
@@ -229,6 +262,10 @@
 				E853FBF427F62DED001313E0 /* JWTBullshit.swift */,
 				E853FBF627F6757D001313E0 /* MeetingSearchDTO.swift */,
 				E8EC4FE827FE2FA200DDE392 /* MeetingInvitationsDTO.swift */,
+				E84D115728039359008D36D0 /* GroupEditDTO.swift */,
+				E8F374AE28048BD500F52E1D /* ChatMessageDTO.swift */,
+				E8F374B228048FEC00F52E1D /* GetChatDTO.swift */,
+				E8F374B42804910200F52E1D /* ChatSendMessageDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -238,6 +275,8 @@
 			children = (
 				E8C09B2B27C7BBB800597ED7 /* MeetMe */,
 				E8C09B2A27C7BBB800597ED7 /* Products */,
+				106BBD11CE395342B39F0863 /* Pods */,
+				C8B0926D0D5EE05AEF8AF47A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -305,6 +344,7 @@
 			children = (
 				E8C09B5227C97C6600597ED7 /* LoginVC.swift */,
 				E8C09B5627C97CAA00597ED7 /* SignUpVC.swift */,
+				E84D11532801A1F8008D36D0 /* EmailCodeCheckVC.swift */,
 			);
 			path = Authentification;
 			sourceTree = "<group>";
@@ -312,8 +352,9 @@
 		E8C09B5827C97CCA00597ED7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E853FBE127F0D915001313E0 /* InterestsParser.swift */,
 				E8C09B5027C97B1400597ED7 /* NavigationHandler.swift */,
-				E8C09B5927C97CF500597ED7 /* Utilities.swift */,
+				E8C09B5927C97CF500597ED7 /* Styling.swift */,
 				E8C09B7027D155D600597ED7 /* Checkbox.swift */,
 				E8C09B8127DA354400597ED7 /* ErrorChecker.swift */,
 			);
@@ -323,15 +364,8 @@
 		E8C09B5B27CFFC9800597ED7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E8F374B8280884D400F52E1D /* App Models */,
 				E853FBBB27E91315001313E0 /* NetworkingModels */,
-				E8C09B5C27CFFD8000597ED7 /* Meeting.swift */,
-				E8C09B5E27CFFF4000597ED7 /* Account.swift */,
-				E8C09B6027D000DA00597ED7 /* Interests.swift */,
-				E8C09B6827D129E600597ED7 /* MeetingSearchFilter.swift */,
-				E8C09B7227D7F45000597ED7 /* User.swift */,
-				E8C09B7427D7F62900597ED7 /* Group.swift */,
-				E8C09B8327DA383400597ED7 /* Errors.swift */,
-				E853FBEB27F4916A001313E0 /* UserInvitations.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -345,6 +379,7 @@
 				E853FBC627EBAD28001313E0 /* GroupCell.swift */,
 				E853FBCB27EBBBBB001313E0 /* ExtendedMeetingCell.swift */,
 				E8EC4FF027FF2DF300DDE392 /* PhotoCell.swift */,
+				E8F374B9280A0D4A00F52E1D /* InterestCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -367,8 +402,6 @@
 		E8C09B7827DA249C00597ED7 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				E8C09B7927DA24B000597ED7 /* Server.swift */,
-				E8C09B7D27DA2E2E00597ED7 /* NetWorker.swift */,
 				E8C09B7F27DA2E9B00597ED7 /* NetworkMonitor.swift */,
 				E8A10AC027E78A07008A43CA /* AccountRequests.swift */,
 				E8A10ABC27E78645008A43CA /* FriendsRequests.swift */,
@@ -377,6 +410,7 @@
 				E853FBD327ECE5E3001313E0 /* MeetMeRequests.swift */,
 				E853FBE927F33E1E001313E0 /* GroupRequests.swift */,
 				E8EC4FF527FF789300DDE392 /* ImageStoreRequest.swift */,
+				E8F374B028048C8D00F52E1D /* ChatRequests.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -391,6 +425,22 @@
 			path = SearchVCs;
 			sourceTree = "<group>";
 		};
+		E8F374B8280884D400F52E1D /* App Models */ = {
+			isa = PBXGroup;
+			children = (
+				E8C09B5C27CFFD8000597ED7 /* Meeting.swift */,
+				E8C09B5E27CFFF4000597ED7 /* Account.swift */,
+				E8C09B6027D000DA00597ED7 /* Interests.swift */,
+				E8C09B6827D129E600597ED7 /* MeetingSearchFilter.swift */,
+				E8C09B7227D7F45000597ED7 /* User.swift */,
+				E8C09B7427D7F62900597ED7 /* Group.swift */,
+				E8C09B8327DA383400597ED7 /* Errors.swift */,
+				E853FBEB27F4916A001313E0 /* UserInvitations.swift */,
+				E8F374B62804BA2500F52E1D /* ChatMessage.swift */,
+			);
+			path = "App Models";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -398,9 +448,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8C09B4027C7BBBA00597ED7 /* Build configuration list for PBXNativeTarget "MeetMe" */;
 			buildPhases = (
+				AEB9901020FFFFACDF43F470 /* [CP] Check Pods Manifest.lock */,
 				E8C09B2527C7BBB800597ED7 /* Sources */,
 				E8C09B2627C7BBB800597ED7 /* Frameworks */,
 				E8C09B2727C7BBB800597ED7 /* Resources */,
+				3DB22EEAE8ED0AE87029001E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -468,6 +520,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3DB22EEAE8ED0AE87029001E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MeetMe/Pods-MeetMe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MeetMe/Pods-MeetMe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MeetMe/Pods-MeetMe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AEB9901020FFFFACDF43F470 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MeetMe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E8C09B2527C7BBB800597ED7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -489,8 +583,9 @@
 				E8C09B4427C7BE0E00597ED7 /* AccountVC.swift in Sources */,
 				E853FBD627ECE7EE001313E0 /* RegisterInfo.swift in Sources */,
 				E8A10ABF27E78660008A43CA /* MeetingRequests.swift in Sources */,
+				E8F374B328048FEC00F52E1D /* GetChatDTO.swift in Sources */,
 				E8C09B6627D1296500597ED7 /* SearchFilterVC.swift in Sources */,
-				E8C09B7A27DA24B000597ED7 /* Server.swift in Sources */,
+				E84D11542801A1F8008D36D0 /* EmailCodeCheckVC.swift in Sources */,
 				E8EC4FE027FC723800DDE392 /* AccountSearchResultsVC.swift in Sources */,
 				E8C09B9027DF3A5300597ED7 /* FriendsVC.swift in Sources */,
 				E853FBD027ECA42D001313E0 /* ViewParticipantsVC.swift in Sources */,
@@ -503,25 +598,29 @@
 				E8EC4FE227FCA07A00DDE392 /* GroupSearchResultVC.swift in Sources */,
 				E853FBF327F6178B001313E0 /* ImageDTO.swift in Sources */,
 				E8C09B6427D0FBA700597ED7 /* MeetingCell.swift in Sources */,
+				E8F374AF28048BD500F52E1D /* ChatMessageDTO.swift in Sources */,
+				E8F374B52804910200F52E1D /* ChatSendMessageDTO.swift in Sources */,
 				E8C09B4627C7BE3000597ED7 /* MeetingsVC.swift in Sources */,
 				E853FBBF27E9174D001313E0 /* ChooseParticipantsVC.swift in Sources */,
 				E853FBCA27EBB3F6001313E0 /* GroupScreen.swift in Sources */,
 				E853FBF727F6757E001313E0 /* MeetingSearchDTO.swift in Sources */,
+				E84D11582803935A008D36D0 /* GroupEditDTO.swift in Sources */,
 				E8C09B6127D000DA00597ED7 /* Interests.swift in Sources */,
 				E8C09B6927D129E600597ED7 /* MeetingSearchFilter.swift in Sources */,
 				E8EC4FF427FF43B500DDE392 /* PhotoCollectionFooter.swift in Sources */,
+				E8F374B128048C8D00F52E1D /* ChatRequests.swift in Sources */,
 				E853FBCC27EBBBBB001313E0 /* ExtendedMeetingCell.swift in Sources */,
 				E853FBDE27F0C121001313E0 /* MeetingDTO.swift in Sources */,
 				E8EC4FE727FE2E5900DDE392 /* ChatVC.swift in Sources */,
 				E8EC4FDE27FAFCAC00DDE392 /* MeetingSearchResultsVC.swift in Sources */,
 				E8C09B5727C97CAA00597ED7 /* SignUpVC.swift in Sources */,
-				E8C09B7E27DA2E2E00597ED7 /* NetWorker.swift in Sources */,
+				E8F374B72804BA2500F52E1D /* ChatMessage.swift in Sources */,
 				E853FBEA27F33E1E001313E0 /* GroupRequests.swift in Sources */,
 				E8C09B4E27C811E900597ED7 /* UIView+.swift in Sources */,
 				E8C09B5327C97C6600597ED7 /* LoginVC.swift in Sources */,
 				E8A10ABB27E5F895008A43CA /* ViewFriendCell.swift in Sources */,
 				E8C09B8827DC0B1500597ED7 /* EditAccountVC.swift in Sources */,
-				E8C09B5A27C97CF500597ED7 /* Utilities.swift in Sources */,
+				E8C09B5A27C97CF500597ED7 /* Styling.swift in Sources */,
 				E853FBEC27F4916B001313E0 /* UserInvitations.swift in Sources */,
 				E853FBC327EA12C2001313E0 /* CreateGroupVC.swift in Sources */,
 				E853FBBA27E912B8001313E0 /* AddParticipantCell.swift in Sources */,
@@ -539,6 +638,7 @@
 				E8C09B2F27C7BBB800597ED7 /* SceneDelegate.swift in Sources */,
 				E8C09B7327D7F45000597ED7 /* User.swift in Sources */,
 				E8EC4FE927FE2FA200DDE392 /* MeetingInvitationsDTO.swift in Sources */,
+				E8F374BA280A0D4B00F52E1D /* InterestCell.swift in Sources */,
 				E8EC4FF127FF2DF300DDE392 /* PhotoCell.swift in Sources */,
 				E853FBD227ECE58C001313E0 /* AuthRequests.swift in Sources */,
 			);
@@ -684,6 +784,7 @@
 		};
 		E8C09B4127C7BBBA00597ED7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5E79A61C15E656EAB76AFF2 /* Pods-MeetMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -713,6 +814,7 @@
 		};
 		E8C09B4227C7BBBA00597ED7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F6D59591A6C60573D733A29 /* Pods-MeetMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -6,27 +6,38 @@
 //
 
 import UIKit
+import Kingfisher
 
+/// Контроллер, отвечающий за создание и редактирование группы
 class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITextViewDelegate {
-    
+    /// Группа, информацию о которой пользователь редактирует
     var group: Group?
-    var createButton: UIBarButtonItem?
-    
-    var interests = [Interests]()
-    var invitedFriendsIDs = [Int64]()
-    var chosenImage: UIImage?
-    
-    let formatter = DateFormatter()
-    let scrollView = UIScrollView()
-    let mainView = UIView()
-    
-    let chooseImageButton = UIButton(type: .system)
-    let editInterestsButton = UIButton(type: .system)
-    let addFriendsButton = UIButton()
-    
-    let privateSwitch = UISwitch()
-    
-    let nameTextField : UITextField = {
+    /// Кнопка сохранения изменений или создания новой группы
+    private var createButton: UIBarButtonItem?
+    /// Метод, который вызывается при заверешении редактирования группы для передачи новых данных о ней в GroupScreen
+    var completion: ((Group) -> (Void))?
+    /// Список интересов
+    private var interests = [Interests]()
+    /// Список идентификаторов приглашенных в группу друзей
+    private var invitedFriendsIDs = [Int64]()
+    ///  Выбранное изображение группы
+    private var chosenImage: UIImage?
+    /// Форматер даты
+    private let formatter = DateFormatter()
+    /// Прокручиваемая область, содержащая UI элементы
+    private let scrollView = UIScrollView()
+    /// Область с UI элементами
+    private let mainView = UIView()
+    /// Кнопка выбора изображения группы
+    private let chooseImageButton = UIButton(type: .system)
+    /// Кнопка редактирования интересов группы
+    private let editInterestsButton = UIButton(type: .system)
+    /// Кнопка для открытия ChooseParticipantsVC для добавления друзей в группу
+    private let addFriendsButton = UIButton()
+    /// Переключатель, отображающий приватная или публичная данная группа
+    private let privateSwitch = UISwitch()
+    /// Текстовое поле с названием группы
+    private let nameTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -36,8 +47,8 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         textField.font = UIFont.boldSystemFont(ofSize: 18)
         return textField
     }()
-    
-    let infoTextView: UITextView = {
+    /// Текстовое поле и информацией о группе
+    private let infoTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.borderWidth = 1
@@ -46,8 +57,8 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         textView.autocorrectionType = UITextAutocorrectionType.no
         return textView
     }()
-    
-    let interestsTextView : UITextView = {
+    /// Текстовое поле и интересами группы
+    private let interestsTextView : UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.borderWidth = 1
@@ -56,8 +67,8 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         textView.autocorrectionType = UITextAutocorrectionType.no
         return textView
     }()
-    
-    let groupImage : UIImageView = {
+    /// UI элемент, отображающий изображение группы
+    private let groupImage : UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
@@ -70,35 +81,40 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         createButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createGroup))
         navigationItem.rightBarButtonItem = createButton
         configView()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        showMeetingInfo()
+        showGroupInfo()
     }
     
-    private func showMeetingInfo() {
+    /// Отображение информации о группе (при редактировании)
+    private func showGroupInfo() {
         formatter.dateFormat = "dd.MM HH:mm"
         if let group = group {
             nameTextField.text = group.groupName
         
             privateSwitch.isOn = group.isPrivate
             infoTextView.text = group.groupInfo
-            interestsTextView.text = Utilities.getInterests(interestArray: group.interests)
+            interestsTextView.text = Styling.getInterests(interestArray: group.interests)
             interests = group.interests
+            if group.groupImageURL.isEmpty {
+                groupImage.image = UIImage(named: "placeholder")
+            } else {
+                groupImage.kf.setImage(with: URL(string: group.groupImageURL), options: [.forceRefresh])
+            }
+            
         }
     }
     
-    
+    /// Проверка введенных пользователем данных
     private func createGroupCheck() throws {
-        
         if nameTextField.text!.isEmpty {
             throw CreateMeetingError.noName
         }
-        
     }
     
-    @objc func createGroup()  {
+    /// Создание новой группы или сохранение данных отредактироыванной группы
+    @objc private func createGroup()  {
         do {
             try createGroupCheck()
         } catch let error {
@@ -106,13 +122,21 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
             self.present(alert, animated: true, completion: nil)
             return
         }
-        
         if let group = group {
-            group.groupInfo = infoTextView.text
-            group.interests = interests
-            let index = User.currentUser.groups?.firstIndex(of: group)!
-            User.currentUser.groups?[index!] = group
-            navigationController?.popViewController(animated: true)
+            let dto = GroupEditDTO(name: nameTextField.text ?? group.groupName, description: infoTextView.text, isPrivate: privateSwitch.isOn, interests: InterestsParser.getInterestsString(interests: interests))
+            GroupRequests.shared.editGroup(groupID: group.id, image: chosenImage, newInfo: dto, completion: {(group, error) in
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                if let group = group {
+                    let index = User.currentUser.groups?.firstIndex(of: group)
+                    User.currentUser.groups![index!] = group
+                    self.completion?(group)
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
         } else {
             let createdGroup = Group(id: 0, groupImage: "", groupName: nameTextField.text!, groupInfo: infoTextView.text, interests: interests, meetings: [], participants: [], admins: [User.currentUser.account!.id])
             GroupRequests.shared.createGroup(image: chosenImage, group: createdGroup, completion: {(group, error) in
@@ -121,10 +145,8 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
                     self.present(alert, animated: true, completion: nil)
                     return
                 }
-                
                 if let group = group {
                     User.currentUser.groups!.append(group)
-                    
                     GroupRequests.shared.addNewGroupParticipants(participants: self.invitedFriendsIDs, groupID: group.id, completion: {(error) in
                         if let error = error {
                             let alert = ErrorChecker.handler.getAlertController(error: error)
@@ -135,11 +157,11 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
                     self.navigationController?.popViewController(animated: true)
                 }
             })
-            
         }
     }
     
-    @objc func chooseImage() {
+    /// Выбор изображения группы
+    @objc private func chooseImage() {
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
@@ -147,20 +169,14 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         present(picker, animated: true)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let userPickedImage = info[.editedImage] as? UIImage else { return }
-        groupImage.image = userPickedImage
-        chosenImage = userPickedImage
-        picker.dismiss(animated: true)
-    }
-    
-    @objc func editInterests() {
+    ///  Редактирование выбранных интересов группы
+    @objc private func editInterests() {
         let vc = InterestsVC()
         vc.interests = interests
         vc.completion = {(interests) in
             
             self.interests = interests
-            self.interestsTextView.text = Utilities.getInterests(interestArray: self.interests)
+            self.interestsTextView.text = Styling.getInterests(interestArray: self.interests)
         }
         
         if let sheet = vc.sheetPresentationController {
@@ -170,8 +186,8 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         present(vc, animated: true)
     }
     
-    
-    @objc func addFriends() {
+    /// Выбор идентификторов друзей, которые будут добавлены в группу при ее создании или заверешении редактирования
+    @objc private func addFriends() {
         let vc = ChooseParticipantsVC()
         vc.passData = {(friends, groups) in
             self.invitedFriendsIDs = friends
@@ -183,13 +199,23 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let userPickedImage = info[.editedImage] as? UIImage else { return }
+        groupImage.image = userPickedImage
+        chosenImage = userPickedImage
+        picker.dismiss(animated: true)
+    }
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
     
-    func configView() {
+    // MARK: Configs
+    /// Формирование экрана с полями для ввода/редактирование инорфмации о группе
+    private func configView() {
         view.addSubview(scrollView)
         scrollView.addSubview(mainView)
         
@@ -212,8 +238,8 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         configParticipantsView()
     }
     
-    
-    func configNameAndImageView() {
+    /// Формирование раздела экрана с названием и картикной группы
+    private func configNameAndImageView() {
         chooseImageButton.setTitle("Выбрать изображение", for: .normal)
         chooseImageButton.addTarget(self, action: #selector(chooseImage), for: .touchUpInside)
         mainView.addSubview(chooseImageButton)
@@ -228,7 +254,7 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         groupImage.pinHeight(to: mainView.safeAreaLayoutGuide.widthAnchor, mult: 0.5)
         groupImage.image = UIImage(named: "placeholder")
         
-        Utilities.styleTextField(nameTextField)
+        Styling.styleTextField(nameTextField)
         mainView.addSubview(nameTextField)
         nameTextField.pinCenter(to: mainView.safeAreaLayoutGuide.centerXAnchor, const: 0)
         nameTextField.pinTop(to: groupImage.bottomAnchor, const: 10)
@@ -238,8 +264,8 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         nameTextField.delegate = self
     }
     
-    
-    func configOnlinePrivateView() {
+    /// Формирование раздела экрана с переключателем приватная/публичная группа
+    private func configOnlinePrivateView() {
         let privateLabel = UILabel()
         privateLabel.text = "Приватная группа"
         mainView.addSubview(privateLabel)
@@ -253,8 +279,8 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         privateSwitch.pinRight(to: mainView.trailingAnchor, const: 30)
     }
     
-    
-    func configInfoAndInterestsView() {
+    /// Формирование раздела экрана со списком интересов
+    private func configInfoAndInterestsView() {
         let infoLabel = UILabel()
         infoLabel.font = UIFont.boldSystemFont(ofSize: 15)
         infoLabel.textColor = .systemGray
@@ -305,9 +331,9 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         chooseImageButton.setWidth(to: 200)
     }
     
-    func configParticipantsView() {
-        
-        Utilities.styleFilledButton(addFriendsButton)
+    /// Формирование раздела экрана с кнопкой для просмотра и добавления участников группы
+    private func configParticipantsView() {
+        Styling.styleFilledButton(addFriendsButton)
         addFriendsButton.setTitle("Добавить участников", for: .normal)
         mainView.addSubview(addFriendsButton)
         addFriendsButton.pinTop(to: interestsTextView.bottomAnchor, const: 20)

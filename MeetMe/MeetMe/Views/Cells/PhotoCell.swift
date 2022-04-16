@@ -8,30 +8,21 @@
 import UIKit
 import Kingfisher
 
+/// Ячейка, отображающая фотографию в PhotoGalleryVC
 class PhotoCell: UICollectionViewCell {
+    ///  UI элемент для отображения фотографии
     var image = UIImageView()
-    var imageURL: URL!
     
-//    override init(frame: CGRect) {
-//        image.contentMode = .scaleAspectFill
-//        image.clipsToBounds = true
-//        super.init(frame:frame)
-//        contentView.addSubview(image)
-//        image.pin(to: self.contentView)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("error")
-//    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        image.kf.indicatorType = .activity
-        image.kf.setImage(with: imageURL)
-        //image.image = UIImage(named: "placeholder")
+    /// Метод, формирующий внешний вид ячейки
+    func configure() {
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         contentView.addSubview(image)
         image.pin(to: self.contentView)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        image.image = nil
     }
 }

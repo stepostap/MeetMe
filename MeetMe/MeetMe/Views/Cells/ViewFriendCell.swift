@@ -7,8 +7,9 @@
 
 import UIKit
 
+/// Ячейка, отображающая краткую информацию об аккаунте
 class ViewFriendCell: UITableViewCell {
-
+    /// Аккаунт, информацию о котором отображает ячейка
     var account: Account? {
         didSet {
             nameLabel.text = account?.name
@@ -19,9 +20,9 @@ class ViewFriendCell: UITableViewCell {
             }
         }
     }
-    
+    /// Текстовое поле с именем аккаунта
     let nameLabel = UILabel()
-    
+    /// UI элемент с картинкой аккаунта
     let accountImage: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
@@ -39,6 +40,7 @@ class ViewFriendCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Метод, формирующий внешний вид ячейки
     private func setCostraints() {
         contentView.setHeight(to: 50)
         contentView.addSubview(accountImage)

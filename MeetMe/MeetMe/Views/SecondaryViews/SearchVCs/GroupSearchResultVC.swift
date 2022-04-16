@@ -7,20 +7,23 @@
 
 import UIKit
 
+/// Организация отображения результатов поиска групп
 class GroupSearchResultVC: UITableViewController, UISearchResultsUpdating {
-    
-    var parentVC: GroupsVC {
+    /// ViewController, содержащий данный ViewController
+    private var parentVC: GroupsVC {
         return self.presentingViewController as! GroupsVC
     }
-    
-    let loader = UIActivityIndicatorView()
+    /// Список отображаемых групп
+    private var groups = [[Group]]()
+    /// Индндикатор загрузки 
+    private let loader = UIActivityIndicatorView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         confinTableView()
     }
-    
-    func confinTableView() {
+    /// Формирование таблицы с найденными группами
+    private func confinTableView() {
         self.tableView.backgroundView = loader
         self.tableView.backgroundColor = .systemBackground
         self.tableView.register(GroupCell.self, forCellReuseIdentifier: "groupCell")
@@ -30,11 +33,11 @@ class GroupSearchResultVC: UITableViewController, UISearchResultsUpdating {
         loader.startAnimating()
         let query = searchController.searchBar.text ?? ""
         if !query.isEmpty {
-            GroupRequests.shared.getFilteredGroups(query: query, filter: [], completion: updateTable(groups:error:))
+            GroupRequests.shared.getFilteredGroups(query: query, filter: parentVC.searchFilterInterests, completion: updateTable(groups:error:))
         }
     }
-    
-    func updateTable(groups: [[Group]]?, error: Error?) {
+    /// Обновление данных таблицы с найденными группами 
+    private func updateTable(groups: [[Group]]?, error: Error?) {
         self.loader.stopAnimating()
         if let error = error {
             let alert = ErrorChecker.handler.getAlertController(error: error)
@@ -49,8 +52,6 @@ class GroupSearchResultVC: UITableViewController, UISearchResultsUpdating {
         self.tableView.reloadData()
     }
     
-    var groups = [[Group]]()
-
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = GroupScreen()

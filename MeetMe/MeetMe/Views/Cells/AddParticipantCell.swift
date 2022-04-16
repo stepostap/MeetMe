@@ -7,20 +7,24 @@
 
 import UIKit
 
+/// Ячейка, позволяющая выбрать участника (пользователя или группу) для получения приглащения
 class AddParticipantCell: UITableViewCell {
-
+    /// Идентификатор участника
     var participantID: Int64?
+    /// Имя участника
     let nameLabel = UILabel()
+    /// Метод,  который вызывается при изменении значение чекбокса
     var checkboxChanged: ((_ checked: Bool, _ id: Int64) -> (Void))?
+    /// Можно ли менять значение чекбокса
     var canBeSelected = true
-    
+    ///  UI элемент, отображающий картинку участника
     let participantImage: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
         return image
     }()
-    
+    /// Чекбокс
     let checkbox = CheckBox()
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -46,6 +50,7 @@ class AddParticipantCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
         
+    /// Метод, формирующий внешний вид ячейки
     private func setCostraints() {
         
         contentView.setHeight(to: 50)
@@ -59,7 +64,7 @@ class AddParticipantCell: UITableViewCell {
         nameLabel.setWidth(to: 250)
         
         contentView.addSubview(checkbox)
-        checkbox.style = .tick
+        //checkbox.style = .tick
         checkbox.borderStyle = .roundedSquare(radius: 5)
         //checkbox.isChecked = false
         checkbox.isUserInteractionEnabled = false

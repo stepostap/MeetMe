@@ -8,26 +8,31 @@
 import UIKit
 import Kingfisher
 
+/// Контроллер, отвечающий за отображение аккаунта
 class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITextViewDelegate {
-    
+    /// Аккаунт
     var account: Account?
-    
-    var logoutButton: UIBarButtonItem?
-    var editButton: UIBarButtonItem?
-    
-    let scrollView = UIScrollView()
-    let accountView = UIStackView()
-    let friendsButton = UIButton()
-    let addAsFriendButton = UIButton()
-    
-    let accountImage : UIImageView = {
+    /// Кнопка для выхода из аккаунта
+    private var logoutButton: UIBarButtonItem?
+    /// Кнопка для редактирования аккаунта
+    private var editButton: UIBarButtonItem?
+    /// Прогручиваемая облать, которая содержит всю информацию о пользователе
+    private let scrollView = UIScrollView()
+    /// Область с информацией о пользователе
+    private let accountView = UIStackView()
+    /// Кнопка для перехода на экран списка друзей
+    private let friendsButton = UIButton()
+    /// Кнопка для добавления аккаунта в список друзей
+    private let addAsFriendButton = UIButton()
+    ///  UI элемент,  отвечающий за отображение картнки аккунта
+    private let accountImage : UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
         return image
     }()
-    
-    let nameTextField : UITextField = {
+    /// Текстовое поле с именем пользователя
+    private let nameTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -38,8 +43,8 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         textField.isUserInteractionEnabled = false
         return textField
     }()
-    
-    let infoTextView: UITextView = {
+    /// Текстовое поле с информацией о пользователе
+    private let infoTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.borderWidth = 1
@@ -50,8 +55,8 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         textView.isScrollEnabled = false
         return textView
     }()
-    
-    let interestsTextView : UITextView = {
+    /// Текстовое поле с интересами пользователя
+    private let interestsTextView : UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.borderWidth = 1
@@ -61,8 +66,8 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         textView.isUserInteractionEnabled = false
         return textView
     }()
-    
-    let vkLinkTextField : UITextField = {
+    ///  Текстовое поле с именем аккаунта пользователя в ВК
+    private let vkLinkTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -74,8 +79,8 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         textField.textColor = .systemBlue
         return textField
     }()
-    
-    let tgLinkTextField : UITextField = {
+    /// Текстовое поле с именем аккаунта пользователя в Телеграмм
+    private let tgLinkTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -88,44 +93,80 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         textField.isUserInteractionEnabled = false
         return textField
     }()
-    
-    let imageAndNameHeight = 280
-    let infoHeight = 40
-    let interestsHeight = 120
-    let linksHeight = 200
-    let friendsButtonHeight = 40
-    
-    var accountViewHeight = 0
-    var accountViewHeightConstraint: NSLayoutConstraint?
-    
+    /// Текстовое поле с именем пользоателя в Инстаграм
+    private let instLinkTextField : UITextField = {
+        let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+        textField.keyboardType = UIKeyboardType.default
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing;
+        textField.textAlignment = .left
+        textField.textColor = UIColor.systemBlue
+        textField.placeholder = "Аккаунт в Телеграмме"
+        textField.isEnabled = false
+        textField.isUserInteractionEnabled = false
+        return textField
+    }()
+    /// Константа высоты области с именем и картинкой
+    private let imageAndNameHeight = 280
+    /// Константа высоты области с информацией об аккаунте
+    private let infoHeight = 40
+    /// Константа высоты области с интересами
+    private let interestsHeight = 120
+    /// Константа высоты области с ссылками
+    private let linksHeight = 200
+    /// Константа высоты области с кнопкой просмотра друзей
+    private let friendsButtonHeight = 40
+    /// Константа высоты области с ссылками на соц. сети пользователя
+    private let singleLinkHeight = 55
+    /// Константа высоты области со всеми данными об аккаунте
+    private var accountViewHeight = 0
+    /// Констреинт высоты области со всеми данными об аккаунте
+    private var accountViewHeightConstraint: NSLayoutConstraint?
+    /// Отображается аккаунт пользователя или другой аккаунт
     var isUserAccount = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        logoutButton = UIBarButtonItem(title: "Sign out", style: .done, target: self, action: #selector(signOut))
+        logoutButton = UIBarButtonItem(title: "Выйти", style: .done, target: self, action: #selector(signOut))
         editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editProfile))
         
         if isUserAccount {
             self.navigationItem.rightBarButtonItem = logoutButton
             self.navigationItem.leftBarButtonItem = editButton
+        } else {
+            FriendsReequests.shared.getFriends(completion: {(accounts, error) in
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                if let accounts = accounts {
+                    User.currentUser.friends = accounts
+                    self.setAccountInfo()
+                }
+            })
         }
-        
         configView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setAccountInfo()
+        if User.currentUser.friends != nil || isUserAccount {
+            setAccountInfo()
+        }
     }
     
-    @objc func viewFriends() {
-        
+    /// Переход на экран просмотра друзей и заявок
+    @objc private func viewFriends() {
         let vc = FriendsVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func setAccountInfo() {
+    /// Вывод информации о пользователе
+    private func setAccountInfo() {
         accountViewHeight = imageAndNameHeight
         
         if let accountViewHeightConstraint = accountViewHeightConstraint {
@@ -162,37 +203,121 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         }
 
         if account!.interests != [] {
-            interestsTextView.text = Utilities.getInterests(interestArray: account?.interests ?? [])
+            interestsTextView.text = Styling.getInterests(interestArray: account?.interests ?? [])
             accountViewHeight += interestsHeight
             accountView.addArrangedSubview(configIterestsTextView())
         }
 
-        if !(account!.socialMediaLinks.isEmpty) {
-            var vkLink = ""
-            var tgLink = ""
-            if let accountVkLink = account?.socialMediaLinks["vk"] {
+        if !(account!.isLinksEmpty()) {
+            let view = UIView()
+            let linksLabel = UILabel()
+            view.addSubview(linksLabel)
+            view.setHeight(to: 30)
+            linksLabel.font = UIFont.boldSystemFont(ofSize: 15)
+            linksLabel.textColor = .systemGray
+            linksLabel.text = "Ссылки на соц. сети"
+            linksLabel.pinTop(to: view.topAnchor, const: 10)
+            linksLabel.pinLeft(to: view.leadingAnchor, const: 25)
+            linksLabel.setHeight(to: 30)
+
+            accountView.addArrangedSubview(view)
+            accountViewHeight += 30
+            
+            if let accountVkLink = account?.socialMediaLinks["vk"], !accountVkLink.isEmpty {
                 vkLinkTextField.text = accountVkLink
-                vkLink = accountVkLink
+                accountView.addArrangedSubview(configVKView())
+                accountViewHeight += singleLinkHeight
             }
-            if let accountTgLink = account?.socialMediaLinks["tg"] {
+            
+            if let accountTgLink = account?.socialMediaLinks["tg"], !accountTgLink.isEmpty {
                 tgLinkTextField.text = accountTgLink
-                tgLink = accountTgLink
+                accountView.addArrangedSubview(configTGView())
+                accountViewHeight += singleLinkHeight
             }
             
-            if !vkLink.isEmpty || !tgLink.isEmpty {
-                accountViewHeight += linksHeight
-                accountView.addArrangedSubview(configLinksView())
+            if let accountInstLink = account?.socialMediaLinks["inst"], !accountInstLink.isEmpty {
+                instLinkTextField.text = accountInstLink
+                accountView.addArrangedSubview(configINSTView())
+                accountViewHeight += singleLinkHeight
             }
-            
         }
         
         accountViewHeightConstraint = accountView.heightAnchor.constraint(equalToConstant: CGFloat(accountViewHeight))
         accountViewHeightConstraint?.isActive = true
-        //accountView.setHeight(to: accountViewHeight)
     }
     
-    private func configView() {
+    /// Отправка аккаунту запроса на дружбу
+    @objc private func addAsFriend() {
+        FriendsReequests.shared.makeFriendRequest(recieverId: account!.id, completion: {(error) in
+            if let error = error {
+                let alert = ErrorChecker.handler.getAlertController(error: error)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            self.addAsFriendButton.isEnabled = false
+        })
+    }
+    
+    /// Выход из аккаунта
+    @objc private func signOut() {
+        UserDefaults.standard.removeObject(forKey: "userEmail")
+        UserDefaults.standard.removeObject(forKey: "userPassword")
+        MeetMeRequests.JWTToken = ""
+        User.currentUser = User()
+        view.setRootViewController(NavigationHandler.createAuthNC(), animated: true)
+    }
 
+    /// Открытие контроллера, отвечающего за редактирование профиля
+    @objc private func editProfile() {
+        let editVC = EditAccountVC()
+        navigationController?.pushViewController(editVC, animated: true)
+    }
+    
+    /// Переход на страничку аккаунта в ВК
+    @objc private func viewVkLink(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == UITapGestureRecognizer.State.ended {
+            if let vkLink = account?.socialMediaLinks["vk"] {
+                if let url = URL(string: "https://vk.com/\(vkLink)") {
+                    UIApplication.shared.open(url)
+                }
+            }
+        }
+    }
+    
+    /// Переход на страничку аккаунта в Телеграмм
+    @objc private func viewTGLink(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == UITapGestureRecognizer.State.ended {
+            if let tgLink = account?.socialMediaLinks["tg"] {
+                if let url = URL(string: "https://t.me/\(tgLink)") {
+                    UIApplication.shared.open(url)
+                }
+            }
+        }
+    }
+    
+    /// Переход на страничку аккаунта в Инстаграме
+    @objc private func viewINSTLink(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == UITapGestureRecognizer.State.ended {
+            if let instLink = account?.socialMediaLinks["inst"] {
+                if let url = URL(string: "https://www.instagram.com/\(instLink)") {
+                    UIApplication.shared.open(url)
+                }
+            }
+        }
+    }
+    
+    /// Выбор изображения пользователя
+    @objc private func chooseImage() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true)
+    }
+    
+    // MARK: Configs
+    /// Формирование экрана профиля
+    private func configView() {
         view.addSubview(scrollView)
         scrollView.addSubview(accountView)
         
@@ -212,6 +337,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         
     }
     
+    /// Формирование части экрана с картинкой и именем аккаунта
     private func configImageAndNameView() -> UIView {
         let view = UIView()
         view.setHeight(to: imageAndNameHeight)
@@ -224,7 +350,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         accountImage.image = UIImage(named: "placeholder")
         
         view.addSubview(nameTextField)
-        Utilities.styleTextField(nameTextField)
+        Styling.styleTextField(nameTextField)
         nameTextField.pinCenter(to: accountImage.safeAreaLayoutGuide.centerXAnchor, const: 0)
         nameTextField.pinTop(to: accountImage.bottomAnchor, const: 10)
         //nameTextField.pinBottom(to: view.bottomAnchor, const: 10)
@@ -236,7 +362,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         return view
     }
     
-    
+    /// Формирование части экрана с кнопкой для просмотра друзей
     private func configFriendsButton() -> UIView {
         let view = UIView()
         view.setHeight(to: friendsButtonHeight)
@@ -251,7 +377,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         return view
     }
     
-    
+    /// Формирование части экрана с кнопкой для отправки запроса в друзья
     private func configAddAsFriendButton() -> UIView {
         let view = UIView()
         view.setHeight(to: friendsButtonHeight)
@@ -266,11 +392,9 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         return view
     }
     
-    
+    /// Формирование части экрана с информацией о пользователе
     private func configInfoTextView() -> UIView{
         let view = UIView()
-        //view.setHeight(to: infoHeight)
-        //view.pinWidth(to: view.widthAnchor, mult: 1)
         
         let infoLabel = UILabel()
         infoLabel.font = UIFont.boldSystemFont(ofSize: 15)
@@ -292,6 +416,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         return view
     }
     
+    /// Формирование части экрана с интересами пользователя
     private func configIterestsTextView() ->  UIView {
         let view = UIView()
         view.setHeight(to: interestsHeight)
@@ -316,57 +441,25 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         return view
     }
     
-    @objc func viewVkLink(recognizer: UITapGestureRecognizer) {
-        if recognizer.state == UITapGestureRecognizer.State.began {
-            
-            if let vkLink = account?.socialMediaLinks["vk"] {
-                print(1)
-                let url = URL(string: "https://vk.com/\(vkLink)")
-                do {
-                    var isReachable = true
-                    isReachable = try url?.checkResourceIsReachable() ?? false
-                    if isReachable {
-                        
-                        UIApplication.shared.open(url!)
-                    }
-                } catch {
-                    
-                }
-            }
-        }
-    }
-    
-    private func configLinksView() -> UIView {
+    /// Формирование части экрана с ссылкой на аккаунт пользователя в ВК
+    private func configVKView() -> UIView {
         let view = UIView()
-        view.setHeight(to: linksHeight)
+        view.setHeight(to: singleLinkHeight)
         view.pinWidth(to: view.widthAnchor, mult: 1)
-        view.setContentHuggingPriority(.init(100.0), for: .vertical)
-        Utilities.styleTextField(vkLinkTextField)
-        Utilities.styleTextField(tgLinkTextField)
         
-        let linksLabel = UILabel()
-        linksLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        linksLabel.textColor = .systemGray
-        linksLabel.text = "Ссылки на соц. сети"
-        view.addSubview(linksLabel)
-        linksLabel.pinTop(to: view.topAnchor, const: 10)
-        linksLabel.pinLeft(to: view.leadingAnchor, const: 25)
-        linksLabel.setHeight(to: 30)
-        linksLabel.setWidth(to: 200)
-        
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewVkLink))
-        view.addGestureRecognizer(gestureRecognizer)
-//        vkLinkTextField.addGestureRecognizer(gestureRecognizer)
-       
         let vkImage = UIImageView(image: UIImage(named: "vkLogo"))
         view.addSubview(vkImage)
         vkImage.contentMode = .scaleAspectFit
-        vkImage.pinTop(to: linksLabel.bottomAnchor, const: 0)
+        vkImage.pinTop(to: view.topAnchor, const: 5)
         vkImage.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 20)
         vkImage.setWidth(to: 50)
         vkImage.setHeight(to: 50)
-//        vkImage.addGestureRecognizer(gestureRecognizer)
+        vkImage.isUserInteractionEnabled = true
+        let vkTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewVkLink))
+        vkTapGestureRecognizer.numberOfTapsRequired = 1
+        vkImage.addGestureRecognizer(vkTapGestureRecognizer)
         
+        Styling.styleTextField(vkLinkTextField)
         view.addSubview(vkLinkTextField)
         vkLinkTextField.pinLeft(to: vkImage.trailingAnchor, const: 5)
         vkLinkTextField.pinCenter(to: vkImage.centerYAnchor, const: 0)
@@ -374,15 +467,28 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         vkLinkTextField.setHeight(to: 30)
         vkLinkTextField.delegate = self
         
+        return view
+    }
+    
+    /// Формирование части экрана с ссылкой на аккаунт пользователя в Телелеграмм
+    private func configTGView() -> UIView {
+        let view = UIView()
+        view.setHeight(to: singleLinkHeight)
+        view.pinWidth(to: view.widthAnchor, mult: 1)
         
         let tgImage = UIImageView(image: UIImage(named: "tgLogo"))
         view.addSubview(tgImage)
         tgImage.contentMode = .scaleAspectFit
-        tgImage.pinTop(to: vkImage.bottomAnchor, const: 10)
+        tgImage.pinTop(to: view.topAnchor, const: 5)
         tgImage.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 20)
         tgImage.setWidth(to: 50)
         tgImage.setHeight(to: 50)
+        tgImage.isUserInteractionEnabled = true
+        let tgTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTGLink))
+        tgTapGestureRecognizer.numberOfTapsRequired = 1
+        tgImage.addGestureRecognizer(tgTapGestureRecognizer)
         
+        Styling.styleTextField(tgLinkTextField)
         view.addSubview(tgLinkTextField)
         tgLinkTextField.pinLeft(to: tgImage.trailingAnchor, const: 5)
         tgLinkTextField.pinCenter(to: tgImage.centerYAnchor, const: 0)
@@ -393,6 +499,37 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         return view
     }
     
+    /// Формирование части экрана с ссылкой на аккаунт пользователя в Инстаграме
+    private func configINSTView() -> UIView {
+        let view = UIView()
+        view.setHeight(to: singleLinkHeight)
+        view.pinWidth(to: view.widthAnchor, mult: 1)
+        
+        let instImage = UIImageView(image: UIImage(named: "instLogo"))
+        view.addSubview(instImage)
+        instImage.contentMode = .scaleAspectFit
+        instImage.pinTop(to: view.topAnchor, const: 5)
+        instImage.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 20)
+        instImage.setWidth(to: 50)
+        instImage.setHeight(to: 50)
+        instImage.isUserInteractionEnabled = true
+        let tgTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewINSTLink))
+        tgTapGestureRecognizer.numberOfTapsRequired = 1
+        instImage.addGestureRecognizer(tgTapGestureRecognizer)
+        
+        Styling.styleTextField(instLinkTextField)
+        view.addSubview(instLinkTextField)
+        instLinkTextField.pinLeft(to: instImage.trailingAnchor, const: 5)
+        instLinkTextField.pinCenter(to: instImage.centerYAnchor, const: 0)
+        instLinkTextField.setWidth(to: 200)
+        instLinkTextField.setHeight(to: 30)
+        instLinkTextField.delegate = self
+        
+        return view
+    }
+    
+   
+    // MARK: Delegates
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         return textView.resignFirstResponder()
     }
@@ -408,43 +545,9 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         return textField.resignFirstResponder()
     }
     
-    @objc func chooseImage() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true)
-    }
-    
-    @objc func addAsFriend() {
-        FriendsReequests.shared.makeFriendRequest(recieverId: account!.id, completion: {(error) in
-            if let error = error {
-                let alert = ErrorChecker.handler.getAlertController(error: error)
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
-            self.addAsFriendButton.isEnabled = false
-        })
-    }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let userPickedImage = info[.editedImage] as? UIImage else { return }
         accountImage.image = userPickedImage
         picker.dismiss(animated: true)
     }
-    
-    @objc func signOut() {
-        UserDefaults.standard.removeObject(forKey: "userName")
-        UserDefaults.standard.removeObject(forKey: "userPassword")
-        MeetMeRequests.JWTToken = ""
-        User.currentUser = User()
-        view.setRootViewController(NavigationHandler.createAuthNC(), animated: true)
-    }
-
-    @objc func editProfile() {
-        let editVC = EditAccountVC()
-        navigationController?.pushViewController(editVC, animated: true)
-    }
-    
-   
 }

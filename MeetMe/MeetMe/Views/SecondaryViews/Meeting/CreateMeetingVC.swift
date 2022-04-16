@@ -7,55 +7,62 @@
 
 import UIKit
 
+/// Контроллер, отвечающий за создание и редактирование мероприятия
 class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITextViewDelegate {
-    
+    /// Мероприятие, которое пользователь редактирует
     var meeting: Meeting?
-    var createButton: UIBarButtonItem?
-    
-    var interests = [Interests]()
-    var invitedFriendsIDs = [Int64]()
-    var invitedGroupsIDs = [Int64]()
-    var chosenImage: UIImage?
-    
-    let formatter = DateFormatter()
-    let scrollView = UIScrollView()
-    let mainView = UIView()
-    
-    let chooseImageButton = UIButton(type: .system)
-    let editInterestsButton = UIButton(type: .system)
-    let addFriendsButton = UIButton()
-    let addGroupsButton = UIButton()
-    
-    let invitedFriendsLabel = UILabel()
-    let invitedGroupsLabel = UILabel()
-    
-    let onlineSwitch = UISwitch()
-    let privateSwitch = UISwitch()
-    
-    let datePicker1 = UIDatePicker()
-    let datePicker2 = UIDatePicker()
-    let startingDateTextField : UITextField = {
+    /// Кнопка для создания мероприятия или сохранения введенных изменений
+    private var createButton: UIBarButtonItem?
+    /// Список интересов мероприятия
+    private var interests = [Interests]()
+    /// Список идентификаторов приглашенных друзей
+    private var invitedFriendsIDs = [Int64]()
+    /// Список идентификаторов приглашенных групп
+    private var invitedGroupsIDs = [Int64]()
+    /// UI элемент для отображения картинки мероприятия
+    private var chosenImage: UIImage?
+    /// Форматтер даты
+    private let formatter = DateFormatter()
+    /// Прокручиваемая область с информацией о мерпориятии
+    private let scrollView = UIScrollView()
+    /// Область с информацией о мероприятии
+    private let mainView = UIView()
+    /// Кнопка для выбора изображения мероприятия
+    private let chooseImageButton = UIButton(type: .system)
+    /// Кнопка для редактирования интересов мероприятия
+    private let editInterestsButton = UIButton(type: .system)
+    /// Кнопка для выбора друзей и групп, которые будут приглашены на мероприятие
+    private let addFriendsButton = UIButton()
+    /// Элемент для настройки онлайн/оффлайн значения мероприятия
+    private let onlineSwitch = UISwitch()
+    /// Элемент для настройки приватное/публичное значения мероприятия
+    private let privateSwitch = UISwitch()
+    /// Выбор даты
+    private let datePicker1 = UIDatePicker()
+    private let datePicker2 = UIDatePicker()
+    /// Текстовое поле для отображения/ввода даты начала мероприятия
+    private let startingDateTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 150, height: 30))
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         return textField
     }()
-    
-    let endingDateTextField : UITextField = {
+    /// Текстовое поле для отображения/ввода даты концы мероприятия
+    private let endingDateTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 150, height: 30))
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         return textField
     }()
-    
-    let maxParticipantsTextField : UITextField = {
+    /// Текстовое поле для отображения/ввода максимального числа участников мероприятия
+    private let maxParticipantsTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
         textField.textAlignment = .left
         textField.keyboardType = UIKeyboardType.numberPad
         return textField
     }()
-    
-    let nameTextField : UITextField = {
+    /// Текстовове поля для отображения/вввода названия мероприятия
+    private let nameTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -65,8 +72,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         textField.font = UIFont.boldSystemFont(ofSize: 18)
         return textField
     }()
-    
-    let infoTextView: UITextView = {
+    /// Текстовое поле для отображения/ввода информации о мероприятии
+    private let infoTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.borderWidth = 1
@@ -75,8 +82,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         textView.autocorrectionType = UITextAutocorrectionType.no
         return textView
     }()
-    
-    let interestsTextView : UITextView = {
+    /// Текстовое поля для отображения списка интересов пользователя
+    private let interestsTextView : UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.borderWidth = 1
@@ -85,15 +92,15 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         textView.autocorrectionType = UITextAutocorrectionType.no
         return textView
     }()
-    
-    let meetingImage : UIImageView = {
+    /// UI элемент для отображения изображения мероприятия
+    private let meetingImage : UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
         return image
     }()
-    
-    let locationTextView: UITextView = {
+    /// Текстовое поле для отображения места проведения мероприятия
+    private let locationTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.borderWidth = 1
@@ -109,13 +116,13 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         createButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createMeeting))
         navigationItem.rightBarButtonItem = createButton
         configView()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         showMeetingInfo()
     }
     
+    /// Метод для отображения информации о мероприятии
     private func showMeetingInfo() {
         formatter.dateFormat = "dd.MM HH:mm"
         if let meeting = meeting {
@@ -123,24 +130,27 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
             onlineSwitch.isOn = meeting.isOnline
             privateSwitch.isOn = meeting.isPrivate
             infoTextView.text = meeting.info
-            interestsTextView.text = Utilities.getInterests(interestArray: meeting.types)
+            interestsTextView.text = Styling.getInterests(interestArray: meeting.types)
             print(formatter.string(from: meeting.startingDate))
             startingDateTextField.text = formatter.string(from: meeting.startingDate)
             if let endingDate = meeting.endingDate {
                 endingDateTextField.text = formatter.string(from: endingDate)
+                datePicker2.date = endingDate
             }
             interests = meeting.types
             maxParticipantsTextField.text = meeting.participantsMax.description
             datePicker1.date = meeting.startingDate
-            if let endDate = meeting.endingDate {
-                datePicker2.date = endDate
+            if !meeting.imageURL.isEmpty {
+                meetingImage.kf.setImage(with: URL(string: meeting.imageURL))
+            } else {
+                meetingImage.image = UIImage(named: "placeholder")
             }
+            
         }
     }
     
-    
+    /// Проверка полей на наличие подходящей информации для создания/редактирования мероприятия
     private func createMeetingCheck() throws {
-        
         if nameTextField.text!.isEmpty {
             throw CreateMeetingError.noName
         }
@@ -158,8 +168,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         }
     }
     
-    
-    @objc func createMeeting()  {
+    /// Создание / заверешение редактирования мероприятия
+    @objc private func createMeeting()  {
         do {
             try createMeetingCheck()
         } catch let error {
@@ -174,49 +184,19 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         }
         
         if let _ = meeting {
-            self.meeting = Meeting(id: self.meeting!.id, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, isParticipant: true, groups: meeting!.participantsGroupsID, participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: self.meeting!.currentParticipantNumber)
+            self.meeting = Meeting(id: self.meeting!.id, creatorID: User.currentUser.account!.id, chatID: self.meeting!.chatID, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, isParticipant: true, groups: meeting!.participantsGroupsID, participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: self.meeting!.currentParticipantNumber)
             
-            MeetingRequests.shared.editMeeting(meeting: meeting!, completion: {(error) in
+            MeetingRequests.shared.editMeeting(image: chosenImage, meeting: meeting!, completion: {(meeting, error) in
                 if let error = error {
                     let alert = ErrorChecker.handler.getAlertController(error: error)
                     self.present(alert, animated: true, completion: nil)
                     return
                 }
-                let index = User.currentUser.plannedMeetings!.firstIndex(of: self.meeting!)
-                User.currentUser.plannedMeetings![index!] = self.meeting!
-                self.navigationController?.popViewController(animated: true)
-            })
-        } else {
-            self.meeting = Meeting(id: 0, creatorID: User.currentUser.account!.id, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, isParticipant: true,  groups: [], participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: 1)
-            
-            MeetingRequests.shared.createMeeting(image: chosenImage, meeting: meeting!, completion: {(meeting, error) in
-                if let error = error {
-                    let alert = ErrorChecker.handler.getAlertController(error: error)
-                    self.present(alert, animated: true, completion: nil)
-                    return
-                }
-                
                 if let meeting = meeting {
-                    if let _ = User.currentUser.plannedMeetings {
-                        meeting.isUserParticipant = true
-                        User.currentUser.plannedMeetings!.append(meeting)
-                    } else {
-                        User.currentUser.plannedMeetings = [meeting]
-                    }
+                    meeting.isUserParticipant = true
+                    let index = User.currentUser.plannedMeetings!.firstIndex(of: meeting)
+                    User.currentUser.plannedMeetings![index!] = meeting
                     
-                    
-//                    if !self.invitedGroupsIDs.isEmpty {
-//                        GroupRequests.shared.inviteGroupsToMeeting(groups: self.invitedGroupsIDs, meetingID: meeting.id,
-//                                                                   completion: {(error) in
-//                            if let error = error {
-//                                let alert = ErrorChecker.handler.getAlertController(error: error)
-//                                self.present(alert, animated: true, completion: nil)
-//                                return
-//                            }
-//
-//                        })
-//                    }
-
                     if !self.invitedFriendsIDs.isEmpty {
                         MeetingRequests.shared.inviteAccountsToMeeting(invites: MeetingInvitationsDTO(users: self.invitedFriendsIDs, groups: self.invitedGroupsIDs), meetingID: meeting.id, completion: {(error) in
                             if let error = error {
@@ -230,12 +210,47 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
                     self.navigationController?.popViewController(animated: true)
                 }
             })
-           
+        } else {
+            self.meeting = Meeting(id: 0, creatorID: User.currentUser.account!.id, chatID: 0, name: nameTextField.text!, types: interests, info: infoTextView.text, online: onlineSwitch.isOn, isPrivate: privateSwitch.isOn, isParticipant: true,  groups: [], participantsMax: Int(maxParticipantsTextField.text!)!, Location: locationTextView.text, startingDate: datePicker1.date, endingDate: endingDate, currentParticipantNumber: 1)
+            
+            MeetingRequests.shared.createMeeting(image: chosenImage, meeting: meeting!, completion: {(meeting, error) in
+                if let error = error {
+                    let alert = ErrorChecker.handler.getAlertController(error: error)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                if let meeting = meeting {
+                    if let _ = User.currentUser.plannedMeetings {
+                        meeting.isUserParticipant = true
+                        let index = User.currentUser.plannedMeetings?.lastIndex(where: {$0.startingDate < meeting.startingDate})
+                        if let index = index {
+                            User.currentUser.plannedMeetings?.insert(meeting, at: index + 1)
+                        } else {
+                            User.currentUser.plannedMeetings?.insert(meeting, at: 0)
+                        }
+                    } else {
+                        User.currentUser.plannedMeetings = [meeting]
+                    }
+
+                    if !self.invitedFriendsIDs.isEmpty || !self.invitedGroupsIDs.isEmpty {
+                        MeetingRequests.shared.inviteAccountsToMeeting(invites: MeetingInvitationsDTO(users: self.invitedFriendsIDs, groups: self.invitedGroupsIDs), meetingID: meeting.id, completion: {(error) in
+                            if let error = error {
+                                let alert = ErrorChecker.handler.getAlertController(error: error)
+                                self.present(alert, animated: true, completion: nil)
+                                return
+                            }
+                        })
+                    }
+                    
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
         }
     }
     
-    
-    @objc func chooseImage() {
+    /// Выбор изображения
+    @objc private func chooseImage() {
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
@@ -243,40 +258,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         present(picker, animated: true)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let userPickedImage = info[.editedImage] as? UIImage else { return }
-        meetingImage.image = userPickedImage
-        chosenImage = userPickedImage
-        picker.dismiss(animated: true)
-    }
-    
-    @objc func editInterests() {
-        let vc = InterestsVC()
-        vc.interests = interests
-        vc.completion = {(interests) in
-            
-            self.interests = interests
-            self.interestsTextView.text = Utilities.getInterests(interestArray: self.interests)
-        }
-        
-        if let sheet = vc.sheetPresentationController {
-            sheet.detents = [ .medium(), .large() ]
-        }
-        
-        present(vc, animated: true)
-    }
-    
-    @objc func updateStartingDateTextview() {
-        formatter.dateFormat = "dd.MM HH:mm"
-        startingDateTextField.text = formatter.string(from: datePicker1.date)
-    }
-    
-    @objc func updateEndingDateTextview() {
-        formatter.dateFormat = "dd.MM HH:mm"
-        endingDateTextField.text = formatter.string(from: datePicker2.date)
-    }
-    
-    @objc func addFriends() {
+    /// Открытие ChooseParticipantsVC для выбора друзей и групп, которые будут приглашены на мероприятие
+    @objc private func addFriends() {
         let vc = ChooseParticipantsVC()
         vc.includeGroups = true
         vc.passData = {(friends, groups) in
@@ -286,6 +269,40 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         vc.chosenFriendIDs = invitedFriendsIDs
         vc.chosenGroupIDs = invitedGroupsIDs
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    ///  Редактирование списка интересов мероприятия
+    @objc private func editInterests() {
+        let vc = InterestsVC()
+        vc.interests = interests
+        vc.completion = {(interests) in
+            self.interests = interests
+            self.interestsTextView.text = Styling.getInterests(interestArray: self.interests)
+        }
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [ .medium(), .large() ]
+        }
+        present(vc, animated: true)
+    }
+    
+    
+    // MARK: Delegates
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let userPickedImage = info[.editedImage] as? UIImage else { return }
+        meetingImage.image = userPickedImage
+        chosenImage = userPickedImage
+        picker.dismiss(animated: true)
+    }
+    
+    
+    @objc func updateStartingDateTextview() {
+        formatter.dateFormat = "dd.MM HH:mm"
+        startingDateTextField.text = formatter.string(from: datePicker1.date)
+    }
+    
+    @objc func updateEndingDateTextview() {
+        formatter.dateFormat = "dd.MM HH:mm"
+        endingDateTextField.text = formatter.string(from: datePicker2.date)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -305,7 +322,9 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         return textField.resignFirstResponder()
     }
     
-    func configView() {
+    // MARK: Configs
+    /// Формирование экрана
+    private func configView() {
         view.addSubview(scrollView)
         scrollView.addSubview(mainView)
         
@@ -330,8 +349,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         configParticipantsView()
     }
     
-    
-    func configNameAndImageView() {
+    /// Формирование части экрана, отображающей название и картинку мероприятия
+    private func configNameAndImageView() {
         chooseImageButton.setTitle("Выбрать изображение", for: .normal)
         chooseImageButton.addTarget(self, action: #selector(chooseImage), for: .touchUpInside)
         mainView.addSubview(chooseImageButton)
@@ -346,7 +365,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         meetingImage.pinHeight(to: mainView.safeAreaLayoutGuide.widthAnchor, mult: 0.5)
         meetingImage.image = UIImage(named: "placeholder")
         
-        Utilities.styleTextField(nameTextField)
+        Styling.styleTextField(nameTextField)
         mainView.addSubview(nameTextField)
         nameTextField.pinCenter(to: mainView.safeAreaLayoutGuide.centerXAnchor, const: 0)
         nameTextField.pinTop(to: meetingImage.bottomAnchor, const: 10)
@@ -356,8 +375,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         nameTextField.delegate = self
     }
     
-    
-    func configOnlinePrivateView() {
+    /// Формирование части экрана, отображающей onlineSwitch и privateSwitch
+    private func configOnlinePrivateView() {
         let onlineLabel = UILabel()
         onlineLabel.text = "Онлайн"
         mainView.addSubview(onlineLabel)
@@ -383,8 +402,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         privateSwitch.pinRight(to: mainView.trailingAnchor, const: 30)
     }
     
-    
-    func configInfoAndInterestsView() {
+    /// Формирование части экрана, отображающей информацию и интересы мероприятия
+    private func configInfoAndInterestsView() {
         let infoLabel = UILabel()
         infoLabel.font = UIFont.boldSystemFont(ofSize: 15)
         infoLabel.textColor = .systemGray
@@ -435,7 +454,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         chooseImageButton.setWidth(to: 200)
     }
 
-    func configDateView() {
+    /// Формирование части экрана, отображающей даты проведения мероприятия
+    private func configDateView() {
         let datesLabel = UILabel()
         datesLabel.font = UIFont.boldSystemFont(ofSize: 15)
         datesLabel.textColor = .systemGray
@@ -454,7 +474,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         startingDateLabel.setHeight(to: 30)
         startingDateLabel.setWidth(to: 80)
         
-        Utilities.styleTextField(startingDateTextField)
+        Styling.styleTextField(startingDateTextField)
         datePicker1.datePickerMode = .dateAndTime
         datePicker1.addTarget(self, action: #selector(updateStartingDateTextview), for: .valueChanged)
         mainView.addSubview(startingDateTextField)
@@ -473,7 +493,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         endingDateLabel.setHeight(to: 30)
         endingDateLabel.setWidth(to: 80)
         
-        Utilities.styleTextField(endingDateTextField)
+        Styling.styleTextField(endingDateTextField)
         datePicker2.datePickerMode = .dateAndTime
         datePicker2.addTarget(self, action: #selector(updateEndingDateTextview), for: .valueChanged)
         mainView.addSubview(endingDateTextField)
@@ -485,7 +505,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         endingDateTextField.delegate = self
     }
     
-    func configLocationView() {
+    /// Формирование части экрана, отображающей место проведения мероприятия
+    private func configLocationView() {
         let locationLabel = UILabel()
         view.addSubview(locationLabel)
         locationLabel.text = "Место проведения"
@@ -504,7 +525,8 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         locationTextView.delegate = self
     }
     
-    func configParticipantsView() {
+    /// Формирование части экрана, отображающей информацию о числе участников мероприятия
+    private func configParticipantsView() {
         let participantsLabel = UILabel()
         participantsLabel.font = UIFont.boldSystemFont(ofSize: 15)
         participantsLabel.textColor = .systemGray
@@ -523,7 +545,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         maxPartaicipantsLabel.setHeight(to: 30)
         maxPartaicipantsLabel.setWidth(to: 180)
         
-        Utilities.styleTextField(maxParticipantsTextField)
+        Styling.styleTextField(maxParticipantsTextField)
         mainView.addSubview(maxParticipantsTextField)
         maxParticipantsTextField.pinCenter(to: maxPartaicipantsLabel.centerYAnchor, const: 0)
         maxParticipantsTextField.pinLeft(to: maxPartaicipantsLabel.trailingAnchor, const: 0)
@@ -531,7 +553,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         maxParticipantsTextField.setHeight(to: 30)
         maxParticipantsTextField.delegate = self
         
-        Utilities.styleFilledButton(addFriendsButton)
+        Styling.styleFilledButton(addFriendsButton)
         addFriendsButton.setTitle("Добавить участников", for: .normal)
         mainView.addSubview(addFriendsButton)
         addFriendsButton.pinTop(to: maxPartaicipantsLabel.bottomAnchor, const: 20)
@@ -539,33 +561,5 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         addFriendsButton.setHeight(to: 40)
         addFriendsButton.pinRight(to: mainView.trailingAnchor, const: 20)
         addFriendsButton.addTarget(self, action: #selector(addFriends), for: .touchUpInside)
-        
-//        mainView.addSubview(invitedFriendsLabel)
-//        invitedFriendsLabel.layer.borderWidth = 1
-//        invitedFriendsLabel.layer.cornerRadius = 10
-//        invitedFriendsLabel.backgroundColor = .systemGray4
-//        invitedFriendsLabel.pinLeft(to: addFriendsButton.trailingAnchor, const: 10)
-//        invitedFriendsLabel.pinCenter(to: addFriendsButton.centerYAnchor, const: 0)
-//        invitedFriendsLabel.setWidth(to: 20)
-//        invitedFriendsLabel.setHeight(to: 20)
-//
-//        Utilities.styleFilledButton(addGroupsButton)
-//        addGroupsButton.setTitle("Добавить группы", for: .normal)
-//        mainView.addSubview(addGroupsButton)
-//        addGroupsButton.pinTop(to: addFriendsButton.bottomAnchor, const: 20)
-//        addGroupsButton.pinLeft(to: mainView.leadingAnchor, const: 20)
-//        addGroupsButton.setHeight(to: 30)
-//        addGroupsButton.setWidth(to: 180)
-//        addGroupsButton.addTarget(self, action: #selector(addGroups), for: .touchUpInside)
-//
-//        mainView.addSubview(invitedGroupsLabel)
-//        invitedGroupsLabel.layer.borderWidth = 1
-//        invitedGroupsLabel.layer.cornerRadius = 10
-//        invitedGroupsLabel.backgroundColor = .systemGray4
-//        invitedGroupsLabel.pinLeft(to: addGroupsButton.trailingAnchor, const: 10)
-//        invitedGroupsLabel.pinCenter(to: addGroupsButton.centerYAnchor, const: 0)
-//        invitedGroupsLabel.setWidth(to: 20)
-//        invitedGroupsLabel.setHeight(to: 20)
     }
-    
 }

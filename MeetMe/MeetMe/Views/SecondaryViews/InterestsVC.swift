@@ -7,88 +7,47 @@
 
 import UIKit
 
-class InterestsVC: UIViewController {
-    
+/// Контроллер, отвечающий за выбор интересов
+class InterestsVC: UITableViewController {
+    /// Список выбранных интересов
     var interests = [Interests]()
-    var meetingTypeCheckboxes = [CheckBox]()
+    /// Метод, который вызывается при закрытии данного контроллера, для передачи данных о выбранных интересах 
     var completion: (([Interests]) -> (Void))?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createCheckboxArray()
-        
-        for checkbox in meetingTypeCheckboxes {
-            checkbox.isChecked = interests.contains(Interests.allCases[checkbox.index])
-        }
-        
-        let checkboxStack = createCheckboxStackview()
-        view.backgroundColor = .systemBackground
-        view.addSubview(checkboxStack)
-        checkboxStack.setConstraints(to: view, left: 5, top: 5, right: 5, bottom: 5)
-        // Do any additional setup after loading the view.
+        tableView.register(InterestCell.self, forCellReuseIdentifier: "interestCell")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         completion?(interests)
     }
-
-    func createCheckboxStackview() -> UIStackView {
-        let checkboxStack = UIStackView()
-        checkboxStack.axis = NSLayoutConstraint.Axis.vertical
-        checkboxStack.alignment = UIStackView.Alignment.leading
-        checkboxStack.spacing = 10
-        
-        for checkbox in meetingTypeCheckboxes {
-            checkboxStack.addArrangedSubview(createCheckboxWithLabel(checkbox: checkbox,
-                                                                     text: Interests.allCases[checkbox.index].rawValue))
-        }
-        
-        return checkboxStack
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
-    func createCheckboxArray(){
-        var i = 0
-        for _ in Interests.allCases {
-            let checkbox = CheckBox.init()
-            checkbox.style = .tick
-            checkbox.borderStyle = .roundedSquare(radius: 5)
-            checkbox.index = i
-            checkbox.addTarget(self, action: #selector(syncCheckbox(_:)), for: .valueChanged)
-            i += 1
-            meetingTypeCheckboxes.append(checkbox)
-        }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Interests.allCases.count
     }
     
-    @objc func syncCheckbox(_ sender: CheckBox)  {
-        let type = Interests.allCases[sender.index]
-        if sender.isChecked {
-            interests.append(type)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "interestCell", for: indexPath) as! InterestCell
+        cell.interest = Interests.allCases[indexPath.row]
+        if self.interests.contains(cell.interest) {
+            cell.checkbox.isChecked = true
         } else {
-            if let index = interests.firstIndex(of: type){
-                interests.remove(at: index)
+            cell.checkbox.isChecked = false
+        }
+        cell.checkboxChanged = {(checked, interest) in
+            if checked {
+                self.interests.append(interest)
+            } else {
+                if let index = self.interests.firstIndex(of: interest) {
+                    self.interests.remove(at: index)
+                }
             }
         }
-    }
-
-    func createCheckboxWithLabel(checkbox: CheckBox, text: String) -> UIView {
-        let container = UIView()
-        container.setHeight(to: 30)
-        container.setWidth(to: 250)
-        
-        let label = UILabel()
-        label.text = text
-        label.font = .systemFont(ofSize: 15)
-        
-        container.addSubview(checkbox)
-        container.addSubview(label)
-        
-        checkbox.setConstraints(to: container, left: 5, top: 5, width: 30, height: 30)
-        label.pinLeft(to: checkbox.trailingAnchor, const: 10)
-        label.pinTop(to: container.topAnchor, const: 10)
-        label.setWidth(to: 200)
-        label.setHeight(to: 20)
-        
-        return container
+        return cell
     }
 }

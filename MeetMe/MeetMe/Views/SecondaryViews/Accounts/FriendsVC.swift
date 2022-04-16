@@ -9,16 +9,22 @@ import UIKit
 import CloudKit
 import Network
 
+///  Экран списка друзей и списка заявок в друзья
 class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+    /// Разделитель экрана на секции (друзья и запросы)
     let segmentController = UISegmentedControl(items: ["Друзья", "Запросы"])
-    var searchController: UISearchController?
-    let friendsTableView = UITableView()
-    let loader = UIActivityIndicatorView()
-    let refresher = UIRefreshControl()
-    let searchAccountsVC = AccountSearchResultsVC()
-    
-    var currentFriends = [Account]()
+    /// Контроллера поиска
+    private var searchController: UISearchController?
+    /// UI элемент, отображающий либо список друзей, либо список запросов в друзья
+    private let friendsTableView = UITableView()
+    /// Идентификатор загрузки
+    private let loader = UIActivityIndicatorView()
+    /// Идентификатор обновления данных
+    private let refresher = UIRefreshControl()
+    /// Контроллер, отвечающий за отображение результатов поиска
+    private let searchAccountsVC = AccountSearchResultsVC()
+    /// Список отображаемых аккаунтов
+    private var currentAccounts = [Account]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,28 +46,39 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         reloadData()
     }
     
-    
-    @objc func reloadData() {
+    ///  Обновление данных о друзьях и завявках в друзья
+    @objc private func reloadData() {
         if segmentController.selectedSegmentIndex == 0 {
             if let _  = User.currentUser.friends {
-                currentFriends = User.currentUser.friends!
+                currentAccounts = User.currentUser.friends!
             } else  {
-                currentFriends = []
+                currentAccounts = []
                 uploadFriends()
             }
         } else  {
             if let _  = User.currentUser.friendsRequests {
-                currentFriends = User.currentUser.friendsRequests!
+                currentAccounts = User.currentUser.friendsRequests!
             } else  {
-                currentFriends = []
+                currentAccounts = []
                 uploadFriends()
             }
         }
         friendsTableView.reloadData()
     }
     
+    ///  Изменение отображемых данных при смене выбранной секции (друзья и заявки)
+    @objc private func segmentChanged() {
+        if segmentController.selectedSegmentIndex == 0 {
+            currentAccounts = User.currentUser.friends!
+        } else {
+            currentAccounts = User.currentUser.friendsRequests!
+        }
+       
+        friendsTableView.reloadData()
+    }
     
-    @objc func uploadFriends() {
+    /// Загрузка информации о друзьях или заявках пользователя в зависимости от выбранной секции
+    @objc private func uploadFriends() {
         loader.startAnimating()
         if segmentController.selectedSegmentIndex == 0 {
             FriendsReequests.shared.getFriends(completion: {(accounts, error) in
@@ -76,7 +93,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 
                 if let accounts = accounts {
                     User.currentUser.friends = accounts
-                    self.currentFriends = accounts
+                    self.currentAccounts = accounts
                     self.friendsTableView.reloadData()
                 }
             })
@@ -94,7 +111,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 
                 if let accounts = accounts {
                     User.currentUser.friendsRequests = accounts
-                    self.currentFriends = accounts
+                    self.currentAccounts = accounts
                     self.friendsTableView.reloadData()
                 }
             })
@@ -102,19 +119,21 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    
-    func addFriendAction(indexPath: IndexPath) -> UIContextualAction {
+    /// Создание UIContextualAction, добавляющего аккаунт в друзья
+    private func addFriendAction(indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "Добавить в друзья") {[weak self] (_,_,_) in
-            FriendsReequests.shared.makeFriendRequest(recieverId: self!.currentFriends[indexPath.row].id, completion: {(error) in
+            FriendsReequests.shared.makeFriendRequest(recieverId: self!.currentAccounts[indexPath.row].id, completion: {(error) in
                 if let error = error {
                     let alert = ErrorChecker.handler.getAlertController(error: error)
                     self?.present(alert, animated: true, completion: nil)
                     return
                 }
                 
-                let index = User.currentUser.friendsRequests?.firstIndex(of: self!.currentFriends[indexPath.row])
+                let index = User.currentUser.friendsRequests?.firstIndex(of: self!.currentAccounts[indexPath.row])
                 User.currentUser.friends?.append(User.currentUser.friendsRequests![index!])
                 User.currentUser.friendsRequests?.remove(at: index!)
+                self?.currentAccounts.remove(at: index!)
+                self?.friendsTableView.deleteRows(at: [indexPath], with: .automatic)
                 self?.friendsTableView.reloadData()
             })
         }
@@ -122,24 +141,25 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return action
     }
     
-    
-    func removeFriendAction(indexPath: IndexPath) -> UIContextualAction {
+    /// Создание UIContextualAction, удаляющего аккаунт из списка друзей 
+    private func removeFriendAction(indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive, title: "Удалить") {[weak self] (_,_,_) in
-            FriendsReequests.shared.deleteFriend(recieverId: self!.currentFriends[indexPath.row].id, completion: {(error) in
+            FriendsReequests.shared.deleteFriend(recieverId: self!.currentAccounts[indexPath.row].id, completion: {(error) in
                 if let error = error {
                     let alert = ErrorChecker.handler.getAlertController(error: error)
                     self?.present(alert, animated: true, completion: nil)
                     return
                 }
-                
-                if User.currentUser.friends!.contains(self!.currentFriends[indexPath.row]) {
-                    let index = User.currentUser.friends?.firstIndex(of: self!.currentFriends[indexPath.row])
+                var index: Int?
+                if User.currentUser.friends!.contains(self!.currentAccounts[indexPath.row]) {
+                    index = User.currentUser.friends?.firstIndex(of: self!.currentAccounts[indexPath.row])
                     User.currentUser.friends?.remove(at: index!)
                 } else {
-                    let index = User.currentUser.friendsRequests?.firstIndex(of: self!.currentFriends[indexPath.row])
+                    index = User.currentUser.friendsRequests?.firstIndex(of: self!.currentAccounts[indexPath.row])
                     User.currentUser.friendsRequests?.remove(at: index!)
                 }
-                
+                self?.currentAccounts.remove(at: index!)
+                self?.friendsTableView.deleteRows(at: [indexPath], with: .automatic)
                 self?.friendsTableView.reloadData()
             })
         }
@@ -147,7 +167,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return action
     }
     
-    
+    // MARK: TableView DataSource
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var actions = [UIContextualAction]()
         
@@ -165,44 +185,35 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentFriends.count
+        return currentAccounts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingCell", for: indexPath) as! ViewFriendCell
-        cell.account = currentFriends[indexPath.row]
+        cell.account = currentAccounts[indexPath.row]
        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = AccountVC()
-        vc.account = currentFriends[indexPath.row]
+        vc.account = currentAccounts[indexPath.row]
         vc.isUserAccount = false
         navigationController?.pushViewController(vc, animated: true)
     }
     
-   
-    @objc func segmentChanged() {
-        if segmentController.selectedSegmentIndex == 0 {
-            currentFriends = User.currentUser.friends!
-        } else {
-            currentFriends = User.currentUser.friendsRequests!
-        }
-       
-        friendsTableView.reloadData()
-    }
-    
-    func configSegmentController() {
+   // MARK: Configs
+    /// Формирование  и отображение разделителя экрана на секции
+    private func configSegmentController() {
         view.addSubview(segmentController)
         segmentController.setConstraints(to: view, left: 30, top: 0, right: 30, height: 30)
         segmentController.selectedSegmentIndex = 0
         segmentController.addTarget(self, action: #selector(reloadData), for: .valueChanged)
     }
     
-    func configNavigationBar()  {
-       
+    /// Формирование панели навигации
+    private func configNavigationBar()  {
         searchController?.searchBar.sizeToFit()
         searchController?.obscuresBackgroundDuringPresentation = false
         searchController?.searchBar.placeholder = "Search meetings"
@@ -211,11 +222,10 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         navigationItem.title = "Друзья"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.searchController = searchController
-       
     }
     
-    func configMeetingTableView() {
-        
+    /// Формирование и добавления на экран таблицы мероприятий
+    private func configMeetingTableView() {
         friendsTableView.register(ViewFriendCell.self, forCellReuseIdentifier: "MeetingCell")
         view.addSubview(friendsTableView)
         friendsTableView.backgroundView = loader
