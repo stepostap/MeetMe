@@ -26,7 +26,7 @@ class MeetingSearchResultsVC: UITableViewController, UISearchResultsUpdating {
     /// Формирование таблицы с результатом поиска мероприятий
     private func configTableView() {
         self.tableView.backgroundView = loader
-        self.tableView.backgroundColor = .systemBackground
+        self.tableView.backgroundColor = UIColor(named: "BackgroundMain")
         self.tableView.register(MeetingCell.self, forCellReuseIdentifier: "meetingCell")
     }
     

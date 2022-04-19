@@ -16,6 +16,8 @@ class InterestsVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "BackgroundMain")
+        tableView.backgroundColor = UIColor(named: "BackgroundMain")
         tableView.register(InterestCell.self, forCellReuseIdentifier: "interestCell")
     }
     
@@ -34,6 +36,7 @@ class InterestsVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "interestCell", for: indexPath) as! InterestCell
         cell.interest = Interests.allCases[indexPath.row]
+        cell.backgroundColor = UIColor(named: "BackgroundDarker")
         if self.interests.contains(cell.interest) {
             cell.checkbox.isChecked = true
         } else {

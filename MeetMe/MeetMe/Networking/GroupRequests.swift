@@ -90,7 +90,7 @@ class GroupRequests: MeetMeRequests {
     }
     
     /// Создание и отправка запроса на редактирование информации существующей группы и обработка полученного ответа
-    func editGroup(groupID: Int64, image: UIImage?, newInfo: GroupEditDTO, completion: @escaping (Group?, Error?)->() ) {
+    func editGroup(groupID: Int64, image: UIImage?, newInfo: GroupEditDTO, completion: @escaping (Group?, Error?)->(Void) ) {
         if !NetworkMonitor.shared.isConnected {
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
         }

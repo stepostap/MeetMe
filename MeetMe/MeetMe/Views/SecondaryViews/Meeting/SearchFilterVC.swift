@@ -21,6 +21,7 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
+        //textField.backgroundColor = UIColor(named: "BackgroundMain")
         return textField
     }()
     /// Чекбоксы для выбора интересов, которые должны быть у найденных мероприятий
@@ -49,7 +50,7 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        view.backgroundColor = UIColor(named: "BackgroundDarker")
         interestsVC.interests = searchOptions?.types ?? []
         interestsVC.completion = {(interest) in
             self.searchOptions?.types = interest
@@ -71,10 +72,6 @@ class SearchFilterVC: UIViewController, UITextFieldDelegate {
         configureView()
     }
     
-    
-    override func viewWillLayoutSubviews() {
-        view.backgroundColor = .systemBackground
-    }
     
     /// Метод для синхронизации значения чекбокса и поля isOnline
     @objc private func isOnlineCheckboxSync() {

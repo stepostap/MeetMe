@@ -19,6 +19,7 @@ class PhotoGalleryVC: UICollectionViewController, UICollectionViewDelegateFlowLa
     /// Ширина одного изображения на экране
     private let imageWidth = (UIScreen.main.bounds.width - 20) / 2
     
+    var images = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,23 +46,6 @@ class PhotoGalleryVC: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    /// Получение изображения из кэша
-    private func getSingleImage(with urlString : String) -> UIImage? {
-        guard let url = URL.init(string: urlString) else {
-            return  nil
-        }
-        let resource = ImageResource(downloadURL: url)
-        var image:  UIImage?
-        KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: nil) { result in
-            switch result {
-            case .success(let value):
-                image = value.image
-            case .failure:
-                image = nil
-            }
-        }
-        return image
-    }
     
     /// Отправка запроса на получение ссылок на изображения
     private func downloadPhotos() {
@@ -111,11 +95,7 @@ class PhotoGalleryVC: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func imageInGallery(gallery: SwiftPhotoGallery, forIndex: Int) -> UIImage? {
-        if let image = getSingleImage(with: loadedPhotoURLs[forIndex]) {
-            return image
-        } else {
-            return UIImage(named: "placeholder")
-        }
+        return images[forIndex]
     }
     
     func galleryDidTapToClose(gallery: SwiftPhotoGallery) {
@@ -137,7 +117,14 @@ class PhotoGalleryVC: UICollectionViewController, UICollectionViewDelegateFlowLa
         cell.configure()
         cell.image.kf.indicatorType = .activity
         
-        cell.image.kf.setImage(with: URL(string: self.loadedPhotoURLs[indexPath.row]), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: imageWidth, height: imageWidth))), .scaleFactor(UIScreen.main.scale), .cacheOriginalImage])
+        cell.image.kf.setImage(with: URL(string: self.loadedPhotoURLs[indexPath.row]), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)))], completionHandler: { result in
+            switch result {
+            case .success(let value):
+                self.images.append(value.image)
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        })
         
         return cell
     }
@@ -171,8 +158,10 @@ class PhotoGalleryVC: UICollectionViewController, UICollectionViewDelegateFlowLa
         gallery.pageIndicatorTintColor = UIColor.gray.withAlphaComponent(0.5)
         gallery.currentPageIndicatorTintColor = UIColor.white
         gallery.hidePageControl = false
+        //gallery.currentPage = indexPath.row
         present(gallery, animated: true, completion: { () -> Void in
             gallery.currentPage = indexPath.row
+            //gallery.scrollToImage(withIndex: indexPath.row, animated: true)
         })
     }
 }

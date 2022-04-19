@@ -25,7 +25,7 @@ class GroupSearchResultVC: UITableViewController, UISearchResultsUpdating {
     /// Формирование таблицы с найденными группами
     private func confinTableView() {
         self.tableView.backgroundView = loader
-        self.tableView.backgroundColor = .systemBackground
+        self.tableView.backgroundColor = UIColor(named: "BackgroundMain")
         self.tableView.register(GroupCell.self, forCellReuseIdentifier: "groupCell")
     }
 
@@ -79,6 +79,7 @@ class GroupSearchResultVC: UITableViewController, UISearchResultsUpdating {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupCell
         let group = groups[indexPath.section][indexPath.row]
         cell.nameLabel.text = group.groupName
+        cell.backgroundColor = UIColor(named: "BackgroundMain")
         if !group.groupImageURL.isEmpty {
             let url = URL(string: group.groupImageURL)
             cell.groupImage.kf.indicatorType = .activity

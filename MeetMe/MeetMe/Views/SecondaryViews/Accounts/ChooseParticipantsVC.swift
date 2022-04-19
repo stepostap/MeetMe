@@ -41,8 +41,8 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
         participantTableView.delegate = self
         participantTableView.dataSource = self
         
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "BackgroundMain")
+        participantTableView.backgroundColor = UIColor(named: "BackgroundMain")
         
         configNavigationBar()
         configSegmentController()
@@ -203,7 +203,7 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AddParticipantCell
-        
+        cell.backgroundColor = UIColor(named: "BackgroundMain")
         if segmentController.selectedSegmentIndex == 1 {
             let group = currentUserGroups![indexPath.row]
             cell.nameLabel.text = group.groupName

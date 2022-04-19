@@ -19,16 +19,16 @@ class GroupScreen: UITableViewController {
     /// Высота текстового поля для оторажения интересов
     private var interestHeight = 0.0
     /// Кнопка для вступления пользователя в группу
-    private let joinGroupButton = UIButton()
+    private let joinGroupButton = UIButton(type: .system)
     /// Идентификатор обновления информации о группе
     private let refresher = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = UIColor(named: "BackgroundMain")
         let optionsButton = UIBarButtonItem(title: ". . .", style: .plain, target: self, action: #selector(showGroupActions))
         navigationItem.rightBarButtonItem = optionsButton
-        
+        self.navigationController?.navigationBar.barTintColor = UIColor(named: "BackgroundDarker")
         self.tableView.register(ExtendedMeetingCell.self, forCellReuseIdentifier: "meetingCell")
         refresher.addTarget(self, action: #selector(getGroupMeetings), for: .valueChanged)
         self.tableView.refreshControl = refresher
@@ -140,7 +140,7 @@ class GroupScreen: UITableViewController {
     /// Формирование раздела экрана с полной информацией о группе
     private func configHeaderView() -> UIView {
         let view = UIView()
-        view.backgroundColor = .systemGray4
+        view.backgroundColor = UIColor(named: "BackgroundMain")
         
         let groupImage = UIImageView()
         view.addSubview(groupImage)
@@ -148,6 +148,7 @@ class GroupScreen: UITableViewController {
         groupImage.setHeight(to: 250)
         groupImage.pinTop(to: view.topAnchor, const: 5)
         groupImage.pinCenter(to: view.centerXAnchor, const: 0)
+        Styling.styleImageView1(groupImage)
         if group!.groupImageURL.isEmpty {
             groupImage.image = UIImage(named: "placeholder")
         } else {
@@ -155,28 +156,27 @@ class GroupScreen: UITableViewController {
             groupImage.kf.setImage(with: URL(string: group!.groupImageURL), options: [.forceRefresh])
         }
         
-        
-        let groupName = UILabel()
+        let groupName = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+        Styling.styleTextField(groupName)
         groupName.text = group?.groupName
         view.addSubview(groupName)
         groupName.pinTop(to: groupImage.bottomAnchor, const: 10)
         groupName.pinCenter(to: view.centerXAnchor, const: 0)
-        groupName.pinLeft(to: view.leadingAnchor, const: 20)
-        groupName.pinRight(to: view.trailingAnchor, const: 20)
+        groupName.setWidth(to: 200)
+//        groupName.pinLeft(to: view.leadingAnchor, const: 20)
+//        groupName.pinRight(to: view.trailingAnchor, const: 20)
         groupName.textAlignment = .center
         groupName.font = .boldSystemFont(ofSize: 18)
         
-        let viewParticipantsButton = UIButton()
+        let viewParticipantsButton = UIButton(type: .system)
         view.addSubview(viewParticipantsButton)
-        viewParticipantsButton.pinTop(to: groupName.bottomAnchor, const: 5)
+        viewParticipantsButton.pinTop(to: groupName.bottomAnchor, const: 15)
         viewParticipantsButton.pinCenter(to: view.centerXAnchor, const: 0)
-        viewParticipantsButton.pinLeft(to: view.leadingAnchor, const: 0)
-        viewParticipantsButton.pinRight(to: view.trailingAnchor, const: 0)
+        viewParticipantsButton.pinLeft(to: view.leadingAnchor, const: 20)
+        viewParticipantsButton.pinRight(to: view.trailingAnchor, const: 20)
         viewParticipantsButton.setHeight(to: 30)
-        viewParticipantsButton.layer.borderWidth = 1
-        viewParticipantsButton.layer.borderColor = UIColor.systemGray.cgColor
+        Styling.styleButton(viewParticipantsButton)
         viewParticipantsButton.setTitle("Участники", for: .normal)
-        viewParticipantsButton.setTitleColor(.darkGray, for: .normal)
         viewParticipantsButton.addTarget(self, action: #selector(viewParticipants), for: .touchUpInside)
         
         let stackView = UIStackView()
@@ -240,6 +240,7 @@ class GroupScreen: UITableViewController {
         info.text = group?.groupInfo
         info.layer.borderWidth = 1
         info.layer.borderColor = UIColor.systemGray.cgColor
+        info.backgroundColor = UIColor(named: "BackgroundDarker")
         info.isScrollEnabled = false
         infotextHeight = info.text.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 40, font: .systemFont(ofSize: 16))
         info.pinTop(to: label.bottomAnchor, const: 0)
@@ -274,6 +275,7 @@ class GroupScreen: UITableViewController {
         interests.text = Styling.getInterests(interestArray: group?.interests ?? [])
         interests.layer.borderWidth = 1
         interests.layer.borderColor = UIColor.systemGray.cgColor
+        interests.backgroundColor = UIColor(named: "BackgroundDarker")
         interests.isScrollEnabled = false
         intereststextHeight = interests.text.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 40, font: .systemFont(ofSize: 16))
         interests.pinTop(to: label.bottomAnchor, const: 0)
@@ -299,6 +301,7 @@ class GroupScreen: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "meetingCell", for: indexPath) as! ExtendedMeetingCell
         cell.meeting = groupMeetings[indexPath.row]
+        cell.backgroundColor = UIColor(named: "BackgroundDarker")
         return cell
     }
     
@@ -315,6 +318,6 @@ class GroupScreen: UITableViewController {
             .heightWithConstrainedWidth(width: width, font: .systemFont(ofSize: 15))
         let interestsText = Styling.getInterests(interestArray: groupMeetings[indexPath.row].types)
         let interestsHeight = interestsText.heightWithConstrainedWidth(width: width, font: .systemFont(ofSize: 15))
-        return 150 + locationHeight + interestsHeight
+        return 170 + locationHeight + interestsHeight
     }
 }

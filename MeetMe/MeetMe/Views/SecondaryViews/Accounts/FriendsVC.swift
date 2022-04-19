@@ -29,11 +29,11 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor(named: "BackgroundMain")
+        friendsTableView.backgroundColor = UIColor(named: "BackgroundMain")
         friendsTableView.delegate = self
         friendsTableView.dataSource = self
         
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.backgroundColor = .systemBackground
         searchController = UISearchController(searchResultsController: searchAccountsVC)
         segmentController.selectedSegmentIndex = 0
         
@@ -192,7 +192,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingCell", for: indexPath) as! ViewFriendCell
         cell.account = currentAccounts[indexPath.row]
-       
+        cell.backgroundColor = UIColor(named: "BackgroundMain")
         return cell
     }
     
@@ -215,7 +215,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     /// Формирование панели навигации
     private func configNavigationBar()  {
         searchController?.searchBar.sizeToFit()
-        searchController?.obscuresBackgroundDuringPresentation = false
+        searchController?.obscuresBackgroundDuringPresentation = true
         searchController?.searchBar.placeholder = "Search meetings"
         searchController?.searchResultsUpdater = searchAccountsVC
         
@@ -234,7 +234,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         friendsTableView.pinTop(to: segmentController.bottomAnchor, const: 10)
         friendsTableView.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 10)
         friendsTableView.pinRight(to: view.safeAreaLayoutGuide.trailingAnchor, const: 10)
-        friendsTableView.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor, const: 10)
+        friendsTableView.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor, const: 0)
     }
 
 }

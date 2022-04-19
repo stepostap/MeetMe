@@ -12,7 +12,7 @@ class GroupsVC: UITableViewController {
     /// Контроллер, отвечающий за отображение разультата поиска групп
     private let searchResultVC = GroupSearchResultVC()
     /// Контроллер поиска
-    private var searchController:  UISearchController?
+    private var searchController: UISearchController?
     /// Идентификатор загрузки
     private let loader = UIActivityIndicatorView()
     /// Идентификатор обновления данных
@@ -22,7 +22,7 @@ class GroupsVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "BackgroundMain")
         searchController = UISearchController(searchResultsController: searchResultVC)
         configView()
     }
@@ -106,6 +106,7 @@ class GroupsVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupCell
         let group = User.currentUser.groups![indexPath.row]
         cell.nameLabel.text = group.groupName
+        cell.backgroundColor = UIColor(named: "BackgroundMain")
         if !group.groupImageURL.isEmpty {
             let url = URL(string: group.groupImageURL)
             cell.groupImage.kf.indicatorType = .activity

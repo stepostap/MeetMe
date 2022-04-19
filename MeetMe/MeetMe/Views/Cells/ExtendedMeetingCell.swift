@@ -54,6 +54,7 @@ class ExtendedMeetingCell: UITableViewCell {
         textView.autocorrectionType = UITextAutocorrectionType.no
         textView.isUserInteractionEnabled = false
         textView.isScrollEnabled = false
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     /// Текстовое поле с интересами мероприятия
@@ -62,6 +63,7 @@ class ExtendedMeetingCell: UITableViewCell {
         textView.font = .boldSystemFont(ofSize: 15)
         textView.isUserInteractionEnabled = false
         textView.isScrollEnabled = false
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     /// Текстовое поле с число участников
@@ -81,36 +83,47 @@ class ExtendedMeetingCell: UITableViewCell {
     /// Метод, формирующий внешний вид ячейки
     private func setCostraints() {
         
-        contentView.addSubview(meetingImage)
-        meetingImage.setConstraints(to: contentView, left: 10, top: 10, width: 100, height: 100)
+        let view = UIView()
+        view.layer.cornerRadius = 7
+        view.layer.shadowRadius = 5
+        view.layer.shadowOpacity = 0.3
+        view.layer.shadowOffset = CGSize(width: 0, height: 6)
         
-        contentView.addSubview(meetingName)
-        meetingName.pinTop(to: contentView.topAnchor, const: 5)
+        view.addSubview(meetingImage)
+        meetingImage.setConstraints(to: view, left: 10, top: 10, width: 100, height: 100)
+        
+        view.addSubview(meetingName)
+        meetingName.pinTop(to: view.topAnchor, const: 5)
         meetingName.pinLeft(to: meetingImage.trailingAnchor, const: 10)
-        meetingName.pinRight(to: contentView.trailingAnchor, const: 10)
+        meetingName.pinRight(to: view.trailingAnchor, const: 10)
         meetingName.setHeight(to: 20)
         
-        contentView.addSubview(dateLabel)
+        view.addSubview(dateLabel)
         dateLabel.pinTop(to: meetingName.bottomAnchor, const: 5)
         dateLabel.pinLeft(to: meetingImage.trailingAnchor, const: 10)
-        dateLabel.pinRight(to: contentView.trailingAnchor, const: 10)
+        dateLabel.pinRight(to: view.trailingAnchor, const: 10)
         dateLabel.setHeight(to: 20)
         
-        contentView.addSubview(participantsLabel)
+        view.addSubview(participantsLabel)
         participantsLabel.pinTop(to: dateLabel.bottomAnchor, const: 5)
         participantsLabel.pinLeft(to: meetingImage.trailingAnchor, const: 10)
-        participantsLabel.pinRight(to: contentView.trailingAnchor, const: 10)
+        participantsLabel.pinRight(to: view.trailingAnchor, const: 10)
         participantsLabel.setHeight(to: 20)
         
-        contentView.addSubview(interestsTextView)
+        view.addSubview(interestsTextView)
         interestsTextView.pinTop(to: meetingImage.bottomAnchor, const: 5)
-        interestsTextView.pinLeft(to: contentView.leadingAnchor, const: 10)
-        interestsTextView.pinRight(to: contentView.trailingAnchor, const: 10)
+        interestsTextView.pinLeft(to: view.leadingAnchor, const: 10)
+        interestsTextView.pinRight(to: view.trailingAnchor, const: 10)
         
         
-        contentView.addSubview(locationTextView)
+        view.addSubview(locationTextView)
         locationTextView.pinTop(to: interestsTextView.bottomAnchor, const: 5)
-        locationTextView.pinLeft(to: contentView.leadingAnchor, const: 10)
-        locationTextView.pinRight(to: contentView.trailingAnchor, const: 10)
+        locationTextView.pinLeft(to: view.leadingAnchor, const: 10)
+        locationTextView.pinRight(to: view.trailingAnchor, const: 10)
+        
+        contentView.addSubview(view)
+        view.setConstraints(to: contentView, left: 5, top: 3, right: 5, bottom: 13)
+        view.backgroundColor = UIColor(named: "BackgroundDarker")
+        contentView.backgroundColor = UIColor(named: "BackgroundMain")
     }
 }

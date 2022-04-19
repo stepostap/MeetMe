@@ -55,6 +55,7 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.cornerRadius = 5
         textView.autocorrectionType = UITextAutocorrectionType.no
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     /// Текстовое поле и интересами группы
@@ -65,6 +66,7 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.cornerRadius = 5
         textView.autocorrectionType = UITextAutocorrectionType.no
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     /// UI элемент, отображающий изображение группы
@@ -72,12 +74,13 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
+        Styling.styleImageView1(image)
         return image
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "BackgroundMain")
         createButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createGroup))
         navigationItem.rightBarButtonItem = createButton
         configView()

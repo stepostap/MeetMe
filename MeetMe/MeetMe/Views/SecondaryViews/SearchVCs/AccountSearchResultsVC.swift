@@ -26,7 +26,7 @@ class AccountSearchResultsVC: UITableViewController, UISearchResultsUpdating {
     /// Формирование таблицы найденных аккаунтов
     private func confinTableView() {
         self.tableView.backgroundView = loader
-        self.tableView.backgroundColor = .systemBackground
+        self.tableView.backgroundColor = UIColor(named: "BackgroundMain")
         self.tableView.register(ViewFriendCell.self, forCellReuseIdentifier: "accountCell")
     }
 
@@ -70,6 +70,7 @@ class AccountSearchResultsVC: UITableViewController, UISearchResultsUpdating {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "accountCell", for: indexPath) as! ViewFriendCell
         cell.account = accounts[indexPath.section][indexPath.row]
+        cell.backgroundColor = UIColor(named: "BackgroundMain")
         return cell
     }
     

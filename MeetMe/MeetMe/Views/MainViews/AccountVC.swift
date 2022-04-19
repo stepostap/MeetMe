@@ -21,7 +21,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     /// Область с информацией о пользователе
     private let accountView = UIStackView()
     /// Кнопка для перехода на экран списка друзей
-    private let friendsButton = UIButton()
+    private let friendsButton = UIButton(type: .system)
     /// Кнопка для добавления аккаунта в список друзей
     private let addAsFriendButton = UIButton()
     ///  UI элемент,  отвечающий за отображение картнки аккунта
@@ -29,6 +29,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
+        image.kf.indicatorType = .activity
         return image
     }()
     /// Текстовое поле с именем пользователя
@@ -52,6 +53,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         textView.layer.cornerRadius = 5
         textView.autocorrectionType = UITextAutocorrectionType.no
         textView.isUserInteractionEnabled = false
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         textView.isScrollEnabled = false
         return textView
     }()
@@ -63,6 +65,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.cornerRadius = 5
         textView.autocorrectionType = UITextAutocorrectionType.no
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         textView.isUserInteractionEnabled = false
         return textView
     }()
@@ -129,7 +132,8 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "BackgroundMain")
+
         logoutButton = UIBarButtonItem(title: "Выйти", style: .done, target: self, action: #selector(signOut))
         editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editProfile))
         
@@ -150,6 +154,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
                 }
             })
         }
+        
         configView()
     }
     
@@ -341,7 +346,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     private func configImageAndNameView() -> UIView {
         let view = UIView()
         view.setHeight(to: imageAndNameHeight)
-        //view.pinWidth(to: view.widthAnchor, mult: 1)
+        Styling.styleImageView1(accountImage)
         view.addSubview(accountImage)
         accountImage.pinTop(to: view.safeAreaLayoutGuide.topAnchor, const: 10)
         accountImage.pinCenter(to: view.safeAreaLayoutGuide.centerXAnchor, const: 0)
@@ -367,11 +372,9 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         let view = UIView()
         view.setHeight(to: friendsButtonHeight)
         view.addSubview(friendsButton)
-        friendsButton.pin(to: view)
-        friendsButton.layer.borderWidth = 1
-        friendsButton.layer.borderColor = UIColor.systemGray.cgColor
+        friendsButton.setConstraints(to: view, left: 20, top: 0, right: 20, bottom: 0)
+        Styling.styleButton(friendsButton)
         friendsButton.setTitle("Друзья", for: .normal)
-        friendsButton.setTitleColor(.darkGray, for: .normal)
         friendsButton.addTarget(self, action: #selector(viewFriends), for: .touchUpInside)
         
         return view
@@ -382,11 +385,9 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         let view = UIView()
         view.setHeight(to: friendsButtonHeight)
         view.addSubview(addAsFriendButton)
-        addAsFriendButton.pin(to: view)
-        addAsFriendButton.layer.borderWidth = 1
-        addAsFriendButton.layer.borderColor = UIColor.systemGray.cgColor
+        addAsFriendButton.setConstraints(to: view, left: 20, top: 0, right: 20, bottom: 0)
         addAsFriendButton.setTitle("Добавить в друзья", for: .normal)
-        addAsFriendButton.setTitleColor(.darkGray, for: .normal)
+        Styling.styleButton(addAsFriendButton)
         addAsFriendButton.addTarget(self, action: #selector(addAsFriend), for: .touchUpInside)
         
         return view

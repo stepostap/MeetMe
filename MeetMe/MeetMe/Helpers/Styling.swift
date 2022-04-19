@@ -35,19 +35,26 @@ class Styling {
         
         // Hollow rounded corner style
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderColor = UIColor.systemBlue.cgColor
         button.layer.cornerRadius = 15.0
-        button.tintColor = UIColor.black
+        button.tintColor = UIColor.systemBlue
     }
     
     /// Стилизация кнопки
     static func styleButton(_ button:UIButton) {
-        
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
+        button.layer.borderColor = UIColor.systemBlue.cgColor
+        button.setTitleColor(.systemBlue, for: .normal)
     }
     
     /// Стилизация UI элемента для отображения картинки 1
     static func styleImageView1(_ imageView:UIImageView) {
-        
+        imageView.layer.cornerRadius = 10
+        imageView.layer.borderWidth = 3
+        imageView.layer.borderColor = UIColor.systemBlue.cgColor
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
     }
     
     /// Стилизация UI элемента для отображения картинки 2

@@ -65,6 +65,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
+        Styling.styleImageView1(image)
         return image
     }()
     /// Текстовое поле, отображающее имя пользователя
@@ -86,6 +87,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.cornerRadius = 5
         textView.autocorrectionType = UITextAutocorrectionType.no
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     /// Текстовое поле, отображающее список интересов пользователя
@@ -96,12 +98,13 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.cornerRadius = 5
         textView.autocorrectionType = UITextAutocorrectionType.no
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "BackgroundMain")
         tabBarController?.tabBar.backgroundColor = .systemGray4
         saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveProfile))
         self.navigationItem.rightBarButtonItem = saveButton

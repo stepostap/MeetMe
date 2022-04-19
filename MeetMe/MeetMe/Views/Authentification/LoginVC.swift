@@ -10,9 +10,9 @@ import UIKit
 /// Контроллер для входа пользователя в приложение
 class LoginVC: UIViewController, UITextFieldDelegate {
     ///  Кнопка для входа
-    private let loginButton = UIButton()
+    private let loginButton = UIButton(type: .system)
     /// Кнопка для регистрации
-    private let signUpButton = UIButton()
+    private let signUpButton = UIButton(type: .system)
     /// Идентификатор загрузки
     private let loader = UIActivityIndicatorView()
     /// Требуется ли сохранять на устройстве логин и пароль для повторного входа
@@ -44,7 +44,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "BackgroundMain")
         configView()
     }
     
@@ -105,7 +105,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         signUpButton.setWidth(to: 200)
         signUpButton.setHeight(to: 30)
         signUpButton.setTitle("Зарегистрироваться", for: .normal)
-        signUpButton.setTitleColor(.black, for: .normal)
+        signUpButton.setTitleColor(.systemBlue, for: .normal)
         signUpButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
     }
     
@@ -163,6 +163,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             if let token = token {
                 MeetMeRequests.JWTToken = token
                 AuthRequests.shared.login(info: LoginInfo(email: email, password: password), completion: { (account, error) in
+                    self.loader.stopAnimating()
                     if let error = error {
                         let alert = ErrorChecker.handler.getAlertController(error: error)
                         self.present(alert, animated: true, completion: nil)
@@ -179,7 +180,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                         }
 
                         User.currentUser.account = account
-                        self.loader.stopAnimating()
                         self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
                     }
                 })

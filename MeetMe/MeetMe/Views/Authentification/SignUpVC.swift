@@ -60,14 +60,14 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         return textField
     }()
     /// Кнопка для осуществления регистрации
-    private let signUpButton = UIButton()
+    private let signUpButton = UIButton(type: .system)
     /// Идентификатор загрузки
     private let loader = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "BackgroundMain")
         configView()
     }
     
@@ -75,7 +75,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     private func loginAndPasswordCheck() throws {
         if let email = emailTextField.text {
             if email.isEmpty {
-                throw LoginErrors.emptyLogin
+                throw RegisterErrors.emptyEmail
             }
             if !ErrorChecker.isEmailValid(email){
                 throw LoginErrors.invalidEmail
@@ -94,7 +94,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         
         if let password = passwordTextField.text {
             if password.isEmpty {
-                throw LoginErrors.emptyPassword
+                throw RegisterErrors.emptyPassword
             }
             if !password.elementsEqual(passwordRepeatTextField.text!) {
                 throw RegisterErrors.passwordsDontMatch
@@ -140,7 +140,8 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                     }
                     if let token = token {
                         MeetingRequests.JWTToken = token
-                        self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
+                        self.navigationController?.pushViewController(EmailCodeCheckVC(), animated: true)
+                        //self.view.setRootViewController(NavigationHandler.createTabBar(), animated: true)
                     }
                 })
             }
@@ -195,7 +196,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         signUpButton.pinCenter(to: view.centerXAnchor, const: 0)
         signUpButton.pinTop(to: loader.bottomAnchor, const: 40)
         signUpButton.setTitle("Зарегистрироваться", for: .normal)
-        signUpButton.setTitleColor(.black, for: .normal)
+        //signUpButton.setTitleColor(.black, for: .normal)
         signUpButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
     }
 }

@@ -80,6 +80,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.cornerRadius = 5
         textView.autocorrectionType = UITextAutocorrectionType.no
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     /// Текстовое поля для отображения списка интересов пользователя
@@ -90,6 +91,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.cornerRadius = 5
         textView.autocorrectionType = UITextAutocorrectionType.no
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     /// UI элемент для отображения изображения мероприятия
@@ -97,6 +99,7 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
+        Styling.styleImageView1(image)
         return image
     }()
     /// Текстовое поле для отображения места проведения мероприятия
@@ -107,12 +110,13 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.cornerRadius = 5
         textView.autocorrectionType = UITextAutocorrectionType.no
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "BackgroundMain")
         createButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createMeeting))
         navigationItem.rightBarButtonItem = createButton
         configView()
@@ -163,7 +167,10 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         if startingDateTextField.text!.isEmpty {
             throw CreateMeetingError.noStartingDate
         }
-        if (!endingDateTextField.text!.isEmpty && datePicker1.date > datePicker2.date) || datePicker1.date < Date.now {
+        if (!endingDateTextField.text!.isEmpty && datePicker1.date > datePicker2.date) {
+            throw CreateMeetingError.startEndDateError
+        }
+        if (datePicker1.date < Date.now) {
             throw CreateMeetingError.startEndDateError
         }
     }
@@ -303,6 +310,10 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
     @objc func updateEndingDateTextview() {
         formatter.dateFormat = "dd.MM HH:mm"
         endingDateTextField.text = formatter.string(from: datePicker2.date)
+    }
+    
+    @objc func datepickerDone() {
+        self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -474,6 +485,11 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         startingDateLabel.setHeight(to: 30)
         startingDateLabel.setWidth(to: 80)
         
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(datepickerDone))
+        toolBar.setItems([doneBtn], animated: true)
+        
         Styling.styleTextField(startingDateTextField)
         datePicker1.datePickerMode = .dateAndTime
         datePicker1.addTarget(self, action: #selector(updateStartingDateTextview), for: .valueChanged)
@@ -482,7 +498,9 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         startingDateTextField.pinCenter(to: startingDateLabel.centerYAnchor, const: 0)
         startingDateTextField.setWidth(to: 150)
         startingDateTextField.setHeight(to: 30)
+        datePicker1.preferredDatePickerStyle = .wheels
         startingDateTextField.inputView = datePicker1
+        startingDateTextField.inputAccessoryView = toolBar
         startingDateTextField.delegate = self
         
         let endingDateLabel = UILabel()
@@ -495,12 +513,14 @@ class CreateMeetingVC: UIViewController, UITextFieldDelegate, UIImagePickerContr
         
         Styling.styleTextField(endingDateTextField)
         datePicker2.datePickerMode = .dateAndTime
+        datePicker2.preferredDatePickerStyle = .wheels
         datePicker2.addTarget(self, action: #selector(updateEndingDateTextview), for: .valueChanged)
         mainView.addSubview(endingDateTextField)
         endingDateTextField.pinLeft(to: endingDateLabel.trailingAnchor, const: 10)
         endingDateTextField.pinCenter(to: endingDateLabel.centerYAnchor, const: 0)
         endingDateTextField.setWidth(to: 150)
         endingDateTextField.setHeight(to: 30)
+        endingDateTextField.inputAccessoryView = toolBar
         endingDateTextField.inputView = datePicker2
         endingDateTextField.delegate = self
     }

@@ -20,6 +20,7 @@ class ViewParticipantsVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "BackgroundMain")
         if let group = group {
             GroupRequests.shared.getGroupParticipants(groupID: group.id, completion: {(accounts, error) in
                 if let error = error {
@@ -98,6 +99,7 @@ class ViewParticipantsVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "accountCell", for: indexPath) as! ViewFriendCell
+        cell.backgroundColor = UIColor(named: "BackgroundMain")
         if indexPath.section == 0 {
             cell.account = admins[indexPath.row]
         } else {

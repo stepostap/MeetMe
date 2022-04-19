@@ -37,7 +37,8 @@ class ChatVC: MessagesViewController {
         navigationItem.rightBarButtonItem = viewMeetingButton
         
         loadFirstMessages()
-        
+        view.backgroundColor = UIColor(named: "BackgroundDarker")
+        messagesCollectionView.backgroundColor = UIColor(named: "BackgroundDarker")
         title = meeting.name
         configureMessageCollectionView()
         configureMessageInputBar()
@@ -221,10 +222,13 @@ extension ChatVC: MessagesDisplayDelegate {
         let sender = messages[indexPath.section].sender as! MessageSender
         
         let nameSplit = sender.displayName.split(separator: " ")
-        let initials = "\(nameSplit[0].first ?? "S")\(nameSplit[1].first ?? "R")"
-        
-        avatarView.set(avatar: Avatar(image: getSingleImage(with: sender.avatarURL), initials: initials))
-        
+        if nameSplit.count > 1 {
+            let initials = "\(nameSplit[0].first ?? "S")\(nameSplit[1].first ?? "R")"
+            avatarView.set(avatar: Avatar(image: getSingleImage(with: sender.avatarURL), initials: initials))
+        } else {
+            let initials = "\(nameSplit[0].first ?? "S")"
+            avatarView.set(avatar: Avatar(image: getSingleImage(with: sender.avatarURL), initials: initials))
+        }
     }
     
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {

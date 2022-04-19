@@ -52,7 +52,6 @@ class MeetMeRequests {
         print("Recieved: \(data.prettyJson as Any)")
         do {
             responceData = try self.decoder.decode(Responce<T>.self, from: data)
-            //print(responceData.data)
         } catch {
             throw JSONError.decodingError
         }
@@ -65,9 +64,36 @@ class MeetMeRequests {
                 throw NetworkerError.badData
             }
         } else {
-            throw ServerError.init(message: model.message)
+            throw configError(errorCode: model.appCode, message: model.message)
         }
     }
+    
+    
+    func configError(errorCode: Int, message: String) -> Error {
+        switch errorCode {
+        case 1: return LoginErrors.invalidEmail
+        case 2: return LoginErrors.invalidPassword
+        case 3: return RegisterErrors.emailRegistered
+        case 4: return RegisterErrors.wrongEmailCode
+        case 5: return RegisterErrors.accountNotActive
+        case 10: return MeetingError.maxMeetingParticipants
+        case 11: return CreateMeetingError.unableToCreateMeeting
+        case 12: return CreateMeetingError.unableToEdit
+        case 13: return MeetingError.meetingDeleted
+        case 14: return MeetingError.userAlreadyParticipant
+        case 20: return CreateGroupError.unableToCreateGroup
+        case 21: return CreateGroupError.userAlreadyParticipant
+        case 22: return CreateGroupError.unableToEditGroup
+        case 30: return FriendError.unableToSendRequest
+        case 31: return FriendError.alreadyFriend
+        case 40: return ImageStoreError.unableToLoadImage
+        case 41: return ImageStoreError.unableToUploadImage
+        case 50: return ChatError.unableToLoadMessages
+        case 51: return ChatError.unableToSendMessage
+        default: return ServerError.init(message: message)
+        }
+    }
+    
     
     /// Проверка полученных  от сервера данных на наличие ошибок
     func checkResponce(data: Data) throws {
@@ -136,9 +162,6 @@ class MeetMeRequests {
     
     /// Проверка ответа сервера на наличие ошибок
     func errorCheck(data: Data?, response: URLResponse?, error: Error?) throws {
-        if let error = error {
-            throw error
-        }
         
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkerError.badResponse
@@ -150,6 +173,10 @@ class MeetMeRequests {
         
         guard data != nil else {
             throw NetworkerError.badData
+        }
+        
+        if let error = error {
+            throw error
         }
     }
     

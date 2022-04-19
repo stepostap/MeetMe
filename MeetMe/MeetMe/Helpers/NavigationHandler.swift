@@ -14,10 +14,12 @@ class NavigationHandler {
     static func createAccountNC() -> UINavigationController {
         
         let accountVC = AccountVC()
-        accountVC.title = "Account"
-        accountVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account2"), tag: 0)
+        accountVC.title = "Аккаунт"
+        accountVC.tabBarItem = UITabBarItem(title: "Аккаунт", image: UIImage(named: "account2"), tag: 0)
+        let navigation = UINavigationController(rootViewController: accountVC)
+        navigation.navigationBar.barTintColor = UIColor(named: "BackgroundDarker")
         
-        return UINavigationController(rootViewController: accountVC)
+        return navigation
     }
     
     ///  Создание NavigationController, содержащего контроллер мероприятий
@@ -26,8 +28,10 @@ class NavigationHandler {
         let meetingVC = MeetingsVC()
         meetingVC.title = "Meetings"
         meetingVC.tabBarItem = UITabBarItem(title: "Meetings", image: UIImage(named: "meeting3"), tag: 1)
+        let navigation = UINavigationController(rootViewController: meetingVC)
+        navigation.navigationBar.barTintColor = UIColor(named: "BackgroundDarker")
         
-        return UINavigationController(rootViewController: meetingVC)
+        return navigation
     }
     
     ///  Создание NavigationController, содержащего контроллер групп
@@ -36,15 +40,24 @@ class NavigationHandler {
         let groupsVC = GroupsVC()
         groupsVC.title = "Groups"
         groupsVC.tabBarItem = UITabBarItem(title: "Groups", image: UIImage(named: "groups3"), tag: 2)
+        let navigation = UINavigationController(rootViewController: groupsVC)
+        navigation.navigationBar.barTintColor = UIColor(named: "BackgroundDarker")
         
-        return UINavigationController(rootViewController: groupsVC)
+        return navigation
     }
     
     ///  Создание TabBarController, содержащего 3 NavigationController: для мероприятий, для аккаунта и для групп
     static func createTabBar() -> UITabBarController {
         let tabBarController = UITabBarController()
-        UITabBar.appearance().tintColor = .systemBlue
         tabBarController.viewControllers = [createAccountNC(), createMeetingsNC(), createGroupsNC()]
+        let appearance = UITabBarAppearance()
+        appearance.backgroundColor = UIColor(named: "BackgroundDarker")
+        appearance.selectionIndicatorTintColor = UIColor(named: "BackgroundDarker")
+        appearance.shadowColor = UIColor(named: "BackgroundDarker")
+        tabBarController.tabBar.standardAppearance = appearance
+        tabBarController.tabBar.isTranslucent = false
+        tabBarController.tabBar.backgroundColor = UIColor(named: "BackgroundDarker")
+        
         
         return tabBarController
     }

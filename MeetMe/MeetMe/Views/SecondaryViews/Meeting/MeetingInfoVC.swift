@@ -74,6 +74,7 @@ class MeetingInfoVC: UIViewController {
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.cornerRadius = 5
         textView.isUserInteractionEnabled = false
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     /// Текстовое поле для отображения интересов мероприятия
@@ -84,6 +85,7 @@ class MeetingInfoVC: UIViewController {
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.cornerRadius = 5
         textView.isUserInteractionEnabled = false
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     /// UI элемент, демонстрирующий картинку мероприятия
@@ -91,6 +93,7 @@ class MeetingInfoVC: UIViewController {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
+        Styling.styleImageView1(image)
         return image
     }()
     ///  Текстовое поле для отображения информации о месте проведения мероприятия
@@ -101,6 +104,7 @@ class MeetingInfoVC: UIViewController {
         textView.layer.borderColor = UIColor.systemGray.cgColor
         textView.layer.cornerRadius = 5
         textView.autocorrectionType = UITextAutocorrectionType.no
+        textView.backgroundColor = UIColor(named: "BackgroundDarker")
         return textView
     }()
     /// Константа высоты области с названием и картинкой мероприятия
@@ -120,7 +124,7 @@ class MeetingInfoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "BackgroundMain")
         
         let viewParticipantsButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(viewParticipants))
         navigationItem.rightBarButtonItem = viewParticipantsButton

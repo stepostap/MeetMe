@@ -123,11 +123,29 @@ class AuthRequests: MeetMeRequests {
     
     /// Создание и отправка запроса на повторную отправку кода для подтверждения почты
     func requestAnotherVerificationCode(completion: @escaping (Error?) -> (Void)) {
+        if !NetworkMonitor.shared.isConnected {
+            DispatchQueue.main.async { completion(NetworkerError.noConnection)}
+        }
         
+        var request = URLRequest(url: URL(string: userURL + User.currentUser.account!.id.description + "/send_new_code")!)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(MeetMeRequests.JWTToken)", forHTTPHeaderField: "Authorization")
+        
+        let task = emptyResponceTask(request: request, completion: completion)
+        task.resume()
     }
     
     /// Создание и отправка запроса на проверку введенного пользователем кода для подтверждения адреса электронной почты
     func sendVerificationCode(code: String, completion: @escaping (Error?) -> (Void)) {
+        if !NetworkMonitor.shared.isConnected {
+            DispatchQueue.main.async { completion(NetworkerError.noConnection)}
+        }
         
+        var request = URLRequest(url: URL(string: userURL + User.currentUser.account!.id.description + "/verify/\(code)")!)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(MeetMeRequests.JWTToken)", forHTTPHeaderField: "Authorization")
+        
+        let task = emptyResponceTask(request: request, completion: completion)
+        task.resume()
     }
 }

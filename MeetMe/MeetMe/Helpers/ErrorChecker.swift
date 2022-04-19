@@ -22,17 +22,13 @@ class ErrorChecker {
                 message = "Введен неправильный пароль"
             case LoginErrors.invalidEmail:
                 message = "Некорректный email адрес."
-            case LoginErrors.noSuchUser:
-                message = "Неверный email или пароль."
             case LoginErrors.emptyLogin:
                 message = "Не введен email адрес."
             case LoginErrors.emptyPassword:
                 message = "Не введен пароль."
-            
             default:
                 break
             }
-            
             return message
         }
         
@@ -45,11 +41,18 @@ class ErrorChecker {
             case RegisterErrors.emailRegistered:
                 message = "Данный электорнный адрес уже зарегестрирован."
             case RegisterErrors.emptyName:
-                message = "Введите имя."
+                message = "Не указано имя."
+            case RegisterErrors.accountNotActive:
+                message = "Аккаунт не был активирован, пожалуйста, повторите процесс регистрации."
+            case RegisterErrors.wrongEmailCode:
+                message = "Неверный код подтверждения электронной почты."
+            case RegisterErrors.emptyEmail:
+                message = "Не указана электронная почта."
+            case RegisterErrors.emptyPassword:
+                message = "Не указан пароль"
             default:
                 break
             }
-            
             return message
         }
         
@@ -64,24 +67,42 @@ class ErrorChecker {
             case CreateMeetingError.noMaxUser:
                 message = "Не выбрано максимальное число участников мероприятия."
             case CreateMeetingError.noStartingDate:
-                message = "Не указана дата начала мероприятия"
+                message = "Не указана дата начала мероприятия."
+            case CreateMeetingError.unableToEdit:
+                message = "Не удалось сохранить внесенные изменения."
+            case CreateMeetingError.startDateError:
+                message = "Мероприятие не может начинаться в прошлом."
+            case CreateMeetingError.unableToCreateMeeting:
+                message = "Не удалось создать мероприятие."
             default:
                 break
             }
-            
             return message
         }
         
-        if error is createGroupError {
+        if error is MeetingError {
             switch error {
-            case createGroupError.noName:
-                message = "Укажите название группы"
-            case createGroupError.noInfo:
-                message = "Добавьте описание группы"
-            case createGroupError.noInterests:
-                message = "Укажите интересы группы"
-            case createGroupError.noParticipants:
-                message = "При создании приватной группы добавьте в нее участников"
+            case MeetingError.userAlreadyParticipant:
+                message = "Вы уже участвуете в данном мероприятии."
+            case MeetingError.meetingDeleted:
+                message = "Данное мероприятие было удалено."
+            case MeetingError.maxMeetingParticipants:
+                message = "В данном мероприятии нет свободных мест для участия."
+            default:
+                break
+            }
+        }
+        
+        if error is CreateGroupError {
+            switch error {
+            case CreateGroupError.noName:
+                message = "Укажите название группы."
+            case CreateGroupError.userAlreadyParticipant:
+                message = "Вы уже подписаны на данную группу."
+            case CreateGroupError.unableToEditGroup:
+                message = "Не удалось отредактировать группу."
+            case CreateGroupError.unableToCreateGroup:
+                message = "Не удалось создать группу."
             default:
                 break
             }
@@ -91,9 +112,9 @@ class ErrorChecker {
         if error is JSONError {
             switch error {
             case JSONError.decodingError:
-                message = "Ошибка в декодировании данных, полученных с сервера"
+                message = "Ошибка в декодировании данных, полученных с сервера."
             case JSONError.encodingError:
-                message = "Ошибка в кодировании введенных данных"
+                message = "Ошибка в кодировании введенных данных."
             default: break
             }
             return message
@@ -115,6 +136,40 @@ class ErrorChecker {
             case NetworkerError.noConnection:
                 message = "Отсутствует соединение с сетью."
             default: break
+            }
+            return message
+        }
+        
+        if error is FriendError {
+            switch error {
+            case FriendError.alreadyFriend:
+                message = "Данный пользователь уже находится в списке ваших друзей."
+            case FriendError.unableToSendRequest:
+                message = "Не удалось отправить запрос в друзья."
+            default:
+                break
+            }
+        }
+        
+        if error is ImageStoreError {
+            switch error {
+            case ImageStoreError.unableToUploadImage:
+                message = "Не удалось загрузить изображение."
+            case ImageStoreError.unableToLoadImage:
+                message = "Не удалось получить изображения."
+            default:
+                break
+            }
+        }
+        
+        if error is ChatError {
+            switch error {
+            case ChatError.unableToSendMessage:
+                message = "Не удалось отправить сообщение."
+            case ChatError.unableToLoadMessages:
+                message = "Не удалось загрузить сообщения."
+            default:
+                break
             }
         }
         

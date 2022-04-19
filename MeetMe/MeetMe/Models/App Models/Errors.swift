@@ -22,7 +22,6 @@ enum JSONError: Error {
 enum LoginErrors: Error {
     case invalidEmail
     case invalidPassword
-    case noSuchUser
     case emptyLogin
     case emptyPassword
 }
@@ -30,23 +29,51 @@ enum LoginErrors: Error {
 enum RegisterErrors: Error {
     case weakPassword
     case emailRegistered
+    case wrongEmailCode
+    case accountNotActive
     case passwordsDontMatch
     case emptyName
+    case emptyEmail
+    case emptyPassword
 }
 
 enum CreateMeetingError : Error {
     case noName
     case noStartingDate
     case startEndDateError
+    case startDateError
     case noMaxUser
     case noParticipants
+    case unableToCreateMeeting
+    case unableToEdit
 }
 
-enum createGroupError: Error {
+enum MeetingError : Error {
+    case maxMeetingParticipants
+    case meetingDeleted
+    case userAlreadyParticipant
+}
+
+enum CreateGroupError: Error {
     case noName
-    case noInfo
-    case noInterests
-    case noParticipants
+    case unableToCreateGroup
+    case unableToEditGroup
+    case userAlreadyParticipant
+}
+
+enum FriendError: Error {
+    case alreadyFriend
+    case unableToSendRequest
+}
+
+enum ImageStoreError: Error {
+    case unableToUploadImage
+    case unableToLoadImage
+}
+
+enum ChatError: Error {
+    case unableToSendMessage
+    case unableToLoadMessages
 }
 
 class ServerError: Error {

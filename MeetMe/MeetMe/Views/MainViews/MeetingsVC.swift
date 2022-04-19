@@ -40,7 +40,7 @@ class MeetingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.addChild(searchResultsVC)
         searchResultsVC.didMove(toParent: self)
 
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "BackgroundMain")
         
         configNavigationBar()
         configSegmentController()
@@ -157,6 +157,7 @@ class MeetingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchFilterVC.searchOptions = self.searchOptions
         if let sheet = searchFilterVC.sheetPresentationController {
             sheet.detents = [ .medium(), .large() ]
+    
         }
         
         present(searchFilterVC, animated: true)
@@ -428,16 +429,15 @@ class MeetingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         refreshControl.addTarget(self, action: #selector(reloadUserMeetings), for: .valueChanged)
         meetingTableView.refreshControl = refreshControl
-        
-        //self.searchController.searchResultsController = searchResultsVC
-        self.searchController?.searchResultsUpdater = searchResultsVC
        
+        self.searchController?.searchResultsUpdater = searchResultsVC
+        meetingTableView.backgroundColor = UIColor(named: "BackgroundMain")
         meetingTableView.backgroundView = activityIndicator
         meetingTableView.register(MeetingCell.self, forCellReuseIdentifier: "MeetingCell")
         view.addSubview(meetingTableView)
         meetingTableView.pinTop(to: segmentController.bottomAnchor, const: 10)
         meetingTableView.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 10)
         meetingTableView.pinRight(to: view.safeAreaLayoutGuide.trailingAnchor, const: 10)
-        meetingTableView.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor, const: 10)
+        meetingTableView.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor, const: 0)
     }
 }
