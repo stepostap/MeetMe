@@ -87,7 +87,7 @@ class GroupsVC: UITableViewController {
         
         searchController?.searchResultsUpdater = searchResultVC
         searchController?.obscuresBackgroundDuringPresentation = false
-        searchController?.searchBar.placeholder = "Search Groups"
+        searchController?.searchBar.placeholder = "Искать группы"
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.searchController = searchController

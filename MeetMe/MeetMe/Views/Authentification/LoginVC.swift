@@ -40,13 +40,18 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         textField.isSecureTextEntry = true
         return textField
     }()
-
+    var alerts = [UIAlertController]()
+    var curAlert = 0
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
         view.backgroundColor = UIColor(named: "BackgroundMain")
         configView()
     }
+    
     
     /// Формирование экрана логина
     private func configView() {
@@ -154,9 +159,9 @@ class LoginVC: UIViewController, UITextFieldDelegate {
        
         AuthRequests.shared.getJWTToken(info: JWTBullshit(email: email, password: password), completion: {(token, error) in
             if let error = error {
+                self.loader.stopAnimating()
                 let alert = ErrorChecker.handler.getAlertController(error: error)
                 self.present(alert, animated: true, completion: nil)
-                self.loader.stopAnimating()
                 return
             }
             

@@ -135,7 +135,7 @@ class AccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         view.backgroundColor = UIColor(named: "BackgroundMain")
 
         logoutButton = UIBarButtonItem(title: "Выйти", style: .done, target: self, action: #selector(signOut))
-        editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editProfile))
+        editButton = UIBarButtonItem(title: "Изменить", style: .done, target: self, action: #selector(editProfile))
         
         if isUserAccount {
             self.navigationItem.rightBarButtonItem = logoutButton

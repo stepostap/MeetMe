@@ -76,41 +76,47 @@ class FriendsReequests: MeetMeRequests{
             DispatchQueue.main.async { completion(nil, NetworkerError.noConnection)}
         }
         
-        var request = URLRequest(url: URL(string: userURL + User.currentUser.account!.id.description + "/friends/search?query=\(query)")!)
-        request.httpMethod = "GET"
-        request.setValue("Bearer \(MeetMeRequests.JWTToken)", forHTTPHeaderField: "Authorization")
-        
-        print(userURL + User.currentUser.account!.id.description + "/friends/search?query=\(query)")
-        
-        let task = session.dataTask(with: request, completionHandler: ({ data, responce, error in
-            do {
-                try self.errorCheck(data: data, response: responce, error: error)
-            } catch let error {
-                DispatchQueue.main.async { completion(nil, error) }
-            }
-            if let data = data {
+        let queryItems = [URLQueryItem(name: "query", value: query)]
+        var urlComps = URLComponents(string: userURL + User.currentUser.account!.id.description + "/friends/search")!
+        urlComps.queryItems = queryItems
+        // URL(string: userURL + User.currentUser.account!.id.description + "/friends/search?query=\(query)")
+        if let url = urlComps.url {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.setValue("Bearer \(MeetMeRequests.JWTToken)", forHTTPHeaderField: "Authorization")
+            
+            print(url)
+            
+            let task = session.dataTask(with: request, completionHandler: ({ data, responce, error in
                 do {
-                    let accountsData : [String:[AccountDTO]] = try self.getData(data: data)
-                    var accounts = [Account]()
-                    var results = [[Account]]()
-                    
-                    for dto in accountsData["friends"]! {
-                        accounts.append(self.createAccountFromDTO(dataAccount: dto))
-                    }
-                    results.append(accounts)
-                    print(accounts.count)
-                    accounts.removeAll()
-                    for dto in accountsData["global"]! {
-                        accounts.append(self.createAccountFromDTO(dataAccount: dto))
-                    }
-                    results.append(accounts)
-                    print(accounts.count)
-                    DispatchQueue.main.async { completion(results, nil) }
+                    try self.errorCheck(data: data, response: responce, error: error)
                 } catch let error {
                     DispatchQueue.main.async { completion(nil, error) }
                 }
-            }
-        }))
-        task.resume()
+                if let data = data {
+                    do {
+                        let accountsData : [String:[AccountDTO]] = try self.getData(data: data)
+                        var accounts = [Account]()
+                        var results = [[Account]]()
+                        
+                        for dto in accountsData["friends"]! {
+                            accounts.append(self.createAccountFromDTO(dataAccount: dto))
+                        }
+                        results.append(accounts)
+                        print(accounts.count)
+                        accounts.removeAll()
+                        for dto in accountsData["global"]! {
+                            accounts.append(self.createAccountFromDTO(dataAccount: dto))
+                        }
+                        results.append(accounts)
+                        print(accounts.count)
+                        DispatchQueue.main.async { completion(results, nil) }
+                    } catch let error {
+                        DispatchQueue.main.async { completion(nil, error) }
+                    }
+                }
+            }))
+            task.resume()
+        }
     }
 }

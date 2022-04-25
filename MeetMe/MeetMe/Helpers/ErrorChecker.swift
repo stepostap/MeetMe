@@ -13,7 +13,7 @@ class ErrorChecker {
     static var handler = ErrorChecker()
     
     /// Создание сообщения в зависимости от типа ошибки
-    private func getMessage(error: Error) -> String {
+    public func getMessage(error: Error) -> String {
         var message = ""
         
         if error is LoginErrors {
@@ -91,6 +91,7 @@ class ErrorChecker {
             default:
                 break
             }
+            return message
         }
         
         if error is CreateGroupError {
@@ -130,7 +131,7 @@ class ErrorChecker {
             case NetworkerError.badData:
                 message = "Данные с сервера не были получены."
             case NetworkerError.badResponse:
-                message = "Неправильный ответ сервераю"
+                message = "Неправильный ответ сервера."
             case NetworkerError.badStatusCode(let code):
                 message = "Ошибка сервера \(code)."
             case NetworkerError.noConnection:
@@ -149,6 +150,7 @@ class ErrorChecker {
             default:
                 break
             }
+            return message
         }
         
         if error is ImageStoreError {
@@ -160,6 +162,7 @@ class ErrorChecker {
             default:
                 break
             }
+            return message
         }
         
         if error is ChatError {
@@ -171,6 +174,7 @@ class ErrorChecker {
             default:
                 break
             }
+            return message
         }
         
         print(error)
@@ -179,7 +183,7 @@ class ErrorChecker {
     
     /// Создание AlertController с текстом соответствующей ошибки
     func getAlertController (error: Error) -> UIAlertController {
-        let alert = UIAlertController(title: "Warning", message: getMessage(error: error), preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ошибка", message: getMessage(error: error), preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
         return alert

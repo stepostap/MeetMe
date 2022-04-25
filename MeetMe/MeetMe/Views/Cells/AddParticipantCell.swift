@@ -61,7 +61,7 @@ class AddParticipantCell: UITableViewCell {
         contentView.addSubview(nameLabel)
         nameLabel.pinLeft(to: participantImage.trailingAnchor, const: 10)
         nameLabel.pinCenter(to: contentView.centerYAnchor, const: 0)
-        nameLabel.setWidth(to: 250)
+        nameLabel.setWidth(to: 220)
         
         contentView.addSubview(checkbox)
         //checkbox.style = .tick

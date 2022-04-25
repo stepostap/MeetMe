@@ -75,7 +75,7 @@ class Meeting: Codable, Equatable {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM HH:mm"
         if let endingDate = endingDate {
-            return formatter.string(from: (endingDate)) + " - " + formatter.string(from: (startingDate))
+            return formatter.string(from: (startingDate)) + " - " + formatter.string(from: (endingDate))
         } else {
             return formatter.string(from: (startingDate))
         }

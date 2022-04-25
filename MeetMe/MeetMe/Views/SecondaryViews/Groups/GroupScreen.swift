@@ -156,15 +156,13 @@ class GroupScreen: UITableViewController {
             groupImage.kf.setImage(with: URL(string: group!.groupImageURL), options: [.forceRefresh])
         }
         
-        let groupName = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+        let groupName = UITextField(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
         Styling.styleTextField(groupName)
         groupName.text = group?.groupName
         view.addSubview(groupName)
         groupName.pinTop(to: groupImage.bottomAnchor, const: 10)
         groupName.pinCenter(to: view.centerXAnchor, const: 0)
-        groupName.setWidth(to: 200)
-//        groupName.pinLeft(to: view.leadingAnchor, const: 20)
-//        groupName.pinRight(to: view.trailingAnchor, const: 20)
+        groupName.setWidth(to: 300)
         groupName.textAlignment = .center
         groupName.font = .boldSystemFont(ofSize: 18)
         
@@ -188,7 +186,6 @@ class GroupScreen: UITableViewController {
         
         if !(group?.interests.isEmpty ?? true) {
             stackView.addArrangedSubview(configInterestsView())
-            
         }
         
         var joinHeieght = 0.0
@@ -242,7 +239,7 @@ class GroupScreen: UITableViewController {
         info.layer.borderColor = UIColor.systemGray.cgColor
         info.backgroundColor = UIColor(named: "BackgroundDarker")
         info.isScrollEnabled = false
-        infotextHeight = info.text.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 40, font: .systemFont(ofSize: 16))
+        infotextHeight = info.text.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 100, font: .systemFont(ofSize: 16))
         info.pinTop(to: label.bottomAnchor, const: 0)
         info.setHeight(to: Int(infotextHeight) +  15)
         info.pinLeft(to: view.leadingAnchor, const: 0)

@@ -14,19 +14,19 @@ enum NetworkerError: Error {
     case badData
 }
 
-enum JSONError: Error {
+enum JSONError: Error, CaseIterable {
     case decodingError
     case encodingError
 }
 
-enum LoginErrors: Error {
+enum LoginErrors: Error, CaseIterable {
     case invalidEmail
     case invalidPassword
     case emptyLogin
     case emptyPassword
 }
 
-enum RegisterErrors: Error {
+enum RegisterErrors: Error, CaseIterable {
     case weakPassword
     case emailRegistered
     case wrongEmailCode
@@ -37,7 +37,7 @@ enum RegisterErrors: Error {
     case emptyPassword
 }
 
-enum CreateMeetingError : Error {
+enum CreateMeetingError : Error, CaseIterable {
     case noName
     case noStartingDate
     case startEndDateError
@@ -48,30 +48,30 @@ enum CreateMeetingError : Error {
     case unableToEdit
 }
 
-enum MeetingError : Error {
+enum MeetingError : Error, CaseIterable {
     case maxMeetingParticipants
     case meetingDeleted
     case userAlreadyParticipant
 }
 
-enum CreateGroupError: Error {
+enum CreateGroupError: Error, CaseIterable {
     case noName
     case unableToCreateGroup
     case unableToEditGroup
     case userAlreadyParticipant
 }
 
-enum FriendError: Error {
+enum FriendError: Error, CaseIterable {
     case alreadyFriend
     case unableToSendRequest
 }
 
-enum ImageStoreError: Error {
+enum ImageStoreError: Error, CaseIterable {
     case unableToUploadImage
     case unableToLoadImage
 }
 
-enum ChatError: Error {
+enum ChatError: Error, CaseIterable {
     case unableToSendMessage
     case unableToLoadMessages
 }

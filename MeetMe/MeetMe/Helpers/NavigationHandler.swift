@@ -26,8 +26,8 @@ class NavigationHandler {
     static func createMeetingsNC() -> UINavigationController {
         
         let meetingVC = MeetingsVC()
-        meetingVC.title = "Meetings"
-        meetingVC.tabBarItem = UITabBarItem(title: "Meetings", image: UIImage(named: "meeting3"), tag: 1)
+        meetingVC.title = "Мероприятия"
+        meetingVC.tabBarItem = UITabBarItem(title: "Меропрития", image: UIImage(named: "meeting3"), tag: 1)
         let navigation = UINavigationController(rootViewController: meetingVC)
         navigation.navigationBar.barTintColor = UIColor(named: "BackgroundDarker")
         
@@ -38,8 +38,8 @@ class NavigationHandler {
     static func createGroupsNC() -> UINavigationController {
         
         let groupsVC = GroupsVC()
-        groupsVC.title = "Groups"
-        groupsVC.tabBarItem = UITabBarItem(title: "Groups", image: UIImage(named: "groups3"), tag: 2)
+        groupsVC.title = "Группы"
+        groupsVC.tabBarItem = UITabBarItem(title: "Группы", image: UIImage(named: "groups3"), tag: 2)
         let navigation = UINavigationController(rootViewController: groupsVC)
         navigation.navigationBar.barTintColor = UIColor(named: "BackgroundDarker")
         

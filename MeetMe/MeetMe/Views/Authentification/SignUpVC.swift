@@ -122,6 +122,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         
         AuthRequests.shared.register(info: RegisterInfo(email: email, password: password, fullName: name), completion: { (account, error) in
             if let error = error {
+                self.loader.stopAnimating()
                 let alert = ErrorChecker.handler.getAlertController(error: error)
                 self.present(alert, animated: true, completion: nil)
                 return

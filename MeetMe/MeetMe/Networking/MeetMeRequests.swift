@@ -69,7 +69,7 @@ class MeetMeRequests {
     }
     
     
-    func configError(errorCode: Int, message: String) -> Error {
+    private func configError(errorCode: Int, message: String) -> Error {
         switch errorCode {
         case 1: return LoginErrors.invalidEmail
         case 2: return LoginErrors.invalidPassword
@@ -96,7 +96,7 @@ class MeetMeRequests {
     
     
     /// Проверка полученных  от сервера данных на наличие ошибок
-    func checkResponce(data: Data) throws {
+    private func checkResponce(data: Data) throws {
         var responceData: Responce<IDDTO>
         do {
             responceData = try self.decoder.decode(Responce<IDDTO>.self, from: data)

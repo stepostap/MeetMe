@@ -125,6 +125,7 @@ class CreateGroupVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
             self.present(alert, animated: true, completion: nil)
             return
         }
+        
         if let group = group {
             let dto = GroupEditDTO(name: nameTextField.text ?? group.groupName, description: infoTextView.text, isPrivate: privateSwitch.isOn, interests: InterestsParser.getInterestsString(interests: interests))
             GroupRequests.shared.editGroup(groupID: group.id, image: chosenImage, newInfo: dto, completion: {(group, error) in

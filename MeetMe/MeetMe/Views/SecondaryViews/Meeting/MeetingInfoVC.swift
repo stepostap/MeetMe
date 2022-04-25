@@ -125,8 +125,7 @@ class MeetingInfoVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "BackgroundMain")
-        
-        let viewParticipantsButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(viewParticipants))
+        let viewParticipantsButton = UIBarButtonItem(title: "Участники", style: .done, target: self, action: #selector(viewParticipants))
         navigationItem.rightBarButtonItem = viewParticipantsButton
         configView()
         setViewInfo()
@@ -197,6 +196,7 @@ class MeetingInfoVC: UIViewController {
             }
             
             self.meeting!.isUserParticipant = true
+            self.meeting!.currentParticipantNumber += 1
             if User.currentUser.meetingInvitations?.personalInvitations.contains(self.meeting!) ??  false {
                 let index = User.currentUser.meetingInvitations!.personalInvitations.firstIndex(of: self.meeting!)
                 User.currentUser.meetingInvitations!.personalInvitations.remove(at: index!)

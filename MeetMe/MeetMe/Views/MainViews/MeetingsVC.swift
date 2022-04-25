@@ -250,12 +250,18 @@ class MeetingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     }
                     
                     meeting.isUserParticipant = true
+                    meeting.currentParticipantNumber += 1
                     
                     let index = User.currentUser.meetingInvitations!.personalInvitations.firstIndex(of: meeting)
                     User.currentUser.meetingInvitations!.personalInvitations.remove(at: index!)
                     
                     if participate {
-                        User.currentUser.plannedMeetings?.append(meeting)
+                        let index = User.currentUser.plannedMeetings?.lastIndex(where: {$0.startingDate < meeting.startingDate})
+                        if let index = index {
+                            User.currentUser.plannedMeetings?.insert(meeting, at: index + 1)
+                        } else {
+                            User.currentUser.plannedMeetings?.insert(meeting, at: 0)
+                        }
                     }
                     
                     self!.meetingTableView.reloadData()
@@ -415,9 +421,9 @@ class MeetingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let createMeetingButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createMeeting))
         searchController?.searchBar.sizeToFit()
         searchController?.obscuresBackgroundDuringPresentation = false
-        searchController?.searchBar.placeholder = "Search meetings"
+        searchController?.searchBar.placeholder = "Искать мероприятия"
         
-        navigationItem.title = "Meetings"
+        navigationItem.title = "Мероприятия"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.searchController = searchController
         navigationItem.leftBarButtonItem = filterButton

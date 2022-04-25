@@ -165,9 +165,9 @@ class ChooseParticipantsVC: UIViewController, UITableViewDelegate, UITableViewDa
         searchController.searchBar.sizeToFit()
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search meetings"
+        searchController.searchBar.placeholder = "Искать участников"
         
-        navigationItem.title = "Друзья"
+        navigationItem.title = "Участники"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.searchController = searchController
     }

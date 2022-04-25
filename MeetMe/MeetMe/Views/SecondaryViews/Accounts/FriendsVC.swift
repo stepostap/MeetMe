@@ -216,7 +216,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private func configNavigationBar()  {
         searchController?.searchBar.sizeToFit()
         searchController?.obscuresBackgroundDuringPresentation = true
-        searchController?.searchBar.placeholder = "Search meetings"
+        searchController?.searchBar.placeholder = "Искать друзей"
         searchController?.searchResultsUpdater = searchAccountsVC
         
         navigationItem.title = "Друзья"

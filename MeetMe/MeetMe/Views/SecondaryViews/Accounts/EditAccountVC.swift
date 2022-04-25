@@ -105,7 +105,6 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "BackgroundMain")
-        tabBarController?.tabBar.backgroundColor = .systemGray4
         saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveProfile))
         self.navigationItem.rightBarButtonItem = saveButton
         configView()
@@ -179,7 +178,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         scrollView.pinBottom(to: view.bottomAnchor, const: 0)
         editView.pin(to: scrollView)
         editView.pinWidth(to: view.widthAnchor, mult: 1)
-        editView.pinHeight(to: view.heightAnchor, mult: 1)
+        editView.setHeight(to: 750)
 
         
         chooseImageButton.setTitle("Выбрать изображение", for: .normal)

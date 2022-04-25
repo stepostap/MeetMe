@@ -153,7 +153,7 @@ class GroupRequests: MeetMeRequests {
                     for dto in meetingData {
                         meetings.append(self.createMeetingFromDTO(dataMeeting: dto))
                     }
-                    //meeting.id = dataMeeting.id
+                    meetings = meetings.sorted(by: { $0.startingDate < $1.startingDate })
                     DispatchQueue.main.async { completion(meetings, nil) }
                 } catch let error {
                     DispatchQueue.main.async { completion(nil, error) }
@@ -218,7 +218,7 @@ class GroupRequests: MeetMeRequests {
             DispatchQueue.main.async { completion(NetworkerError.noConnection)}
         }
         
-        var request = URLRequest(url: URL(string: groupURL + groupID.description + "/participant/" + User.currentUser.account!.id.description)!)
+        var request = URLRequest(url: URL(string: groupURL + groupID.description + "/participants/" + User.currentUser.account!.id.description)!)
         //request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "DELETE"
         request.setValue("Bearer \(MeetMeRequests.JWTToken)", forHTTPHeaderField: "Authorization")
