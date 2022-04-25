@@ -1,0 +1,11 @@
+
+
+target 'MeetMe' do
+  
+  use_frameworks!
+
+  # Pods for MeetMe
+pod 'SwiftPhotoGallery'
+
+
+end
