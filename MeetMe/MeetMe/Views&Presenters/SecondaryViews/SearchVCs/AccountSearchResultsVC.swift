@@ -33,7 +33,6 @@ class AccountSearchResultsVC: UITableViewController, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         loader.startAnimating()
         let query = searchController.searchBar.text ?? ""
-        print(parentVC.segmentController.selectedSegmentIndex)
         if !query.isEmpty {
             FriendsReequests.shared.searchFriends(query: query, completion: updateTable(accounts:error:))
         }

@@ -1,14 +1,14 @@
 //
-//  MeetingInfoVC.swift
+//  MeetingInfoView.swift
 //  MeetMe
 //
-//  Created by Stepan Ostapenko on 14.03.2022.
+//  Created by Stepan Ostapenko on 02.09.2022.
 //
 
 import UIKit
 
-/// Класс, отвечающий за отображение информации о мероприятии
-class MeetingInfoVC: UIViewController {
+class MeetingInfoView: UIView {
+
     /// Мероприятие
     var meeting: Meeting?
     /// Форматтер даты
@@ -22,7 +22,7 @@ class MeetingInfoVC: UIViewController {
     /// Индикатор, показывающий приватное ли это мероприятие
     private let privateSwitch = UISwitch()
     /// Кнопка для участия в мероприятии
-    private let participateButton = UIButton()
+    let participateButton = UIButton()
     /// Текстовое поле для отображения даты начала мероприятия
     private let startingDateTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 150, height: 30))
@@ -122,20 +122,16 @@ class MeetingInfoVC: UIViewController {
     /// Константа высоты области с информацией о числе участников мероприятия
     private var participantViewHeight = 120
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "BackgroundMain")
-        let viewParticipantsButton = UIBarButtonItem(title: "Участники", style: .done, target: self, action: #selector(viewParticipants))
-        navigationItem.rightBarButtonItem = viewParticipantsButton
+    init(meeting: Meeting) {
+        super.init(frame: .zero)
+        self.meeting = meeting
+        self.backgroundColor = UIColor(named: "BackgroundMain")
         configView()
         setViewInfo()
     }
     
-    /// Переход на контроллер, отображающий участников мероприятия
-    @objc private func viewParticipants() {
-        let vc = ViewParticipantsVC()
-        vc.meeting = meeting
-        navigationController?.pushViewController(vc, animated: true)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     /// Установка информации о мероприятии на UI элементы
@@ -186,44 +182,22 @@ class MeetingInfoVC: UIViewController {
         }
     }
     
-    /// Участие пользователя в мероприятии
-    @objc private func participate() {
-        MeetingRequests.shared.participateInMeeting(meetingID: meeting!.id, completion: {(error) in
-            if let error = error {
-                let alert = ErrorChecker.handler.getAlertController(error: error)
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
-            
-            self.meeting!.isUserParticipant = true
-            self.meeting!.currentParticipantNumber += 1
-            if User.currentUser.meetingInvitations?.personalInvitations.contains(self.meeting!) ??  false {
-                let index = User.currentUser.meetingInvitations!.personalInvitations.firstIndex(of: self.meeting!)
-                User.currentUser.meetingInvitations!.personalInvitations.remove(at: index!)
-                User.currentUser.plannedMeetings?.append(self.meeting!)
-            } else {
-                User.currentUser.plannedMeetings?.append(self.meeting!)
-            }
-            self.navigationController?.popViewController(animated: true)
-        })
-    }
-    
     // MARK: Configs
     /// Формирование экрана
     private func configView() {
-        view.addSubview(scrollView)
+        addSubview(scrollView)
         scrollView.addSubview(mainStackView)
         
         scrollView.isScrollEnabled = true
         scrollView.isUserInteractionEnabled = true
         scrollView.isPagingEnabled = false
         
-        scrollView.pinCenter(to: view.safeAreaLayoutGuide.centerXAnchor, const: 0)
-        scrollView.pinWidth(to: view.widthAnchor, mult: 1)
-        scrollView.pinTop(to: view.topAnchor, const: 0)
-        scrollView.pinBottom(to: view.bottomAnchor, const: 0)
+        scrollView.pinCenter(to: safeAreaLayoutGuide.centerXAnchor, const: 0)
+        scrollView.pinWidth(to: widthAnchor, mult: 1)
+        scrollView.pinTop(to: topAnchor, const: 0)
+        scrollView.pinBottom(to: bottomAnchor, const: 0)
         mainStackView.pin(to: scrollView)
-        mainStackView.pinWidth(to: view.widthAnchor, mult: 1)
+        mainStackView.pinWidth(to: widthAnchor, mult: 1)
         
         mainStackView.spacing = 0
         mainStackView.axis  = NSLayoutConstraint.Axis.vertical
@@ -462,7 +436,7 @@ class MeetingInfoVC: UIViewController {
             view.addSubview(participateButton)
             Styling.styleFilledButton(participateButton)
             participateButton.pinTop(to: currentParticipantsTextField.bottomAnchor, const: 20)
-            participateButton.addTarget(self, action: #selector(participate), for: .touchUpInside)
+            // 
             participateButton.pinLeft(to: view.leadingAnchor, const: 20)
             participateButton.pinRight(to: view.trailingAnchor, const: 20)
             participateButton.setTitle("Участвовать", for: .normal)
@@ -474,4 +448,5 @@ class MeetingInfoVC: UIViewController {
         
         return view
     }
+
 }

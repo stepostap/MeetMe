@@ -9,7 +9,7 @@ import UIKit
 import Network
 
 /// Контроллер, отвечающий за отображение списка мероприятий
-class MeetingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MeetingsVC: UIViewController {
     /// Фильтр для поиска мероприятий
     let searchOptions = MeetingSearchFilter(types: [], online: false, participantsMax: 100)
     /// Контроллер для разделения экрана на секции (история посещенных мероприятий, предстоящие мероприятия и приглашения)
@@ -19,11 +19,11 @@ class MeetingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     /// Контроллер, отображающий результаты поиска
     private let searchResultsVC = MeetingSearchResultsVC()
     /// UI элемент, отображающий список мероприятий
-    private let meetingTableView = UITableView()
+    let meetingTableView = UITableView()
     /// Индикатор загрузки
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     /// Список текущих просматриваемых пользоваетелем мероприятия
-    private var currentMeetings: [Meeting]? = [Meeting]()
+    var currentMeetings: [Meeting]? = [Meeting]()
     /// Индикатор обновления данных
     private let refreshControl = UIRefreshControl()
 
@@ -168,125 +168,51 @@ class MeetingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         navigationController?.pushViewController(CreateMeetingVC(), animated: true)
     }
     
-    /// Создание UIContextualAction, отвечающего за отписку пользователя от посещения данного мероприятия
-    private func leaveAction(meetingType: MeetingType, indexPath: IndexPath) -> UIContextualAction {
-        let leaveAction = UIContextualAction(style: .destructive, title: "Покинуть мероприятие") { [weak self] (_, _, _) in
-            let alert = UIAlertController(title: "Покинуть мероприятие?", message: "Вы уверены, что хотите покинуть мероприятие? Это действие нельзя отменить.", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-            let removeAction = UIAlertAction(title: "Покинуть", style: .default, handler: {_ in
-                switch meetingType {
-                case .visited:
-                    MeetingRequests.shared.removeMeeting(meetingID: User.currentUser.meetingHistory![indexPath.row].id, completion: {(error) in
-                        if let error = error {
-                            let alert = ErrorChecker.handler.getAlertController(error: error)
-                            self?.present(alert, animated: true, completion: nil)
-                            return
-                        }
-                        self?.currentMeetings!.remove(at: indexPath.row)
-                        User.currentUser.meetingHistory?.remove(at: indexPath.row)
-                        self?.meetingTableView.deleteRows(at: [indexPath], with: .automatic)
-                        self?.meetingTableView.reloadData()
-                    })
-                case .planned:
-                    MeetingRequests.shared.removeMeeting(meetingID: self!.currentMeetings![indexPath.row].id, completion: {(error) in
-                        if let error = error {
-                            let alert = ErrorChecker.handler.getAlertController(error: error)
-                            self?.present(alert, animated: true, completion: nil)
-                            return
-                        }
-                        self?.currentMeetings!.remove(at: indexPath.row)
-                        User.currentUser.plannedMeetings?.remove(at: indexPath.row)
-                        self?.meetingTableView.deleteRows(at: [indexPath], with: .automatic)
-                        self?.meetingTableView.reloadData()
-                    })
-                case .invitations:
-                    break
-                }
-                
-            })
-            alert.addAction(cancelAction)
-            alert.addAction(removeAction)
-            self?.present(alert, animated: true)
-        }
-        return leaveAction
+    
+    // MARK: Configs
+    /// Формирование контроллера, отвечающего за секции приложения
+    private func configSegmentController() {
+        view.addSubview(segmentController)
+        segmentController.setConstraints(to: view, left: 30, top: 0, right: 30, height: 30)
+        segmentController.selectedSegmentIndex = 1
+        segmentController.addTarget(self, action: #selector(reloadData), for: .valueChanged)
     }
     
-    /// Создание UIContextualAction, отвечающего за удаления данного мероприятия
-    private func deleteAction(indexPath: IndexPath) -> UIContextualAction {
+    /// Форормирование панели навигации
+    private func configNavigationBar()  {
+        let filterButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(filterMeetingsSearch))
+        let createMeetingButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createMeeting))
+        searchController?.searchBar.sizeToFit()
+        searchController?.obscuresBackgroundDuringPresentation = false
+        searchController?.searchBar.placeholder = "Искать мероприятия"
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "Отменить мероприятие") { [weak self] (_, _, _) in
-            let alert = UIAlertController(title: "Удалить мероприятие?", message: "Вы уверены, что хотите удалить мероприятие? Это действие нельзя отменить. Мероприятие будет удалено для всех его участников.", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-            let removeAction = UIAlertAction(title: "Удалить", style: .default, handler: {_ in
-                MeetingRequests.shared.deleteMeeting(meetingID: self!.currentMeetings![indexPath.row].id, completion: {(error) in
-                    if let error = error {
-                        let alert = ErrorChecker.handler.getAlertController(error: error)
-                        self!.present(alert, animated: true, completion: nil)
-                        return
-                    }
-                    self!.currentMeetings!.remove(at: indexPath.row)
-                    User.currentUser.plannedMeetings?.remove(at: indexPath.row)
-                    self!.meetingTableView.deleteRows(at: [indexPath], with: .automatic)
-                    self!.meetingTableView.reloadData()
-                })
-            })
-            alert.addAction(cancelAction)
-            alert.addAction(removeAction)
-            self!.present(alert, animated: true)
-        }
-        return deleteAction
+        navigationItem.title = "Мероприятия"
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.searchController = searchController
+        navigationItem.leftBarButtonItem = filterButton
+        navigationItem.rightBarButtonItem = createMeetingButton
     }
     
-    /// Создание UIContextualAction, отвечающего за ответ на приглашение на мероприятие
-    private func inviteAction(participate: Bool, indexPath: IndexPath) -> UIContextualAction {
-        let participateAction = UIContextualAction(style: (participate ? .normal : .destructive), title: (participate ? "Участвовать" : "Отказаться")) { [weak self] (_, _, _) in
-            if indexPath.section == 0 {
-                let meeting = User.currentUser.meetingInvitations!.personalInvitations[indexPath.row]
-                MeetingRequests.shared.answerToInvitation(accept: participate, meetingID: meeting.id, completion: {(error) in
-                    if let error = error {
-                        let alert = ErrorChecker.handler.getAlertController(error: error)
-                        self!.present(alert, animated: true, completion: nil)
-                        return
-                    }
-                    
-                    meeting.isUserParticipant = true
-                    meeting.currentParticipantNumber += 1
-                    
-                    let index = User.currentUser.meetingInvitations!.personalInvitations.firstIndex(of: meeting)
-                    User.currentUser.meetingInvitations!.personalInvitations.remove(at: index!)
-                    
-                    if participate {
-                        let index = User.currentUser.plannedMeetings?.lastIndex(where: {$0.startingDate < meeting.startingDate})
-                        if let index = index {
-                            User.currentUser.plannedMeetings?.insert(meeting, at: index + 1)
-                        } else {
-                            User.currentUser.plannedMeetings?.insert(meeting, at: 0)
-                        }
-                    }
-                    
-                    self!.meetingTableView.reloadData()
-                })
-            } else {
-                let meeting = User.currentUser.meetingInvitations!.groupInvitations[indexPath.section - 1].meetings[indexPath.row]
-                GroupRequests.shared.respondMeetingForGroupInvitation(accept: participate, groupID: (User.currentUser.meetingInvitations?.groupInvitations[indexPath.section - 1].group.id)!, meetingID: (User.currentUser.meetingInvitations?.groupInvitations[indexPath.section - 1].meetings[indexPath.row].id)!,
-                                                                      completion: {(error) in
-                    if let error = error {
-                        let alert = ErrorChecker.handler.getAlertController(error: error)
-                        self!.present(alert, animated: true, completion: nil)
-                        return
-                    }
-                    
-                    let index = User.currentUser.meetingInvitations!.groupInvitations[indexPath.section - 1].meetings.firstIndex(of: meeting)
-                    User.currentUser.meetingInvitations!.groupInvitations[indexPath.section - 1].meetings.remove(at: index!)
-                    
-                    self?.meetingTableView.reloadData()
-                })
-            }
-        }
-        return participateAction
+    ///  Формирование UI элемента, отображающего список мероприятий 
+    private func configMeetingTableView() {
+        
+        refreshControl.addTarget(self, action: #selector(reloadUserMeetings), for: .valueChanged)
+        meetingTableView.refreshControl = refreshControl
+       
+        self.searchController?.searchResultsUpdater = searchResultsVC
+        meetingTableView.backgroundColor = UIColor(named: "BackgroundMain")
+        meetingTableView.backgroundView = activityIndicator
+        meetingTableView.register(MeetingCell.self, forCellReuseIdentifier: "MeetingCell")
+        view.addSubview(meetingTableView)
+        meetingTableView.pinTop(to: segmentController.bottomAnchor, const: 10)
+        meetingTableView.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 10)
+        meetingTableView.pinRight(to: view.safeAreaLayoutGuide.trailingAnchor, const: 10)
+        meetingTableView.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor, const: 0)
     }
+}
 
-    // MARK: TableView DataSource
+
+extension MeetingsVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if let _ = currentMeetings {
             return 1
@@ -374,12 +300,12 @@ class MeetingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         var actions = [UIContextualAction]()
         switch segmentController.selectedSegmentIndex {
         case 0:
-            let leaveAction = leaveAction(meetingType: .visited, indexPath: indexPath)
+            let leaveAction = ContextualActionService.leaveMeetingAction(meetingType: .visited, indexPath: indexPath, meetingsVC: self)
             actions.append(leaveAction)
             
         case 1:
-            let leaveAction = leaveAction(meetingType: .planned, indexPath: indexPath)
-            let deleteAction = deleteAction(indexPath: indexPath)
+            let leaveAction = ContextualActionService.leaveMeetingAction(meetingType: .planned, indexPath: indexPath, meetingsVC: self)
+            let deleteAction = ContextualActionService.deleteMeetingAction(indexPath: indexPath, meetingsVC: self)
             let editAction = UIContextualAction(style: .normal, title: "Редактировать") { _, _, complete in
                 let vc = CreateMeetingVC()
                 vc.meeting = self.currentMeetings![indexPath.row]
@@ -393,8 +319,8 @@ class MeetingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             
         case 2:
-            let participateAction = inviteAction(participate: true, indexPath: indexPath)
-            let declineAction = inviteAction(participate: false, indexPath: indexPath)
+            let participateAction = ContextualActionService.inviteMeetingAction(participate: true, indexPath: indexPath, meetingsVC: self)
+            let declineAction = ContextualActionService.inviteMeetingAction(participate: false, indexPath: indexPath, meetingsVC: self)
             actions.append(participateAction)
             actions.append(declineAction)
             
@@ -404,46 +330,5 @@ class MeetingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let configuration = UISwipeActionsConfiguration(actions: actions)
         configuration.performsFirstActionWithFullSwipe = false
         return configuration
-    }
-    
-    // MARK: Configs
-    /// Формирование контроллера, отвечающего за секции приложения
-    private func configSegmentController() {
-        view.addSubview(segmentController)
-        segmentController.setConstraints(to: view, left: 30, top: 0, right: 30, height: 30)
-        segmentController.selectedSegmentIndex = 1
-        segmentController.addTarget(self, action: #selector(reloadData), for: .valueChanged)
-    }
-    
-    /// Форормирование панели навигации
-    private func configNavigationBar()  {
-        let filterButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(filterMeetingsSearch))
-        let createMeetingButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createMeeting))
-        searchController?.searchBar.sizeToFit()
-        searchController?.obscuresBackgroundDuringPresentation = false
-        searchController?.searchBar.placeholder = "Искать мероприятия"
-        
-        navigationItem.title = "Мероприятия"
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.searchController = searchController
-        navigationItem.leftBarButtonItem = filterButton
-        navigationItem.rightBarButtonItem = createMeetingButton
-    }
-    
-    ///  Формирование UI элемента, отображающего список мероприятий 
-    private func configMeetingTableView() {
-        
-        refreshControl.addTarget(self, action: #selector(reloadUserMeetings), for: .valueChanged)
-        meetingTableView.refreshControl = refreshControl
-       
-        self.searchController?.searchResultsUpdater = searchResultsVC
-        meetingTableView.backgroundColor = UIColor(named: "BackgroundMain")
-        meetingTableView.backgroundView = activityIndicator
-        meetingTableView.register(MeetingCell.self, forCellReuseIdentifier: "MeetingCell")
-        view.addSubview(meetingTableView)
-        meetingTableView.pinTop(to: segmentController.bottomAnchor, const: 10)
-        meetingTableView.pinLeft(to: view.safeAreaLayoutGuide.leadingAnchor, const: 10)
-        meetingTableView.pinRight(to: view.safeAreaLayoutGuide.trailingAnchor, const: 10)
-        meetingTableView.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor, const: 0)
     }
 }
