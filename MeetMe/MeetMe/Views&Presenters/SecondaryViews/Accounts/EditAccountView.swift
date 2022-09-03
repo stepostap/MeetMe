@@ -1,31 +1,25 @@
 //
-//  EditAccountVC.swift
+//  EditAccountView.swift
 //  MeetMe
 //
-//  Created by Stepan Ostapenko on 12.03.2022.
+//  Created by Stepan Ostapenko on 02.09.2022.
 //
 
 import UIKit
-import Kingfisher
 
-/// Контроллер, отвечающий за редактирование информации об аккаунте
-class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITextViewDelegate {
+class EditAccountView: UIView {
     /// Аккаунт пользователя
     var account = Account(account: User.currentUser.account!)
-    /// Кнопка сохранения введенной информации
-    private var saveButton: UIBarButtonItem?
     ///  Кнопка выбора изображения (автара) пользователя
-    private let chooseImageButton = UIButton(type: .system)
+    let chooseImageButton = UIButton(type: .system)
     /// Кнопка выбора хэштегов (интересов) пользователя
-    private let editInterestsButton = UIButton(type: .system)
+    let editInterestsButton = UIButton(type: .system)
     /// Прокручиваемая область, на которой расположены UI элементы
     private let scrollView = UIScrollView()
     /// Область с UI элементами
     private let editView = UIView()
-    /// Выбранное пользоваетелем изображение
-    private var chosenImage: UIImage?
     /// Текстовое поле для ввода ссылки на аккаунт в ВК
-    private let vkLinkTextField : UITextField = {
+    let vkLinkTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -37,7 +31,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         return textField
     }()
     /// Текстовое поле для ввода ссылки на аккаунт в Телеграмм
-    private let tgLinkTextField : UITextField = {
+    let tgLinkTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -49,7 +43,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         return textField
     }()
     /// Текстовое поле для ввода ссылки на аккаунт в Instagram
-    private let instLinkTextField : UITextField = {
+    let instLinkTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -61,7 +55,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         return textField
     }()
     /// UI элемент, отображающий изображение пользователя
-    private let accountImage : UIImageView = {
+    let accountImage : UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.layer.borderWidth = 0
@@ -69,7 +63,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         return image
     }()
     /// Текстовое поле, отображающее имя пользователя
-    private let nameTextField : UITextField = {
+    let nameTextField : UITextField = {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -91,7 +85,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         return textView
     }()
     /// Текстовое поле, отображающее список интересов пользователя
-    private let interestsTextView : UITextView = {
+    let interestsTextView : UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.borderWidth = 1
@@ -102,87 +96,37 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         return textView
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "BackgroundMain")
-        saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveProfile))
-        self.navigationItem.rightBarButtonItem = saveButton
+    init() {
+        super.init(frame: .zero)
+        self.backgroundColor = UIColor(named: "BackgroundMain")
         configView()
     }
     
-    /// Сохранение внесенных изменений
-    @objc private func saveProfile() {
-        account.socialMediaLinks["vk"] = vkLinkTextField.text ?? ""
-        account.socialMediaLinks["tg"] = tgLinkTextField.text ?? ""
-        account.socialMediaLinks["inst"] = instLinkTextField.text ?? ""
-        
-        account.info = infoTextView.text
-        if !nameTextField.text!.isEmpty {
-            account.name = nameTextField.text!
-        }
-        
-        AccountRequests.shared.editAccount(image: chosenImage, account: EditAccountDTO(fullName: account.name, description: account.info, links: account.socialMediaLinks, interests: InterestsParser.getInterestsString(interests: account.interests)), completion: {(account, error) in
-            
-            if let error = error {
-                let alert = ErrorChecker.handler.getAlertController(error: error)
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
-            
-            if let account = account {
-                User.currentUser.account = Account(account: account)
-                self.navigationController?.popViewController(animated: true)
-            }
-        })
-    }
-    
-    /// Редактирование интересов пользователя
-    @objc private func editInterests() {
-        let vc = InterestsVC()
-        vc.interests = account.interests
-        vc.completion = {(interests) in
-            print(interests)
-            self.account.interests = interests
-            self.interestsTextView.text = Styling.getInterests(interestArray: self.account.interests)
-        }
-        
-        if let sheet = vc.sheetPresentationController {
-            sheet.detents = [ .medium(), .large() ]
-        }
-        
-        present(vc, animated: true)
-    }
-    
-    /// Выбор изображения пользователя 
-    @objc private func chooseImage() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: Configs
     private func configView() {
         
-        view.addSubview(scrollView)
+        self.addSubview(scrollView)
         scrollView.addSubview(editView)
         
         scrollView.isScrollEnabled = true
         scrollView.isUserInteractionEnabled = true
         scrollView.isPagingEnabled = false
         
-        scrollView.pinCenter(to: view.safeAreaLayoutGuide.centerXAnchor, const: 0)
-        scrollView.pinWidth(to: view.widthAnchor, mult: 1)
-        scrollView.pinTop(to: view.topAnchor, const: 0)
-        scrollView.pinBottom(to: view.bottomAnchor, const: 0)
+        scrollView.pinCenter(to: self.safeAreaLayoutGuide.centerXAnchor, const: 0)
+        scrollView.pinWidth(to: self.widthAnchor, mult: 1)
+        scrollView.pinTop(to: self.topAnchor, const: 0)
+        scrollView.pinBottom(to: self.bottomAnchor, const: 0)
         editView.pin(to: scrollView)
-        editView.pinWidth(to: view.widthAnchor, mult: 1)
+        editView.pinWidth(to: self.widthAnchor, mult: 1)
         editView.setHeight(to: 750)
 
         
         chooseImageButton.setTitle("Выбрать изображение", for: .normal)
-        chooseImageButton.addTarget(self, action: #selector(chooseImage), for: .touchUpInside)
+        // 
         editView.addSubview(chooseImageButton)
         chooseImageButton.pinTop(to: editView.safeAreaLayoutGuide.topAnchor, const: 0)
         chooseImageButton.pinCenter(to: editView.safeAreaLayoutGuide.centerXAnchor, const: 0)
@@ -238,7 +182,7 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         
         editView.addSubview(editInterestsButton)
         editInterestsButton.setTitle("Изменить", for: .normal)
-        editInterestsButton.addTarget(self, action: #selector(editInterests), for: .touchUpInside)
+        // editInterestsButton.addTarget(self, action: #selector(editInterests), for: .touchUpInside)
         editInterestsButton.pinTop(to: infoTextView.bottomAnchor, const: 10)
         editInterestsButton.pinRight(to: editView.safeAreaLayoutGuide.trailingAnchor, const: 20)
         editInterestsButton.setWidth(to: 120)
@@ -326,8 +270,10 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
         }
         instLinkTextField.delegate = self
     }
-    
-    // MARK: Text delegates
+}
+
+// MARK: Text delegates
+extension EditAccountView: UITextViewDelegate, UITextFieldDelegate {
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         return textView.resignFirstResponder()
     }
@@ -344,15 +290,4 @@ class EditAccountVC: UIViewController, UITextFieldDelegate, UIImagePickerControl
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
-    
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let userPickedImage = info[.editedImage] as? UIImage else { return }
-        accountImage.image = userPickedImage
-        chosenImage = userPickedImage
-        picker.dismiss(animated: true)
-    }
-    
-    
 }
-
