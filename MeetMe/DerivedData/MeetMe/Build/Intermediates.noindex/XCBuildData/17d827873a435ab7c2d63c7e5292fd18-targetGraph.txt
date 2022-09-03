@@ -1,0 +1,7 @@
+Target dependency graph (3 targets)
+SwiftPhotoGallery in Pods, no dependencies
+Pods-MeetMe in Pods, depends on:
+SwiftPhotoGallery in Pods (explicit)
+MeetMe in MeetMe, depends on:
+Pods-MeetMe in Pods (implicit dependency via file 'Pods_MeetMe.framework' in build phase 'Link Binary')
+SwiftPhotoGallery in Pods (implicit dependency via options '-framework SwiftPhotoGallery' in build setting 'OTHER_LDFLAGS')

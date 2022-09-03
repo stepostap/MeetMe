@@ -1,0 +1,48 @@
+Target dependency graph (22 targets)
+SwiftPhotoGallery in Pods, no dependencies
+Pods-MeetMe in Pods, depends on:
+SwiftPhotoGallery in Pods (explicit)
+Kingfisher in Kingfisher, no dependencies
+Kingfisher in Kingfisher, depends on:
+Kingfisher in Kingfisher (explicit)
+MessageKit_MessageKit in MessageKit, no dependencies
+InputBarAccessoryView in InputBarAccessoryView, no dependencies
+InputBarAccessoryView in InputBarAccessoryView, depends on:
+InputBarAccessoryView in InputBarAccessoryView (explicit)
+MessageKit in MessageKit, depends on:
+MessageKit_MessageKit in MessageKit (explicit)
+InputBarAccessoryView in InputBarAccessoryView (explicit)
+MessageKit in MessageKit, depends on:
+MessageKit in MessageKit (explicit)
+InputBarAccessoryView in InputBarAccessoryView (explicit)
+MeetMe in MeetMe, depends on:
+Pods-MeetMe in Pods (implicit dependency via file 'Pods_MeetMe.framework' in build phase 'Link Binary')
+SwiftPhotoGallery in Pods (implicit dependency via options '-framework SwiftPhotoGallery' in build setting 'OTHER_LDFLAGS')
+Kingfisher in Kingfisher (explicit)
+MessageKit in MessageKit (explicit)
+InputBarAccessoryView in InputBarAccessoryView (explicit)
+SwiftPhotoGallery in Pods, no dependencies
+Pods-MeetMe in Pods, depends on:
+SwiftPhotoGallery in Pods (explicit)
+Kingfisher in Kingfisher, no dependencies
+Kingfisher in Kingfisher, depends on:
+Kingfisher in Kingfisher (explicit)
+MessageKit_MessageKit in MessageKit, no dependencies
+InputBarAccessoryView in InputBarAccessoryView, no dependencies
+InputBarAccessoryView in InputBarAccessoryView, depends on:
+InputBarAccessoryView in InputBarAccessoryView (explicit)
+MessageKit in MessageKit, depends on:
+MessageKit_MessageKit in MessageKit (explicit)
+InputBarAccessoryView in InputBarAccessoryView (explicit)
+MessageKit in MessageKit, depends on:
+MessageKit in MessageKit (explicit)
+InputBarAccessoryView in InputBarAccessoryView (explicit)
+MeetMe in MeetMe, depends on:
+Pods-MeetMe in Pods (implicit dependency via file 'Pods_MeetMe.framework' in build phase 'Link Binary')
+SwiftPhotoGallery in Pods (implicit dependency via options '-framework SwiftPhotoGallery' in build setting 'OTHER_LDFLAGS')
+Kingfisher in Kingfisher (explicit)
+MessageKit in MessageKit (explicit)
+InputBarAccessoryView in InputBarAccessoryView (explicit)
+SwiftPhotoGallery in Pods, no dependencies
+Pods-MeetMe in Pods, depends on:
+SwiftPhotoGallery in Pods (explicit)

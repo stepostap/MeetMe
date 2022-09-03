@@ -23,4 +23,11 @@ struct GroupDTO: Codable {
     let photoUrl: String?
     let isPrivate: Bool
     let interests: [String]?
+    
+    /// Создание эземпляра класса Group из экземпляра класса GroupDTO (перевод из серверной модели данных
+    /// в модель, используемую в приложени)
+    func createGroupFromDTO() -> Group {
+        let group = Group(id: id, groupImage: photoUrl ?? "", groupName: name, groupInfo: description ?? "", interests: InterestsParser.getInterests(interestsString: interests ?? []), meetings: [], participants: [], admins: [adminId])
+        return group
+    }
 }

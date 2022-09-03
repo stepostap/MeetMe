@@ -1,0 +1,10 @@
+framework module SwiftPhotoGallery {
+  umbrella header "SwiftPhotoGallery-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module SwiftPhotoGallery.__Swift {
+    exclude header "SwiftPhotoGallery-Swift.h"
+}

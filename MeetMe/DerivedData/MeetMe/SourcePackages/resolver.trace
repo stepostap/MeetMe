@@ -1,0 +1,14 @@
+derived: https://github.com/onevcat/Kingfisher.git
+derived: https://github.com/nathantannar4/InputBarAccessoryView.git
+derived: https://github.com/MessageKit/MessageKit
+resolving: https://github.com/onevcat/Kingfisher.git
+resolved: https://github.com/onevcat/Kingfisher.git @ 7.3.2
+resolving: https://github.com/MessageKit/MessageKit
+resolved: https://github.com/MessageKit/MessageKit @ 3.8.0
+derived: https://github.com/nathantannar4/InputBarAccessoryView
+resolving: https://github.com/nathantannar4/InputBarAccessoryView.git
+resolved: https://github.com/nathantannar4/InputBarAccessoryView.git @ 5.5.0
+solved:
+inputbaraccessoryview[https://github.com/nathantannar4/InputBarAccessoryView.git] 5.5.0
+kingfisher[https://github.com/onevcat/Kingfisher.git] 7.3.2
+messagekit[https://github.com/MessageKit/MessageKit] 3.8.0

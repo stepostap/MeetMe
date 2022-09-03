@@ -35,4 +35,16 @@ struct MeetingDTO: Codable {
     let maxNumberOfParticipants, numberOfParticipants: Int
     let interests: [String]?
     let isParticipant: Bool?
+    
+    /// Создание эземпляра класса Meeting из экземпляра класса MeetingDTO (перевод из серверной модели данныхданных
+    /// в модель, используемую в приложени)
+    func createMeetingFromDTO() -> Meeting {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy HH:mm"
+        let recievedMeeting = Meeting(id: id, creatorID: adminId, chatID: chatId, name: name, types: InterestsParser.getInterests(interestsString: interests ?? []), info: description ?? "", online: isOnline, isPrivate: isPrivate, isParticipant: isParticipant ?? false, groups: [], participantsMax: maxNumberOfParticipants, Location: location ?? "", startingDate: formatter.date(from: startDate)!, endingDate: nil, currentParticipantNumber: numberOfParticipants, imageURL: imageUrl ?? "")
+        if let endingDate = endDate {
+            recievedMeeting.endingDate = formatter.date(from: endingDate)
+        }
+        return recievedMeeting
+    }
 }
