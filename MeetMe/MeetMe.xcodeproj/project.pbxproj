@@ -12,8 +12,8 @@
 		E84D11542801A1F8008D36D0 /* EmailCodeCheckVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84D11532801A1F8008D36D0 /* EmailCodeCheckVC.swift */; };
 		E84D11582803935A008D36D0 /* GroupEditDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84D115728039359008D36D0 /* GroupEditDTO.swift */; };
 		E853FBBA27E912B8001313E0 /* AddParticipantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBB927E912B8001313E0 /* AddParticipantCell.swift */; };
-		E853FBBF27E9174D001313E0 /* ChooseParticipantsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBBE27E9174D001313E0 /* ChooseParticipantsVC.swift */; };
-		E853FBC327EA12C2001313E0 /* CreateGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBC227EA12C2001313E0 /* CreateGroupVC.swift */; };
+		E853FBBF27E9174D001313E0 /* ChooseParticipantsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBBE27E9174D001313E0 /* ChooseParticipantsPresenter.swift */; };
+		E853FBC327EA12C2001313E0 /* CreateGroupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBC227EA12C2001313E0 /* CreateGroupPresenter.swift */; };
 		E853FBC727EBAD28001313E0 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBC627EBAD28001313E0 /* GroupCell.swift */; };
 		E853FBCA27EBB3F6001313E0 /* GroupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBC927EBB3F6001313E0 /* GroupScreen.swift */; };
 		E853FBCC27EBBBBB001313E0 /* ExtendedMeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBCB27EBBBBB001313E0 /* ExtendedMeetingCell.swift */; };
@@ -36,6 +36,18 @@
 		E853FBF327F6178B001313E0 /* ImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBF227F6178B001313E0 /* ImageDTO.swift */; };
 		E853FBF527F62DED001313E0 /* JWTBullshit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBF427F62DED001313E0 /* JWTBullshit.swift */; };
 		E853FBF727F6757E001313E0 /* MeetingSearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E853FBF627F6757D001313E0 /* MeetingSearchDTO.swift */; };
+		E87FE45028B9033B00E9D2E3 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE44F28B9033B00E9D2E3 /* AccountView.swift */; };
+		E87FE45228BE83A600E9D2E3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE45128BE83A600E9D2E3 /* LoginView.swift */; };
+		E87FE45428BE8E8500E9D2E3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE45328BE8E8500E9D2E3 /* SignUpView.swift */; };
+		E87FE45628C0BECE00E9D2E3 /* ChooseParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE45528C0BECE00E9D2E3 /* ChooseParticipantsView.swift */; };
+		E87FE45828C0DDD100E9D2E3 /* ConontextualActionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE45728C0DDD100E9D2E3 /* ConontextualActionsService.swift */; };
+		E87FE45A28C0F76800E9D2E3 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE45928C0F76800E9D2E3 /* FriendsView.swift */; };
+		E87FE45C28C24E2B00E9D2E3 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE45B28C24E2B00E9D2E3 /* EditAccountView.swift */; };
+		E87FE45E28C2535C00E9D2E3 /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE45D28C2535C00E9D2E3 /* CreateGroupView.swift */; };
+		E87FE46028C2635900E9D2E3 /* GroupScreenHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE45F28C2635900E9D2E3 /* GroupScreenHeaderView.swift */; };
+		E87FE46228C26A8600E9D2E3 /* MeetingInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE46128C26A8600E9D2E3 /* MeetingInfoView.swift */; };
+		E87FE46428C26D5100E9D2E3 /* CreateMeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE46328C26D5000E9D2E3 /* CreateMeetingView.swift */; };
+		E87FE46728C3ADCD00E9D2E3 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87FE46628C3ADCD00E9D2E3 /* CacheService.swift */; };
 		E8A10ABB27E5F895008A43CA /* ViewFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A10ABA27E5F895008A43CA /* ViewFriendCell.swift */; };
 		E8A10ABD27E78645008A43CA /* FriendsRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A10ABC27E78645008A43CA /* FriendsRequests.swift */; };
 		E8A10ABF27E78660008A43CA /* MeetingRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A10ABE27E78660008A43CA /* MeetingRequests.swift */; };
@@ -46,13 +58,13 @@
 		E8C09B3727C7BBB800597ED7 /* MeetMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B3527C7BBB800597ED7 /* MeetMe.xcdatamodeld */; };
 		E8C09B3927C7BBBA00597ED7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8C09B3827C7BBBA00597ED7 /* Assets.xcassets */; };
 		E8C09B3C27C7BBBA00597ED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8C09B3A27C7BBBA00597ED7 /* LaunchScreen.storyboard */; };
-		E8C09B4427C7BE0E00597ED7 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B4327C7BE0E00597ED7 /* AccountVC.swift */; };
+		E8C09B4427C7BE0E00597ED7 /* AccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B4327C7BE0E00597ED7 /* AccountPresenter.swift */; };
 		E8C09B4627C7BE3000597ED7 /* MeetingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B4527C7BE3000597ED7 /* MeetingsVC.swift */; };
 		E8C09B4827C7BE3D00597ED7 /* GroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B4727C7BE3D00597ED7 /* GroupsVC.swift */; };
 		E8C09B4E27C811E900597ED7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B4D27C811E900597ED7 /* UIView+.swift */; };
 		E8C09B5127C97B1400597ED7 /* NavigationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5027C97B1400597ED7 /* NavigationHandler.swift */; };
-		E8C09B5327C97C6600597ED7 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5227C97C6600597ED7 /* LoginVC.swift */; };
-		E8C09B5727C97CAA00597ED7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5627C97CAA00597ED7 /* SignUpVC.swift */; };
+		E8C09B5327C97C6600597ED7 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5227C97C6600597ED7 /* LoginPresenter.swift */; };
+		E8C09B5727C97CAA00597ED7 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5627C97CAA00597ED7 /* SignUpPresenter.swift */; };
 		E8C09B5A27C97CF500597ED7 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5927C97CF500597ED7 /* Styling.swift */; };
 		E8C09B5D27CFFD8000597ED7 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5C27CFFD8000597ED7 /* Meeting.swift */; };
 		E8C09B5F27CFFF4000597ED7 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B5E27CFFF4000597ED7 /* Account.swift */; };
@@ -67,11 +79,11 @@
 		E8C09B8227DA354400597ED7 /* ErrorChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8127DA354400597ED7 /* ErrorChecker.swift */; };
 		E8C09B8427DA383400597ED7 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8327DA383400597ED7 /* Errors.swift */; };
 		E8C09B8627DB96E000597ED7 /* InterestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8527DB96DF00597ED7 /* InterestsVC.swift */; };
-		E8C09B8827DC0B1500597ED7 /* EditAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8727DC0B1500597ED7 /* EditAccountVC.swift */; };
-		E8C09B8A27DCE4EE00597ED7 /* CreateMeetingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8927DCE4ED00597ED7 /* CreateMeetingVC.swift */; };
+		E8C09B8827DC0B1500597ED7 /* EditAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8727DC0B1500597ED7 /* EditAccountPresenter.swift */; };
+		E8C09B8A27DCE4EE00597ED7 /* CreateMeetingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8927DCE4ED00597ED7 /* CreateMeetingPresenter.swift */; };
 		E8C09B8C27DE44C700597ED7 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8B27DE44C600597ED7 /* UIStackView+.swift */; };
-		E8C09B8E27DEC43000597ED7 /* MeetingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8D27DEC42F00597ED7 /* MeetingInfoVC.swift */; };
-		E8C09B9027DF3A5300597ED7 /* FriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8F27DF3A5300597ED7 /* FriendsVC.swift */; };
+		E8C09B8E27DEC43000597ED7 /* MeetingInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8D27DEC42F00597ED7 /* MeetingInfoPresenter.swift */; };
+		E8C09B9027DF3A5300597ED7 /* FriendsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C09B8F27DF3A5300597ED7 /* FriendsPresenter.swift */; };
 		E8EC4FDE27FAFCAC00DDE392 /* MeetingSearchResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EC4FDD27FAFCAC00DDE392 /* MeetingSearchResultsVC.swift */; };
 		E8EC4FE027FC723800DDE392 /* AccountSearchResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EC4FDF27FC723800DDE392 /* AccountSearchResultsVC.swift */; };
 		E8EC4FE227FCA07A00DDE392 /* GroupSearchResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EC4FE127FCA07A00DDE392 /* GroupSearchResultVC.swift */; };
@@ -98,8 +110,8 @@
 		E84D11532801A1F8008D36D0 /* EmailCodeCheckVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeCheckVC.swift; sourceTree = "<group>"; };
 		E84D115728039359008D36D0 /* GroupEditDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupEditDTO.swift; sourceTree = "<group>"; };
 		E853FBB927E912B8001313E0 /* AddParticipantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParticipantCell.swift; sourceTree = "<group>"; };
-		E853FBBE27E9174D001313E0 /* ChooseParticipantsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseParticipantsVC.swift; sourceTree = "<group>"; };
-		E853FBC227EA12C2001313E0 /* CreateGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupVC.swift; sourceTree = "<group>"; };
+		E853FBBE27E9174D001313E0 /* ChooseParticipantsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseParticipantsPresenter.swift; sourceTree = "<group>"; };
+		E853FBC227EA12C2001313E0 /* CreateGroupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupPresenter.swift; sourceTree = "<group>"; };
 		E853FBC627EBAD28001313E0 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 		E853FBC927EBB3F6001313E0 /* GroupScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupScreen.swift; sourceTree = "<group>"; };
 		E853FBCB27EBBBBB001313E0 /* ExtendedMeetingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedMeetingCell.swift; sourceTree = "<group>"; };
@@ -121,6 +133,18 @@
 		E853FBF227F6178B001313E0 /* ImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDTO.swift; sourceTree = "<group>"; };
 		E853FBF427F62DED001313E0 /* JWTBullshit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTBullshit.swift; sourceTree = "<group>"; };
 		E853FBF627F6757D001313E0 /* MeetingSearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingSearchDTO.swift; sourceTree = "<group>"; };
+		E87FE44F28B9033B00E9D2E3 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		E87FE45128BE83A600E9D2E3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		E87FE45328BE8E8500E9D2E3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		E87FE45528C0BECE00E9D2E3 /* ChooseParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseParticipantsView.swift; sourceTree = "<group>"; };
+		E87FE45728C0DDD100E9D2E3 /* ConontextualActionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConontextualActionsService.swift; sourceTree = "<group>"; };
+		E87FE45928C0F76800E9D2E3 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		E87FE45B28C24E2B00E9D2E3 /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
+		E87FE45D28C2535C00E9D2E3 /* CreateGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
+		E87FE45F28C2635900E9D2E3 /* GroupScreenHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupScreenHeaderView.swift; sourceTree = "<group>"; };
+		E87FE46128C26A8600E9D2E3 /* MeetingInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingInfoView.swift; sourceTree = "<group>"; };
+		E87FE46328C26D5000E9D2E3 /* CreateMeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeetingView.swift; sourceTree = "<group>"; };
+		E87FE46628C3ADCD00E9D2E3 /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		E8A10ABA27E5F895008A43CA /* ViewFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFriendCell.swift; sourceTree = "<group>"; };
 		E8A10ABC27E78645008A43CA /* FriendsRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsRequests.swift; sourceTree = "<group>"; };
 		E8A10ABE27E78660008A43CA /* MeetingRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRequests.swift; sourceTree = "<group>"; };
@@ -133,13 +157,13 @@
 		E8C09B3827C7BBBA00597ED7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8C09B3B27C7BBBA00597ED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8C09B3D27C7BBBA00597ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E8C09B4327C7BE0E00597ED7 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		E8C09B4327C7BE0E00597ED7 /* AccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPresenter.swift; sourceTree = "<group>"; };
 		E8C09B4527C7BE3000597ED7 /* MeetingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsVC.swift; sourceTree = "<group>"; };
 		E8C09B4727C7BE3D00597ED7 /* GroupsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsVC.swift; sourceTree = "<group>"; };
 		E8C09B4D27C811E900597ED7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		E8C09B5027C97B1400597ED7 /* NavigationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHandler.swift; sourceTree = "<group>"; };
-		E8C09B5227C97C6600597ED7 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		E8C09B5627C97CAA00597ED7 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		E8C09B5227C97C6600597ED7 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		E8C09B5627C97CAA00597ED7 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
 		E8C09B5927C97CF500597ED7 /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		E8C09B5C27CFFD8000597ED7 /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		E8C09B5E27CFFF4000597ED7 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
@@ -154,11 +178,11 @@
 		E8C09B8127DA354400597ED7 /* ErrorChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorChecker.swift; sourceTree = "<group>"; };
 		E8C09B8327DA383400597ED7 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		E8C09B8527DB96DF00597ED7 /* InterestsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsVC.swift; sourceTree = "<group>"; };
-		E8C09B8727DC0B1500597ED7 /* EditAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountVC.swift; sourceTree = "<group>"; };
-		E8C09B8927DCE4ED00597ED7 /* CreateMeetingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeetingVC.swift; sourceTree = "<group>"; };
+		E8C09B8727DC0B1500597ED7 /* EditAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountPresenter.swift; sourceTree = "<group>"; };
+		E8C09B8927DCE4ED00597ED7 /* CreateMeetingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeetingPresenter.swift; sourceTree = "<group>"; };
 		E8C09B8B27DE44C600597ED7 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
-		E8C09B8D27DEC42F00597ED7 /* MeetingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingInfoVC.swift; sourceTree = "<group>"; };
-		E8C09B8F27DF3A5300597ED7 /* FriendsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsVC.swift; sourceTree = "<group>"; };
+		E8C09B8D27DEC42F00597ED7 /* MeetingInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingInfoPresenter.swift; sourceTree = "<group>"; };
+		E8C09B8F27DF3A5300597ED7 /* FriendsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPresenter.swift; sourceTree = "<group>"; };
 		E8EC4FDD27FAFCAC00DDE392 /* MeetingSearchResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingSearchResultsVC.swift; sourceTree = "<group>"; };
 		E8EC4FDF27FC723800DDE392 /* AccountSearchResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearchResultsVC.swift; sourceTree = "<group>"; };
 		E8EC4FE127FCA07A00DDE392 /* GroupSearchResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchResultVC.swift; sourceTree = "<group>"; };
@@ -212,9 +236,11 @@
 		E84B770127E2006D00D985A8 /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
-				E8C09B8D27DEC42F00597ED7 /* MeetingInfoVC.swift */,
+				E8C09B8D27DEC42F00597ED7 /* MeetingInfoPresenter.swift */,
+				E87FE46128C26A8600E9D2E3 /* MeetingInfoView.swift */,
 				E8C09B6527D1296500597ED7 /* SearchFilterVC.swift */,
-				E8C09B8927DCE4ED00597ED7 /* CreateMeetingVC.swift */,
+				E8C09B8927DCE4ED00597ED7 /* CreateMeetingPresenter.swift */,
+				E87FE46328C26D5000E9D2E3 /* CreateMeetingView.swift */,
 			);
 			path = Meeting;
 			sourceTree = "<group>";
@@ -232,8 +258,10 @@
 		E853FBC827EBB3BB001313E0 /* Groups */ = {
 			isa = PBXGroup;
 			children = (
-				E853FBC227EA12C2001313E0 /* CreateGroupVC.swift */,
+				E853FBC227EA12C2001313E0 /* CreateGroupPresenter.swift */,
+				E87FE45D28C2535C00E9D2E3 /* CreateGroupView.swift */,
 				E853FBC927EBB3F6001313E0 /* GroupScreen.swift */,
+				E87FE45F28C2635900E9D2E3 /* GroupScreenHeaderView.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -242,9 +270,12 @@
 			isa = PBXGroup;
 			children = (
 				E853FBCF27ECA42D001313E0 /* ViewParticipantsVC.swift */,
-				E853FBBE27E9174D001313E0 /* ChooseParticipantsVC.swift */,
-				E8C09B8F27DF3A5300597ED7 /* FriendsVC.swift */,
-				E8C09B8727DC0B1500597ED7 /* EditAccountVC.swift */,
+				E853FBBE27E9174D001313E0 /* ChooseParticipantsPresenter.swift */,
+				E87FE45528C0BECE00E9D2E3 /* ChooseParticipantsView.swift */,
+				E8C09B8F27DF3A5300597ED7 /* FriendsPresenter.swift */,
+				E87FE45928C0F76800E9D2E3 /* FriendsView.swift */,
+				E8C09B8727DC0B1500597ED7 /* EditAccountPresenter.swift */,
+				E87FE45B28C24E2B00E9D2E3 /* EditAccountView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -270,6 +301,16 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		E87FE46528C3ADAF00E9D2E3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E87FE45728C0DDD100E9D2E3 /* ConontextualActionsService.swift */,
+				E8C09B7827DA249C00597ED7 /* NetworkingServices */,
+				E87FE46628C3ADCD00E9D2E3 /* CacheService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		E8C09B2027C7BBB800597ED7 = {
 			isa = PBXGroup;
 			children = (
@@ -291,7 +332,7 @@
 		E8C09B2B27C7BBB800597ED7 /* MeetMe */ = {
 			isa = PBXGroup;
 			children = (
-				E8C09B7827DA249C00597ED7 /* Networking */,
+				E87FE46528C3ADAF00E9D2E3 /* Services */,
 				E8C09B5B27CFFC9800597ED7 /* Models */,
 				E8C09B5827C97CCA00597ED7 /* Helpers */,
 				E8C09B4F27C8120800597ED7 /* Extensions */,
@@ -302,13 +343,13 @@
 				E8C09B3A27C7BBBA00597ED7 /* LaunchScreen.storyboard */,
 				E8C09B3D27C7BBBA00597ED7 /* Info.plist */,
 				E8C09B3527C7BBB800597ED7 /* MeetMe.xcdatamodeld */,
-				E8C09B4927C7D25E00597ED7 /* Views */,
+				E8C09B4927C7D25E00597ED7 /* Views&Presenters */,
 				E84B76FF27E1FD5900D985A8 /* toDo.rtf */,
 			);
 			path = MeetMe;
 			sourceTree = "<group>";
 		};
-		E8C09B4927C7D25E00597ED7 /* Views */ = {
+		E8C09B4927C7D25E00597ED7 /* Views&Presenters */ = {
 			isa = PBXGroup;
 			children = (
 				E8C09B6727D1297900597ED7 /* SecondaryViews */,
@@ -316,7 +357,7 @@
 				E8C09B5427C97C6B00597ED7 /* Authentification */,
 				E8C09B4A27C7D26C00597ED7 /* MainViews */,
 			);
-			path = Views;
+			path = "Views&Presenters";
 			sourceTree = "<group>";
 		};
 		E8C09B4A27C7D26C00597ED7 /* MainViews */ = {
@@ -324,7 +365,8 @@
 			children = (
 				E8C09B4727C7BE3D00597ED7 /* GroupsVC.swift */,
 				E8C09B4527C7BE3000597ED7 /* MeetingsVC.swift */,
-				E8C09B4327C7BE0E00597ED7 /* AccountVC.swift */,
+				E8C09B4327C7BE0E00597ED7 /* AccountPresenter.swift */,
+				E87FE44F28B9033B00E9D2E3 /* AccountView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -342,8 +384,10 @@
 		E8C09B5427C97C6B00597ED7 /* Authentification */ = {
 			isa = PBXGroup;
 			children = (
-				E8C09B5227C97C6600597ED7 /* LoginVC.swift */,
-				E8C09B5627C97CAA00597ED7 /* SignUpVC.swift */,
+				E8C09B5227C97C6600597ED7 /* LoginPresenter.swift */,
+				E87FE45128BE83A600E9D2E3 /* LoginView.swift */,
+				E8C09B5627C97CAA00597ED7 /* SignUpPresenter.swift */,
+				E87FE45328BE8E8500E9D2E3 /* SignUpView.swift */,
 				E84D11532801A1F8008D36D0 /* EmailCodeCheckVC.swift */,
 			);
 			path = Authentification;
@@ -399,7 +443,7 @@
 			path = SecondaryViews;
 			sourceTree = "<group>";
 		};
-		E8C09B7827DA249C00597ED7 /* Networking */ = {
+		E8C09B7827DA249C00597ED7 /* NetworkingServices */ = {
 			isa = PBXGroup;
 			children = (
 				E8C09B7F27DA2E9B00597ED7 /* NetworkMonitor.swift */,
@@ -412,7 +456,7 @@
 				E8EC4FF527FF789300DDE392 /* ImageStoreRequest.swift */,
 				E8F374B028048C8D00F52E1D /* ChatRequests.swift */,
 			);
-			path = Networking;
+			path = NetworkingServices;
 			sourceTree = "<group>";
 		};
 		E8EC4FED27FF1B6D00DDE392 /* SearchVCs */ = {
@@ -567,6 +611,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E87FE45E28C2535C00E9D2E3 /* CreateGroupView.swift in Sources */,
 				E8C09B3727C7BBB800597ED7 /* MeetMe.xcdatamodeld in Sources */,
 				E8C09B8027DA2E9B00597ED7 /* NetworkMonitor.swift in Sources */,
 				E8C09B8C27DE44C700597ED7 /* UIStackView+.swift in Sources */,
@@ -580,19 +625,20 @@
 				E853FBE027F0CA55001313E0 /* AccountDTO.swift in Sources */,
 				E8EC4FF627FF789300DDE392 /* ImageStoreRequest.swift in Sources */,
 				E8C09B5D27CFFD8000597ED7 /* Meeting.swift in Sources */,
-				E8C09B4427C7BE0E00597ED7 /* AccountVC.swift in Sources */,
+				E8C09B4427C7BE0E00597ED7 /* AccountPresenter.swift in Sources */,
 				E853FBD627ECE7EE001313E0 /* RegisterInfo.swift in Sources */,
 				E8A10ABF27E78660008A43CA /* MeetingRequests.swift in Sources */,
 				E8F374B328048FEC00F52E1D /* GetChatDTO.swift in Sources */,
 				E8C09B6627D1296500597ED7 /* SearchFilterVC.swift in Sources */,
 				E84D11542801A1F8008D36D0 /* EmailCodeCheckVC.swift in Sources */,
 				E8EC4FE027FC723800DDE392 /* AccountSearchResultsVC.swift in Sources */,
-				E8C09B9027DF3A5300597ED7 /* FriendsVC.swift in Sources */,
+				E8C09B9027DF3A5300597ED7 /* FriendsPresenter.swift in Sources */,
 				E853FBD027ECA42D001313E0 /* ViewParticipantsVC.swift in Sources */,
-				E8C09B8A27DCE4EE00597ED7 /* CreateMeetingVC.swift in Sources */,
+				E8C09B8A27DCE4EE00597ED7 /* CreateMeetingPresenter.swift in Sources */,
 				E853FBC727EBAD28001313E0 /* GroupCell.swift in Sources */,
 				E8EC4FEF27FF2BA100DDE392 /* PhotoGalleryVC.swift in Sources */,
 				E853FBE827F33569001313E0 /* GroupDTO.swift in Sources */,
+				E87FE46428C26D5100E9D2E3 /* CreateMeetingView.swift in Sources */,
 				E8A10ABD27E78645008A43CA /* FriendsRequests.swift in Sources */,
 				E8C09B8227DA354400597ED7 /* ErrorChecker.swift in Sources */,
 				E8EC4FE227FCA07A00DDE392 /* GroupSearchResultVC.swift in Sources */,
@@ -601,34 +647,42 @@
 				E8F374AF28048BD500F52E1D /* ChatMessageDTO.swift in Sources */,
 				E8F374B52804910200F52E1D /* ChatSendMessageDTO.swift in Sources */,
 				E8C09B4627C7BE3000597ED7 /* MeetingsVC.swift in Sources */,
-				E853FBBF27E9174D001313E0 /* ChooseParticipantsVC.swift in Sources */,
+				E853FBBF27E9174D001313E0 /* ChooseParticipantsPresenter.swift in Sources */,
 				E853FBCA27EBB3F6001313E0 /* GroupScreen.swift in Sources */,
 				E853FBF727F6757E001313E0 /* MeetingSearchDTO.swift in Sources */,
+				E87FE45828C0DDD100E9D2E3 /* ConontextualActionsService.swift in Sources */,
+				E87FE45628C0BECE00E9D2E3 /* ChooseParticipantsView.swift in Sources */,
 				E84D11582803935A008D36D0 /* GroupEditDTO.swift in Sources */,
+				E87FE45428BE8E8500E9D2E3 /* SignUpView.swift in Sources */,
 				E8C09B6127D000DA00597ED7 /* Interests.swift in Sources */,
 				E8C09B6927D129E600597ED7 /* MeetingSearchFilter.swift in Sources */,
 				E8EC4FF427FF43B500DDE392 /* PhotoCollectionFooter.swift in Sources */,
 				E8F374B128048C8D00F52E1D /* ChatRequests.swift in Sources */,
 				E853FBCC27EBBBBB001313E0 /* ExtendedMeetingCell.swift in Sources */,
 				E853FBDE27F0C121001313E0 /* MeetingDTO.swift in Sources */,
+				E87FE46228C26A8600E9D2E3 /* MeetingInfoView.swift in Sources */,
 				E8EC4FE727FE2E5900DDE392 /* ChatVC.swift in Sources */,
+				E87FE45C28C24E2B00E9D2E3 /* EditAccountView.swift in Sources */,
 				E8EC4FDE27FAFCAC00DDE392 /* MeetingSearchResultsVC.swift in Sources */,
-				E8C09B5727C97CAA00597ED7 /* SignUpVC.swift in Sources */,
+				E8C09B5727C97CAA00597ED7 /* SignUpPresenter.swift in Sources */,
+				E87FE45A28C0F76800E9D2E3 /* FriendsView.swift in Sources */,
 				E8F374B72804BA2500F52E1D /* ChatMessage.swift in Sources */,
 				E853FBEA27F33E1E001313E0 /* GroupRequests.swift in Sources */,
 				E8C09B4E27C811E900597ED7 /* UIView+.swift in Sources */,
-				E8C09B5327C97C6600597ED7 /* LoginVC.swift in Sources */,
+				E8C09B5327C97C6600597ED7 /* LoginPresenter.swift in Sources */,
 				E8A10ABB27E5F895008A43CA /* ViewFriendCell.swift in Sources */,
-				E8C09B8827DC0B1500597ED7 /* EditAccountVC.swift in Sources */,
+				E8C09B8827DC0B1500597ED7 /* EditAccountPresenter.swift in Sources */,
 				E8C09B5A27C97CF500597ED7 /* Styling.swift in Sources */,
+				E87FE45228BE83A600E9D2E3 /* LoginView.swift in Sources */,
 				E853FBEC27F4916B001313E0 /* UserInvitations.swift in Sources */,
-				E853FBC327EA12C2001313E0 /* CreateGroupVC.swift in Sources */,
+				E853FBC327EA12C2001313E0 /* CreateGroupPresenter.swift in Sources */,
 				E853FBBA27E912B8001313E0 /* AddParticipantCell.swift in Sources */,
 				E853FBD427ECE5E3001313E0 /* MeetMeRequests.swift in Sources */,
 				E853FBD827ED0A1E001313E0 /* Responce.swift in Sources */,
 				E8C09B8427DA383400597ED7 /* Errors.swift in Sources */,
 				E8A10AC127E78A07008A43CA /* AccountRequests.swift in Sources */,
-				E8C09B8E27DEC43000597ED7 /* MeetingInfoVC.swift in Sources */,
+				E87FE46028C2635900E9D2E3 /* GroupScreenHeaderView.swift in Sources */,
+				E8C09B8E27DEC43000597ED7 /* MeetingInfoPresenter.swift in Sources */,
 				E8C09B4827C7BE3D00597ED7 /* GroupsVC.swift in Sources */,
 				E853FBE427F122CD001313E0 /* EditMeetingDTO.swift in Sources */,
 				E853FBEE27F52E2C001313E0 /* EditAccountDTO.swift in Sources */,
@@ -636,6 +690,8 @@
 				E8C09B5127C97B1400597ED7 /* NavigationHandler.swift in Sources */,
 				E8C09B2D27C7BBB800597ED7 /* AppDelegate.swift in Sources */,
 				E8C09B2F27C7BBB800597ED7 /* SceneDelegate.swift in Sources */,
+				E87FE45028B9033B00E9D2E3 /* AccountView.swift in Sources */,
+				E87FE46728C3ADCD00E9D2E3 /* CacheService.swift in Sources */,
 				E8C09B7327D7F45000597ED7 /* User.swift in Sources */,
 				E8EC4FE927FE2FA200DDE392 /* MeetingInvitationsDTO.swift in Sources */,
 				E8F374BA280A0D4B00F52E1D /* InterestCell.swift in Sources */,

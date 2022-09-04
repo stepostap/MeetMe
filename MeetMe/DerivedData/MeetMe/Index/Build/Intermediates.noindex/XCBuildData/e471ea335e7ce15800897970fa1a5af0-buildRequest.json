@@ -1,0 +1,59 @@
+{
+  "_buildCommand2" : {
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : true,
+    "targets" : null
+  },
+  "buildCommand" : "build",
+  "configuredTargets" : [
+    {
+      "guid" : "165965158aa12a96b52f95f06e104cb1a5d20349ea84424ba038536e9ca41718"
+    }
+  ],
+  "containerPath" : "/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe.xcworkspace",
+  "continueBuildingAfterErrors" : true,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "indexbuild",
+    "activeArchitecture" : "x86_64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphonesimulator",
+      "sdk" : "iphonesimulator15.2",
+      "sdkVariant" : "iphonesimulator",
+      "supportedArchitectures" : [
+        "x86_64"
+      ],
+      "targetArchitecture" : "x86_64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/Stepostap/Developer/MeetMe/MeetMe/DerivedData/MeetMe/Index/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/Stepostap/Developer/MeetMe/MeetMe/DerivedData/MeetMe/Index/Build/Products",
+      "derivedDataPath" : "/Users/Stepostap/Developer/MeetMe/MeetMe/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/Stepostap/Developer/MeetMe/MeetMe/DerivedData/MeetMe/Index/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/Stepostap/Developer/MeetMe/MeetMe/DerivedData/MeetMe/Index/PrecompiledHeaders",
+      "pchPath" : "/Users/Stepostap/Developer/MeetMe/MeetMe/DerivedData/MeetMe/Index/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO",
+          "INDEX_ARENA_INFO_REGULAR_BUILD_PRODUCTS_DIR" : "/Users/Stepostap/Developer/MeetMe/MeetMe/DerivedData/MeetMe/Build/Products",
+          "ONLY_ACTIVE_ARCH" : "YES"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "schemeCommand2" : "launch",
+  "shouldCollectMetrics" : false,
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

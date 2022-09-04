@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "InputBarAccessoryView",
+        "repositoryURL": "https://github.com/nathantannar4/InputBarAccessoryView.git",
+        "state": {
+          "branch": null,
+          "revision": "2843b4454cfb6de5b4d1e5939fef2dd6257b69ee",
+          "version": "5.5.0"
+        }
+      },
+      {
+        "package": "Kingfisher",
+        "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
+        "state": {
+          "branch": null,
+          "revision": "be1a1acb283a702b99b630f586877ba02234b4cb",
+          "version": "7.3.2"
+        }
+      },
+      {
+        "package": "MessageKit",
+        "repositoryURL": "https://github.com/MessageKit/MessageKit",
+        "state": {
+          "branch": null,
+          "revision": "84236d91ac5783e3ecbefc15b82d854476720115",
+          "version": "3.8.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,85 @@
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Groups/CreateGroupView.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Services/NetworkingServices/NetworkMonitor.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Extensions/UIStackView+.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Extensions/Data+.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/JWTBullshit.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/App\ Models/Account.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Helpers/Checkbox.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/InterestsVC.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/IDDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/App\ Models/Group.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/AccountDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Services/NetworkingServices/ImageStoreRequest.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/App\ Models/Meeting.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/MainViews/AccountPresenter.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/RegisterInfo.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Services/NetworkingServices/MeetingRequests.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/GetChatDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Meeting/SearchFilterVC.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Authentification/EmailCodeCheckVC.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/SearchVCs/AccountSearchResultsVC.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Accounts/FriendsPresenter.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Accounts/ViewParticipantsVC.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Meeting/CreateMeetingPresenter.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Cells/GroupCell.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/PhotoGalleryVC.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/GroupDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Meeting/CreateMeetingView.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Services/NetworkingServices/FriendsRequests.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Helpers/ErrorChecker.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/SearchVCs/GroupSearchResultVC.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/ImageDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Cells/MeetingCell.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/ChatMessageDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/ChatSendMessageDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/MainViews/MeetingsVC.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Accounts/ChooseParticipantsPresenter.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Groups/GroupScreen.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/MeetingSearchDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Services/ConontextualActionsService.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Accounts/ChooseParticipantsView.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/GroupEditDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Authentification/SignUpView.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/App\ Models/Interests.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/App\ Models/MeetingSearchFilter.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/PhotoCollectionFooter.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Services/NetworkingServices/ChatRequests.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Cells/ExtendedMeetingCell.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/MeetingDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Meeting/MeetingInfoView.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/ChatVC.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Accounts/EditAccountView.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/SearchVCs/MeetingSearchResultsVC.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Authentification/SignUpPresenter.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Accounts/FriendsView.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/App\ Models/ChatMessage.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Services/NetworkingServices/GroupRequests.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Extensions/UIView+.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Authentification/LoginPresenter.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Cells/ViewFriendCell.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Accounts/EditAccountPresenter.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Helpers/Styling.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Authentification/LoginView.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/App\ Models/UserInvitations.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Groups/CreateGroupPresenter.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Cells/AddParticipantCell.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Services/NetworkingServices/MeetMeRequests.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/Responce.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/App\ Models/Errors.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Services/NetworkingServices/AccountRequests.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Groups/GroupScreenHeaderView.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/SecondaryViews/Meeting/MeetingInfoPresenter.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/MainViews/GroupsVC.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/EditMeetingDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/EditAccountDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Helpers/InterestsParser.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Helpers/NavigationHandler.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/AppDelegate.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/SceneDelegate.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/MainViews/AccountView.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Services/CacheService.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/App\ Models/User.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Models/NetworkingModels/DTO/MeetingInvitationsDTO.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Cells/InterestCell.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Views&Presenters/Cells/PhotoCell.swift
+/Users/Stepostap/Developer/MeetMe/MeetMe/MeetMe/Services/NetworkingServices/AuthRequests.swift

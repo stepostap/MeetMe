@@ -1,0 +1,4 @@
+module InputBarAccessoryView {
+header "InputBarAccessoryView-Swift.h"
+export *
+}

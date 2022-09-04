@@ -1,0 +1,11 @@
+framework module SwiftPhotoGallery {
+  umbrella header "SwiftPhotoGallery-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module SwiftPhotoGallery.Swift {
+    header "SwiftPhotoGallery-Swift.h"
+    requires objc
+}

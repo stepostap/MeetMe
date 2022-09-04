@@ -27,4 +27,9 @@ struct AccountDTO: Codable {
     var photoUrl: String?
     var email: String?
     var telephone: String?
+    
+    func createAccountFromDTO() -> Account {
+        let account = Account(id: id, name: fullName, info: description ?? "", imageDataURL: photoUrl ?? "", interests: InterestsParser.getInterests(interestsString: interests ?? []), socialMediaLinks: links ?? [:])
+        return account
+    }
 }

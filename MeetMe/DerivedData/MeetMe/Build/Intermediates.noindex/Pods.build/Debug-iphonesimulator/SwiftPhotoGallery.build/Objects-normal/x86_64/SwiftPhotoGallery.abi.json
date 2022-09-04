@@ -1,0 +1,3695 @@
+{
+  "kind": "Root",
+  "name": "TopLevel",
+  "printedName": "TopLevel",
+  "children": [
+    {
+      "kind": "Import",
+      "name": "Foundation",
+      "printedName": "Foundation",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftPhotoGallery",
+      "printedName": "SwiftPhotoGallery",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery",
+      "declAttributes": [
+        "Exported"
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "UIKit.UIGestureRecognizerSubclass",
+      "printedName": "UIKit.UIGestureRecognizerSubclass",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "UIKit",
+      "printedName": "UIKit",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "PanDirection",
+      "printedName": "PanDirection",
+      "children": [
+        {
+          "kind": "Var",
+          "name": "vertical",
+          "printedName": "vertical",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(SwiftPhotoGallery.PanDirection.Type) -> SwiftPhotoGallery.PanDirection",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "PanDirection",
+                  "printedName": "SwiftPhotoGallery.PanDirection",
+                  "usr": "s:17SwiftPhotoGallery12PanDirectionO"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "SwiftPhotoGallery.PanDirection.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "PanDirection",
+                      "printedName": "SwiftPhotoGallery.PanDirection",
+                      "usr": "s:17SwiftPhotoGallery12PanDirectionO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:17SwiftPhotoGallery12PanDirectionO8verticalyA2CmF",
+          "mangledName": "$s17SwiftPhotoGallery12PanDirectionO8verticalyA2CmF",
+          "moduleName": "SwiftPhotoGallery",
+          "fixedbinaryorder": 0
+        },
+        {
+          "kind": "Var",
+          "name": "horizontal",
+          "printedName": "horizontal",
+          "children": [
+            {
+              "kind": "TypeFunc",
+              "name": "Function",
+              "printedName": "(SwiftPhotoGallery.PanDirection.Type) -> SwiftPhotoGallery.PanDirection",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "PanDirection",
+                  "printedName": "SwiftPhotoGallery.PanDirection",
+                  "usr": "s:17SwiftPhotoGallery12PanDirectionO"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Metatype",
+                  "printedName": "SwiftPhotoGallery.PanDirection.Type",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "PanDirection",
+                      "printedName": "SwiftPhotoGallery.PanDirection",
+                      "usr": "s:17SwiftPhotoGallery12PanDirectionO"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "declKind": "EnumElement",
+          "usr": "s:17SwiftPhotoGallery12PanDirectionO10horizontalyA2CmF",
+          "mangledName": "$s17SwiftPhotoGallery12PanDirectionO10horizontalyA2CmF",
+          "moduleName": "SwiftPhotoGallery",
+          "fixedbinaryorder": 1
+        },
+        {
+          "kind": "Function",
+          "name": "__derived_enum_equals",
+          "printedName": "__derived_enum_equals(_:_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "PanDirection",
+              "printedName": "SwiftPhotoGallery.PanDirection",
+              "usr": "s:17SwiftPhotoGallery12PanDirectionO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "PanDirection",
+              "printedName": "SwiftPhotoGallery.PanDirection",
+              "usr": "s:17SwiftPhotoGallery12PanDirectionO"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "s:17SwiftPhotoGallery12PanDirectionO21__derived_enum_equalsySbAC_ACtFZ",
+          "mangledName": "$s17SwiftPhotoGallery12PanDirectionO21__derived_enum_equalsySbAC_ACtFZ",
+          "moduleName": "SwiftPhotoGallery",
+          "static": true,
+          "implicit": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "hash",
+          "printedName": "hash(into:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Hasher",
+              "printedName": "Swift.Hasher",
+              "paramValueOwnership": "InOut",
+              "usr": "s:s6HasherV"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "s:17SwiftPhotoGallery12PanDirectionO4hash4intoys6HasherVz_tF",
+          "mangledName": "$s17SwiftPhotoGallery12PanDirectionO4hash4intoys6HasherVz_tF",
+          "moduleName": "SwiftPhotoGallery",
+          "implicit": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Var",
+          "name": "hashValue",
+          "printedName": "hashValue",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGallery12PanDirectionO9hashValueSivp",
+          "mangledName": "$s17SwiftPhotoGallery12PanDirectionO9hashValueSivp",
+          "moduleName": "SwiftPhotoGallery",
+          "implicit": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGallery12PanDirectionO9hashValueSivg",
+              "mangledName": "$s17SwiftPhotoGallery12PanDirectionO9hashValueSivg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "accessorKind": "get"
+            }
+          ]
+        }
+      ],
+      "declKind": "Enum",
+      "usr": "s:17SwiftPhotoGallery12PanDirectionO",
+      "mangledName": "$s17SwiftPhotoGallery12PanDirectionO",
+      "moduleName": "SwiftPhotoGallery",
+      "isEnumExhaustive": true,
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Sendable",
+          "printedName": "Sendable",
+          "usr": "s:s8SendableP",
+          "mangledName": "$ss8SendableP"
+        }
+      ]
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "PanDirectionGestureRecognizer",
+      "printedName": "PanDirectionGestureRecognizer",
+      "children": [
+        {
+          "kind": "Var",
+          "name": "direction",
+          "printedName": "direction",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "PanDirection",
+              "printedName": "SwiftPhotoGallery.PanDirection",
+              "usr": "s:17SwiftPhotoGallery12PanDirectionO"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGallery29PanDirectionGestureRecognizerC9directionAA0dE0Ovp",
+          "mangledName": "$s17SwiftPhotoGallery29PanDirectionGestureRecognizerC9directionAA0dE0Ovp",
+          "moduleName": "SwiftPhotoGallery",
+          "declAttributes": [
+            "Custom",
+            "Final",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 0,
+          "isLet": true,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "PanDirection",
+                  "printedName": "SwiftPhotoGallery.PanDirection",
+                  "usr": "s:17SwiftPhotoGallery12PanDirectionO"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGallery29PanDirectionGestureRecognizerC9directionAA0dE0Ovg",
+              "mangledName": "$s17SwiftPhotoGallery29PanDirectionGestureRecognizerC9directionAA0dE0Ovg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "declAttributes": [
+                "Final"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(direction:target:action:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "PanDirectionGestureRecognizer",
+              "printedName": "SwiftPhotoGallery.PanDirectionGestureRecognizer",
+              "usr": "c:@M@SwiftPhotoGallery@objc(cs)PanDirectionGestureRecognizer"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "PanDirection",
+              "printedName": "SwiftPhotoGallery.PanDirection",
+              "usr": "s:17SwiftPhotoGallery12PanDirectionO"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "ProtocolComposition",
+              "printedName": "AnyObject"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Selector",
+              "printedName": "ObjectiveC.Selector",
+              "usr": "s:10ObjectiveC8SelectorV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:17SwiftPhotoGallery29PanDirectionGestureRecognizerC9direction6target6actionAcA0dE0O_yXl10ObjectiveC8SelectorVtcfc",
+          "mangledName": "$s17SwiftPhotoGallery29PanDirectionGestureRecognizerC9direction6target6actionAcA0dE0O_yXl10ObjectiveC8SelectorVtcfc",
+          "moduleName": "SwiftPhotoGallery",
+          "declAttributes": [
+            "Custom"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Function",
+          "name": "touchesMoved",
+          "printedName": "touchesMoved(_:with:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Set",
+              "printedName": "Swift.Set<UIKit.UITouch>",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UITouch",
+                  "printedName": "UIKit.UITouch",
+                  "usr": "c:objc(cs)UITouch"
+                }
+              ],
+              "usr": "s:Sh"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UIEvent",
+              "printedName": "UIKit.UIEvent",
+              "usr": "c:objc(cs)UIEvent"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)PanDirectionGestureRecognizer(im)touchesMoved:withEvent:",
+          "mangledName": "$s17SwiftPhotoGallery29PanDirectionGestureRecognizerC12touchesMoved_4withyShySo7UITouchCG_So7UIEventCtF",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "touchesMoved:withEvent:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(target:action:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "PanDirectionGestureRecognizer",
+              "printedName": "SwiftPhotoGallery.PanDirectionGestureRecognizer",
+              "usr": "c:@M@SwiftPhotoGallery@objc(cs)PanDirectionGestureRecognizer"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Any?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "ProtocolComposition",
+                  "printedName": "Any"
+                }
+              ],
+              "usr": "s:Sq"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "ObjectiveC.Selector?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Selector",
+                  "printedName": "ObjectiveC.Selector",
+                  "usr": "s:10ObjectiveC8SelectorV"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)PanDirectionGestureRecognizer(im)initWithTarget:action:",
+          "mangledName": "$s17SwiftPhotoGallery29PanDirectionGestureRecognizerC6target6actionACypSg_10ObjectiveC8SelectorVSgtcfc",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithTarget:action:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@SwiftPhotoGallery@objc(cs)PanDirectionGestureRecognizer",
+      "mangledName": "$s17SwiftPhotoGallery29PanDirectionGestureRecognizerC",
+      "moduleName": "SwiftPhotoGallery",
+      "isOpen": true,
+      "declAttributes": [
+        "Custom",
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)UIPanGestureRecognizer",
+      "superclassNames": [
+        "UIKit.UIPanGestureRecognizer",
+        "UIKit.UIGestureRecognizer",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "Foundation",
+      "printedName": "Foundation",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftPhotoGallery",
+      "printedName": "SwiftPhotoGallery",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery",
+      "declAttributes": [
+        "Exported"
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "UIKit.UIGestureRecognizerSubclass",
+      "printedName": "UIKit.UIGestureRecognizerSubclass",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "UIKit",
+      "printedName": "UIKit",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "SwiftPhotoGalleryDataSource",
+      "printedName": "SwiftPhotoGalleryDataSource",
+      "children": [
+        {
+          "kind": "Function",
+          "name": "numberOfImagesInGallery",
+          "printedName": "numberOfImagesInGallery(gallery:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "SwiftPhotoGallery",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGallery",
+              "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@SwiftPhotoGallery@objc(pl)SwiftPhotoGalleryDataSource(im)numberOfImagesInGalleryWithGallery:",
+          "mangledName": "$s17SwiftPhotoGallery0abC10DataSourceP016numberOfImagesInC07gallerySiA2AC_tF",
+          "moduleName": "SwiftPhotoGallery",
+          "genericSig": "<τ_0_0 where τ_0_0 : SwiftPhotoGallery.SwiftPhotoGalleryDataSource>",
+          "sugared_genericSig": "<Self where Self : SwiftPhotoGallery.SwiftPhotoGalleryDataSource>",
+          "protocolReq": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "reqNewWitnessTableEntry": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "imageInGallery",
+          "printedName": "imageInGallery(gallery:forIndex:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "UIKit.UIImage?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIImage",
+                  "printedName": "UIKit.UIImage",
+                  "usr": "c:objc(cs)UIImage"
+                }
+              ],
+              "usr": "s:Sq"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "SwiftPhotoGallery",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGallery",
+              "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@SwiftPhotoGallery@objc(pl)SwiftPhotoGalleryDataSource(im)imageInGalleryWithGallery:forIndex:",
+          "mangledName": "$s17SwiftPhotoGallery0abC10DataSourceP07imageInC07gallery8forIndexSo7UIImageCSgA2AC_SitF",
+          "moduleName": "SwiftPhotoGallery",
+          "genericSig": "<τ_0_0 where τ_0_0 : SwiftPhotoGallery.SwiftPhotoGalleryDataSource>",
+          "sugared_genericSig": "<Self where Self : SwiftPhotoGallery.SwiftPhotoGalleryDataSource>",
+          "protocolReq": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "reqNewWitnessTableEntry": true,
+          "funcSelfKind": "NonMutating"
+        }
+      ],
+      "declKind": "Protocol",
+      "usr": "c:@M@SwiftPhotoGallery@objc(pl)SwiftPhotoGalleryDataSource",
+      "mangledName": "$s17SwiftPhotoGallery0abC10DataSourceP",
+      "moduleName": "SwiftPhotoGallery",
+      "genericSig": "<τ_0_0 : AnyObject>",
+      "sugared_genericSig": "<Self : AnyObject>",
+      "declAttributes": [
+        "ObjC"
+      ]
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "SwiftPhotoGalleryDelegate",
+      "printedName": "SwiftPhotoGalleryDelegate",
+      "children": [
+        {
+          "kind": "Function",
+          "name": "galleryDidTapToClose",
+          "printedName": "galleryDidTapToClose(gallery:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "SwiftPhotoGallery",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGallery",
+              "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@SwiftPhotoGallery@objc(pl)SwiftPhotoGalleryDelegate(im)galleryDidTapToCloseWithGallery:",
+          "mangledName": "$s17SwiftPhotoGallery0abC8DelegateP20galleryDidTapToClose0E0yA2AC_tF",
+          "moduleName": "SwiftPhotoGallery",
+          "genericSig": "<τ_0_0 where τ_0_0 : SwiftPhotoGallery.SwiftPhotoGalleryDelegate>",
+          "sugared_genericSig": "<Self where Self : SwiftPhotoGallery.SwiftPhotoGalleryDelegate>",
+          "protocolReq": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "reqNewWitnessTableEntry": true,
+          "funcSelfKind": "NonMutating"
+        }
+      ],
+      "declKind": "Protocol",
+      "usr": "c:@M@SwiftPhotoGallery@objc(pl)SwiftPhotoGalleryDelegate",
+      "mangledName": "$s17SwiftPhotoGallery0abC8DelegateP",
+      "moduleName": "SwiftPhotoGallery",
+      "genericSig": "<τ_0_0 : AnyObject>",
+      "sugared_genericSig": "<Self : AnyObject>",
+      "declAttributes": [
+        "ObjC"
+      ]
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "SwiftPhotoGallery",
+      "printedName": "SwiftPhotoGallery",
+      "children": [
+        {
+          "kind": "Var",
+          "name": "animateImageTransition",
+          "printedName": "animateImageTransition",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC22animateImageTransition33_001710C3B5A87CC952B898FC504D668FLLSbvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC22animateImageTransition33_001710C3B5A87CC952B898FC504D668FLLSbvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isInternal": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 0,
+          "hasStorage": true
+        },
+        {
+          "kind": "Var",
+          "name": "isViewFirstAppearing",
+          "printedName": "isViewFirstAppearing",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC20isViewFirstAppearing33_001710C3B5A87CC952B898FC504D668FLLSbvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC20isViewFirstAppearing33_001710C3B5A87CC952B898FC504D668FLLSbvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isInternal": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 1,
+          "hasStorage": true
+        },
+        {
+          "kind": "Var",
+          "name": "deviceInRotation",
+          "printedName": "deviceInRotation",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC16deviceInRotation33_001710C3B5A87CC952B898FC504D668FLLSbvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC16deviceInRotation33_001710C3B5A87CC952B898FC504D668FLLSbvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isInternal": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 2,
+          "hasStorage": true
+        },
+        {
+          "kind": "Var",
+          "name": "dataSource",
+          "printedName": "dataSource",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "WeakStorage",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDataSource?"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC10dataSourceAA0abc4DataE0_pSgvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC10dataSourceAA0abc4DataE0_pSgvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "ReferenceOwnership",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 3,
+          "ownership": 1,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDataSource?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "SwiftPhotoGalleryDataSource",
+                      "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDataSource",
+                      "usr": "c:@M@SwiftPhotoGallery@objc(pl)SwiftPhotoGalleryDataSource"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC10dataSourceAA0abc4DataE0_pSgvg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC10dataSourceAA0abc4DataE0_pSgvg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDataSource?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "SwiftPhotoGalleryDataSource",
+                      "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDataSource",
+                      "usr": "c:@M@SwiftPhotoGallery@objc(pl)SwiftPhotoGalleryDataSource"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC10dataSourceAA0abc4DataE0_pSgvs",
+              "mangledName": "$s17SwiftPhotoGalleryAAC10dataSourceAA0abc4DataE0_pSgvs",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC10dataSourceAA0abc4DataE0_pSgvM",
+              "mangledName": "$s17SwiftPhotoGalleryAAC10dataSourceAA0abc4DataE0_pSgvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "delegate",
+          "printedName": "delegate",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "WeakStorage",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDelegate?"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC8delegateAA0abC8Delegate_pSgvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC8delegateAA0abC8Delegate_pSgvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "ReferenceOwnership",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 4,
+          "ownership": 1,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDelegate?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "SwiftPhotoGalleryDelegate",
+                      "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDelegate",
+                      "usr": "c:@M@SwiftPhotoGallery@objc(pl)SwiftPhotoGalleryDelegate"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC8delegateAA0abC8Delegate_pSgvg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC8delegateAA0abC8Delegate_pSgvg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDelegate?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "SwiftPhotoGalleryDelegate",
+                      "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDelegate",
+                      "usr": "c:@M@SwiftPhotoGallery@objc(pl)SwiftPhotoGalleryDelegate"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC8delegateAA0abC8Delegate_pSgvs",
+              "mangledName": "$s17SwiftPhotoGalleryAAC8delegateAA0abC8Delegate_pSgvs",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC8delegateAA0abC8Delegate_pSgvM",
+              "mangledName": "$s17SwiftPhotoGalleryAAC8delegateAA0abC8Delegate_pSgvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "imageCollectionView",
+          "printedName": "imageCollectionView",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionView",
+              "printedName": "UIKit.UICollectionView",
+              "usr": "c:objc(cs)UICollectionView"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC19imageCollectionViewSo012UICollectionF0Cvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC19imageCollectionViewSo012UICollectionF0Cvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom",
+            "Lazy"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UICollectionView",
+                  "printedName": "UIKit.UICollectionView",
+                  "usr": "c:objc(cs)UICollectionView"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC19imageCollectionViewSo012UICollectionF0Cvg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC19imageCollectionViewSo012UICollectionF0Cvg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "UICollectionView",
+                  "printedName": "UIKit.UICollectionView",
+                  "usr": "c:objc(cs)UICollectionView"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC19imageCollectionViewSo012UICollectionF0Cvs",
+              "mangledName": "$s17SwiftPhotoGalleryAAC19imageCollectionViewSo012UICollectionF0Cvs",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC19imageCollectionViewSo012UICollectionF0CvM",
+              "mangledName": "$s17SwiftPhotoGalleryAAC19imageCollectionViewSo012UICollectionF0CvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "$__lazy_storage_$_imageCollectionView",
+          "printedName": "$__lazy_storage_$_imageCollectionView",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "UIKit.UICollectionView?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UICollectionView",
+                  "printedName": "UIKit.UICollectionView",
+                  "usr": "c:objc(cs)UICollectionView"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC37$__lazy_storage_$_imageCollectionView33_001710C3B5A87CC952B898FC504D668FLLSo012UICollectionH0CSgvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC37$__lazy_storage_$_imageCollectionView33_001710C3B5A87CC952B898FC504D668FLLSo012UICollectionH0CSgvp",
+          "moduleName": "SwiftPhotoGallery",
+          "implicit": true,
+          "isInternal": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "Final",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 5,
+          "hasStorage": true
+        },
+        {
+          "kind": "Var",
+          "name": "numberOfImages",
+          "printedName": "numberOfImages",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC14numberOfImagesSivp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC14numberOfImagesSivp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC14numberOfImagesSivg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC14numberOfImagesSivg",
+              "moduleName": "SwiftPhotoGallery",
+              "isOpen": true,
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "backgroundColor",
+          "printedName": "backgroundColor",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UIColor",
+              "printedName": "UIKit.UIColor",
+              "usr": "c:objc(cs)UIColor"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC15backgroundColorSo7UIColorCvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC15backgroundColorSo7UIColorCvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIColor",
+                  "printedName": "UIKit.UIColor",
+                  "usr": "c:objc(cs)UIColor"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC15backgroundColorSo7UIColorCvg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC15backgroundColorSo7UIColorCvg",
+              "moduleName": "SwiftPhotoGallery",
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIColor",
+                  "printedName": "UIKit.UIColor",
+                  "usr": "c:objc(cs)UIColor"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC15backgroundColorSo7UIColorCvs",
+              "mangledName": "$s17SwiftPhotoGalleryAAC15backgroundColorSo7UIColorCvs",
+              "moduleName": "SwiftPhotoGallery",
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC15backgroundColorSo7UIColorCvM",
+              "mangledName": "$s17SwiftPhotoGalleryAAC15backgroundColorSo7UIColorCvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "currentPageIndicatorTintColor",
+          "printedName": "currentPageIndicatorTintColor",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UIColor",
+              "printedName": "UIKit.UIColor",
+              "usr": "c:objc(cs)UIColor"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC29currentPageIndicatorTintColorSo7UIColorCvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC29currentPageIndicatorTintColorSo7UIColorCvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIColor",
+                  "printedName": "UIKit.UIColor",
+                  "usr": "c:objc(cs)UIColor"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC29currentPageIndicatorTintColorSo7UIColorCvg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC29currentPageIndicatorTintColorSo7UIColorCvg",
+              "moduleName": "SwiftPhotoGallery",
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIColor",
+                  "printedName": "UIKit.UIColor",
+                  "usr": "c:objc(cs)UIColor"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC29currentPageIndicatorTintColorSo7UIColorCvs",
+              "mangledName": "$s17SwiftPhotoGalleryAAC29currentPageIndicatorTintColorSo7UIColorCvs",
+              "moduleName": "SwiftPhotoGallery",
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC29currentPageIndicatorTintColorSo7UIColorCvM",
+              "mangledName": "$s17SwiftPhotoGalleryAAC29currentPageIndicatorTintColorSo7UIColorCvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "pageIndicatorTintColor",
+          "printedName": "pageIndicatorTintColor",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UIColor",
+              "printedName": "UIKit.UIColor",
+              "usr": "c:objc(cs)UIColor"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC22pageIndicatorTintColorSo7UIColorCvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC22pageIndicatorTintColorSo7UIColorCvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIColor",
+                  "printedName": "UIKit.UIColor",
+                  "usr": "c:objc(cs)UIColor"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC22pageIndicatorTintColorSo7UIColorCvg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC22pageIndicatorTintColorSo7UIColorCvg",
+              "moduleName": "SwiftPhotoGallery",
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIColor",
+                  "printedName": "UIKit.UIColor",
+                  "usr": "c:objc(cs)UIColor"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC22pageIndicatorTintColorSo7UIColorCvs",
+              "mangledName": "$s17SwiftPhotoGalleryAAC22pageIndicatorTintColorSo7UIColorCvs",
+              "moduleName": "SwiftPhotoGallery",
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC22pageIndicatorTintColorSo7UIColorCvM",
+              "mangledName": "$s17SwiftPhotoGalleryAAC22pageIndicatorTintColorSo7UIColorCvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "currentPage",
+          "printedName": "currentPage",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC11currentPageSivp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC11currentPageSivp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC11currentPageSivg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC11currentPageSivg",
+              "moduleName": "SwiftPhotoGallery",
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC11currentPageSivs",
+              "mangledName": "$s17SwiftPhotoGalleryAAC11currentPageSivs",
+              "moduleName": "SwiftPhotoGallery",
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC11currentPageSivM",
+              "mangledName": "$s17SwiftPhotoGalleryAAC11currentPageSivM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "hidePageControl",
+          "printedName": "hidePageControl",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC15hidePageControlSbvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC15hidePageControlSbvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "HasInitialValue",
+            "Custom",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 6,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC15hidePageControlSbvg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC15hidePageControlSbvg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC15hidePageControlSbvs",
+              "mangledName": "$s17SwiftPhotoGalleryAAC15hidePageControlSbvs",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC15hidePageControlSbvM",
+              "mangledName": "$s17SwiftPhotoGalleryAAC15hidePageControlSbvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "hideStatusBar",
+          "printedName": "hideStatusBar",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC13hideStatusBarSbvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC13hideStatusBarSbvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 7,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC13hideStatusBarSbvg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC13hideStatusBarSbvg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC13hideStatusBarSbvs",
+              "mangledName": "$s17SwiftPhotoGalleryAAC13hideStatusBarSbvs",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC13hideStatusBarSbvM",
+              "mangledName": "$s17SwiftPhotoGalleryAAC13hideStatusBarSbvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "isSwipeToDismissEnabled",
+          "printedName": "isSwipeToDismissEnabled",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC23isSwipeToDismissEnabledSbvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC23isSwipeToDismissEnabledSbvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 8,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC23isSwipeToDismissEnabledSbvg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC23isSwipeToDismissEnabledSbvg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC23isSwipeToDismissEnabledSbvs",
+              "mangledName": "$s17SwiftPhotoGalleryAAC23isSwipeToDismissEnabledSbvs",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC23isSwipeToDismissEnabledSbvM",
+              "mangledName": "$s17SwiftPhotoGalleryAAC23isSwipeToDismissEnabledSbvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "isRevolvingCarouselEnabled",
+          "printedName": "isRevolvingCarouselEnabled",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC26isRevolvingCarouselEnabledSbvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC26isRevolvingCarouselEnabledSbvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 9,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC26isRevolvingCarouselEnabledSbvg",
+              "mangledName": "$s17SwiftPhotoGalleryAAC26isRevolvingCarouselEnabledSbvg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC26isRevolvingCarouselEnabledSbvs",
+              "mangledName": "$s17SwiftPhotoGalleryAAC26isRevolvingCarouselEnabledSbvs",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGalleryAAC26isRevolvingCarouselEnabledSbvM",
+              "mangledName": "$s17SwiftPhotoGalleryAAC26isRevolvingCarouselEnabledSbvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "pageBeforeRotation",
+          "printedName": "pageBeforeRotation",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC18pageBeforeRotation33_001710C3B5A87CC952B898FC504D668FLLSivp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC18pageBeforeRotation33_001710C3B5A87CC952B898FC504D668FLLSivp",
+          "moduleName": "SwiftPhotoGallery",
+          "isInternal": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 10,
+          "hasStorage": true
+        },
+        {
+          "kind": "Var",
+          "name": "currentIndexPath",
+          "printedName": "currentIndexPath",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "IndexPath",
+              "printedName": "Foundation.IndexPath",
+              "usr": "s:10Foundation9IndexPathV"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC16currentIndexPath33_001710C3B5A87CC952B898FC504D668FLL10Foundation0eF0Vvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC16currentIndexPath33_001710C3B5A87CC952B898FC504D668FLL10Foundation0eF0Vvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isInternal": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 11,
+          "hasStorage": true
+        },
+        {
+          "kind": "Var",
+          "name": "flowLayout",
+          "printedName": "flowLayout",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionViewFlowLayout",
+              "printedName": "UIKit.UICollectionViewFlowLayout",
+              "usr": "c:objc(cs)UICollectionViewFlowLayout"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC10flowLayout33_001710C3B5A87CC952B898FC504D668FLLSo020UICollectionViewFlowE0Cvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC10flowLayout33_001710C3B5A87CC952B898FC504D668FLLSo020UICollectionViewFlowE0Cvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isInternal": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 12,
+          "hasStorage": true
+        },
+        {
+          "kind": "Var",
+          "name": "pageControl",
+          "printedName": "pageControl",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UIPageControl",
+              "printedName": "UIKit.UIPageControl",
+              "usr": "c:objc(cs)UIPageControl"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC11pageControl33_001710C3B5A87CC952B898FC504D668FLLSo06UIPageE0Cvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC11pageControl33_001710C3B5A87CC952B898FC504D668FLLSo06UIPageE0Cvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isInternal": true,
+          "declAttributes": [
+            "HasInitialValue",
+            "Custom",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 13,
+          "hasStorage": true
+        },
+        {
+          "kind": "Var",
+          "name": "pageControlBottomConstraint",
+          "printedName": "pageControlBottomConstraint",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "UIKit.NSLayoutConstraint?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSLayoutConstraint",
+                  "printedName": "UIKit.NSLayoutConstraint",
+                  "usr": "c:objc(cs)NSLayoutConstraint"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC27pageControlBottomConstraint33_001710C3B5A87CC952B898FC504D668FLLSo08NSLayoutG0CSgvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC27pageControlBottomConstraint33_001710C3B5A87CC952B898FC504D668FLLSo08NSLayoutG0CSgvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isInternal": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 14,
+          "hasStorage": true
+        },
+        {
+          "kind": "Var",
+          "name": "pageControlCenterXConstraint",
+          "printedName": "pageControlCenterXConstraint",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "UIKit.NSLayoutConstraint?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSLayoutConstraint",
+                  "printedName": "UIKit.NSLayoutConstraint",
+                  "usr": "c:objc(cs)NSLayoutConstraint"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC28pageControlCenterXConstraint33_001710C3B5A87CC952B898FC504D668FLLSo18NSLayoutConstraintCSgvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC28pageControlCenterXConstraint33_001710C3B5A87CC952B898FC504D668FLLSo18NSLayoutConstraintCSgvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isInternal": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 15,
+          "hasStorage": true
+        },
+        {
+          "kind": "Var",
+          "name": "needsLayout",
+          "printedName": "needsLayout",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGalleryAAC11needsLayout33_001710C3B5A87CC952B898FC504D668FLLSbvp",
+          "mangledName": "$s17SwiftPhotoGalleryAAC11needsLayout33_001710C3B5A87CC952B898FC504D668FLLSbvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isInternal": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 16,
+          "hasStorage": true
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(delegate:dataSource:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "SwiftPhotoGallery",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGallery",
+              "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "SwiftPhotoGalleryDelegate",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDelegate",
+              "usr": "c:@M@SwiftPhotoGallery@objc(pl)SwiftPhotoGalleryDelegate"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "SwiftPhotoGalleryDataSource",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryDataSource",
+              "usr": "c:@M@SwiftPhotoGallery@objc(pl)SwiftPhotoGalleryDataSource"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "s:17SwiftPhotoGalleryAAC8delegate10dataSourceAbA0abC8Delegate_p_AA0abc4DataF0_ptcfc",
+          "mangledName": "$s17SwiftPhotoGalleryAAC8delegate10dataSourceAbA0abC8Delegate_p_AA0abc4DataF0_ptcfc",
+          "moduleName": "SwiftPhotoGallery",
+          "declAttributes": [
+            "Custom"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(coder:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGallery?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "SwiftPhotoGallery",
+                  "printedName": "SwiftPhotoGallery.SwiftPhotoGallery",
+                  "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery"
+                }
+              ],
+              "usr": "s:Sq"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "NSCoder",
+              "printedName": "Foundation.NSCoder",
+              "usr": "c:objc(cs)NSCoder"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)initWithCoder:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC5coderABSgSo7NSCoderC_tcfc",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "objc_name": "initWithCoder:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Required"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Function",
+          "name": "reload",
+          "printedName": "reload(imageIndexes:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Array",
+              "printedName": "[Swift.Int]",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Int",
+                  "printedName": "Swift.Int",
+                  "usr": "s:Si"
+                }
+              ],
+              "usr": "s:Sa"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "s:17SwiftPhotoGalleryAAC6reload12imageIndexesySid_tF",
+          "mangledName": "$s17SwiftPhotoGalleryAAC6reload12imageIndexesySid_tF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "viewWillLayoutSubviews",
+          "printedName": "viewWillLayoutSubviews()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)viewWillLayoutSubviews",
+          "mangledName": "$s17SwiftPhotoGalleryAAC22viewWillLayoutSubviewsyyF",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "viewWillLayoutSubviews",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "viewDidLayoutSubviews",
+          "printedName": "viewDidLayoutSubviews()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)viewDidLayoutSubviews",
+          "mangledName": "$s17SwiftPhotoGalleryAAC21viewDidLayoutSubviewsyyF",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "viewDidLayoutSubviews",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "viewDidLoad",
+          "printedName": "viewDidLoad()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)viewDidLoad",
+          "mangledName": "$s17SwiftPhotoGalleryAAC11viewDidLoadyyF",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "viewDidLoad",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "viewDidAppear",
+          "printedName": "viewDidAppear(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)viewDidAppear:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC13viewDidAppearyySbF",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "viewDidAppear:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Var",
+          "name": "prefersStatusBarHidden",
+          "printedName": "prefersStatusBarHidden",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(py)prefersStatusBarHidden",
+          "mangledName": "$s17SwiftPhotoGalleryAAC22prefersStatusBarHiddenSbvp",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "prefersStatusBarHidden",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)prefersStatusBarHidden",
+              "mangledName": "$s17SwiftPhotoGalleryAAC22prefersStatusBarHiddenSbvg",
+              "moduleName": "SwiftPhotoGallery",
+              "overriding": true,
+              "isOpen": true,
+              "objc_name": "prefersStatusBarHidden",
+              "declAttributes": [
+                "Dynamic",
+                "ObjC",
+                "Custom",
+                "Override"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "name": "viewWillTransition",
+          "printedName": "viewWillTransition(to:with:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "CGSize",
+              "printedName": "CoreGraphics.CGSize",
+              "usr": "c:@S@CGSize"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UIViewControllerTransitionCoordinator",
+              "printedName": "UIKit.UIViewControllerTransitionCoordinator",
+              "usr": "c:objc(pl)UIViewControllerTransitionCoordinator"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)viewWillTransitionToSize:withTransitionCoordinator:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC18viewWillTransition2to4withySo6CGSizeV_So016UIViewControllerF11Coordinator_ptF",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "viewWillTransitionToSize:withTransitionCoordinator:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Var",
+          "name": "supportedInterfaceOrientations",
+          "printedName": "supportedInterfaceOrientations",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UIInterfaceOrientationMask",
+              "printedName": "UIKit.UIInterfaceOrientationMask",
+              "usr": "c:@E@UIInterfaceOrientationMask"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(py)supportedInterfaceOrientations",
+          "mangledName": "$s17SwiftPhotoGalleryAAC30supportedInterfaceOrientationsSo26UIInterfaceOrientationMaskVvp",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "supportedInterfaceOrientations",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIInterfaceOrientationMask",
+                  "printedName": "UIKit.UIInterfaceOrientationMask",
+                  "usr": "c:@E@UIInterfaceOrientationMask"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)supportedInterfaceOrientations",
+              "mangledName": "$s17SwiftPhotoGalleryAAC30supportedInterfaceOrientationsSo26UIInterfaceOrientationMaskVvg",
+              "moduleName": "SwiftPhotoGallery",
+              "overriding": true,
+              "isOpen": true,
+              "objc_name": "supportedInterfaceOrientations",
+              "declAttributes": [
+                "Dynamic",
+                "ObjC",
+                "Custom",
+                "Override"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "shouldAutorotate",
+          "printedName": "shouldAutorotate",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(py)shouldAutorotate",
+          "mangledName": "$s17SwiftPhotoGalleryAAC16shouldAutorotateSbvp",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "shouldAutorotate",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bool",
+                  "printedName": "Swift.Bool",
+                  "usr": "s:Sb"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)shouldAutorotate",
+              "mangledName": "$s17SwiftPhotoGalleryAAC16shouldAutorotateSbvg",
+              "moduleName": "SwiftPhotoGallery",
+              "overriding": true,
+              "isOpen": true,
+              "objc_name": "shouldAutorotate",
+              "declAttributes": [
+                "Dynamic",
+                "ObjC",
+                "Custom",
+                "Override"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "name": "updatePageControl",
+          "printedName": "updatePageControl()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "s:17SwiftPhotoGalleryAAC17updatePageControlyyF",
+          "mangledName": "$s17SwiftPhotoGalleryAAC17updatePageControlyyF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "singleTapAction",
+          "printedName": "singleTapAction(recognizer:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UITapGestureRecognizer",
+              "printedName": "UIKit.UITapGestureRecognizer",
+              "usr": "c:objc(cs)UITapGestureRecognizer"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)singleTapActionWithRecognizer:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC15singleTapAction10recognizerySo22UITapGestureRecognizerC_tF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "singleTapActionWithRecognizer:",
+          "declAttributes": [
+            "Custom",
+            "ObjC"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(nibName:bundle:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "SwiftPhotoGallery",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGallery",
+              "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Swift.String?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "String",
+                  "printedName": "Swift.String",
+                  "usr": "s:SS"
+                }
+              ],
+              "usr": "s:Sq"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.Bundle?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Bundle",
+                  "printedName": "Foundation.Bundle",
+                  "usr": "c:objc(cs)NSBundle"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)initWithNibName:bundle:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC7nibName6bundleABSSSg_So8NSBundleCSgtcfc",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithNibName:bundle:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Function",
+          "name": "numberOfSections",
+          "printedName": "numberOfSections(in:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionView",
+              "printedName": "UIKit.UICollectionView",
+              "usr": "c:objc(cs)UICollectionView"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)numberOfSectionsInCollectionView:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC16numberOfSections2inSiSo16UICollectionViewC_tF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "numberOfSectionsInCollectionView:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "collectionView",
+          "printedName": "collectionView(_:numberOfItemsInSection:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionView",
+              "printedName": "UIKit.UICollectionView",
+              "usr": "c:objc(cs)UICollectionView"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)collectionView:numberOfItemsInSection:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC14collectionView_22numberOfItemsInSectionSiSo012UICollectionE0C_SitF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "collectionView:numberOfItemsInSection:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "collectionView",
+          "printedName": "collectionView(_:cellForItemAt:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionViewCell",
+              "printedName": "UIKit.UICollectionViewCell",
+              "usr": "c:objc(cs)UICollectionViewCell"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionView",
+              "printedName": "UIKit.UICollectionView",
+              "usr": "c:objc(cs)UICollectionView"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "IndexPath",
+              "printedName": "Foundation.IndexPath",
+              "usr": "s:10Foundation9IndexPathV"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)collectionView:cellForItemAtIndexPath:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC14collectionView_13cellForItemAtSo012UICollectionE4CellCSo0jE0C_10Foundation9IndexPathVtF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "collectionView:cellForItemAtIndexPath:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "collectionView",
+          "printedName": "collectionView(_:viewForSupplementaryElementOfKind:at:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionReusableView",
+              "printedName": "UIKit.UICollectionReusableView",
+              "usr": "c:objc(cs)UICollectionReusableView"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionView",
+              "printedName": "UIKit.UICollectionView",
+              "usr": "c:objc(cs)UICollectionView"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "String",
+              "printedName": "Swift.String",
+              "usr": "s:SS"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "IndexPath",
+              "printedName": "Foundation.IndexPath",
+              "usr": "s:10Foundation9IndexPathV"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)collectionView:viewForSupplementaryElementOfKind:atIndexPath:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC14collectionView_33viewForSupplementaryElementOfKind2atSo020UICollectionReusableE0CSo0mE0C_SS10Foundation9IndexPathVtF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "collectionView:viewForSupplementaryElementOfKind:atIndexPath:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "collectionView",
+          "printedName": "collectionView(_:layout:referenceSizeForFooterInSection:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "CGSize",
+              "printedName": "CoreGraphics.CGSize",
+              "usr": "c:@S@CGSize"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionView",
+              "printedName": "UIKit.UICollectionView",
+              "usr": "c:objc(cs)UICollectionView"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionViewLayout",
+              "printedName": "UIKit.UICollectionViewLayout",
+              "usr": "c:objc(cs)UICollectionViewLayout"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)collectionView:layout:referenceSizeForFooterInSection:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC14collectionView_6layout31referenceSizeForFooterInSectionSo6CGSizeVSo012UICollectionE0C_So0nE6LayoutCSitF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Dynamic",
+            "Custom",
+            "ObjC"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "collectionView",
+          "printedName": "collectionView(_:layout:referenceSizeForHeaderInSection:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "CGSize",
+              "printedName": "CoreGraphics.CGSize",
+              "usr": "c:@S@CGSize"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionView",
+              "printedName": "UIKit.UICollectionView",
+              "usr": "c:objc(cs)UICollectionView"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionViewLayout",
+              "printedName": "UIKit.UICollectionViewLayout",
+              "usr": "c:objc(cs)UICollectionViewLayout"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Int",
+              "printedName": "Swift.Int",
+              "usr": "s:Si"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)collectionView:layout:referenceSizeForHeaderInSection:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC14collectionView_6layout31referenceSizeForHeaderInSectionSo6CGSizeVSo012UICollectionE0C_So0nE6LayoutCSitF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Dynamic",
+            "Custom",
+            "ObjC"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "scrollViewWillBeginDragging",
+          "printedName": "scrollViewWillBeginDragging(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UIScrollView",
+              "printedName": "UIKit.UIScrollView",
+              "usr": "c:objc(cs)UIScrollView"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)scrollViewWillBeginDragging:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC27scrollViewWillBeginDraggingyySo08UIScrollE0CF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "scrollViewWillBeginDragging:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "scrollViewDidEndDecelerating",
+          "printedName": "scrollViewDidEndDecelerating(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UIScrollView",
+              "printedName": "UIKit.UIScrollView",
+              "usr": "c:objc(cs)UIScrollView"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)scrollViewDidEndDecelerating:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC28scrollViewDidEndDeceleratingyySo08UIScrollE0CF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "scrollViewDidEndDecelerating:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "collectionView",
+          "printedName": "collectionView(_:willDisplay:forItemAt:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionView",
+              "printedName": "UIKit.UICollectionView",
+              "usr": "c:objc(cs)UICollectionView"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionViewCell",
+              "printedName": "UIKit.UICollectionViewCell",
+              "usr": "c:objc(cs)UICollectionViewCell"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "IndexPath",
+              "printedName": "Foundation.IndexPath",
+              "usr": "s:10Foundation9IndexPathV"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)collectionView:willDisplayCell:forItemAtIndexPath:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC14collectionView_11willDisplay9forItemAtySo012UICollectionE0C_So0kE4CellC10Foundation9IndexPathVtF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "collectionView:willDisplayCell:forItemAtIndexPath:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "collectionView",
+          "printedName": "collectionView(_:willDisplaySupplementaryView:forElementKind:at:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionView",
+              "printedName": "UIKit.UICollectionView",
+              "usr": "c:objc(cs)UICollectionView"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionReusableView",
+              "printedName": "UIKit.UICollectionReusableView",
+              "usr": "c:objc(cs)UICollectionReusableView"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "String",
+              "printedName": "Swift.String",
+              "usr": "s:SS"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "IndexPath",
+              "printedName": "Foundation.IndexPath",
+              "usr": "s:10Foundation9IndexPathV"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)collectionView:willDisplaySupplementaryView:forElementKind:atIndexPath:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC14collectionView_024willDisplaySupplementaryE014forElementKind2atySo012UICollectionE0C_So0m8ReusableE0CSS10Foundation9IndexPathVtF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "collectionView:willDisplaySupplementaryView:forElementKind:atIndexPath:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "collectionView",
+          "printedName": "collectionView(_:didEndDisplaying:forItemAt:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionView",
+              "printedName": "UIKit.UICollectionView",
+              "usr": "c:objc(cs)UICollectionView"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UICollectionViewCell",
+              "printedName": "UIKit.UICollectionViewCell",
+              "usr": "c:objc(cs)UICollectionViewCell"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "IndexPath",
+              "printedName": "Foundation.IndexPath",
+              "usr": "s:10Foundation9IndexPathV"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)collectionView:didEndDisplayingCell:forItemAtIndexPath:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC14collectionView_16didEndDisplaying9forItemAtySo012UICollectionE0C_So0lE4CellC10Foundation9IndexPathVtF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "collectionView:didEndDisplayingCell:forItemAtIndexPath:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "gestureRecognizer",
+          "printedName": "gestureRecognizer(_:shouldRequireFailureOf:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "usr": "s:Sb"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UIGestureRecognizer",
+              "printedName": "UIKit.UIGestureRecognizer",
+              "usr": "c:objc(cs)UIGestureRecognizer"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UIGestureRecognizer",
+              "printedName": "UIKit.UIGestureRecognizer",
+              "usr": "c:objc(cs)UIGestureRecognizer"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery(im)gestureRecognizer:shouldRequireFailureOfGestureRecognizer:",
+          "mangledName": "$s17SwiftPhotoGalleryAAC17gestureRecognizer_22shouldRequireFailureOfSbSo09UIGestureE0C_AFtF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "gestureRecognizer:shouldRequireFailureOfGestureRecognizer:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGallery",
+      "mangledName": "$s17SwiftPhotoGalleryAAC",
+      "moduleName": "SwiftPhotoGallery",
+      "isOpen": true,
+      "declAttributes": [
+        "Custom",
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)UIViewController",
+      "superclassNames": [
+        "UIKit.UIViewController",
+        "UIKit.UIResponder",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "Foundation",
+      "printedName": "Foundation",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftPhotoGallery",
+      "printedName": "SwiftPhotoGallery",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery",
+      "declAttributes": [
+        "Exported"
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "UIKit.UIGestureRecognizerSubclass",
+      "printedName": "UIKit.UIGestureRecognizerSubclass",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "UIKit",
+      "printedName": "UIKit",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "SwiftPhotoGallery"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "SwiftPhotoGalleryCell",
+      "printedName": "SwiftPhotoGalleryCell",
+      "children": [
+        {
+          "kind": "Var",
+          "name": "image",
+          "printedName": "image",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "UIKit.UIImage?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIImage",
+                  "printedName": "UIKit.UIImage",
+                  "usr": "c:objc(cs)UIImage"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGallery0abC4CellC5imageSo7UIImageCSgvp",
+          "mangledName": "$s17SwiftPhotoGallery0abC4CellC5imageSo7UIImageCSgvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom",
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 0,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "UIKit.UIImage?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "UIImage",
+                      "printedName": "UIKit.UIImage",
+                      "usr": "c:objc(cs)UIImage"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGallery0abC4CellC5imageSo7UIImageCSgvg",
+              "mangledName": "$s17SwiftPhotoGallery0abC4CellC5imageSo7UIImageCSgvg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "UIKit.UIImage?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "UIImage",
+                      "printedName": "UIKit.UIImage",
+                      "usr": "c:objc(cs)UIImage"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGallery0abC4CellC5imageSo7UIImageCSgvs",
+              "mangledName": "$s17SwiftPhotoGallery0abC4CellC5imageSo7UIImageCSgvs",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGallery0abC4CellC5imageSo7UIImageCSgvM",
+              "mangledName": "$s17SwiftPhotoGallery0abC4CellC5imageSo7UIImageCSgvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "scrollView",
+          "printedName": "scrollView",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UIScrollView",
+              "printedName": "UIKit.UIScrollView",
+              "usr": "c:objc(cs)UIScrollView"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGallery0abC4CellC10scrollViewSo08UIScrollF0Cvp",
+          "mangledName": "$s17SwiftPhotoGallery0abC4CellC10scrollViewSo08UIScrollF0Cvp",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 1,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIScrollView",
+                  "printedName": "UIKit.UIScrollView",
+                  "usr": "c:objc(cs)UIScrollView"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGallery0abC4CellC10scrollViewSo08UIScrollF0Cvg",
+              "mangledName": "$s17SwiftPhotoGallery0abC4CellC10scrollViewSo08UIScrollF0Cvg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIScrollView",
+                  "printedName": "UIKit.UIScrollView",
+                  "usr": "c:objc(cs)UIScrollView"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGallery0abC4CellC10scrollViewSo08UIScrollF0Cvs",
+              "mangledName": "$s17SwiftPhotoGallery0abC4CellC10scrollViewSo08UIScrollF0Cvs",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGallery0abC4CellC10scrollViewSo08UIScrollF0CvM",
+              "mangledName": "$s17SwiftPhotoGallery0abC4CellC10scrollViewSo08UIScrollF0CvM",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "imageView",
+          "printedName": "imageView",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UIImageView",
+              "printedName": "UIKit.UIImageView",
+              "usr": "c:objc(cs)UIImageView"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:17SwiftPhotoGallery0abC4CellC9imageViewSo07UIImageF0Cvp",
+          "mangledName": "$s17SwiftPhotoGallery0abC4CellC9imageViewSo07UIImageF0Cvp",
+          "moduleName": "SwiftPhotoGallery",
+          "declAttributes": [
+            "Custom",
+            "Final",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 2,
+          "isLet": true,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIImageView",
+                  "printedName": "UIKit.UIImageView",
+                  "usr": "c:objc(cs)UIImageView"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:17SwiftPhotoGallery0abC4CellC9imageViewSo07UIImageF0Cvg",
+              "mangledName": "$s17SwiftPhotoGallery0abC4CellC9imageViewSo07UIImageF0Cvg",
+              "moduleName": "SwiftPhotoGallery",
+              "implicit": true,
+              "declAttributes": [
+                "Final"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(frame:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "SwiftPhotoGalleryCell",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryCell",
+              "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGalleryCell"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "CGRect",
+              "printedName": "CoreGraphics.CGRect",
+              "usr": "c:@S@CGRect"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGalleryCell(im)initWithFrame:",
+          "mangledName": "$s17SwiftPhotoGallery0abC4CellC5frameACSo6CGRectV_tcfc",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "objc_name": "initWithFrame:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(coder:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryCell?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "SwiftPhotoGalleryCell",
+                  "printedName": "SwiftPhotoGallery.SwiftPhotoGalleryCell",
+                  "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGalleryCell"
+                }
+              ],
+              "usr": "s:Sq"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "NSCoder",
+              "printedName": "Foundation.NSCoder",
+              "usr": "c:objc(cs)NSCoder"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGalleryCell(im)initWithCoder:",
+          "mangledName": "$s17SwiftPhotoGallery0abC4CellC5coderACSgSo7NSCoderC_tcfc",
+          "moduleName": "SwiftPhotoGallery",
+          "overriding": true,
+          "objc_name": "initWithCoder:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom",
+            "Required"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Function",
+          "name": "doubleTapAction",
+          "printedName": "doubleTapAction(recognizer:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UITapGestureRecognizer",
+              "printedName": "UIKit.UITapGestureRecognizer",
+              "usr": "c:objc(cs)UITapGestureRecognizer"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGalleryCell(im)doubleTapActionWithRecognizer:",
+          "mangledName": "$s17SwiftPhotoGallery0abC4CellC15doubleTapAction10recognizerySo22UITapGestureRecognizerC_tF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "doubleTapActionWithRecognizer:",
+          "declAttributes": [
+            "Custom",
+            "ObjC"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "configureForNewImage",
+          "printedName": "configureForNewImage(animated:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Bool",
+              "printedName": "Swift.Bool",
+              "hasDefaultArg": true,
+              "usr": "s:Sb"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "s:17SwiftPhotoGallery0abC4CellC20configureForNewImage8animatedySb_tF",
+          "mangledName": "$s17SwiftPhotoGallery0abC4CellC20configureForNewImage8animatedySb_tF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "declAttributes": [
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "viewForZooming",
+          "printedName": "viewForZooming(in:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "UIKit.UIView?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UIView",
+                  "printedName": "UIKit.UIView",
+                  "usr": "c:objc(cs)UIView"
+                }
+              ],
+              "usr": "s:Sq"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UIScrollView",
+              "printedName": "UIKit.UIScrollView",
+              "usr": "c:objc(cs)UIScrollView"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGalleryCell(im)viewForZoomingInScrollView:",
+          "mangledName": "$s17SwiftPhotoGallery0abC4CellC14viewForZooming2inSo6UIViewCSgSo12UIScrollViewC_tF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "viewForZoomingInScrollView:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "scrollViewDidZoom",
+          "printedName": "scrollViewDidZoom(_:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "UIScrollView",
+              "printedName": "UIKit.UIScrollView",
+              "usr": "c:objc(cs)UIScrollView"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@CM@SwiftPhotoGallery@objc(cs)SwiftPhotoGalleryCell(im)scrollViewDidZoom:",
+          "mangledName": "$s17SwiftPhotoGallery0abC4CellC17scrollViewDidZoomyySo08UIScrollF0CF",
+          "moduleName": "SwiftPhotoGallery",
+          "isOpen": true,
+          "objc_name": "scrollViewDidZoom:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Custom"
+          ],
+          "funcSelfKind": "NonMutating"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@SwiftPhotoGallery@objc(cs)SwiftPhotoGalleryCell",
+      "mangledName": "$s17SwiftPhotoGallery0abC4CellC",
+      "moduleName": "SwiftPhotoGallery",
+      "isOpen": true,
+      "declAttributes": [
+        "Custom",
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)UICollectionViewCell",
+      "hasMissingDesignatedInitializers": true,
+      "inheritsConvenienceInitializers": true,
+      "superclassNames": [
+        "UIKit.UICollectionViewCell",
+        "UIKit.UICollectionReusableView",
+        "UIKit.UIView",
+        "UIKit.UIResponder",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "__DefaultCustomPlaygroundQuickLookable",
+          "printedName": "__DefaultCustomPlaygroundQuickLookable",
+          "usr": "s:s38__DefaultCustomPlaygroundQuickLookableP",
+          "mangledName": "$ss38__DefaultCustomPlaygroundQuickLookableP"
+        }
+      ]
+    }
+  ],
+  "json_format_version": 6
+}
