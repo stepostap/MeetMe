@@ -1,8 +1,0 @@
-version: "Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)"
-options: "fa176ae26597a429326ae46122df1d5c23ade041360a794088ff9d9b72bd6af1"
-build_start_time: [1661441359, 469646930]
-build_end_time: [1661441365, 79166889]
-inputs:
-  "/Users/Stepostap/Developer/MeetMe/MeetMe/Pods/SwiftPhotoGallery/Pod/Classes/PanDirectionGestureRecognizer.swift": [1661441343, 274504423]
-  "/Users/Stepostap/Developer/MeetMe/MeetMe/Pods/SwiftPhotoGallery/Pod/Classes/SwiftPhotoGallery.swift": [1661441343, 274718284]
-  "/Users/Stepostap/Developer/MeetMe/MeetMe/Pods/SwiftPhotoGallery/Pod/Classes/SwiftPhotoGalleryCell.swift": [1661441343, 274289846]

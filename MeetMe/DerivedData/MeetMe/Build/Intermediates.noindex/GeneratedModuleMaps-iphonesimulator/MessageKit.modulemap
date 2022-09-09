@@ -1,4 +1,0 @@
-module MessageKit {
-header "MessageKit-Swift.h"
-export *
-}
